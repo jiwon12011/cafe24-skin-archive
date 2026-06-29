@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOMA LIVING | 로그인</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Serif+KR:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --main:#43392f; --sub:#998d7d; --point:#9a7b56; --bg:#faf7f2; --bg-soft:#efe9e0;
+  --topbar:#2f2a24; --sale:#b15a3c; --line:#e7ded2; --text:#403930;
+  --maxw:1550px; --pad:30px; --section-gap:96px;
+  --fs-h2:26px; --fs-h3:17px; --fs-body:15px; --fs-sm:13px; --fs-xs:12px;
+  --fw-medium:500; --fw-bold:600; --fw-black:700; --radius:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard',sans-serif;color:var(--text);background:var(--bg);font-size:var(--fs-body);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none;transition:color .2s}a:hover{color:var(--point)}
+img{display:block;max-width:100%;height:auto}ul,ol{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+.label{font-family:'Cormorant Garamond',serif;font-size:var(--fs-sm);font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--point)}
+
+.topbar{background:var(--topbar);color:#e7ddcf;font-size:var(--fs-xs)}
+.topbar .inner{display:flex;align-items:center;justify-content:space-between;height:38px}
+.topbar nav{display:flex;gap:16px;align-items:center}.topbar nav a{color:#cfc4b2}.topbar nav a:hover{color:#fff}.topbar .div{opacity:.4}
+.site-header{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line)}
+.site-header .inner{display:flex;align-items:center;height:80px}
+.logo{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:var(--main);letter-spacing:3px;flex:0 0 auto}
+.gnb{flex:1;display:flex;gap:42px;justify-content:center;font-size:var(--fs-body);font-weight:var(--fw-medium)}
+.gnb a{padding:8px 0;color:var(--main)}.gnb a:hover{color:var(--point)}
+.utils{flex:0 0 auto;display:flex;gap:22px;font-size:18px;color:var(--main);align-items:center}
+.utils a{position:relative}.utils a:hover{color:var(--point)}
+.utils .cart-count{position:absolute;top:-8px;right:-10px;background:var(--point);color:#fff;font-size:10px;font-weight:var(--fw-bold);width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+
+main{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);min-height:62vh;display:flex;flex-direction:column;align-items:center}
+.page-head{text-align:center;padding:60px 0 30px}
+.page-head .label{margin-bottom:10px}
+.page-head h1{font-family:'Noto Serif KR',serif;font-size:34px;font-weight:500;color:var(--main)}
+.auth{width:100%;max-width:430px;padding-bottom:80px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:var(--fs-sm);font-weight:var(--fw-medium);color:var(--main);margin-bottom:7px}
+.field input{width:100%;padding:15px 16px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;font-size:var(--fs-body);color:var(--main)}
+.field input:focus{outline:none;border-color:var(--point)}
+.row-opt{display:flex;justify-content:space-between;align-items:center;margin:16px 0 22px;font-size:var(--fs-sm);color:var(--sub)}
+.row-opt label{display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.row-opt input{accent-color:var(--point);width:16px;height:16px}
+.row-opt a:hover{color:var(--point)}
+.btn-main{display:block;width:100%;text-align:center;background:var(--point);color:#fff;padding:17px 0;border-radius:var(--radius);font-size:var(--fs-body);font-weight:var(--fw-bold)}
+.btn-main:hover{background:var(--main);color:#fff}
+.divider{display:flex;align-items:center;gap:14px;color:var(--sub);font-size:var(--fs-xs);margin:28px 0}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.sns-login{display:flex;flex-direction:column;gap:10px}
+.sns-login a{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 0;border-radius:var(--radius);font-size:var(--fs-sm);font-weight:var(--fw-medium);border:1px solid var(--line);background:#fff;color:var(--main)}
+.sns-login a:hover{border-color:var(--point)}
+.sns-login a i{font-size:16px}
+.to-signup{text-align:center;margin-top:26px;font-size:var(--fs-sm);color:var(--sub)}
+.to-signup a{color:var(--main);font-weight:var(--fw-bold);border-bottom:1px solid var(--main);padding-bottom:2px}
+.to-signup a:hover{color:var(--point);border-color:var(--point)}
+
+.site-footer{margin-top:var(--section-gap);border-top:1px solid var(--line);background:var(--bg-soft);padding:56px 0 40px;font-size:var(--fs-sm);color:var(--sub)}
+.site-footer .top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:40px;max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+.site-footer .flogo{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:24px;color:var(--main);letter-spacing:3px;margin-bottom:16px}
+.site-footer .intro{max-width:330px;line-height:1.8}
+.site-footer .cols{display:flex;gap:64px}
+.site-footer .col h4{font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--main);margin-bottom:16px}
+.site-footer .col a{display:block;margin-bottom:11px}
+.site-footer .cs .num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--main)}
+.site-footer .cs .time{margin:8px 0}
+.site-footer .sns{display:flex;gap:16px;font-size:18px;margin-top:18px;color:var(--main)}
+.site-footer .copy{max-width:var(--maxw);margin:42px auto 0;padding:24px var(--pad) 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:var(--fs-xs);color:#a99c89}
+.site-footer .copy nav{display:flex;gap:18px}
+
+@media(max-width:1024px){.gnb{display:none}.site-footer .cols{gap:36px}}
+@media(max-width:640px){:root{--pad:18px;--section-gap:60px}.topbar nav{gap:10px}.site-footer .top{flex-direction:column}.site-footer .cols{flex-wrap:wrap;gap:30px}}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="inner container"><span class="promo">지금 가입하면 신규 회원 5% 할인 쿠폰</span><nav><a href="board.html">고객센터</a><span class="div">|</span><a href="board.html">매장 안내</a><span class="div">|</span><a href="login.html">로그인</a></nav></div></div>
+<header class="site-header"><div class="inner container">
+  <a href="index.html" class="logo">SOMA LIVING</a>
+  <nav class="gnb"><a href="products.html">가구</a><a href="products.html">컬렉션</a><a href="products.html">소재와 케어</a><a href="board.html">매거진</a><a href="board.html">브랜드</a></nav>
+  <div class="utils"><a href="products.html" aria-label="검색"><i class="fa-solid fa-magnifying-glass"></i></a><a href="wishlist.html" aria-label="위시리스트"><i class="fa-regular fa-heart"></i></a><a href="cart.html" aria-label="장바구니"><i class="fa-solid fa-bag-shopping"></i><span class="cart-count">0</span></a></div>
+</div></header>
+
+<main>
+  <div class="page-head">
+    <div class="label">LOGIN</div>
+    <h1>로그인</h1>
+  </div>
+  <form class="auth" onsubmit="return false">
+    <div class="field"><label>아이디 또는 이메일</label><input type="text" placeholder="이메일을 입력하세요"></div>
+    <div class="field"><label>비밀번호</label><input type="password" placeholder="비밀번호를 입력하세요"></div>
+    <div class="row-opt">
+      <label><input type="checkbox"> 로그인 상태 유지</label>
+      <a href="#">아이디 · 비밀번호 찾기</a>
+    </div>
+    <a href="index.html" class="btn-main">로그인</a>
+    <div class="divider">또는</div>
+    <div class="sns-login">
+      <a href="#"><i class="fa-solid fa-comment" style="color:#3c1e1e"></i> 카카오로 시작하기</a>
+      <a href="#"><i class="fa-brands fa-google"></i> Google로 시작하기</a>
+      <a href="#"><i class="fa-brands fa-apple"></i> Apple로 시작하기</a>
+    </div>
+    <div class="to-signup">아직 소마리빙 회원이 아니신가요? <a href="signup.html">회원가입</a></div>
+  </form>
+</main>
+
+<footer class="site-footer">
+  <div class="top">
+    <div><div class="flogo">SOMA LIVING</div><p class="intro">소마리빙은 몸과 마음의 균형을 위한<br>웰니스 라이프를 제안합니다.</p>
+      <div class="sns"><a href="#" aria-label="instagram"><i class="fa-brands fa-instagram"></i></a><a href="#" aria-label="facebook"><i class="fa-brands fa-facebook"></i></a><a href="#" aria-label="youtube"><i class="fa-brands fa-youtube"></i></a><a href="#" aria-label="pinterest"><i class="fa-brands fa-pinterest"></i></a></div></div>
+    <div class="cols">
+      <div class="col"><h4>고객 서비스</h4><a href="board.html">주문/배송 안내</a><a href="board.html">교환/반품 안내</a><a href="board.html">자주 묻는 질문</a><a href="board-write.html">1:1 문의</a></div>
+      <div class="col"><h4>브랜드</h4><a href="board.html">브랜드 스토리</a><a href="board.html">지속 가능한 가치</a><a href="board.html">매장 안내</a><a href="board.html">인재 채용</a></div>
+      <div class="col cs"><h4>고객센터</h4><div class="num">02-1234-5678</div><div class="time">평일 10:00 ~ 18:00 (주말/공휴일 휴무)</div><div>help@somaliving.co.kr</div></div>
+    </div>
+  </div>
+  <div class="copy"><span>© 2024 SOMA LIVING. All rights reserved.</span><nav><a href="board.html">이용약관</a><a href="board.html">개인정보처리방침</a></nav></div>
+</footer>
+</body>
+</html>

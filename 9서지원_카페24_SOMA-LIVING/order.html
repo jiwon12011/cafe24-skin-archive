@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOMA LIVING | 주문/결제</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Serif+KR:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --main:#43392f; --sub:#998d7d; --point:#9a7b56; --bg:#faf7f2; --bg-soft:#efe9e0;
+  --topbar:#2f2a24; --sale:#b15a3c; --line:#e7ded2; --text:#403930;
+  --maxw:1550px; --pad:30px; --gap:22px; --section-gap:96px;
+  --fs-h2:26px; --fs-h3:17px; --fs-body:15px; --fs-sm:13px; --fs-xs:12px;
+  --fw-light:300; --fw-regular:400; --fw-medium:500; --fw-bold:600; --fw-black:700;
+  --radius:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard',sans-serif;color:var(--text);background:var(--bg);font-size:var(--fs-body);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none;transition:color .2s}a:hover{color:var(--point)}
+img{display:block;max-width:100%;height:auto}ul,ol{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select{font-family:inherit}
+.serif{font-family:'Noto Serif KR',serif}
+.en{font-family:'Cormorant Garamond',serif;letter-spacing:.5px}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+.label{font-family:'Cormorant Garamond',serif;font-size:var(--fs-sm);font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--point)}
+
+.topbar{background:var(--topbar);color:#e7ddcf;font-size:var(--fs-xs)}
+.topbar .inner{display:flex;align-items:center;justify-content:space-between;height:38px}
+.topbar nav{display:flex;gap:16px;align-items:center}
+.topbar nav a{color:#cfc4b2}.topbar nav a:hover{color:#fff}.topbar .div{opacity:.4}
+.site-header{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line)}
+.site-header .inner{display:flex;align-items:center;height:80px}
+.logo{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:var(--main);letter-spacing:3px;flex:0 0 auto}
+.gnb{flex:1;display:flex;gap:42px;justify-content:center;font-size:var(--fs-body);font-weight:var(--fw-medium)}
+.gnb a{position:relative;padding:8px 0;color:var(--main)}.gnb a:hover{color:var(--point)}
+.utils{flex:0 0 auto;display:flex;gap:22px;font-size:18px;color:var(--main);align-items:center}
+.utils a{position:relative}.utils a:hover{color:var(--point)}
+.utils .cart-count{position:absolute;top:-8px;right:-10px;background:var(--point);color:#fff;font-size:10px;font-weight:var(--fw-bold);width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+
+main{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);min-height:60vh}
+.page-head{text-align:center;padding:56px 0 36px}
+.page-head .label{margin-bottom:10px}
+.page-head h1{font-family:'Noto Serif KR',serif;font-size:34px;font-weight:500;color:var(--main)}
+.steps{display:flex;justify-content:center;gap:36px;margin-top:22px;font-size:var(--fs-sm);color:var(--sub)}
+.steps .on{color:var(--point);font-weight:var(--fw-bold)}
+
+.order-wrap{display:grid;grid-template-columns:1fr 360px;gap:40px;align-items:start;padding-bottom:40px}
+.sec{margin-bottom:36px}
+.sec>h2{font-size:var(--fs-h3);font-weight:var(--fw-bold);color:var(--main);padding-bottom:14px;border-bottom:1px solid var(--main);margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.sec>h2 i{color:var(--point);font-size:15px}
+
+.frm .row{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+.frm .row .k{flex:0 0 110px;font-size:var(--fs-sm);color:var(--main);font-weight:var(--fw-medium)}
+.frm .row .k .req{color:var(--point)}
+.frm input[type=text],.frm input[type=tel],.frm input[type=email],.frm select{width:100%;max-width:420px;padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;font-size:var(--fs-body);color:var(--main)}
+.frm input:focus,.frm select:focus{outline:none;border-color:var(--point)}
+.frm .row .with-btn{display:flex;gap:8px;flex:1;max-width:420px}
+.frm .row .with-btn input{flex:1}
+.frm .row .with-btn button{flex:0 0 110px;border:1px solid var(--main);border-radius:var(--radius);font-size:var(--fs-sm);color:var(--main)}
+.frm .row .with-btn button:hover{background:var(--bg-soft)}
+.addr-tab{display:flex;gap:8px;margin-bottom:16px}
+.addr-tab label{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:var(--fs-sm);cursor:pointer}
+.addr-tab input{accent-color:var(--point)}
+.addr-tab label:has(input:checked){border-color:var(--point);color:var(--point);font-weight:var(--fw-medium)}
+
+.ord-items .it{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.ord-items .it:last-child{border-bottom:none}
+.ord-items .it img{width:80px;height:80px;border-radius:var(--radius);object-fit:cover;background:var(--bg-soft);flex:0 0 80px}
+.ord-items .it .nm{font-size:var(--fs-body);font-weight:var(--fw-medium);color:var(--main)}
+.ord-items .it .op{font-size:var(--fs-xs);color:var(--sub);margin-top:3px}
+.ord-items .it .pr{margin-left:auto;font-weight:var(--fw-bold);color:var(--main)}
+
+.pay-methods{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.pay-methods label{display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);border-radius:var(--radius);padding:16px 10px;font-size:var(--fs-sm);cursor:pointer;color:var(--main)}
+.pay-methods label:has(input:checked){border-color:var(--point);color:var(--point);font-weight:var(--fw-bold);background:#fbf7f1}
+.pay-methods input{display:none}
+.pay-methods i{font-size:16px}
+.pay-note{font-size:var(--fs-xs);color:var(--sub);background:var(--bg-soft);border-radius:var(--radius);padding:14px 16px;line-height:1.7}
+
+.summary{background:var(--bg-soft);border-radius:var(--radius);padding:30px 28px;position:sticky;top:100px}
+.summary h3{font-size:var(--fs-h3);font-weight:var(--fw-bold);color:var(--main);margin-bottom:20px}
+.summary .row{display:flex;justify-content:space-between;font-size:var(--fs-sm);color:var(--text);margin-bottom:14px}
+.summary .row .v{font-weight:var(--fw-medium);color:var(--main)}
+.summary .line{border:none;border-top:1px solid var(--line);margin:18px 0}
+.summary .total{display:flex;justify-content:space-between;align-items:baseline}
+.summary .total .t{font-size:var(--fs-body);font-weight:var(--fw-bold);color:var(--main)}
+.summary .total .v{font-size:26px;font-weight:var(--fw-bold);color:var(--point)}
+.summary .agree{margin:20px 0 4px;font-size:var(--fs-xs);color:var(--sub)}
+.summary .agree label{display:flex;align-items:center;gap:8px;cursor:pointer;margin-bottom:8px}
+.summary .agree input{accent-color:var(--point);width:15px;height:15px}
+.summary .pay{display:block;text-align:center;width:100%;margin-top:14px;background:var(--point);color:#fff;padding:18px 0;border-radius:var(--radius);font-size:var(--fs-body);font-weight:var(--fw-bold)}
+.summary .pay:hover{background:var(--main);color:#fff}
+.summary .back{display:block;text-align:center;margin-top:12px;font-size:var(--fs-sm);color:var(--sub)}
+.summary .back:hover{color:var(--point)}
+
+.site-footer{margin-top:var(--section-gap);border-top:1px solid var(--line);background:var(--bg-soft);padding:56px 0 40px;font-size:var(--fs-sm);color:var(--sub)}
+.site-footer .top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:40px}
+.site-footer .flogo{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:24px;color:var(--main);letter-spacing:3px;margin-bottom:16px}
+.site-footer .intro{max-width:330px;line-height:1.8}
+.site-footer .cols{display:flex;gap:64px}
+.site-footer .col h4{font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--main);margin-bottom:16px}
+.site-footer .col a{display:block;margin-bottom:11px}
+.site-footer .cs .num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--main)}
+.site-footer .cs .time{margin:8px 0}
+.site-footer .sns{display:flex;gap:16px;font-size:18px;margin-top:18px;color:var(--main)}
+.site-footer .copy{max-width:var(--maxw);margin:42px auto 0;padding:24px var(--pad) 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:var(--fs-xs);color:#a99c89}
+.site-footer .copy nav{display:flex;gap:18px}
+
+@media(max-width:1024px){.gnb{display:none}.order-wrap{grid-template-columns:1fr}.summary{position:static}.site-footer .cols{gap:36px}}
+@media(max-width:640px){:root{--pad:18px;--section-gap:60px}.topbar nav{gap:10px}.frm .row{flex-direction:column;align-items:flex-start;gap:6px}.pay-methods{grid-template-columns:1fr}.site-footer .top{flex-direction:column}.site-footer .cols{flex-wrap:wrap;gap:30px}}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="inner container"><span class="promo">지금 가입하면 신규 회원 5% 할인 쿠폰</span><nav><a href="board.html">고객센터</a><span class="div">|</span><a href="board.html">매장 안내</a><span class="div">|</span><a href="login.html">로그인</a></nav></div></div>
+<header class="site-header"><div class="inner container">
+  <a href="index.html" class="logo">SOMA LIVING</a>
+  <nav class="gnb"><a href="products.html">가구</a><a href="products.html">컬렉션</a><a href="products.html">소재와 케어</a><a href="board.html">매거진</a><a href="board.html">브랜드</a></nav>
+  <div class="utils"><a href="products.html" aria-label="검색"><i class="fa-solid fa-magnifying-glass"></i></a><a href="wishlist.html" aria-label="위시리스트"><i class="fa-regular fa-heart"></i></a><a href="cart.html" aria-label="장바구니"><i class="fa-solid fa-bag-shopping"></i><span class="cart-count">2</span></a></div>
+</div></header>
+
+<main>
+  <div class="page-head">
+    <div class="label">ORDER</div>
+    <h1>주문 / 결제</h1>
+    <div class="steps"><a href="cart.html">01 장바구니</a><span class="on">02 주문/결제</span><span>03 주문완료</span></div>
+  </div>
+
+  <form class="order-wrap" onsubmit="return false">
+    <div>
+      <!-- 주문자 정보 -->
+      <div class="sec frm">
+        <h2><i class="fa-solid fa-user"></i> 주문자 정보</h2>
+        <div class="row"><span class="k">이름 <span class="req">*</span></span><input type="text" placeholder="이름"></div>
+        <div class="row"><span class="k">연락처 <span class="req">*</span></span><input type="tel" placeholder="'-' 없이 숫자만"></div>
+        <div class="row"><span class="k">이메일</span><input type="email" placeholder="example@email.com"></div>
+      </div>
+
+      <!-- 배송지 -->
+      <div class="sec frm">
+        <h2><i class="fa-solid fa-truck"></i> 배송지 정보</h2>
+        <div class="addr-tab">
+          <label><input type="radio" name="addr" checked> 기본 배송지</label>
+          <label><input type="radio" name="addr"> 새 배송지</label>
+        </div>
+        <div class="row"><span class="k">받는 분 <span class="req">*</span></span><input type="text" placeholder="받는 분 이름"></div>
+        <div class="row"><span class="k">연락처 <span class="req">*</span></span><input type="tel" placeholder="'-' 없이 숫자만"></div>
+        <div class="row"><span class="k">주소 <span class="req">*</span></span>
+          <div class="with-btn"><input type="text" placeholder="우편번호"><button type="button">주소 검색</button></div>
+        </div>
+        <div class="row"><span class="k"></span><input type="text" placeholder="기본 주소"></div>
+        <div class="row"><span class="k"></span><input type="text" placeholder="상세 주소"></div>
+        <div class="row"><span class="k">배송 요청</span>
+          <select><option>배송 시 요청사항을 선택하세요</option><option>부재 시 경비실에 맡겨주세요</option><option>배송 전 연락 바랍니다</option><option>설치 후 포장재 수거 요청</option></select>
+        </div>
+      </div>
+
+      <!-- 주문 상품 -->
+      <div class="sec">
+        <h2><i class="fa-solid fa-box-open"></i> 주문 상품 (2)</h2>
+        <div class="ord-items">
+          <div class="it"><img src="images/p-cloud-lounge-chair.png" alt="클라우드 라운지 체어">
+            <div><div class="nm">클라우드 라운지 체어</div><div class="op">크림 부클레 / 내추럴 오크 · 수량 1개</div></div>
+            <div class="pr">1,590,000원</div></div>
+          <div class="it"><img src="images/p-omud-coffee-table.png" alt="오무드 커피 테이블">
+            <div><div class="nm">오무드 커피 테이블</div><div class="op">아이보리 스톤 · 수량 1개</div></div>
+            <div class="pr">1,290,000원</div></div>
+        </div>
+      </div>
+
+      <!-- 결제수단 -->
+      <div class="sec">
+        <h2><i class="fa-solid fa-credit-card"></i> 결제 수단</h2>
+        <div class="pay-methods">
+          <label><input type="radio" name="pay" checked><i class="fa-regular fa-credit-card"></i> 신용/체크카드</label>
+          <label><input type="radio" name="pay"><i class="fa-solid fa-building-columns"></i> 무통장 입금</label>
+          <label><input type="radio" name="pay"><i class="fa-solid fa-comment"></i> 간편결제</label>
+        </div>
+        <p class="pay-note">실제 결제는 카페24 안전결제 시스템을 통해 진행됩니다. 카드 정보는 본 페이지에 저장되지 않으며, 결제하기 버튼 클릭 시 안전한 결제창으로 이동합니다.</p>
+      </div>
+    </div>
+
+    <!-- 결제 금액 요약 -->
+    <aside class="summary">
+      <h3>결제 금액</h3>
+      <div class="row"><span>총 상품금액</span><span class="v">2,880,000원</span></div>
+      <div class="row"><span>배송비</span><span class="v">무료</span></div>
+      <div class="row"><span>할인/쿠폰</span><span class="v">- 0원</span></div>
+      <div class="row"><span>예상 적립금</span><span class="v">+28,800P</span></div>
+      <hr class="line">
+      <div class="total"><span class="t">최종 결제금액</span><span class="v">2,880,000원</span></div>
+      <div class="agree">
+        <label><input type="checkbox" checked> [필수] 주문 내용을 확인했으며 결제에 동의합니다.</label>
+        <label><input type="checkbox" checked> [필수] 개인정보 수집/이용 및 제3자 제공 동의</label>
+      </div>
+      <a href="order-complete.html" class="pay">2,880,000원 결제하기</a>
+      <a href="cart.html" class="back">장바구니로 돌아가기</a>
+    </aside>
+  </form>
+</main>
+
+<footer class="site-footer">
+  <div class="container top">
+    <div><div class="flogo">SOMA LIVING</div><p class="intro">소마리빙은 몸과 마음의 균형을 위한<br>웰니스 라이프를 제안합니다.</p>
+      <div class="sns"><a href="#" aria-label="instagram"><i class="fa-brands fa-instagram"></i></a><a href="#" aria-label="facebook"><i class="fa-brands fa-facebook"></i></a><a href="#" aria-label="youtube"><i class="fa-brands fa-youtube"></i></a><a href="#" aria-label="pinterest"><i class="fa-brands fa-pinterest"></i></a></div></div>
+    <div class="cols">
+      <div class="col"><h4>고객 서비스</h4><a href="board.html">주문/배송 안내</a><a href="board.html">교환/반품 안내</a><a href="board.html">자주 묻는 질문</a><a href="board-write.html">1:1 문의</a></div>
+      <div class="col"><h4>브랜드</h4><a href="board.html">브랜드 스토리</a><a href="board.html">지속 가능한 가치</a><a href="board.html">매장 안내</a><a href="board.html">인재 채용</a></div>
+      <div class="col cs"><h4>고객센터</h4><div class="num">02-1234-5678</div><div class="time">평일 10:00 ~ 18:00 (주말/공휴일 휴무)</div><div>help@somaliving.co.kr</div></div>
+    </div>
+  </div>
+  <div class="copy"><span>© 2024 SOMA LIVING. All rights reserved.</span><nav><a href="board.html">이용약관</a><a href="board.html">개인정보처리방침</a></nav></div>
+</footer>
+</body>
+</html>

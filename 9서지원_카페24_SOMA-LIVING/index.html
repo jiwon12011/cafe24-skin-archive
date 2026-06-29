@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOMA LIVING | 머무는 시간이 편안해지는 공간</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Serif+KR:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* =========================================================
+   SOMA LIVING — 디자인 토큰
+   (★ 여기 값만 바꾸면 사이트 전체 톤이 바뀝니다)
+   ========================================================= */
+:root{
+  /* ---- 색상 ---- */
+  --main:#43392f;        /* 메인색 (로고·제목·본문강조 = 에스프레소 브라운) */
+  --sub:#998d7d;         /* 서브색 (보조 텍스트 = 웜 그레이) */
+  --point:#9a7b56;       /* ★포인트색 (강조 = 버튼·가격·배지·링크호버 = 카라멜) */
+  --bg:#faf7f2;          /* 배경색 (아이보리) */
+  --bg-soft:#efe9e0;     /* 보조 배경색 (섹션 구분 = 소프트 베이지) */
+  --topbar:#2f2a24;      /* 상단 띠 배경 */
+  --sale:#b15a3c;        /* 세일 퍼센트 (테라코타) */
+  --line:#e7ded2;        /* 구분선 */
+  --text:#403930;        /* 본문 글자색 */
+
+  /* ---- 간격 / 여백 ---- */
+  --maxw:1550px;         /* 콘텐츠 최대 폭 */
+  --pad:30px;            /* 좌우 안쪽 여백 */
+  --gap:22px;            /* 카드 사이 간격 */
+  --section-gap:96px;    /* 섹션별 세로 간격 */
+
+  /* ---- 글자 크기 (계층) ---- */
+  --fs-hero:54px;        /* 히어로 대제목 */
+  --fs-h2:26px;          /* 섹션 제목 */
+  --fs-h3:17px;          /* 카드/소제목 */
+  --fs-body:15px;        /* 본문 */
+  --fs-sm:13px;          /* 작은 글씨 */
+  --fs-xs:12px;          /* 캡션/배지/라벨 */
+
+  /* ---- 글자 두께 ---- */
+  --fw-light:300;
+  --fw-regular:400;
+  --fw-medium:500;
+  --fw-bold:600;
+  --fw-black:700;
+
+  /* ---- 모서리 ---- */
+  --radius:8px;
+}
+
+/* =========================================================
+   기본 / 리셋
+   ========================================================= */
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard',sans-serif;color:var(--text);background:var(--bg);
+  font-size:var(--fs-body);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none;transition:color .2s}
+a:hover{color:var(--point)}
+img{display:block;max-width:100%;height:auto}
+ul,ol{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.serif{font-family:'Noto Serif KR',serif}
+.en{font-family:'Cormorant Garamond',serif;letter-spacing:.5px}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+.point{color:var(--point)}
+.label{font-family:'Cormorant Garamond',serif;font-size:var(--fs-sm);font-weight:600;
+  letter-spacing:2.5px;text-transform:uppercase;color:var(--point)}
+
+/* =========================================================
+   헤더 (모든 페이지 동일)
+   ========================================================= */
+.topbar{background:var(--topbar);color:#e7ddcf;font-size:var(--fs-xs)}
+.topbar .inner{display:flex;align-items:center;justify-content:space-between;height:38px}
+.topbar .promo{letter-spacing:.3px}
+.topbar nav{display:flex;gap:16px;align-items:center}
+.topbar nav a{color:#cfc4b2}
+.topbar nav a:hover{color:#fff}
+.topbar .div{opacity:.4}
+
+.site-header{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line)}
+.site-header .inner{display:flex;align-items:center;height:80px}
+.logo{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;
+  color:var(--main);letter-spacing:3px;flex:0 0 auto}
+.gnb{flex:1;display:flex;gap:42px;justify-content:center;font-size:var(--fs-body);font-weight:var(--fw-medium)}
+.gnb a{position:relative;padding:8px 0;color:var(--main)}
+.gnb a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--point);transition:width .25s}
+.gnb a:hover{color:var(--point)}
+.gnb a:hover::after{width:100%}
+.utils{flex:0 0 auto;display:flex;gap:22px;font-size:18px;color:var(--main);align-items:center}
+.utils a{position:relative}
+.utils a:hover{color:var(--point)}
+.utils .cart-count{position:absolute;top:-8px;right:-10px;background:var(--point);color:#fff;
+  font-size:10px;font-weight:var(--fw-bold);width:16px;height:16px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-family:'Pretendard',sans-serif}
+
+/* =========================================================
+   히어로 (풀폭 이미지 + 좌측 텍스트 + 슬라이드 인디케이터)
+   ========================================================= */
+.hero{position:relative;width:100%;height:660px;overflow:hidden}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero .veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(250,247,242,.55) 0%,rgba(250,247,242,.12) 42%,rgba(250,247,242,0) 70%)}
+.hero .hero-inner{position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+.hero .h-label{color:var(--main);letter-spacing:3px;margin-bottom:20px}
+.hero h1{font-family:'Noto Serif KR',serif;font-weight:500;font-size:var(--fs-hero);
+  line-height:1.32;color:var(--main);letter-spacing:-.5px}
+.hero p.sub{margin-top:22px;font-size:var(--fs-h3);color:var(--main);line-height:1.7;font-weight:var(--fw-regular)}
+.hero .btn-hero{margin-top:34px;display:inline-flex;align-items:center;gap:12px;
+  background:var(--point);color:#fff;padding:15px 30px;border-radius:var(--radius);
+  font-size:var(--fs-body);font-weight:var(--fw-medium);width:fit-content;transition:background .2s}
+.hero .btn-hero:hover{background:var(--main);color:#fff}
+.hero .dots{position:absolute;left:0;right:0;bottom:38px;max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);
+  display:flex;align-items:center;gap:14px;font-family:'Cormorant Garamond',serif;color:var(--main)}
+.hero .dots b{font-size:16px;font-weight:600}
+.hero .dots .bar{width:54px;height:1px;background:var(--main);opacity:.5}
+.hero .dots span{font-size:15px;opacity:.45}
+
+/* =========================================================
+   섹션 공통
+   ========================================================= */
+section{margin-top:var(--section-gap)}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:30px}
+.sec-head .tt h2{font-family:'Noto Serif KR',serif;font-size:var(--fs-h2);font-weight:500;color:var(--main);margin-top:8px}
+.sec-head .more{font-size:var(--fs-sm);color:var(--sub);display:inline-flex;align-items:center;gap:6px}
+.sec-head .more:hover{color:var(--point)}
+
+/* =========================================================
+   상품 카드 (공통)
+   ========================================================= */
+.item{position:relative}
+.item .thumb{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:1/1;background:var(--bg-soft)}
+.item .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
+.item:hover .thumb img{transform:scale(1.05)}
+.item .badge{position:absolute;top:12px;left:12px;z-index:3;display:inline-block;padding:4px 10px;
+  border-radius:5px;font-size:var(--fs-xs);font-weight:var(--fw-bold);letter-spacing:.5px;
+  background:var(--point);color:#fff;font-family:'Cormorant Garamond',serif}
+.item .badge.best{background:var(--main)}
+.item .wish{position:absolute;top:10px;right:10px;z-index:3;width:34px;height:34px;border-radius:50%;
+  background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;
+  color:var(--main);font-size:14px;transition:.2s;box-shadow:0 2px 8px rgba(67,57,47,.12)}
+.item .wish:hover{background:var(--point);color:#fff}
+.item .wish.on{background:var(--point);color:#fff}
+.item .name{margin-top:15px;font-size:var(--fs-body);font-weight:var(--fw-medium);color:var(--main);
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.45;min-height:2.9em}
+.item .opt{font-size:var(--fs-xs);color:var(--sub);margin-top:4px}
+.item .price{margin-top:9px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.item .price .now{font-size:var(--fs-h3);font-weight:var(--fw-bold);color:var(--main)}
+.item .price .pct{color:var(--sale);font-weight:var(--fw-bold);font-size:var(--fs-body)}
+.item .was{font-size:var(--fs-sm);color:#bcb1a1;text-decoration:line-through;margin-top:3px}
+
+/* =========================================================
+   BEST (좌측 인트로 + 우측 4카드)
+   ========================================================= */
+.best .wrap{display:grid;grid-template-columns:300px 1fr;gap:50px;align-items:center}
+.best .intro h2{font-family:'Noto Serif KR',serif;font-size:30px;font-weight:500;color:var(--main);margin:12px 0 18px;line-height:1.35}
+.best .intro p{color:var(--sub);font-size:var(--fs-sm);line-height:1.8}
+.best .intro .more{margin-top:30px;display:inline-flex;align-items:center;gap:8px;font-size:var(--fs-sm);
+  color:var(--main);border-bottom:1px solid var(--main);padding-bottom:4px}
+.best .intro .more:hover{color:var(--point);border-color:var(--point)}
+.best .cards{position:relative}
+.best .track{display:flex;gap:var(--gap);overflow-x:auto;scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;-ms-overflow-style:none;scrollbar-width:none;padding-bottom:2px}
+.best .track::-webkit-scrollbar{display:none}
+.best .track .item{flex:0 0 calc((100% - 3*var(--gap)) / 4);scroll-snap-align:start}
+.best .arrow{position:absolute;top:35%;width:42px;height:42px;border-radius:50%;background:#fff;
+  border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--main);
+  box-shadow:0 4px 14px rgba(67,57,47,.08);z-index:4}
+.best .arrow.prev{left:-21px}
+.best .arrow.next{right:-21px}
+.best .arrow:hover{background:var(--point);color:#fff;border-color:var(--point)}
+
+/* =========================================================
+   MATERIALS & COMFORT (좌 이미지 + 우 카피박스)
+   ========================================================= */
+.material .wrap{display:grid;grid-template-columns:1.15fr 1fr;background:var(--bg-soft);border-radius:var(--radius);overflow:hidden}
+.material .pic{position:relative;overflow:hidden}
+.material .pic img{width:100%;height:100%;object-fit:cover;min-height:420px}
+.material .box{padding:58px 56px}
+.material .box h3{font-family:'Noto Serif KR',serif;font-size:28px;font-weight:500;color:var(--main);margin:14px 0 18px;line-height:1.4}
+.material .box>p{color:var(--sub);font-size:var(--fs-sm);line-height:1.85}
+.material .box .more{margin:24px 0 36px;display:inline-flex;align-items:center;gap:8px;font-size:var(--fs-sm);
+  color:var(--main);border-bottom:1px solid var(--main);padding-bottom:4px}
+.material .box .more:hover{color:var(--point);border-color:var(--point)}
+.material .feats{display:flex;flex-direction:column;gap:20px;border-top:1px solid var(--line);padding-top:30px}
+.material .feats .f{display:flex;align-items:center;gap:16px}
+.material .feats .ic{width:42px;height:42px;border-radius:50%;background:var(--bg);display:flex;align-items:center;
+  justify-content:center;color:var(--point);font-size:17px;flex:0 0 42px}
+.material .feats .f b{font-size:var(--fs-body);font-weight:var(--fw-bold);color:var(--main)}
+.material .feats .f>div span{display:block;font-size:var(--fs-xs);color:var(--sub);margin-top:2px}
+
+/* =========================================================
+   MD'S PICK / NEW (4카드)
+   ========================================================= */
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap)}
+
+/* =========================================================
+   BEST REVIEW (5카드 가로)
+   ========================================================= */
+.reviews .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--gap)}
+.reviews .r{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.reviews .r .pic{aspect-ratio:1/1;overflow:hidden}
+.reviews .r .pic img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
+.reviews .r:hover .pic img{transform:scale(1.05)}
+.reviews .r .body{padding:16px 16px 20px}
+.reviews .r .stars{color:var(--point);font-size:var(--fs-sm);letter-spacing:1px}
+.reviews .r p{font-size:var(--fs-sm);color:var(--text);line-height:1.55;margin:8px 0 12px;min-height:3.3em}
+.reviews .r .who{font-size:var(--fs-xs);color:var(--sub)}
+
+/* =========================================================
+   MAGAZINE (3카드)
+   ========================================================= */
+.magazine .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
+.magazine .m{border-radius:var(--radius);overflow:hidden;background:var(--bg-soft)}
+.magazine .m .pic{aspect-ratio:16/9;overflow:hidden}
+.magazine .m .pic img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
+.magazine .m:hover .pic img{transform:scale(1.04)}
+.magazine .m .txt{padding:24px 26px 30px}
+.magazine .m .t{font-family:'Noto Serif KR',serif;font-size:var(--fs-h3);font-weight:500;color:var(--main)}
+.magazine .m .d{margin-top:9px;font-size:var(--fs-sm);color:var(--sub);line-height:1.6}
+
+/* =========================================================
+   INSTAGRAM (7 정사각)
+   ========================================================= */
+.insta .grid{display:grid;grid-template-columns:repeat(7,1fr);gap:12px}
+.insta .g{aspect-ratio:1/1;border-radius:var(--radius);overflow:hidden}
+.insta .g img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
+.insta .g:hover img{transform:scale(1.08)}
+.insta .head .handle{font-size:var(--fs-sm);color:var(--sub);margin-left:10px;font-family:'Cormorant Garamond',serif;letter-spacing:1px}
+
+/* =========================================================
+   하단 프로모 배너 2개
+   ========================================================= */
+.promos{margin-top:var(--section-gap)}
+.promos .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gap)}
+.promos .pr{display:flex;align-items:center;gap:22px;padding:38px 44px;border-radius:var(--radius);color:#fff}
+.promos .pr.a{background:#8c8267}
+.promos .pr.b{background:#6f6a52}
+.promos .pr .ic{font-size:32px;opacity:.92;flex:0 0 auto}
+.promos .pr .t{font-size:var(--fs-h3);font-weight:var(--fw-bold)}
+.promos .pr .s{font-size:var(--fs-sm);opacity:.85;margin-top:5px}
+.promos .pr .go{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-size:var(--fs-sm);
+  border:1px solid rgba(255,255,255,.6);padding:9px 18px;border-radius:var(--radius);white-space:nowrap}
+.promos .pr .go:hover{background:#fff;color:var(--main)}
+
+/* =========================================================
+   푸터 (모든 페이지 동일)
+   ========================================================= */
+.site-footer{margin-top:var(--section-gap);border-top:1px solid var(--line);background:var(--bg-soft);
+  padding:56px 0 40px;font-size:var(--fs-sm);color:var(--sub)}
+.site-footer .top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:40px}
+.site-footer .flogo{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:24px;
+  color:var(--main);letter-spacing:3px;margin-bottom:16px}
+.site-footer .intro{max-width:330px;line-height:1.8}
+.site-footer .cols{display:flex;gap:64px}
+.site-footer .col h4{font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--main);margin-bottom:16px}
+.site-footer .col a{display:block;margin-bottom:11px}
+.site-footer .cs .num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--main)}
+.site-footer .cs .time{margin:8px 0}
+.site-footer .sns{display:flex;gap:16px;font-size:18px;margin-top:18px;color:var(--main)}
+.site-footer .sns a:hover{color:var(--point)}
+.site-footer .copy{max-width:var(--maxw);margin:42px auto 0;padding:24px var(--pad) 0;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:var(--fs-xs);color:#a99c89}
+.site-footer .copy nav{display:flex;gap:18px}
+
+/* 맨 위로 버튼 */
+.to-top{position:fixed;right:28px;bottom:28px;width:46px;height:46px;border-radius:50%;background:var(--main);
+  color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;z-index:60;
+  box-shadow:0 6px 18px rgba(67,57,47,.25);opacity:.92}
+.to-top:hover{background:var(--point);color:#fff}
+
+/* =========================================================
+   스크롤 등장 효과 (fade + slide-up)
+   ========================================================= */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .8s ease,transform .8s ease}
+.reveal.show{opacity:1;transform:none}
+
+/* =========================================================
+   반응형
+   ========================================================= */
+@media(max-width:1200px){
+  .gnb{gap:26px}
+  .insta .grid{grid-template-columns:repeat(7,1fr)}
+}
+@media(max-width:1024px){
+  .gnb{display:none}
+  .hero{height:560px}
+  :root{--fs-hero:40px}
+  .best .wrap{grid-template-columns:1fr;gap:28px}
+  .best .track .item{flex:0 0 calc((100% - var(--gap)) / 2)}
+  .best .arrow{display:none}
+  .material .wrap{grid-template-columns:1fr}
+  .material .box{padding:40px 32px}
+  .prod-grid{grid-template-columns:repeat(2,1fr)}
+  .reviews .grid{grid-template-columns:repeat(3,1fr)}
+  .magazine .grid{grid-template-columns:1fr}
+  .insta .grid{grid-template-columns:repeat(4,1fr)}
+  .promos .grid{grid-template-columns:1fr}
+  .site-footer .cols{gap:36px}
+}
+@media(max-width:640px){
+  :root{--section-gap:60px;--pad:18px;--fs-hero:32px}
+  .topbar .promo{display:none}
+  .hero{height:480px}
+  .prod-grid{grid-template-columns:repeat(2,1fr)}
+  .best .track .item{flex:0 0 calc((100% - var(--gap)) / 2)}
+  .reviews .grid{grid-template-columns:repeat(2,1fr)}
+  .insta .grid{grid-template-columns:repeat(3,1fr)}
+  .promos .pr{flex-wrap:wrap;padding:28px}
+  .promos .pr .go{margin-left:0}
+  .site-footer .top{flex-direction:column}
+  .site-footer .cols{flex-wrap:wrap;gap:32px}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ 헤더 (모든 페이지 동일) ============ -->
+<div class="topbar">
+  <div class="inner container">
+    <span class="promo">지금 가입하면 신규 회원 5% 할인 쿠폰</span>
+    <nav>
+      <a href="board.html">고객센터</a><span class="div">|</span>
+      <a href="board.html">매장 안내</a><span class="div">|</span>
+      <a href="login.html">로그인</a>
+    </nav>
+  </div>
+</div>
+<header class="site-header">
+  <div class="inner container">
+    <a href="index.html" class="logo">SOMA LIVING</a>
+    <nav class="gnb">
+      <a href="products.html">가구</a>
+      <a href="products.html">컬렉션</a>
+      <a href="products.html">소재와 케어</a>
+      <a href="board.html">매거진</a>
+      <a href="board.html">브랜드</a>
+    </nav>
+    <div class="utils">
+      <a href="products.html" aria-label="검색"><i class="fa-solid fa-magnifying-glass"></i></a><a href="wishlist.html" aria-label="위시리스트"><i class="fa-regular fa-heart"></i></a>
+      <a href="cart.html" aria-label="장바구니"><i class="fa-solid fa-bag-shopping"></i><span class="cart-count">0</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ 히어로 ============ -->
+<section class="hero" style="margin-top:0">
+  <img src="images/hero-living-room.png" alt="편안한 거실에 놓인 소마리빙 라운지 가구">
+  <div class="veil"></div>
+  <div class="hero-inner">
+    <div class="h-label en reveal">SLOW LIVING, WELL LIVING</div>
+    <h1 class="reveal">머무는 시간이<br>편안해지는 공간</h1>
+    <p class="sub reveal">몸과 마음이 이어가는 가구,<br>소마리빙이 제안하는 균형의 일상</p>
+    <a href="products.html" class="btn-hero reveal">컬렉션 둘러보기 <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+  <div class="dots">
+    <b>01</b><span class="bar"></span><span>02</span><span>03</span>
+  </div>
+</section>
+
+<!-- ============ BEST ============ -->
+<section class="best">
+  <div class="container">
+    <div class="wrap">
+      <div class="intro reveal">
+        <div class="label">BEST</div>
+        <h2>지금 가장<br>사랑받는 가구</h2>
+        <p>디자인과 편안함, 오래도록<br>곁에 두고 싶은 인테리어 선택.</p>
+        <a class="more" href="products.html">전체보기 <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="cards reveal">
+        <button class="arrow prev" type="button" aria-label="이전" onclick="bestSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="arrow next" type="button" aria-label="다음" onclick="bestSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+        <ul class="track" id="bestTrack">
+          <li class="item"><a href="product-detail.html">
+            <div class="thumb"><span class="wish"><i class="fa-regular fa-heart"></i></span><img src="images/p-cloud-lounge-chair.png" alt="클라우드 라운지 체어"></div>
+            <p class="name">클라우드 라운지 체어</p><p class="opt">크림 부클레</p>
+            <div class="price"><span class="now">1,590,000원</span></div>
+          </a></li>
+          <li class="item"><a href="product-detail.html">
+            <div class="thumb"><span class="wish"><i class="fa-regular fa-heart"></i></span><img src="images/p-hue-recliner-chairbed.png" alt="휴 리클라이너 체어베드"></div>
+            <p class="name">휴 리클라이너 체어베드</p><p class="opt">월넛 / 패브릭</p>
+            <div class="price"><span class="now">2,980,000원</span></div>
+          </a></li>
+          <li class="item"><a href="product-detail.html">
+            <div class="thumb"><span class="wish"><i class="fa-regular fa-heart"></i></span><img src="images/p-love-side-storage.png" alt="러브 사이드 스토리지 테이블"></div>
+            <p class="name">러브 사이드 스토리지 테이블</p><p class="opt">월넛 원목</p>
+            <div class="price"><span class="now">690,000원</span></div>
+          </a></li>
+          <li class="item"><a href="product-detail.html">
+            <div class="thumb"><span class="wish"><i class="fa-regular fa-heart"></i></span><img src="images/p-omud-coffee-table.png" alt="오무드 커피 테이블"></div>
+            <p class="name">오무드 커피 테이블</p><p class="opt">아이보리 스톤</p>
+            <div class="price"><span class="now">1,290,000원</span></div>
+          </a></li>
+          <li class="item"><a href="product-detail.html">
+            <div class="thumb"><span class="badge best">BEST</span><span class="wish"><i class="fa-regular fa-heart"></i></span><img src="images/p-cloud-coin-sofa.png" alt="클로우 코인 소파"></div>
+            <p class="name">클로우 코인 소파</p><p class="opt">크림 부클레</p>
+            <div class="price"><span class="now">2,450,000원</span></div>
+          </a></li>
+          <li class="item"><a href="product-detail.html">
+            <div class="thumb"><span class="wish"><i class="fa-regular fa-heart"></i></span><img src="images/p-luna-lounge-chair.png" alt="루나 라운지 체어"></div>
+            <p class="name">루나 라운지 체어</p><p class="opt">올리브 / 오크</p>
+            <div class="price"><span class="now">1,250,000원</span></div>
+          </a></li>
+          <li class="item"><a href="product-detail.html">
+            <div class="thumb"><span class="wish"><i class="fa-regular fa-heart"></i></span><img src="images/p-bay-side-table.png" alt="베이 사이드 테이블"></div>
+            <p class="name">베이 사이드 테이블</p><p class="opt">스톤 베이지</p>
+            <div class="price"><span class="now">580,000원</span></div>
+          </a></li>
+          <li class="item"><a href="product-detail.html">
+            <div class="thumb"><span class="wish"><i class="fa-regular fa-heart"></i></span><img src="images/p-arch-storage.png" alt="아크 스토리지 오가나이저"></div>
+            <p class="name">아크 스토리지 오가나이저</p><p class="opt">월넛 원목</p>
+            <div class="price"><span class="now">890,000원</span></div>
+          </a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MATERIALS & COMFORT ============ -->
+<section class="material">
+  <div class="container">
+    <div class="wrap reveal">
+      <div class="pic"><img src="images/material-boucle-banner.png" alt="포근한 부클레 패브릭 클로즈업"></div>
+      <div class="box">
+        <div class="label">MATERIALS &amp; COMFORT</div>
+        <h3>좋은 소재가 만드는<br>깊은 휴식</h3>
+        <p>자연에서 온 솔직한 원료와 인체공학적 설계로,<br>당신의 하루를 더 건강하고 편안하게 만듭니다.</p>
+        <a class="more" href="products.html">소재와 케어 보기 <i class="fa-solid fa-arrow-right"></i></a>
+        <div class="feats">
+          <div class="f"><span class="ic"><i class="fa-solid fa-leaf"></i></span><div><b>자연 소재</b><span>자연에서 온 원료와 패브릭 사용</span></div></div>
+          <div class="f"><span class="ic"><i class="fa-solid fa-person-rays"></i></span><div><b>인체공학적 설계</b><span>바른 자세와 편안한 휴식을 위한 설계</span></div></div>
+          <div class="f"><span class="ic"><i class="fa-solid fa-gem"></i></span><div><b>정교한 마감</b><span>장인의 손길로 완성되는 디테일</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MD'S PICK ============ -->
+<section class="mdpick">
+  <div class="container">
+    <div class="sec-head">
+      <div class="tt"><div class="label">MD'S PICK</div><h2>소마리빙이 추천하는 오늘의 가구</h2></div>
+      <a class="more" href="products.html">전체보기 <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <ul class="prod-grid">
+      <li class="item reveal"><a href="product-detail.html">
+        <div class="thumb"><span class="badge">NEW</span><span class="wish"><i class="fa-regular fa-heart"></i></span><img src="images/p-luna-lounge-chair.png" alt="루나 라운지 체어"></div>
+        <p class="name">루나 라운지 체어</p><p class="opt">올리브 / 오크</p>
+        <div class="price"><span class="now">1,250,000원</span></div>
+      </a></li>
+      <li class="item reveal"><a href="product-detail.html">
+        <div class="thumb"><span class="badge best">BEST</span><span class="wish"><i class="fa-regular fa-heart"></i></span><img src="images/p-cloud-coin-sofa.png" alt="클로우 코인 소파"></div>
+        <p class="name">클로우 코인 소파</p><p class="opt">크림 부클레</p>
+        <div class="price"><span class="now">2,450,000원</span></div>
+      </a></li>
+      <li class="item reveal"><a href="product-detail.html">
+        <div class="thumb"><span class="badge">NEW</span><span class="wish"><i class="fa-regular fa-heart"></i></span><img src="images/p-bay-side-table.png" alt="베이 사이드 테이블"></div>
+        <p class="name">베이 사이드 테이블</p><p class="opt">스톤 베이지</p>
+        <div class="price"><span class="now">580,000원</span></div>
+      </a></li>
+      <li class="item reveal"><a href="product-detail.html">
+        <div class="thumb"><span class="badge">NEW</span><span class="wish"><i class="fa-regular fa-heart"></i></span><img src="images/p-arch-storage.png" alt="아크 스토리지 오가나이저"></div>
+        <p class="name">아크 스토리지 오가나이저</p><p class="opt">월넛 원목</p>
+        <div class="price"><span class="now">890,000원</span></div>
+      </a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ BEST REVIEW ============ -->
+<section class="reviews">
+  <div class="container">
+    <div class="sec-head">
+      <div class="tt"><div class="label">BEST REVIEW</div><h2>소마리빙을 경험한 고객들의 이야기</h2></div>
+      <a class="more" href="board.html">전체보기 <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="grid">
+      <div class="r reveal">
+        <div class="pic"><img src="images/review-1.png" alt="고객 거실 후기"></div>
+        <div class="body"><div class="stars">★★★★★</div><p>하루 끝, 이 소파에 앉으면 정말 편안해요.</p><div class="who">yuna***</div></div>
+      </div>
+      <div class="r reveal">
+        <div class="pic"><img src="images/review-2.png" alt="리클라이너 독서 후기"></div>
+        <div class="body"><div class="stars">★★★★★</div><p>디자인도 예쁘고, 앉으면 몸이 자연스럽게 편안해져요.</p><div class="who">green_life</div></div>
+      </div>
+      <div class="r reveal">
+        <div class="pic"><img src="images/review-3.png" alt="커피 테이블 디테일 후기"></div>
+        <div class="body"><div class="stars">★★★★★</div><p>마감이 깔끔 고급스럽고 원목 결이 아름다워요.</p><div class="who">calm_home</div></div>
+      </div>
+      <div class="r reveal">
+        <div class="pic"><img src="images/review-4.png" alt="월넛 사이드보드 후기"></div>
+        <div class="body"><div class="stars">★★★★★</div><p>공간이 훨씬 차분해졌어요. 정말 마음에 들어요.</p><div class="who">era_minimal</div></div>
+      </div>
+      <div class="r reveal">
+        <div class="pic"><img src="images/review-5.png" alt="부클레 체어 코너 후기"></div>
+        <div class="body"><div class="stars">★★★★★</div><p>패브릭이 부드럽고 포근해서 오래 앉아 있고 싶어요.</p><div class="who">slow.daily</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MAGAZINE ============ -->
+<section class="magazine">
+  <div class="container">
+    <div class="sec-head">
+      <div class="tt"><div class="label">MAGAZINE</div><h2>나를 위한 쉼의 이야기</h2></div>
+      <a class="more" href="board.html">전체보기 <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="grid">
+      <a class="m reveal" href="board-view.html">
+        <div class="pic"><img src="images/magazine-1.png" alt="웰니스 인테리어"></div>
+        <div class="txt"><div class="t">나를 위한 쉼, 웰니스 인테리어</div><div class="d">몸과 마음의 균형을 돕는 공간 연출법</div></div>
+      </a>
+      <a class="m reveal" href="board-view.html">
+        <div class="pic"><img src="images/magazine-2.png" alt="의자 고르기 가이드"></div>
+        <div class="txt"><div class="t">좋은 휴식을 위한 의자 고르기</div><div class="d">체형과 라이프스타일에 맞는 선택 가이드</div></div>
+      </a>
+      <a class="m reveal" href="board-view.html">
+        <div class="pic"><img src="images/magazine-3.png" alt="자연 소재의 힘"></div>
+        <div class="txt"><div class="t">자연 소재의 힘</div><div class="d">원목과 패브릭이 주는 편안한 에너지</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSTAGRAM ============ -->
+<section class="insta">
+  <div class="container">
+    <div class="sec-head head">
+      <div class="tt"><h2 class="serif" style="font-size:var(--fs-h2)">INSTAGRAM <span class="handle">@soma.living</span></h2></div>
+      <a class="more" href="#">더보기 <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="grid">
+      <a class="g reveal" href="#"><img src="images/insta-1.png" alt="인스타그램 게시물"></a>
+      <a class="g reveal" href="#"><img src="images/insta-2.png" alt="인스타그램 게시물"></a>
+      <a class="g reveal" href="#"><img src="images/insta-3.png" alt="인스타그램 게시물"></a>
+      <a class="g reveal" href="#"><img src="images/insta-4.png" alt="인스타그램 게시물"></a>
+      <a class="g reveal" href="#"><img src="images/insta-5.png" alt="인스타그램 게시물"></a>
+      <a class="g reveal" href="#"><img src="images/insta-6.png" alt="인스타그램 게시물"></a>
+      <a class="g reveal" href="#"><img src="images/insta-7.png" alt="인스타그램 게시물"></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 하단 프로모 배너 ============ -->
+<section class="promos">
+  <div class="container">
+    <div class="grid">
+      <div class="pr a reveal">
+        <span class="ic"><i class="fa-solid fa-store"></i></span>
+        <div><div class="t">쇼룸 방문 예약</div><div class="s">실제 공간에서 소마리빙을 경험해보세요.</div></div>
+        <a class="go" href="board.html">예약하기 <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="pr b reveal">
+        <span class="ic"><i class="fa-solid fa-truck"></i></span>
+        <div><div class="t">전국 무료 배송 &amp; 설치</div><div class="s">전문가가 안전하게 배송과 설치를 도와드립니다.</div></div>
+        <a class="go" href="board.html">자세히 보기 <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 푸터 (모든 페이지 동일) ============ -->
+<footer class="site-footer">
+  <div class="container top">
+    <div>
+      <div class="flogo">SOMA LIVING</div>
+      <p class="intro">소마리빙은 몸과 마음의 균형을 위한<br>웰니스 라이프를 제안합니다.</p>
+      <div class="sns">
+        <a href="#" aria-label="instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="facebook"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#" aria-label="youtube"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#" aria-label="pinterest"><i class="fa-brands fa-pinterest"></i></a>
+      </div>
+    </div>
+    <div class="cols">
+      <div class="col">
+        <h4>고객 서비스</h4>
+        <a href="board.html">주문/배송 안내</a>
+        <a href="board.html">교환/반품 안내</a>
+        <a href="board.html">자주 묻는 질문</a>
+        <a href="board-write.html">1:1 문의</a>
+      </div>
+      <div class="col">
+        <h4>브랜드</h4>
+        <a href="board.html">브랜드 스토리</a>
+        <a href="board.html">지속 가능한 가치</a>
+        <a href="board.html">매장 안내</a>
+        <a href="board.html">인재 채용</a>
+      </div>
+      <div class="col cs">
+        <h4>고객센터</h4>
+        <div class="num">02-1234-5678</div>
+        <div class="time">평일 10:00 ~ 18:00 (주말/공휴일 휴무)</div>
+        <div>help@somaliving.co.kr</div>
+      </div>
+    </div>
+  </div>
+  <div class="copy">
+    <span>© 2024 SOMA LIVING. All rights reserved.</span>
+    <nav><a href="board.html">이용약관</a><a href="board.html">개인정보처리방침</a></nav>
+  </div>
+</footer>
+
+<a href="#" class="to-top" aria-label="맨 위로"><i class="fa-solid fa-chevron-up"></i></a>
+
+<!-- ============ 스크롤 등장 효과 (바닐라 JS / IntersectionObserver) ============ -->
+<script>
+(function(){
+  var els = [].slice.call(document.querySelectorAll('.reveal'));
+  var vh = window.innerHeight || document.documentElement.clientHeight;
+  els.forEach(function(el){ if(el.getBoundingClientRect().top < vh){ el.classList.add('show'); } });
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('show')});return;}
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('show'); io.unobserve(en.target);} });
+  },{threshold:.12});
+  els.forEach(function(e){ if(!e.classList.contains('show')) io.observe(e); });
+})();
+
+// ===== BEST 슬라이드 (화살표로 가로 스크롤) =====
+function bestSlide(dir){
+  var t = document.getElementById('bestTrack');
+  if(!t) return;
+  var card = t.querySelector('.item');
+  var gap = parseInt(getComputedStyle(t).columnGap || getComputedStyle(t).gap || 22, 10) || 22;
+  var step = (card ? card.getBoundingClientRect().width + gap : 300) * 2; // 2칸씩 이동
+  t.scrollBy({ left: dir * step, behavior: 'smooth' });
+}
+
+// ===== 위시(하트) 토글 — 카드 이동 없이 찜만 =====
+document.querySelectorAll('.wish').forEach(function(w){
+  w.addEventListener('click', function(e){
+    e.preventDefault(); e.stopPropagation();
+    w.classList.toggle('on');
+    var ic = w.querySelector('i');
+    if(ic){ ic.classList.toggle('fa-regular'); ic.classList.toggle('fa-solid'); }
+  });
+});
+</script>
+</body>
+</html>

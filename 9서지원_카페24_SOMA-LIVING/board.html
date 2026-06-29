@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOMA LIVING | 고객 게시판</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Serif+KR:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --main:#43392f; --sub:#998d7d; --point:#9a7b56; --bg:#faf7f2; --bg-soft:#efe9e0;
+  --topbar:#2f2a24; --sale:#b15a3c; --line:#e7ded2; --text:#403930;
+  --maxw:1550px; --pad:30px; --section-gap:96px;
+  --fs-h2:26px; --fs-h3:17px; --fs-body:15px; --fs-sm:13px; --fs-xs:12px;
+  --fw-medium:500; --fw-bold:600; --fw-black:700; --radius:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard',sans-serif;color:var(--text);background:var(--bg);font-size:var(--fs-body);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none;transition:color .2s}a:hover{color:var(--point)}
+img{display:block;max-width:100%;height:auto}ul,ol{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+.label{font-family:'Cormorant Garamond',serif;font-size:var(--fs-sm);font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--point)}
+
+.topbar{background:var(--topbar);color:#e7ddcf;font-size:var(--fs-xs)}
+.topbar .inner{display:flex;align-items:center;justify-content:space-between;height:38px}
+.topbar nav{display:flex;gap:16px;align-items:center}.topbar nav a{color:#cfc4b2}.topbar nav a:hover{color:#fff}.topbar .div{opacity:.4}
+.site-header{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line)}
+.site-header .inner{display:flex;align-items:center;height:80px}
+.logo{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:var(--main);letter-spacing:3px;flex:0 0 auto}
+.gnb{flex:1;display:flex;gap:42px;justify-content:center;font-size:var(--fs-body);font-weight:var(--fw-medium)}
+.gnb a{padding:8px 0;color:var(--main)}.gnb a:hover{color:var(--point)}
+.utils{flex:0 0 auto;display:flex;gap:22px;font-size:18px;color:var(--main);align-items:center}
+.utils a{position:relative}.utils a:hover{color:var(--point)}
+.utils .cart-count{position:absolute;top:-8px;right:-10px;background:var(--point);color:#fff;font-size:10px;font-weight:var(--fw-bold);width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+
+main{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);min-height:62vh}
+.page-head{text-align:center;padding:56px 0 30px}
+.page-head .label{margin-bottom:10px}
+.page-head h1{font-family:'Noto Serif KR',serif;font-size:34px;font-weight:500;color:var(--main)}
+
+.board-tabs{display:flex;justify-content:center;gap:8px;margin-bottom:30px;flex-wrap:wrap}
+.board-tabs a{padding:9px 22px;border:1px solid var(--line);border-radius:999px;font-size:var(--fs-sm);font-weight:var(--fw-medium);background:#fff;color:var(--main)}
+.board-tabs a:hover{border-color:var(--point);color:var(--point)}
+.board-tabs a.on{background:var(--main);color:#fff;border-color:var(--main)}
+
+.board-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.board-top .cnt{font-size:var(--fs-sm);color:var(--sub)}
+.board-top .cnt b{color:var(--main)}
+.board-top .search{display:flex;gap:8px}
+.board-top .search select,.board-top .search input{border:1px solid var(--line);border-radius:var(--radius);padding:10px 14px;font-size:var(--fs-sm);background:#fff;color:var(--main)}
+.board-top .search button{background:var(--main);color:#fff;border-radius:var(--radius);padding:10px 18px;font-size:var(--fs-sm)}
+.board-top .search button:hover{background:var(--point)}
+
+.board-list{width:100%;border-collapse:collapse}
+.board-list thead th{border-top:1px solid var(--main);border-bottom:1px solid var(--line);padding:15px 8px;font-size:var(--fs-sm);color:var(--sub);font-weight:var(--fw-medium)}
+.board-list td{border-bottom:1px solid var(--line);padding:18px 8px;font-size:var(--fs-sm);text-align:center;color:var(--text)}
+.board-list td.title{text-align:left}
+.board-list td.title a{color:var(--main);font-weight:var(--fw-medium)}
+.board-list td.title a:hover{color:var(--point)}
+.board-list .cat{display:inline-block;font-size:var(--fs-xs);font-weight:var(--fw-bold);color:var(--point);margin-right:8px}
+.board-list .tag-notice{color:#fff;background:var(--main);padding:2px 9px;border-radius:4px;font-size:var(--fs-xs);font-weight:var(--fw-bold)}
+.board-list .reply{color:var(--sub);font-size:var(--fs-xs);margin-left:8px}
+.board-list .new{color:var(--sale);font-size:var(--fs-xs);margin-left:6px;font-weight:var(--fw-bold)}
+.board-list tr.notice{background:var(--bg-soft)}
+
+.board-bottom{display:flex;justify-content:flex-end;margin-top:18px}
+.btn-write{background:var(--point);color:#fff;padding:12px 26px;border-radius:var(--radius);font-size:var(--fs-sm);font-weight:var(--fw-bold)}
+.btn-write:hover{background:var(--main);color:#fff}
+.pagination{display:flex;justify-content:center;align-items:center;gap:8px;margin:46px 0 20px}
+.pagination a{width:40px;height:40px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:var(--fs-sm);color:var(--sub);border:1px solid transparent}
+.pagination a:hover{border-color:var(--line);color:var(--main)}
+.pagination a.on{background:var(--main);color:#fff}
+
+.site-footer{margin-top:var(--section-gap);border-top:1px solid var(--line);background:var(--bg-soft);padding:56px 0 40px;font-size:var(--fs-sm);color:var(--sub)}
+.site-footer .top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:40px}
+.site-footer .flogo{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:24px;color:var(--main);letter-spacing:3px;margin-bottom:16px}
+.site-footer .intro{max-width:330px;line-height:1.8}
+.site-footer .cols{display:flex;gap:64px}
+.site-footer .col h4{font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--main);margin-bottom:16px}
+.site-footer .col a{display:block;margin-bottom:11px}
+.site-footer .cs .num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--main)}
+.site-footer .cs .time{margin:8px 0}
+.site-footer .sns{display:flex;gap:16px;font-size:18px;margin-top:18px;color:var(--main)}
+.site-footer .copy{max-width:var(--maxw);margin:42px auto 0;padding:24px var(--pad) 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:var(--fs-xs);color:#a99c89}
+.site-footer .copy nav{display:flex;gap:18px}
+.to-top{position:fixed;right:28px;bottom:28px;width:46px;height:46px;border-radius:50%;background:var(--main);color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;z-index:60;box-shadow:0 6px 18px rgba(67,57,47,.25);opacity:.92}.to-top:hover{background:var(--point);color:#fff}
+
+@media(max-width:1024px){.gnb{display:none}.site-footer .cols{gap:36px}}
+@media(max-width:640px){:root{--pad:18px;--section-gap:60px}.topbar nav{gap:10px}.board-top{flex-direction:column;gap:12px;align-items:stretch}.board-list .hide-m{display:none}.site-footer .top{flex-direction:column}.site-footer .cols{flex-wrap:wrap;gap:30px}}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="inner container"><span class="promo">지금 가입하면 신규 회원 5% 할인 쿠폰</span><nav><a href="board.html">고객센터</a><span class="div">|</span><a href="board.html">매장 안내</a><span class="div">|</span><a href="login.html">로그인</a></nav></div></div>
+<header class="site-header"><div class="inner container">
+  <a href="index.html" class="logo">SOMA LIVING</a>
+  <nav class="gnb"><a href="products.html">가구</a><a href="products.html">컬렉션</a><a href="products.html">소재와 케어</a><a href="board.html">매거진</a><a href="board.html">브랜드</a></nav>
+  <div class="utils"><a href="products.html" aria-label="검색"><i class="fa-solid fa-magnifying-glass"></i></a><a href="wishlist.html" aria-label="위시리스트"><i class="fa-regular fa-heart"></i></a><a href="cart.html" aria-label="장바구니"><i class="fa-solid fa-bag-shopping"></i><span class="cart-count">0</span></a></div>
+</div></header>
+
+<main>
+  <div class="page-head">
+    <div class="label">COMMUNITY</div>
+    <h1>고객 게시판</h1>
+  </div>
+
+  <div class="board-tabs">
+    <a href="board.html" class="on">공지사항</a>
+    <a href="board.html">상품 후기</a>
+    <a href="board.html">상품 문의</a>
+    <a href="board.html">자주 묻는 질문</a>
+  </div>
+
+  <div class="board-top">
+    <div class="cnt">전체 <b>24</b>건</div>
+    <div class="search">
+      <select><option>제목</option><option>내용</option><option>작성자</option></select>
+      <input type="text" placeholder="검색어를 입력하세요">
+      <button>검색</button>
+    </div>
+  </div>
+
+  <table class="board-list">
+    <thead>
+      <tr><th style="width:80px">번호</th><th>제목</th><th style="width:140px" class="hide-m">작성자</th><th style="width:120px" class="hide-m">작성일</th><th style="width:80px" class="hide-m">조회</th></tr>
+    </thead>
+    <tbody>
+      <tr class="notice"><td><span class="tag-notice">공지</span></td><td class="title"><a href="board-view.html">5월 신상품 컬렉션 & 신규 회원 혜택 안내</a></td><td class="hide-m">SOMA LIVING</td><td class="hide-m">2024.05.01</td><td class="hide-m">1,820</td></tr>
+      <tr class="notice"><td><span class="tag-notice">공지</span></td><td class="title"><a href="board-view.html">가구 배송 및 설치 서비스 이용 안내</a></td><td class="hide-m">SOMA LIVING</td><td class="hide-m">2024.04.18</td><td class="hide-m">2,341</td></tr>
+      <tr><td>24</td><td class="title"><a href="board-view.html"><span class="cat">[후기]</span>클라우드 라운지 체어 정말 만족합니다<span class="reply">[2]</span><span class="new">N</span></a></td><td class="hide-m">yuna***</td><td class="hide-m">2024.05.18</td><td class="hide-m">312</td></tr>
+      <tr><td>23</td><td class="title"><a href="board-view.html"><span class="cat">[문의]</span>배송 일정 변경이 가능한가요?<span class="reply">[1]</span></a></td><td class="hide-m">kim***</td><td class="hide-m">2024.05.16</td><td class="hide-m">88</td></tr>
+      <tr><td>22</td><td class="title"><a href="board-view.html"><span class="cat">[후기]</span>오무드 커피 테이블, 거실이 화사해졌어요</a></td><td class="hide-m">calm_home</td><td class="hide-m">2024.05.14</td><td class="hide-m">204</td></tr>
+      <tr><td>21</td><td class="title"><a href="board-view.html"><span class="cat">[문의]</span>부클레 패브릭 케어 방법이 궁금합니다<span class="reply">[1]</span></a></td><td class="hide-m">lee***</td><td class="hide-m">2024.05.11</td><td class="hide-m">156</td></tr>
+      <tr><td>20</td><td class="title"><a href="board-view.html"><span class="cat">[후기]</span>휴 리클라이너 체어베드 강력 추천</a></td><td class="hide-m">slow.daily</td><td class="hide-m">2024.05.08</td><td class="hide-m">421</td></tr>
+      <tr><td>19</td><td class="title"><a href="board-view.html"><span class="cat">[문의]</span>모카 컬러 재입고 문의드려요</a></td><td class="hide-m">park***</td><td class="hide-m">2024.05.05</td><td class="hide-m">73</td></tr>
+      <tr><td>18</td><td class="title"><a href="board-view.html"><span class="cat">[후기]</span>루나 라운지 체어 색감이 너무 예뻐요</a></td><td class="hide-m">green_life</td><td class="hide-m">2024.05.02</td><td class="hide-m">298</td></tr>
+    </tbody>
+  </table>
+
+  <div class="board-bottom">
+    <a href="board-write.html" class="btn-write"><i class="fa-solid fa-pen"></i> 글쓰기</a>
+  </div>
+
+  <div class="pagination">
+    <a href="#" aria-label="이전"><i class="fa-solid fa-chevron-left"></i></a>
+    <a href="#" class="on">1</a><a href="#">2</a><a href="#">3</a>
+    <a href="#" aria-label="다음"><i class="fa-solid fa-chevron-right"></i></a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container top">
+    <div><div class="flogo">SOMA LIVING</div><p class="intro">소마리빙은 몸과 마음의 균형을 위한<br>웰니스 라이프를 제안합니다.</p>
+      <div class="sns"><a href="#" aria-label="instagram"><i class="fa-brands fa-instagram"></i></a><a href="#" aria-label="facebook"><i class="fa-brands fa-facebook"></i></a><a href="#" aria-label="youtube"><i class="fa-brands fa-youtube"></i></a><a href="#" aria-label="pinterest"><i class="fa-brands fa-pinterest"></i></a></div></div>
+    <div class="cols">
+      <div class="col"><h4>고객 서비스</h4><a href="board.html">주문/배송 안내</a><a href="board.html">교환/반품 안내</a><a href="board.html">자주 묻는 질문</a><a href="board-write.html">1:1 문의</a></div>
+      <div class="col"><h4>브랜드</h4><a href="board.html">브랜드 스토리</a><a href="board.html">지속 가능한 가치</a><a href="board.html">매장 안내</a><a href="board.html">인재 채용</a></div>
+      <div class="col cs"><h4>고객센터</h4><div class="num">02-1234-5678</div><div class="time">평일 10:00 ~ 18:00 (주말/공휴일 휴무)</div><div>help@somaliving.co.kr</div></div>
+    </div>
+  </div>
+  <div class="copy"><span>© 2024 SOMA LIVING. All rights reserved.</span><nav><a href="board.html">이용약관</a><a href="board.html">개인정보처리방침</a></nav></div>
+</footer>
+<a href="#" class="to-top" aria-label="맨 위로"><i class="fa-solid fa-chevron-up"></i></a>
+</body>
+</html>
