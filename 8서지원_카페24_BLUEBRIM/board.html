@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLUEBRIM | 게시판</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --main:#1b3a6b; --sub:#717b89; --point:#2f6fd0; --bg:#ffffff; --bg-soft:#f4f6f9;
+  --topbar:#16233d; --sale:#e8412c; --line:#e9ecef; --text:#1f2530;
+  --maxw:1550px; --pad:24px; --gap:18px; --section-gap:78px;
+  --fs-h2:23px; --fs-h3:17px; --fs-body:15px; --fs-sm:13px; --fs-xs:12px;
+  --fw-light:300; --fw-regular:400; --fw-medium:500; --fw-bold:700; --fw-black:800;
+  --radius:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard',sans-serif;color:var(--text);background:var(--bg);font-size:var(--fs-body);line-height:1.55}
+a{color:inherit;text-decoration:none;transition:color .2s}a:hover{color:var(--point)}
+img{display:block;max-width:100%;height:auto}ul,ol{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+.en{font-family:'Archivo',sans-serif}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+.topbar{background:var(--topbar);color:#dfe6f1;font-size:var(--fs-xs)}
+.topbar .inner{display:flex;align-items:center;justify-content:space-between;height:36px}
+.topbar nav{display:flex;gap:18px}.topbar nav a{color:#cdd6e6}.topbar nav a:hover{color:#fff}
+.site-header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
+.site-header .inner{display:flex;align-items:center;justify-content:space-between;height:78px}
+.logo{font-family:'Archivo',sans-serif;font-size:28px;font-weight:var(--fw-black);color:var(--main);letter-spacing:1px}
+.gnb{display:flex;gap:30px;font-weight:var(--fw-medium)}.gnb a.lookbook{font-family:'Archivo',sans-serif;font-weight:var(--fw-bold)}
+.utils{display:flex;gap:20px;font-size:19px;color:var(--main)}
+.summer-link{background:var(--bg-soft)}.summer-link .inner{display:flex;justify-content:flex-end;padding:8px 0}
+.summer-link a{display:inline-flex;align-items:center;gap:6px;color:var(--point);font-weight:var(--fw-bold);font-size:var(--fs-sm);font-family:'Archivo',sans-serif}
+.site-footer{margin-top:var(--section-gap);border-top:1px solid var(--line);background:var(--bg-soft);padding:46px 0 56px;font-size:var(--fs-sm);color:var(--sub)}
+.site-footer .top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px}
+.site-footer .flogo{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:22px;color:var(--main);margin-bottom:14px}
+.site-footer .links{display:flex;gap:22px;margin-bottom:14px;font-weight:var(--fw-medium);color:var(--text)}
+.site-footer .company{line-height:1.8}
+.site-footer .cs .num{font-family:'Archivo',sans-serif;font-size:26px;font-weight:var(--fw-bold);color:var(--main)}
+.site-footer .cs .time{margin:6px 0}.site-footer .sns{display:flex;gap:14px;font-size:18px;margin-top:14px;color:var(--main)}
+
+.subwrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+.page-title{text-align:center;margin:46px 0 24px}
+.page-title h1{font-family:'Archivo',sans-serif;font-size:30px;font-weight:var(--fw-black);color:var(--main)}
+.page-title .crumb{color:var(--sub);font-size:var(--fs-sm);margin-top:8px}
+
+.board-tabs{display:flex;justify-content:center;gap:8px;margin-bottom:26px}
+.board-tabs a{padding:9px 22px;border:1px solid var(--line);border-radius:999px;font-size:var(--fs-sm);font-weight:var(--fw-medium)}
+.board-tabs a.active{background:var(--main);color:#fff;border-color:var(--main)}
+.board-tabs a:hover{border-color:var(--point);color:var(--point)}
+.board-tabs a.active:hover{color:#fff}
+
+.b-table{width:100%;border-collapse:collapse;font-size:var(--fs-sm)}
+.b-table thead th{border-top:2px solid var(--main);border-bottom:1px solid var(--line);padding:14px 8px;color:var(--sub)}
+.b-table td{border-bottom:1px solid var(--line);padding:16px 8px;text-align:center}
+.b-table td.subj{text-align:left}
+.b-table td.subj a{font-weight:var(--fw-medium)}
+.b-table .notice{background:var(--bg-soft)}
+.b-table .tag{display:inline-block;padding:3px 10px;border-radius:999px;font-size:var(--fs-xs);font-weight:var(--fw-bold);background:var(--point);color:#fff;margin-right:6px}
+.b-table .tag.gray{background:#dfe3ea;color:var(--sub)}
+.b-table .stars{color:var(--point)}
+.search-bar{display:flex;justify-content:center;gap:8px;margin:26px 0}
+.search-bar input{width:280px;max-width:60vw;padding:11px 14px;border:1px solid var(--line);border-radius:var(--radius)}
+.search-bar button{padding:11px 20px;background:var(--main);color:#fff;border-radius:var(--radius);font-weight:var(--fw-bold)}
+.write-row{text-align:right;margin-top:16px}
+.write-row a{display:inline-flex;align-items:center;gap:6px;background:var(--point);color:#fff;padding:11px 22px;border-radius:var(--radius);font-weight:var(--fw-bold);font-size:var(--fs-sm)}
+.pagination{display:flex;justify-content:center;gap:6px;margin:34px 0 10px}
+.pagination a{min-width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:var(--radius);font-size:var(--fs-sm)}
+.pagination a.active{background:var(--main);color:#fff;border-color:var(--main)}
+@media(max-width:1100px){.gnb{display:none}}
+@media(max-width:640px){:root{--pad:16px}.topbar .promo{display:none}.b-table .hide{display:none}}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="inner container">
+  <span class="promo">여름 신제품 10% 쿠폰 + 전 상품 무료배송</span>
+  <nav><a href="login.html">로그인</a><a href="signup.html">회원가입</a><a href="board.html">주문조회</a><a href="products.html">위시리스트</a></nav>
+</div></div>
+<header class="site-header"><div class="inner container">
+  <a href="index.html" class="logo">BLUEBRIM</a>
+  <nav class="gnb">
+    <a href="products.html">여성</a><a href="products.html">신상품</a><a href="products.html">볼캡</a>
+    <a href="products.html">버킷햇</a><a href="products.html">비니</a><a href="products.html">라피아</a>
+    <a href="products.html">햇</a><a href="products.html">선바이저</a><a href="products.html">액세서리</a>
+    <a href="products.html" class="lookbook">LOOKBOOK</a>
+  </nav>
+  <div class="utils">
+    <a href="products.html"><i class="fa-solid fa-magnifying-glass"></i></a>
+    <a href="login.html"><i class="fa-regular fa-user"></i></a>
+    <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+    <a href="products.html"><i class="fa-regular fa-heart"></i></a>
+  </div>
+</div></header>
+<div class="summer-link"><div class="inner container"><a href="products.html" class="en">BLUEBRIM SUMMER <i class="fa-solid fa-circle-play"></i></a></div></div>
+
+<main class="subwrap">
+  <div class="page-title"><h1>BOARD</h1><div class="crumb"><a href="index.html">HOME</a> › 게시판</div></div>
+
+  <div class="board-tabs">
+    <a href="board.html" class="active">공지사항</a>
+    <a href="board.html">상품리뷰</a>
+    <a href="board.html">Q&amp;A</a>
+    <a href="board.html">FAQ</a>
+  </div>
+
+  <table class="b-table">
+    <thead><tr><th style="width:80px">번호</th><th>제목</th><th style="width:140px" class="hide">작성자</th><th style="width:120px" class="hide">작성일</th><th style="width:80px" class="hide">조회</th></tr></thead>
+    <tbody>
+      <tr class="notice"><td><span class="tag">공지</span></td><td class="subj"><a href="board-view.html">여름 시즌 배송 안내 (제주/도서산간 포함)</a></td><td class="hide">관리자</td><td class="hide">2026.06.20</td><td class="hide">2,140</td></tr>
+      <tr class="notice"><td><span class="tag">공지</span></td><td class="subj"><a href="board-view.html">신규 회원 12,000P 적립 이벤트 안내</a></td><td class="hide">관리자</td><td class="hide">2026.06.10</td><td class="hide">3,512</td></tr>
+      <tr><td>128</td><td class="subj"><a href="board-view.html"><span class="tag gray">리뷰</span>오션 베이 볼캡 정말 가볍고 예뻐요 <span class="stars">★★★★★</span></a></td><td class="hide">여름햇살러</td><td class="hide">2026.06.21</td><td class="hide">204</td></tr>
+      <tr><td>127</td><td class="subj"><a href="board-view.html"><span class="tag gray">Q&amp;A</span>버킷햇 사이즈 문의드려요</a></td><td class="hide">이여름</td><td class="hide">2026.06.20</td><td class="hide">88</td></tr>
+      <tr><td>126</td><td class="subj"><a href="board-view.html"><span class="tag gray">리뷰</span>색감 너무 좋아서 추가 구매했습니다 <span class="stars">★★★★★</span></a></td><td class="hide">모자수집가</td><td class="hide">2026.06.19</td><td class="hide">156</td></tr>
+      <tr><td>125</td><td class="subj"><a href="board-view.html"><span class="tag gray">Q&amp;A</span>재입고 알림은 어떻게 받나요?</a></td><td class="hide">박파도</td><td class="hide">2026.06.18</td><td class="hide">73</td></tr>
+      <tr><td>124</td><td class="subj"><a href="board-view.html"><span class="tag gray">리뷰</span>선물했는데 너무 좋아하네요 :)</a></td><td class="hide">선물러</td><td class="hide">2026.06.17</td><td class="hide">201</td></tr>
+    </tbody>
+  </table>
+
+  <div class="write-row"><a href="board-write.html"><i class="fa-solid fa-pen"></i> 글쓰기</a></div>
+
+  <div class="search-bar">
+    <input type="text" placeholder="검색어를 입력하세요"><button>검색</button>
+  </div>
+
+  <nav class="pagination">
+    <a href="#"><i class="fa-solid fa-angle-left"></i></a>
+    <a href="#" class="active">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a>
+    <a href="#"><i class="fa-solid fa-angle-right"></i></a>
+  </nav>
+</main>
+
+<footer class="site-footer"><div class="container top">
+  <div>
+    <div class="flogo">BLUEBRIM</div>
+    <div class="links"><a href="products.html">회사소개</a><a href="board.html">이용약관</a><a href="board.html">개인정보처리방침</a><a href="board.html">고객센터</a><a href="board.html">매장안내</a></div>
+    <div class="company">(주)블루브림 | BLUEBRIM CO.<br>대표이사 김블루 · 사업자등록번호 123-45-67890<br>통신판매업신고 2024-서울강남-1234 · 개인정보보호책임자 김블루<br>서울특별시 강남구 해변로 123, 4층 (여심동, 블루브림빌딩)<br>고객센터 070-1234-5678 | support@bluebrim.co.kr</div>
+  </div>
+  <div class="cs">
+    <div style="font-weight:var(--fw-bold);color:var(--text);margin-bottom:6px">고객센터</div>
+    <div class="num en">070-1234-5678</div>
+    <div class="time">평일 10:00 - 18:00 (주말/공휴일 휴무)</div>
+    <div>카카오톡 채널 @블루브림</div>
+    <div class="sns"><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-facebook"></i></a><a href="#"><i class="fa-brands fa-youtube"></i></a><a href="#"><i class="fa-brands fa-tiktok"></i></a><a href="#"><i class="fa-brands fa-pinterest"></i></a></div>
+  </div>
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLUEBRIM | 일상에 여름을 씌우는 모자</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* =========================================================
+   BLUEBRIM — 디자인 토큰 (여기 값만 바꾸면 전체 톤 변경)
+   ========================================================= */
+:root{
+  /* ---- 색상 ---- */
+  --main:#1b3a6b;        /* 메인색 (브랜드 네이비) */
+  --sub:#717b89;         /* 서브색 (보조 텍스트) */
+  --point:#2f6fd0;       /* 포인트색 (강조 = 버튼/배지/링크호버/가격) */
+  --bg:#ffffff;          /* 기본 배경색 */
+  --bg-soft:#f4f6f9;     /* 보조 배경색 (섹션 구분) */
+  --topbar:#16233d;      /* 상단 띠 배경 */
+  --sale:#e8412c;        /* 세일 퍼센트(빨강) */
+  --line:#e9ecef;        /* 구분선 */
+  --text:#1f2530;        /* 본문 글자색 */
+
+  /* ---- 간격 / 여백 ---- */
+  --maxw:1550px;         /* 콘텐츠 최대 폭 */
+  --pad:24px;            /* 좌우 안쪽 여백 */
+  --gap:18px;            /* 카드 사이 간격 */
+  --section-gap:78px;    /* 섹션별 세로 간격 */
+
+  /* ---- 글자 크기 (계층) ---- */
+  --fs-hero:46px;        /* 히어로 대제목 */
+  --fs-h2:23px;          /* 섹션 제목 */
+  --fs-h3:17px;          /* 카드/소제목 */
+  --fs-body:15px;        /* 본문 */
+  --fs-sm:13px;          /* 작은 글씨 */
+  --fs-xs:12px;          /* 캡션/배지 */
+
+  /* ---- 글자 두께 ---- */
+  --fw-light:300;
+  --fw-regular:400;
+  --fw-medium:500;
+  --fw-bold:700;
+  --fw-black:800;
+
+  /* ---- 모서리 ---- */
+  --radius:8px;
+}
+
+/* =========================================================
+   기본/리셋
+   ========================================================= */
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard',sans-serif;color:var(--text);background:var(--bg);
+  font-size:var(--fs-body);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none;transition:color .2s}
+a:hover{color:var(--point)}
+img{display:block;max-width:100%;height:auto}
+ul,ol{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+.en{font-family:'Archivo',sans-serif}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+.point{color:var(--point)}
+.sale{color:var(--sale);font-weight:var(--fw-bold)}
+
+/* =========================================================
+   헤더 (모든 페이지 동일)
+   ========================================================= */
+.topbar{background:var(--topbar);color:#dfe6f1;font-size:var(--fs-xs)}
+.topbar .inner{display:flex;align-items:center;justify-content:space-between;height:36px}
+.topbar .promo{font-weight:var(--fw-medium);letter-spacing:.2px}
+.topbar nav{display:flex;gap:18px}
+.topbar nav a{color:#cdd6e6}
+.topbar nav a:hover{color:#fff}
+
+.site-header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
+.site-header .inner{display:flex;align-items:center;justify-content:space-between;height:78px}
+.logo{font-family:'Archivo',sans-serif;font-size:28px;font-weight:var(--fw-black);
+  color:var(--main);letter-spacing:1px}
+.gnb{display:flex;gap:30px;font-size:var(--fs-body);font-weight:var(--fw-medium)}
+.gnb a{position:relative;padding:6px 0}
+.gnb a:hover{color:var(--point)}
+.gnb a.lookbook{font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);letter-spacing:.5px}
+.utils{display:flex;gap:20px;font-size:19px;color:var(--main)}
+.utils a:hover{color:var(--point)}
+.summer-link{background:var(--bg-soft)}
+.summer-link .inner{display:flex;justify-content:flex-end;padding:8px 0}
+.summer-link a{display:inline-flex;align-items:center;gap:6px;color:var(--point);
+  font-weight:var(--fw-bold);font-size:var(--fs-sm);font-family:'Archivo',sans-serif}
+
+/* =========================================================
+   히어로 (시즌 카드 5개)
+   ========================================================= */
+.hero{padding-top:18px}
+.hero .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.hero .card{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:3/4}
+.hero .card img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.hero .card:hover img{transform:scale(1.05)}
+.hero .card .cap{position:absolute;left:0;right:0;bottom:0;padding:18px 16px 20px;
+  background:linear-gradient(to top,rgba(10,20,40,.72),rgba(10,20,40,0));color:#fff}
+.hero .card .tag{font-size:var(--fs-xs);opacity:.85;margin-bottom:6px}
+.hero .card .ttl{font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);
+  font-size:19px;line-height:1.2;letter-spacing:.5px}
+.hero .card .desc{font-size:var(--fs-sm);opacity:.9;margin-top:6px}
+
+/* =========================================================
+   카테고리 칩
+   ========================================================= */
+.cats{margin-top:34px}
+.cats .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.cats .chip{display:inline-flex;align-items:center;gap:8px;padding:7px 16px 7px 8px;
+  border:1px solid var(--line);border-radius:999px;font-size:var(--fs-sm);
+  font-weight:var(--fw-medium);background:#fff}
+.cats .chip img{width:30px;height:30px;border-radius:50%;object-fit:cover}
+.cats .chip:hover{border-color:var(--point);color:var(--point)}
+.cats .chip.active{background:var(--main);color:#fff;border-color:var(--main)}
+
+/* =========================================================
+   섹션 공통 헤더
+   ========================================================= */
+section{margin-top:var(--section-gap)}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px}
+.sec-head h2{font-size:var(--fs-h2);font-weight:var(--fw-bold);color:var(--main)}
+.sec-head .more{font-size:var(--fs-sm);color:var(--sub);display:inline-flex;align-items:center;gap:5px}
+.sec-head .more:hover{color:var(--point)}
+
+/* =========================================================
+   상품 카드 그리드
+   ========================================================= */
+.prod-grid{display:grid;gap:var(--gap)}
+.prod-grid.col6{grid-template-columns:repeat(6,1fr)}
+.prod-grid.col4{grid-template-columns:repeat(4,1fr)}
+.item .thumb{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:1/1;background:var(--bg-soft)}
+.item .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.item:hover .thumb img{transform:scale(1.05)}
+.item .badge{position:absolute;top:10px;left:10px;display:inline-block;padding:3px 9px;
+  border-radius:5px;font-size:var(--fs-xs);font-weight:var(--fw-bold);background:var(--point);color:#fff}
+.item .badge.new{background:var(--point)}
+.item .name{margin-top:12px;font-size:var(--fs-body);font-weight:var(--fw-medium);
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4;min-height:2.8em}
+.item .opt{font-size:var(--fs-xs);color:var(--sub);margin-top:3px}
+.item .price{margin-top:7px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.item .price .now{font-size:var(--fs-h3);font-weight:var(--fw-bold)}
+.item .price .pct{color:var(--sale);font-weight:var(--fw-bold);font-size:var(--fs-body)}
+.item .price .tag-new{color:var(--point);font-weight:var(--fw-bold);font-size:var(--fs-sm)}
+.item .was{font-size:var(--fs-sm);color:#b7bdc7;text-decoration:line-through;margin-top:2px}
+
+/* =========================================================
+   에디토리얼 3분할
+   ========================================================= */
+.editorial .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
+.editorial .e{border-radius:var(--radius);overflow:hidden}
+.editorial .e img{width:100%;aspect-ratio:16/10;object-fit:cover;transition:transform .6s}
+.editorial .e:hover img{transform:scale(1.04)}
+.editorial .e .txt{padding:14px 4px}
+.editorial .e .t{font-size:var(--fs-body);font-weight:var(--fw-medium)}
+.editorial .e .k{margin-top:6px;color:var(--point);font-weight:var(--fw-bold);
+  font-size:var(--fs-sm);font-family:'Archivo',sans-serif;display:inline-flex;gap:5px;align-items:center}
+
+/* =========================================================
+   브랜드 와이드 배너
+   ========================================================= */
+.brand-banner{position:relative;border-radius:var(--radius);overflow:hidden}
+.brand-banner img{width:100%;height:auto;display:block}
+.brand-banner .copy{position:absolute;top:50%;left:6%;transform:translateY(-50%);color:#fff}
+.brand-banner .copy h3{font-family:'Archivo',sans-serif;font-size:48px;font-weight:var(--fw-black);line-height:1.05}
+.brand-banner .copy p{margin:14px 0 22px;font-size:var(--fs-h3)}
+.brand-banner .copy .btn-film{display:inline-flex;align-items:center;gap:8px;background:#fff;
+  color:var(--main);padding:11px 22px;border-radius:var(--radius);font-weight:var(--fw-bold);font-size:var(--fs-sm)}
+
+/* =========================================================
+   혜택 박스 4개
+   ========================================================= */
+.benefits{margin-top:var(--section-gap)}
+.benefits .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap)}
+.benefits .b{display:flex;gap:14px;align-items:center;padding:22px;border:1px solid var(--line);
+  border-radius:var(--radius);background:#fff}
+.benefits .b .ic{width:48px;height:48px;border-radius:var(--radius);background:var(--bg-soft);
+  display:flex;align-items:center;justify-content:center;color:var(--point);font-size:22px;flex:0 0 48px}
+.benefits .b .t{font-weight:var(--fw-bold);font-size:var(--fs-body)}
+.benefits .b .s{color:var(--sub);font-size:var(--fs-sm);margin-top:3px}
+.benefits .b .more{color:var(--sub);font-size:var(--fs-xs);margin-top:6px}
+
+/* =========================================================
+   리뷰
+   ========================================================= */
+.reviews .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--gap)}
+.reviews .r{border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.reviews .r .who{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.reviews .r .who img{width:38px;height:38px;border-radius:50%;object-fit:cover}
+.reviews .r .who b{font-size:var(--fs-sm)}
+.reviews .r p{font-size:var(--fs-sm);color:#3c4654;line-height:1.5;min-height:3em}
+.reviews .r .stars{color:var(--point);font-size:var(--fs-sm);margin-top:10px}
+
+/* =========================================================
+   푸터 (모든 페이지 동일)
+   ========================================================= */
+.site-footer{margin-top:var(--section-gap);border-top:1px solid var(--line);
+  background:var(--bg-soft);padding:46px 0 56px;font-size:var(--fs-sm);color:var(--sub)}
+.site-footer .top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px}
+.site-footer .flogo{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);
+  font-size:22px;color:var(--main);margin-bottom:14px}
+.site-footer .links{display:flex;gap:22px;margin-bottom:14px;font-weight:var(--fw-medium);color:var(--text)}
+.site-footer .company{line-height:1.8}
+.site-footer .cs .num{font-family:'Archivo',sans-serif;font-size:26px;font-weight:var(--fw-bold);color:var(--main)}
+.site-footer .cs .time{margin:6px 0}
+.site-footer .sns{display:flex;gap:14px;font-size:18px;margin-top:14px;color:var(--main)}
+.site-footer .sns a:hover{color:var(--point)}
+
+/* =========================================================
+   스크롤 등장 효과 (fade + slide-up)
+   ========================================================= */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .7s ease, transform .7s ease}
+.reveal.show{opacity:1;transform:none}
+
+/* =========================================================
+   반응형
+   ========================================================= */
+@media(max-width:1100px){
+  .hero .grid{grid-template-columns:repeat(2,1fr)}
+  .prod-grid.col6,.prod-grid.col4{grid-template-columns:repeat(3,1fr)}
+  .editorial .grid,.benefits .grid,.reviews .grid{grid-template-columns:repeat(2,1fr)}
+  .brand-banner .copy h3{font-size:30px}
+  .gnb{display:none}
+}
+@media(max-width:640px){
+  :root{--section-gap:54px;--pad:16px}
+  .prod-grid.col6,.prod-grid.col4{grid-template-columns:repeat(2,1fr)}
+  .reviews .grid,.benefits .grid{grid-template-columns:1fr}
+  .topbar .promo{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ 헤더 (모든 페이지 동일) ============ -->
+<div class="topbar">
+  <div class="inner container">
+    <span class="promo">여름 신제품 10% 쿠폰 + 전 상품 무료배송</span>
+    <nav>
+      <a href="login.html">로그인</a>
+      <a href="signup.html">회원가입</a>
+      <a href="board.html">주문조회</a>
+      <a href="products.html">위시리스트</a>
+    </nav>
+  </div>
+</div>
+<header class="site-header">
+  <div class="inner container">
+    <a href="index.html" class="logo">BLUEBRIM</a>
+    <nav class="gnb">
+      <a href="products.html">여성</a>
+      <a href="products.html">신상품</a>
+      <a href="products.html">볼캡</a>
+      <a href="products.html">버킷햇</a>
+      <a href="products.html">비니</a>
+      <a href="products.html">라피아</a>
+      <a href="products.html">햇</a>
+      <a href="products.html">선바이저</a>
+      <a href="products.html">액세서리</a>
+      <a href="products.html" class="lookbook">LOOKBOOK</a>
+    </nav>
+    <div class="utils">
+      <a href="products.html" aria-label="검색"><i class="fa-solid fa-magnifying-glass"></i></a>
+      <a href="login.html" aria-label="마이페이지"><i class="fa-regular fa-user"></i></a>
+      <a href="cart.html" aria-label="장바구니"><i class="fa-solid fa-cart-shopping"></i></a>
+      <a href="products.html" aria-label="위시리스트"><i class="fa-regular fa-heart"></i></a>
+    </div>
+  </div>
+</header>
+<div class="summer-link">
+  <div class="inner container">
+    <a href="products.html" class="en">BLUEBRIM SUMMER <i class="fa-solid fa-circle-play"></i></a>
+  </div>
+</div>
+
+<!-- ============ 히어로: 시즌 카드 5개 ============ -->
+<section class="hero" style="margin-top:0">
+  <div class="container">
+    <div class="grid">
+      <a class="card reveal" href="product-detail.html">
+        <img src="images/hero-city-breeze-blue-cap.png" alt="시티 브리즈 블루 캡">
+        <div class="cap"><div class="tag">볼캡</div><div class="ttl">CITY BREEZE<br>BLUE CAP</div><div class="desc">도심 속, 여름 바람을 담다</div></div>
+      </a>
+      <a class="card reveal" href="product-detail.html">
+        <img src="images/hero-beach-day-bucket-hat.png" alt="비치 데이 버킷햇">
+        <div class="cap"><div class="tag">버킷햇</div><div class="ttl">BEACH DAY<br>BUCKET HAT</div><div class="desc">해변에서 더 빛나는 하루</div></div>
+      </a>
+      <a class="card reveal" href="product-detail.html">
+        <img src="images/hero-road-trip-green-cap.png" alt="로드 트립 그린 캡">
+        <div class="cap"><div class="tag">볼캡</div><div class="ttl">ROAD TRIP<br>ESSENTIAL</div><div class="desc">어디서든, 나답게</div></div>
+      </a>
+      <a class="card reveal" href="product-detail.html">
+        <img src="images/hero-wind-in-hair-good-pair.png" alt="윈드 인 헤어">
+        <div class="cap"><div class="tag">볼캡</div><div class="ttl">WIND IN HAIR<br>GOOD PAIR</div><div class="desc">함께라서 더 좋은 순간</div></div>
+      </a>
+      <a class="card reveal" href="product-detail.html">
+        <img src="images/hero-vintage-mood-daily-cap.png" alt="빈티지 무드 데일리 캡">
+        <div class="cap"><div class="tag">빈티지 워시</div><div class="ttl">VINTAGE MOOD<br>DAILY CAP</div><div class="desc">시간이 만든 자연스러운 멋</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 카테고리 칩 ============ -->
+<section class="cats" style="margin-top:34px">
+  <div class="container">
+    <div class="row">
+      <button class="chip active"><img src="images/product-navy-b-logo-cap.png" alt="">전체</button>
+      <a class="chip" href="products.html"><img src="images/product-ocean-blue-cap.png" alt="">볼캡</a>
+      <a class="chip" href="products.html"><img src="images/product-beige-bucket-hat.png" alt="">버킷햇</a>
+      <a class="chip" href="products.html"><img src="images/product-raffia-visor.png" alt="">라피아</a>
+      <a class="chip" href="products.html"><img src="images/product-sage-bucket-hat.png" alt="">선바이저</a>
+      <a class="chip" href="products.html"><img src="images/product-forest-green-cap.png" alt="">비니</a>
+      <a class="chip" href="products.html"><img src="images/product-cream-script-cap.png" alt="">햇</a>
+      <a class="chip" href="products.html"><img src="images/product-dusty-pink-cap.png" alt="">액세서리</a>
+      <a class="chip" href="products.html"><img src="images/product-denim-vintage-cap.png" alt="">한정 컬렉션</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 추천/베스트 ============ -->
+<section class="best">
+  <div class="container">
+    <div class="sec-head">
+      <h2>지금 가장 사랑받는 모자</h2>
+      <a class="more" href="products.html">전체보기 <i class="fa-solid fa-chevron-right"></i></a>
+    </div>
+    <ul class="prod-grid col6">
+      <li class="item reveal"><a href="product-detail.html">
+        <div class="thumb"><span class="badge">BEST</span><img src="images/product-ocean-blue-cap.png" alt="오션 베이 볼캡"></div>
+        <p class="name">오션 베이 볼캡</p><p class="opt">리넨 블루</p>
+        <div class="price"><span class="now">29,000원</span><span class="pct">20%</span></div><div class="was">36,000원</div>
+      </a></li>
+      <li class="item reveal"><a href="product-detail.html">
+        <div class="thumb"><span class="badge">BEST</span><img src="images/product-cream-script-cap.png" alt="썬키스 자수 볼캡"></div>
+        <p class="name">썬키스 자수 볼캡</p><p class="opt">크림</p>
+        <div class="price"><span class="now">32,000원</span><span class="pct">20%</span></div><div class="was">40,000원</div>
+      </a></li>
+      <li class="item reveal"><a href="product-detail.html">
+        <div class="thumb"><span class="badge">BEST</span><img src="images/product-forest-green-cap.png" alt="위켄드 소셜클럽 볼캡"></div>
+        <p class="name">위켄드 소셜클럽 볼캡</p><p class="opt">그린</p>
+        <div class="price"><span class="now">29,000원</span><span class="pct">23%</span></div><div class="was">38,000원</div>
+      </a></li>
+      <li class="item reveal"><a href="product-detail.html">
+        <div class="thumb"><span class="badge">BEST</span><img src="images/product-beige-bucket-hat.png" alt="데이 브리즈 버킷햇"></div>
+        <p class="name">데이 브리즈 버킷햇</p><p class="opt">베이지</p>
+        <div class="price"><span class="now">34,000원</span><span class="pct">15%</span></div><div class="was">40,000원</div>
+      </a></li>
+      <li class="item reveal"><a href="product-detail.html">
+        <div class="thumb"><span class="badge">BEST</span><img src="images/product-navy-b-logo-cap.png" alt="B 로고 볼캡"></div>
+        <p class="name">B 로고 볼캡</p><p class="opt">네이비</p>
+        <div class="price"><span class="now">31,000원</span><span class="pct">21%</span></div><div class="was">39,000원</div>
+      </a></li>
+      <li class="item reveal"><a href="product-detail.html">
+        <div class="thumb"><span class="badge">BEST</span><img src="images/product-dusty-pink-cap.png" alt="아카이브 워시드 볼캡"></div>
+        <p class="name">아카이브 워시드 볼캡</p><p class="opt">핑크</p>
+        <div class="price"><span class="now">29,000원</span><span class="pct">26%</span></div><div class="was">39,000원</div>
+      </a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 에디토리얼 ============ -->
+<section class="editorial">
+  <div class="container">
+    <div class="sec-head"><h2>햇살 좋은 날, 모자와 함께</h2></div>
+    <div class="grid">
+      <a class="e reveal" href="products.html">
+        <img src="images/editorial-picnic-style-guide.png" alt="피크닉 스타일 가이드">
+        <div class="txt"><div class="t">피크닉의 완성, 가벼운 모자 스타일링</div><span class="k">STYLE GUIDE <i class="fa-solid fa-chevron-right"></i></span></div>
+      </a>
+      <a class="e reveal" href="products.html">
+        <img src="images/editorial-travel-diary.png" alt="트래블 다이어리">
+        <div class="txt"><div class="t">여름 저녁, 친구와 함께한 잔잔한 순간</div><span class="k">TRAVEL DIARY <i class="fa-solid fa-chevron-right"></i></span></div>
+      </a>
+      <a class="e reveal" href="products.html">
+        <img src="images/editorial-bluebrim-story.png" alt="블루브림 스토리">
+        <div class="txt"><div class="t">햇빛 아래, 나만의 속도로 쉬는 시간</div><span class="k">BLUEBRIM STORY <i class="fa-solid fa-chevron-right"></i></span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 브랜드 와이드 배너 ============ -->
+<section class="brand-banner-wrap">
+  <div class="container">
+    <div class="brand-banner reveal">
+      <img src="images/banner-every-day-every-brim-wide.png" alt="Every day. Every brim.">
+      <div class="copy">
+        <h3>Every day.<br>Every brim.</h3>
+        <p>일상에 여름을 씌우는 모자</p>
+        <a class="btn-film" href="products.html">브랜드 필름 보기 <i class="fa-solid fa-play"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 신상품 ============ -->
+<section class="new">
+  <div class="container">
+    <div class="sec-head">
+      <h2 class="en">NEW ARRIVAL</h2>
+      <a class="more" href="products.html">전체보기 <i class="fa-solid fa-chevron-right"></i></a>
+    </div>
+    <ul class="prod-grid col6">
+      <li class="item reveal"><a href="product-detail.html">
+        <div class="thumb"><img src="images/product-cream-green-cap.png" alt="마리나 클럽 볼캡"></div>
+        <p class="name">마리나 클럽 볼캡</p><p class="opt">아이보리/그린</p>
+        <div class="price"><span class="now">29,000원</span><span class="tag-new">NEW</span></div>
+      </a></li>
+      <li class="item reveal"><a href="product-detail.html">
+        <div class="thumb"><img src="images/product-raffia-visor.png" alt="라피아 바이저"></div>
+        <p class="name">라피아 바이저</p><p class="opt">내추럴</p>
+        <div class="price"><span class="now">36,000원</span><span class="tag-new">NEW</span></div>
+      </a></li>
+      <li class="item reveal"><a href="product-detail.html">
+        <div class="thumb"><img src="images/product-sky-blue-cap.png" alt="씨사이드 무드 볼캡"></div>
+        <p class="name">씨사이드 무드 볼캡</p><p class="opt">스카이</p>
+        <div class="price"><span class="now">32,000원</span><span class="tag-new">NEW</span></div>
+      </a></li>
+      <li class="item reveal"><a href="product-detail.html">
+        <div class="thumb"><img src="images/product-sage-bucket-hat.png" alt="썸머 피시 버킷햇"></div>
+        <p class="name">썸머 피시 버킷햇</p><p class="opt">세이지</p>
+        <div class="price"><span class="now">28,000원</span><span class="tag-new">NEW</span></div>
+      </a></li>
+      <li class="item reveal"><a href="product-detail.html">
+        <div class="thumb"><img src="images/product-beige-model-cap.png" alt="플레인 데일리 볼캡"></div>
+        <p class="name">플레인 데일리 볼캡</p><p class="opt">베이지</p>
+        <div class="price"><span class="now">26,000원</span><span class="tag-new">NEW</span></div>
+      </a></li>
+      <li class="item reveal"><a href="product-detail.html">
+        <div class="thumb"><img src="images/product-denim-vintage-cap.png" alt="1975 워시드 볼캡"></div>
+        <p class="name">1975 워시드 볼캡</p><p class="opt">빈티지 블루</p>
+        <div class="price"><span class="now">31,000원</span><span class="tag-new">NEW</span></div>
+      </a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 혜택 박스 ============ -->
+<section class="benefits">
+  <div class="container">
+    <div class="grid">
+      <div class="b reveal"><div class="ic"><i class="fa-solid fa-ticket"></i></div>
+        <div><div class="t">신제품 10% 쿠폰팩</div><div class="s">앱 설치 시 다운받기</div><div class="more">자세히 보기 ›</div></div></div>
+      <div class="b reveal"><div class="ic"><i class="fa-solid fa-gift"></i></div>
+        <div><div class="t">신규 회원 선물</div><div class="s">최대 12,000P 적립</div><div class="more">자세히 보기 ›</div></div></div>
+      <div class="b reveal"><div class="ic"><i class="fa-solid fa-truck-fast"></i></div>
+        <div><div class="t">전 상품 무료배송</div><div class="s">빠르고 안전하게</div><div class="more">자세히 보기 ›</div></div></div>
+      <div class="b reveal"><div class="ic"><i class="fa-solid fa-box-open"></i></div>
+        <div><div class="t">선물 포장 서비스</div><div class="s">정성을 담아 전해요</div><div class="more">자세히 보기 ›</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 리뷰 ============ -->
+<section class="reviews">
+  <div class="container">
+    <div class="sec-head">
+      <h2 class="en">BLUEBRIM REVIEW</h2>
+      <a class="more" href="board.html">전체보기 <i class="fa-solid fa-chevron-right"></i></a>
+    </div>
+    <div class="grid">
+      <div class="r reveal"><div class="who"><img src="images/review-avatar-1.png" alt=""><b>여름햇살러</b></div>
+        <p>"여름 햇살에도 부담 없이 잘 어울려요. 데일리로 최고예요!"</p><div class="stars">★★★★★</div></div>
+      <div class="r reveal"><div class="who"><img src="images/review-avatar-2.png" alt=""><b>모자수집가</b></div>
+        <p>"소재가 가볍고 통풍이 잘 돼서 한여름에도 시원해요."</p><div class="stars">★★★★★</div></div>
+      <div class="r reveal"><div class="who"><img src="images/review-avatar-3.png" alt=""><b>데일리룩</b></div>
+        <p>"컬러감이 정말 예뻐서 코디 포인트로 딱이에요."</p><div class="stars">★★★★★</div></div>
+      <div class="r reveal"><div class="who"><img src="images/review-avatar-4.png" alt=""><b>여행좋아</b></div>
+        <p>"여행 가서 매일 썼어요. 챙 길이도 딱 좋아요!"</p><div class="stars">★★★★★</div></div>
+      <div class="r reveal"><div class="who"><img src="images/review-avatar-5.png" alt=""><b>선물러</b></div>
+        <p>"선물했더니 너무 좋아해서 뿌듯했어요 :)"</p><div class="stars">★★★★★</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 푸터 (모든 페이지 동일) ============ -->
+<footer class="site-footer">
+  <div class="container top">
+    <div>
+      <div class="flogo">BLUEBRIM</div>
+      <div class="links">
+        <a href="products.html">회사소개</a><a href="board.html">이용약관</a>
+        <a href="board.html">개인정보처리방침</a><a href="board.html">고객센터</a><a href="board.html">매장안내</a>
+      </div>
+      <div class="company">
+        (주)블루브림 | BLUEBRIM CO.<br>
+        대표이사 김블루 · 사업자등록번호 123-45-67890<br>
+        통신판매업신고 2024-서울강남-1234 · 개인정보보호책임자 김블루<br>
+        서울특별시 강남구 해변로 123, 4층 (여심동, 블루브림빌딩)<br>
+        고객센터 070-1234-5678 | support@bluebrim.co.kr
+      </div>
+    </div>
+    <div class="cs">
+      <div style="font-weight:var(--fw-bold);color:var(--text);margin-bottom:6px">고객센터</div>
+      <div class="num en">070-1234-5678</div>
+      <div class="time">평일 10:00 - 18:00 (주말/공휴일 휴무)</div>
+      <div>카카오톡 채널 @블루브림</div>
+      <div class="sns">
+        <a href="#" aria-label="instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="facebook"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#" aria-label="youtube"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#" aria-label="tiktok"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#" aria-label="pinterest"><i class="fa-brands fa-pinterest"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ 스크롤 등장 효과 (바닐라 JS / IntersectionObserver) ============ -->
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('show')});return;}
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('show'); io.unobserve(en.target);} });
+  },{threshold:.12});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>

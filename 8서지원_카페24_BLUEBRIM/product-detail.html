@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLUEBRIM | 오션 베이 볼캡</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --main:#1b3a6b; --sub:#717b89; --point:#2f6fd0; --bg:#ffffff; --bg-soft:#f4f6f9;
+  --topbar:#16233d; --sale:#e8412c; --line:#e9ecef; --text:#1f2530;
+  --maxw:1550px; --pad:24px; --gap:18px; --section-gap:78px;
+  --fs-hero:46px; --fs-h2:23px; --fs-h3:17px; --fs-body:15px; --fs-sm:13px; --fs-xs:12px;
+  --fw-light:300; --fw-regular:400; --fw-medium:500; --fw-bold:700; --fw-black:800;
+  --radius:8px;
+  --detail-w:800px;   /* 상세설명 이미지 폭 */
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard',sans-serif;color:var(--text);background:var(--bg);font-size:var(--fs-body);line-height:1.55}
+a{color:inherit;text-decoration:none;transition:color .2s}a:hover{color:var(--point)}
+img{display:block;max-width:100%;height:auto}ul,ol{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+.en{font-family:'Archivo',sans-serif}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+
+/* 헤더/푸터 (동일) */
+.topbar{background:var(--topbar);color:#dfe6f1;font-size:var(--fs-xs)}
+.topbar .inner{display:flex;align-items:center;justify-content:space-between;height:36px}
+.topbar nav{display:flex;gap:18px}.topbar nav a{color:#cdd6e6}.topbar nav a:hover{color:#fff}
+.site-header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
+.site-header .inner{display:flex;align-items:center;justify-content:space-between;height:78px}
+.logo{font-family:'Archivo',sans-serif;font-size:28px;font-weight:var(--fw-black);color:var(--main);letter-spacing:1px}
+.gnb{display:flex;gap:30px;font-weight:var(--fw-medium)}.gnb a.lookbook{font-family:'Archivo',sans-serif;font-weight:var(--fw-bold)}
+.utils{display:flex;gap:20px;font-size:19px;color:var(--main)}
+.summer-link{background:var(--bg-soft)}.summer-link .inner{display:flex;justify-content:flex-end;padding:8px 0}
+.summer-link a{display:inline-flex;align-items:center;gap:6px;color:var(--point);font-weight:var(--fw-bold);font-size:var(--fs-sm);font-family:'Archivo',sans-serif}
+.site-footer{margin-top:var(--section-gap);border-top:1px solid var(--line);background:var(--bg-soft);padding:46px 0 56px;font-size:var(--fs-sm);color:var(--sub)}
+.site-footer .top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px}
+.site-footer .flogo{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:22px;color:var(--main);margin-bottom:14px}
+.site-footer .links{display:flex;gap:22px;margin-bottom:14px;font-weight:var(--fw-medium);color:var(--text)}
+.site-footer .company{line-height:1.8}
+.site-footer .cs .num{font-family:'Archivo',sans-serif;font-size:26px;font-weight:var(--fw-bold);color:var(--main)}
+.site-footer .cs .time{margin:6px 0}.site-footer .sns{display:flex;gap:14px;font-size:18px;margin-top:14px;color:var(--main)}
+
+.subwrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+.crumb{color:var(--sub);font-size:var(--fs-sm);margin:24px 0 22px}.crumb a:hover{color:var(--point)}
+
+/* 상품 상단 */
+.detail-top{display:grid;grid-template-columns:1fr 1fr;gap:50px}
+.gallery .main-img{border-radius:var(--radius);overflow:hidden;background:var(--bg-soft);aspect-ratio:1/1}
+.gallery .main-img img{width:100%;height:100%;object-fit:cover}
+.gallery .thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:12px}
+.gallery .thumbs img{border-radius:var(--radius);aspect-ratio:1/1;object-fit:cover;cursor:pointer;border:1px solid var(--line)}
+.gallery .thumbs img:hover{border-color:var(--point)}
+
+.info .cat{color:var(--point);font-size:var(--fs-sm);font-weight:var(--fw-bold)}
+.info h1{font-size:30px;font-weight:var(--fw-bold);margin:10px 0 6px;color:var(--main)}
+.info .rate{color:var(--point);font-size:var(--fs-sm)}.info .rate span{color:var(--sub)}
+.info .price-box{margin:20px 0;padding:20px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.info .price-box .was{color:#b7bdc7;text-decoration:line-through;font-size:var(--fs-body)}
+.info .price-box .now{font-size:32px;font-weight:var(--fw-black);color:var(--main);margin-top:4px}
+.info .price-box .now .pct{color:var(--sale);font-size:24px;margin-left:8px}
+.info .row{display:flex;justify-content:space-between;padding:10px 0;font-size:var(--fs-sm);border-bottom:1px dashed var(--line)}
+.info .row .k{color:var(--sub)}
+.opt-sel{margin:18px 0}
+.opt-sel label{display:block;font-size:var(--fs-sm);color:var(--sub);margin-bottom:6px}
+.opt-sel select{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius);font-size:var(--fs-body);background:#fff}
+.qty-box{display:flex;align-items:center;justify-content:space-between;background:var(--bg-soft);padding:14px 16px;border-radius:var(--radius);margin:18px 0}
+.qty-box .stepper{display:flex;align-items:center;gap:14px}
+.qty-box .stepper button{width:30px;height:30px;border:1px solid var(--line);border-radius:6px;background:#fff;font-size:16px}
+.qty-box .sum{font-weight:var(--fw-bold)}.qty-box .sum b{color:var(--main);font-size:20px}
+.total{display:flex;align-items:baseline;justify-content:space-between;margin:18px 0}
+.total .big{font-size:28px;font-weight:var(--fw-black);color:var(--main)}
+.buy-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:16px;border-radius:var(--radius);font-size:var(--fs-h3);font-weight:var(--fw-bold)}
+.btn-primary{background:var(--point);color:#fff}
+.btn-line{background:#fff;color:var(--main);border:1.5px solid var(--main)}
+.btn-cart{grid-column:1/3;background:var(--main);color:#fff}
+.icon-row{display:flex;gap:18px;margin-top:14px;font-size:var(--fs-sm);color:var(--sub)}
+.icon-row a:hover{color:var(--point)}
+
+/* 탭 */
+.tabs{margin-top:64px}
+.tab-nav{display:flex;border-bottom:2px solid var(--main)}
+.tab-nav button{flex:1;padding:16px;font-size:var(--fs-h3);font-weight:var(--fw-medium);color:var(--sub);border-bottom:3px solid transparent;margin-bottom:-2px}
+.tab-nav button.active{color:var(--main);font-weight:var(--fw-bold);border-color:var(--point)}
+.tab-panel{display:none;padding:44px 0}
+.tab-panel.active{display:block}
+
+/* === 상세설명: 폭 800 세로 롱페이지 (≈3000px) === */
+.detail-page{width:var(--detail-w);max-width:100%;margin:0 auto;text-align:center;color:#2a2f38}
+.detail-page .kicker{font-family:'Archivo',sans-serif;letter-spacing:3px;color:var(--point);font-weight:var(--fw-bold);font-size:13px}
+.detail-page h2{font-size:30px;font-weight:var(--fw-black);color:var(--main);margin:10px 0 14px;line-height:1.3}
+.detail-page h3{font-size:21px;font-weight:var(--fw-bold);color:var(--main);margin:8px 0 10px}
+.detail-page p{font-size:15px;line-height:1.9;color:#4a525e}
+.detail-page .lead{font-size:17px;color:#39414d;line-height:1.95}
+.detail-page .block{padding:60px 20px}
+.detail-page .block.soft{background:var(--bg-soft);border-radius:var(--radius)}
+.detail-page .big{width:100%;border-radius:var(--radius);margin:0 0 6px;aspect-ratio:4/5;object-fit:cover}
+.detail-page .wide{width:100%;border-radius:var(--radius);aspect-ratio:4/3;object-fit:cover}
+.detail-page .two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+.detail-page .two img{width:100%;border-radius:var(--radius);aspect-ratio:1/1;object-fit:cover}
+.detail-page .points{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+.detail-page .points .pt{padding:24px 14px;border:1px solid var(--line);border-radius:var(--radius)}
+.detail-page .points .pt i{font-size:26px;color:var(--point)}
+.detail-page .points .pt b{display:block;margin:12px 0 6px;color:var(--main)}
+.detail-page .points .pt span{font-size:13px;color:var(--sub)}
+.detail-page .spec{width:100%;border-collapse:collapse;text-align:left;margin-top:10px;font-size:14px}
+.detail-page .spec th{width:140px;background:var(--bg-soft);color:var(--main);font-weight:var(--fw-bold);padding:13px 16px;border:1px solid var(--line)}
+.detail-page .spec td{padding:13px 16px;border:1px solid var(--line);color:#4a525e}
+.detail-page .divider{width:40px;height:3px;background:var(--point);margin:18px auto}
+
+/* 리뷰 탭 */
+.rv-summary{display:flex;gap:30px;align-items:center;background:var(--bg-soft);padding:28px;border-radius:var(--radius);margin-bottom:26px}
+.rv-summary .score{font-size:48px;font-weight:var(--fw-black);color:var(--main);font-family:'Archivo',sans-serif}
+.rv-summary .stars{color:var(--point);font-size:20px}
+.rv-list .rv{display:flex;gap:16px;padding:22px 0;border-bottom:1px solid var(--line)}
+.rv-list .rv img.av{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:0 0 46px}
+.rv-list .rv .stars{color:var(--point);font-size:var(--fs-sm)}
+.rv-list .rv .who{font-weight:var(--fw-bold);font-size:var(--fs-sm)}
+.rv-list .rv .date{color:var(--sub);font-size:var(--fs-xs);margin-left:6px}
+.rv-list .rv p{margin:8px 0;font-size:var(--fs-body);color:#3c4654}
+.rv-list .rv .ph{display:flex;gap:8px;margin-top:8px}
+.rv-list .rv .ph img{width:72px;height:72px;border-radius:var(--radius);object-fit:cover}
+
+/* 문의 탭 */
+.qna-table{width:100%;border-collapse:collapse;font-size:var(--fs-sm)}
+.qna-table th{background:var(--bg-soft);color:var(--main);padding:13px;border-bottom:2px solid var(--main)}
+.qna-table td{padding:15px 13px;border-bottom:1px solid var(--line);text-align:center}
+.qna-table td.subj{text-align:left}
+.qna-table .st{display:inline-block;padding:3px 10px;border-radius:999px;font-size:var(--fs-xs);font-weight:var(--fw-bold)}
+.qna-table .st.done{background:var(--point);color:#fff}
+.qna-table .st.wait{background:var(--bg-soft);color:var(--sub)}
+.qna-write{text-align:right;margin-top:18px}
+.qna-write a{display:inline-flex;align-items:center;gap:6px;background:var(--main);color:#fff;padding:11px 20px;border-radius:var(--radius);font-weight:var(--fw-bold);font-size:var(--fs-sm)}
+
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .7s ease,transform .7s ease}
+.reveal.show{opacity:1;transform:none}
+@media(max-width:1100px){.gnb{display:none}.detail-top{grid-template-columns:1fr;gap:30px}}
+@media(max-width:640px){:root{--pad:16px}.detail-page .points{grid-template-columns:1fr}.detail-page .block{padding:40px 4px}}
+</style>
+</head>
+<body>
+
+<!-- 헤더 -->
+<div class="topbar"><div class="inner container">
+  <span class="promo">여름 신제품 10% 쿠폰 + 전 상품 무료배송</span>
+  <nav><a href="login.html">로그인</a><a href="signup.html">회원가입</a><a href="board.html">주문조회</a><a href="products.html">위시리스트</a></nav>
+</div></div>
+<header class="site-header"><div class="inner container">
+  <a href="index.html" class="logo">BLUEBRIM</a>
+  <nav class="gnb">
+    <a href="products.html">여성</a><a href="products.html">신상품</a><a href="products.html">볼캡</a>
+    <a href="products.html">버킷햇</a><a href="products.html">비니</a><a href="products.html">라피아</a>
+    <a href="products.html">햇</a><a href="products.html">선바이저</a><a href="products.html">액세서리</a>
+    <a href="products.html" class="lookbook">LOOKBOOK</a>
+  </nav>
+  <div class="utils">
+    <a href="products.html"><i class="fa-solid fa-magnifying-glass"></i></a>
+    <a href="login.html"><i class="fa-regular fa-user"></i></a>
+    <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+    <a href="products.html"><i class="fa-regular fa-heart"></i></a>
+  </div>
+</div></header>
+<div class="summer-link"><div class="inner container"><a href="products.html" class="en">BLUEBRIM SUMMER <i class="fa-solid fa-circle-play"></i></a></div></div>
+
+<main class="subwrap">
+  <div class="crumb"><a href="index.html">HOME</a> › <a href="products.html">볼캡</a> › 오션 베이 볼캡</div>
+
+  <!-- 상품 상단 -->
+  <div class="detail-top">
+    <div class="gallery">
+      <div class="main-img"><img id="mainImg" src="images/product-ocean-blue-cap.png" alt="오션 베이 볼캡"></div>
+      <div class="thumbs">
+        <img src="images/product-ocean-blue-cap.png" alt="" onclick="document.getElementById('mainImg').src=this.src">
+        <img src="images/product-sky-blue-cap.png" alt="" onclick="document.getElementById('mainImg').src=this.src">
+        <img src="images/product-navy-b-logo-cap.png" alt="" onclick="document.getElementById('mainImg').src=this.src">
+        <img src="images/product-denim-vintage-cap.png" alt="" onclick="document.getElementById('mainImg').src=this.src">
+        <img src="images/hero-city-breeze-blue-cap.png" alt="" onclick="document.getElementById('mainImg').src=this.src">
+      </div>
+    </div>
+
+    <div class="info">
+      <div class="cat">BEST · 볼캡</div>
+      <h1>오션 베이 볼캡</h1>
+      <div class="rate">★★★★★ <span>(4.9 · 리뷰 1,284)</span></div>
+
+      <div class="price-box">
+        <div class="was">36,000원</div>
+        <div class="now">29,000원 <span class="pct">20%</span></div>
+      </div>
+
+      <div class="row"><span class="k">배송</span><span>무료배송 (오늘 14시 이전 주문 시 당일출고)</span></div>
+      <div class="row"><span class="k">적립</span><span>구매 시 290P 적립</span></div>
+      <div class="row"><span class="k">소재</span><span>코튼 100% · 워시드 가공</span></div>
+
+      <div class="opt-sel">
+        <label>색상 선택</label>
+        <select><option>색상을 선택하세요</option><option>리넨 블루</option><option>스카이</option><option>네이비</option></select>
+      </div>
+      <div class="opt-sel">
+        <label>사이즈 선택</label>
+        <select><option>사이즈를 선택하세요</option><option>FREE (54-59cm, 조절밴드)</option></select>
+      </div>
+
+      <div class="qty-box">
+        <div class="stepper"><span>수량</span><button type="button">-</button><span>1</span><button type="button">+</button></div>
+        <div class="sum">상품금액 <b>29,000원</b></div>
+      </div>
+
+      <div class="total"><span>총 상품금액</span><span class="big">29,000원</span></div>
+
+      <div class="buy-btns">
+        <a href="#" class="btn btn-primary">바로 구매</a>
+        <a href="cart.html" class="btn btn-line">장바구니</a>
+        <a href="cart.html" class="btn btn-cart"><i class="fa-solid fa-bag-shopping"></i> 장바구니에 담기</a>
+      </div>
+      <div class="icon-row">
+        <a href="#"><i class="fa-regular fa-heart"></i> 위시리스트</a>
+        <a href="#"><i class="fa-solid fa-share-nodes"></i> 공유하기</a>
+        <a href="#"><i class="fa-regular fa-comment-dots"></i> 1:1 문의</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 탭 -->
+  <div class="tabs">
+    <div class="tab-nav">
+      <button class="active" data-tab="desc">상세정보</button>
+      <button data-tab="review">리뷰 (1,284)</button>
+      <button data-tab="qna">상품문의</button>
+    </div>
+
+    <!-- 상세정보 (폭 800 롱페이지) -->
+    <div class="tab-panel active" id="desc">
+      <div class="detail-page">
+
+        <div class="block">
+          <p class="kicker">BLUEBRIM SUMMER</p>
+          <h2>매일의 여름을 가볍게,<br>오션 베이 볼캡</h2>
+          <span class="divider"></span>
+          <p class="lead">바닷바람을 닮은 워시드 블루.<br>하루 종일 써도 가벼운 코튼 100% 소재로<br>출근길부터 주말 나들이까지 자연스럽게 어울립니다.</p>
+        </div>
+
+        <img class="big reveal" src="images/hero-city-breeze-blue-cap.png" alt="착용 컷 1">
+
+        <div class="block">
+          <h3>도심에서도, 바다에서도</h3>
+          <p>군더더기 없는 6각 패널 실루엣에 은은한 워시드 가공을 더했습니다.
+          자연스럽게 빛바랜 듯한 컬러는 어떤 옷에도 부담 없이 녹아들어,
+          매일 손이 가는 데일리 캡이 되어줍니다.</p>
+        </div>
+
+        <div class="two reveal">
+          <img src="images/product-ocean-blue-cap.png" alt="디테일 1">
+          <img src="images/product-sky-blue-cap.png" alt="디테일 2">
+        </div>
+
+        <div class="block soft reveal">
+          <p class="kicker">FABRIC &amp; FIT</p>
+          <h3>가볍고 시원한 여름 코튼</h3>
+          <p>땀이 차기 쉬운 여름을 위해 통기성이 좋은 코튼 원단을 사용했습니다.
+          안쪽 밴드는 땀 흡수가 빠른 소재로 마감해 오래 써도 쾌적하고,
+          뒤쪽 조절 버클로 54~59cm 머리 둘레에 맞게 조절할 수 있습니다.</p>
+          <div class="points">
+            <div class="pt"><i class="fa-solid fa-feather"></i><b>초경량</b><span>하루 종일 가벼운 착용감</span></div>
+            <div class="pt"><i class="fa-solid fa-wind"></i><b>통기성</b><span>시원한 여름 코튼</span></div>
+            <div class="pt"><i class="fa-solid fa-sliders"></i><b>사이즈 조절</b><span>버클로 간편하게</span></div>
+          </div>
+        </div>
+
+        <img class="wide reveal" src="images/hero-wind-in-hair-good-pair.png" alt="착용 컷 2">
+
+        <div class="block">
+          <h3>혼자도, 함께도 좋은</h3>
+          <p>유니섹스 디자인으로 커플·친구와 함께 매치하기 좋습니다.
+          빛에 따라 다르게 보이는 워시드 블루가 사진 속에서도 감각적으로 담깁니다.</p>
+        </div>
+
+        <div class="two reveal">
+          <img src="images/product-navy-b-logo-cap.png" alt="컬러 옵션 1">
+          <img src="images/product-denim-vintage-cap.png" alt="컬러 옵션 2">
+        </div>
+
+        <div class="block soft reveal">
+          <h3>SIZE &amp; INFO</h3>
+          <span class="divider"></span>
+          <table class="spec">
+            <tr><th>소재</th><td>코튼 100% (워시드 가공)</td></tr>
+            <tr><th>사이즈</th><td>FREE · 둘레 54~59cm (뒤 버클 조절)</td></tr>
+            <tr><th>챙 길이</th><td>약 7cm</td></tr>
+            <tr><th>색상</th><td>리넨 블루 / 스카이 / 네이비</td></tr>
+            <tr><th>제조국</th><td>대한민국</td></tr>
+            <tr><th>세탁</th><td>미온수 손세탁 권장 · 그늘에서 건조</td></tr>
+          </table>
+        </div>
+
+        <div class="block">
+          <p class="kicker">EVERY DAY. EVERY BRIM.</p>
+          <h2>오늘의 햇살을<br>가볍게 씌우세요</h2>
+          <p class="lead">BLUEBRIM은 매일의 일상에<br>편안한 여름을 더합니다.</p>
+        </div>
+
+        <img class="wide reveal" src="images/banner-every-day-every-brim-wide.png" alt="브랜드 배너">
+      </div>
+    </div>
+
+    <!-- 리뷰 -->
+    <div class="tab-panel" id="review">
+      <div class="rv-summary">
+        <div><div class="score en">4.9</div><div class="stars">★★★★★</div></div>
+        <div>
+          <div style="font-weight:var(--fw-bold)">총 1,284개의 리뷰</div>
+          <div style="color:var(--sub);font-size:var(--fs-sm);margin-top:4px">실제 구매 고객님들이 남겨주신 후기입니다.</div>
+        </div>
+      </div>
+      <div class="rv-list">
+        <div class="rv">
+          <img class="av" src="images/review-avatar-1.png" alt="">
+          <div>
+            <div class="stars">★★★★★</div>
+            <div><span class="who">여름햇살러</span><span class="date">2026.06.20</span></div>
+            <p>여름 햇살에도 부담 없이 잘 어울려요. 색감이 사진보다 더 예쁘고 가벼워서 데일리로 매일 써요!</p>
+            <div class="ph"><img src="images/product-ocean-blue-cap.png" alt=""><img src="images/hero-city-breeze-blue-cap.png" alt=""></div>
+          </div>
+        </div>
+        <div class="rv">
+          <img class="av" src="images/review-avatar-2.png" alt="">
+          <div>
+            <div class="stars">★★★★★</div>
+            <div><span class="who">모자수집가</span><span class="date">2026.06.18</span></div>
+            <p>소재가 가볍고 통풍이 잘 돼서 한여름에도 시원합니다. 버클로 사이즈 조절돼서 편해요.</p>
+          </div>
+        </div>
+        <div class="rv">
+          <img class="av" src="images/review-avatar-3.png" alt="">
+          <div>
+            <div class="stars">★★★★☆</div>
+            <div><span class="who">데일리룩</span><span class="date">2026.06.15</span></div>
+            <p>컬러감이 정말 예뻐서 코디 포인트로 딱이에요. 챙이 조금만 더 길었으면 완벽했을 듯!</p>
+          </div>
+        </div>
+        <div class="rv">
+          <img class="av" src="images/review-avatar-4.png" alt="">
+          <div>
+            <div class="stars">★★★★★</div>
+            <div><span class="who">여행좋아</span><span class="date">2026.06.10</span></div>
+            <p>여행 가서 매일 썼어요. 구겨도 금방 펴지고 햇빛 가리기 좋아요. 재구매 의사 100%!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 상품문의 -->
+    <div class="tab-panel" id="qna">
+      <table class="qna-table">
+        <thead><tr><th>상태</th><th>제목</th><th>작성자</th><th>작성일</th></tr></thead>
+        <tbody>
+          <tr><td><span class="st done">답변완료</span></td><td class="subj">사이즈 조절 폭이 어느 정도 되나요?</td><td>김블루</td><td>2026.06.21</td></tr>
+          <tr><td><span class="st done">답변완료</span></td><td class="subj">스카이 색상 재입고 예정 있을까요?</td><td>이여름</td><td>2026.06.19</td></tr>
+          <tr><td><span class="st wait">답변대기</span></td><td class="subj">남자가 써도 잘 어울리는 핏인가요?</td><td>박파도</td><td>2026.06.17</td></tr>
+          <tr><td><span class="st done">답변완료</span></td><td class="subj">세탁기로 돌려도 되나요?</td><td>최바다</td><td>2026.06.12</td></tr>
+        </tbody>
+      </table>
+      <div class="qna-write"><a href="board-write.html"><i class="fa-solid fa-pen"></i> 상품문의 작성</a></div>
+    </div>
+  </div>
+</main>
+
+<!-- 푸터 -->
+<footer class="site-footer"><div class="container top">
+  <div>
+    <div class="flogo">BLUEBRIM</div>
+    <div class="links"><a href="products.html">회사소개</a><a href="board.html">이용약관</a><a href="board.html">개인정보처리방침</a><a href="board.html">고객센터</a><a href="board.html">매장안내</a></div>
+    <div class="company">(주)블루브림 | BLUEBRIM CO.<br>대표이사 김블루 · 사업자등록번호 123-45-67890<br>통신판매업신고 2024-서울강남-1234 · 개인정보보호책임자 김블루<br>서울특별시 강남구 해변로 123, 4층 (여심동, 블루브림빌딩)<br>고객센터 070-1234-5678 | support@bluebrim.co.kr</div>
+  </div>
+  <div class="cs">
+    <div style="font-weight:var(--fw-bold);color:var(--text);margin-bottom:6px">고객센터</div>
+    <div class="num en">070-1234-5678</div>
+    <div class="time">평일 10:00 - 18:00 (주말/공휴일 휴무)</div>
+    <div>카카오톡 채널 @블루브림</div>
+    <div class="sns"><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-facebook"></i></a><a href="#"><i class="fa-brands fa-youtube"></i></a><a href="#"><i class="fa-brands fa-tiktok"></i></a><a href="#"><i class="fa-brands fa-pinterest"></i></a></div>
+  </div>
+</div></footer>
+
+<script>
+/* 탭 전환 */
+document.querySelectorAll('.tab-nav button').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.tab-nav button').forEach(function(x){x.classList.remove('active')});
+    document.querySelectorAll('.tab-panel').forEach(function(x){x.classList.remove('active')});
+    b.classList.add('active');
+    document.getElementById(b.dataset.tab).classList.add('active');
+  });
+});
+/* 스크롤 등장 효과 */
+(function(){var els=document.querySelectorAll('.reveal');if(!('IntersectionObserver'in window)){els.forEach(function(e){e.classList.add('show')});return;}
+var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('show');io.unobserve(x.target);}})},{threshold:.1});els.forEach(function(e){io.observe(e)});})();
+</script>
+</body>
+</html>
