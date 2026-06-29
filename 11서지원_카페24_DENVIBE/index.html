@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DENVIBE | Blue, Bold, Move in Denim</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* =========================================================
+   DENVIBE — 디자인 토큰
+   (★ 여기 값만 바꾸면 사이트 전체 톤이 바뀝니다)
+   ========================================================= */
+:root{
+  /* ---- 색상 ---- */
+  --main:#16181d;        /* 메인색 (텍스트·헤딩 near-black) */
+  --sub:#8a8f99;         /* 서브색 (보조 텍스트) */
+  --point:#001fa3;       /* ★포인트색 (코발트 블루 = 버튼·링크호버·배지·강조·블루밴드) */
+  --accent:#ffd400;      /* 보조 액센트 (옐로 = 밑줄·스마일·MENU) */
+  --bg:#ffffff;          /* 기본 배경색 */
+  --bg-soft:#eef0f4;     /* 보조 배경 (About 라이트 그레이) */
+  --line:#e6e8ec;        /* 구분선 */
+  --text:#1d2026;        /* 본문 글자색 */
+  --on-blue:#ffffff;     /* 블루 위 글자색 */
+
+  /* ---- 간격 / 여백 ---- */
+  --maxw:1550px;         /* 콘텐츠 최대 폭 */
+  --pad:30px;            /* 좌우 안쪽 여백 */
+  --gap:20px;            /* 카드 사이 간격 */
+  --band:92px;           /* 섹션(밴드) 상하 여백 */
+
+  /* ---- 글자 크기 (계층) ---- */
+  --fs-hero:52px;        /* 히어로 대제목 */
+  --fs-h2:34px;          /* 섹션 제목 */
+  --fs-h3:18px;          /* 카드/소제목 */
+  --fs-body:15px;        /* 본문 */
+  --fs-sm:13px;          /* 작은 글씨 */
+  --fs-xs:11px;          /* 캡션/배지/라벨 */
+
+  /* ---- 글자 두께 ---- */
+  --fw-regular:400;
+  --fw-medium:500;
+  --fw-bold:700;
+  --fw-black:900;
+
+  /* ---- 모서리 ---- */
+  --radius:8px;
+}
+
+/* =========================================================
+   기본 / 리셋
+   ========================================================= */
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard',sans-serif;color:var(--text);background:var(--bg);
+  font-size:var(--fs-body);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none;transition:color .2s}
+a:hover{color:var(--point)}
+img{display:block;max-width:100%;height:auto}
+ul,ol{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.en{font-family:'Archivo',sans-serif}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+
+/* 옐로 형광펜 밑줄 / 동그라미 */
+.hl{position:relative;display:inline-block}
+.hl::after{content:"";position:absolute;left:-2px;right:-2px;bottom:2px;height:38%;background:var(--accent);z-index:-1;opacity:.95}
+
+/* =========================================================
+   헤더 (모든 페이지 동일)
+   ========================================================= */
+.site-header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
+.site-header .inner{display:flex;align-items:center;height:72px;position:relative}
+.menu-btn{display:flex;align-items:center;gap:8px;font-family:'Archivo',sans-serif;font-weight:var(--fw-black);
+  font-size:var(--fs-sm);letter-spacing:1px;background:var(--accent);color:var(--main);
+  padding:10px 16px;border-radius:6px}
+.logo{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:28px;letter-spacing:1px;
+  color:var(--point);position:absolute;left:50%;transform:translateX(-50%)}
+.utils{margin-left:auto;display:flex;gap:24px;align-items:center;font-family:'Archivo',sans-serif;
+  font-weight:var(--fw-bold);font-size:var(--fs-sm);letter-spacing:.5px;color:var(--main)}
+.utils a{display:inline-flex;align-items:center;gap:7px}
+.utils a:hover{color:var(--point)}
+
+/* =========================================================
+   히어로 (블루 / 좌 텍스트 + 행잉데님 + 우 모델)
+   ========================================================= */
+.hero{position:relative;background:var(--point);color:var(--on-blue);overflow:hidden}
+.hero .grid{display:grid;grid-template-columns:46% 54%;min-height:560px}
+.hero .left{padding:60px 50px 56px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;background:var(--point)}
+.hero .intro{font-size:var(--fs-sm);line-height:1.8;max-width:300px;opacity:.92;margin-bottom:30px}
+.hero h1{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:var(--fs-hero);line-height:1.02;letter-spacing:-1px}
+.hero h1 .u{position:relative;display:inline-block}
+.hero h1 .u::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:6px;background:var(--accent);border-radius:3px}
+.hero .shop-now{margin-top:38px;display:inline-flex;align-items:center;gap:30px;border:1.5px solid rgba(255,255,255,.8);
+  border-radius:6px;padding:14px 22px;font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-sm);
+  letter-spacing:1px;color:#fff;width:fit-content}
+.hero .shop-now:hover{background:#fff;color:var(--point)}
+.hero .right{position:relative;background:#d6dae4}
+.hero .right img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:64% 16%}
+.hero .hanging{position:absolute;top:0;left:31%;width:185px;z-index:3}
+.hero .hanging img{width:100%;height:auto}
+
+/* =========================================================
+   브랜드 스트립
+   ========================================================= */
+.strip{background:var(--point);border-top:1px solid rgba(255,255,255,.18);padding:18px 0}
+.strip .row{display:flex;align-items:center;justify-content:center;gap:26px;color:#fff;flex-wrap:wrap}
+.strip .row .b{font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-h3);letter-spacing:1px}
+.strip .row .smile{width:30px;height:16px;opacity:.92}
+
+/* =========================================================
+   About (트렌드 드리븐)
+   ========================================================= */
+.about{background:var(--bg-soft);padding:var(--band) 0}
+.about .wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:50px;align-items:center}
+.about h2{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:42px;line-height:1.2;color:var(--main)}
+.about h2 .circ{position:relative;display:inline-block;padding:0 6px}
+.about h2 .circ::after{content:"";position:absolute;inset:-6px -2px;border:3px solid var(--accent);border-radius:50%;transform:rotate(-3deg)}
+.about .squig{display:block;margin:14px 0 0;color:var(--accent)}
+.about .btn{margin-top:30px;display:inline-flex;align-items:center;gap:10px;background:var(--point);color:#fff;
+  border-radius:999px;padding:15px 30px;font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-sm);letter-spacing:1px}
+.about .btn:hover{background:var(--main);color:#fff}
+.about .pic{justify-self:center}
+.about .pic .circle{width:330px;height:330px;border-radius:50%;overflow:hidden}
+.about .pic .circle img{width:100%;height:100%;object-fit:cover}
+
+/* =========================================================
+   Shop (상품 3카드 + 화살표)
+   ========================================================= */
+.shop{padding:var(--band) 0}
+.sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:30px}
+.sec-head h2{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:var(--fs-h2);color:var(--main)}
+.sec-head .arrows{display:flex;gap:10px}
+.sec-head .arrows button{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;color:var(--main)}
+.sec-head .arrows button:hover{background:var(--point);color:#fff;border-color:var(--point)}
+.shop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
+.pcard .thumb{border-radius:var(--radius);overflow:hidden;aspect-ratio:1/1.18;background:var(--bg-soft)}
+.pcard .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.pcard:hover .thumb img{transform:scale(1.04)}
+.pcard .body{padding:16px 4px 0;border-bottom:2px solid var(--main);padding-bottom:18px}
+.pcard .nm{font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-h3);color:var(--main)}
+.pcard .opt{font-size:var(--fs-sm);color:var(--sub);margin-top:5px}
+.pcard .dots{display:flex;gap:6px;margin:12px 0}
+.pcard .dots span{width:14px;height:14px;border-radius:50%;border:1px solid rgba(0,0,0,.12)}
+.pcard .price{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:20px;color:var(--main)}
+
+/* =========================================================
+   rhythm (블루 밴드 + 3아이콘 + 4카드)
+   ========================================================= */
+.rhythm{background:var(--point);color:#fff;padding:var(--band) 0}
+.rhythm h2{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:var(--fs-h2);text-align:center;line-height:1.18}
+.rhythm h2 .u{position:relative;display:inline-block}
+.rhythm h2 .u::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:5px;background:var(--accent);border-radius:3px}
+.rhythm .icons{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;max-width:900px;margin:46px auto 56px}
+.rhythm .ic{text-align:center}
+.rhythm .ic .g{font-size:30px;margin-bottom:14px}
+.rhythm .ic h3{font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-h3);margin-bottom:8px}
+.rhythm .ic p{font-size:var(--fs-sm);opacity:.85;line-height:1.6;max-width:240px;margin:0 auto}
+.rhythm .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap)}
+.rhythm .fc{background:#fff;border-radius:12px;padding:18px;color:var(--main);position:relative;overflow:hidden}
+.rhythm .fc .pic{border-radius:8px;overflow:hidden;aspect-ratio:1/1;margin-bottom:16px}
+.rhythm .fc .pic img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.rhythm .fc:hover .pic img{transform:scale(1.05)}
+.rhythm .fc h4{font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-h3);line-height:1.3;min-height:2.6em}
+.rhythm .fc .link{margin-top:14px;display:inline-flex;align-items:center;gap:8px;font-family:'Archivo',sans-serif;
+  font-weight:var(--fw-bold);font-size:var(--fs-xs);letter-spacing:.5px;color:var(--point)}
+.rhythm .fc .link:hover{color:var(--main)}
+
+/* =========================================================
+   Instagram (12 그리드)
+   ========================================================= */
+.insta{padding:var(--band) 0}
+.insta .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.insta .g{aspect-ratio:1/1;border-radius:var(--radius);overflow:hidden}
+.insta .g img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.insta .g:hover img{transform:scale(1.06)}
+
+/* =========================================================
+   푸터 (모든 페이지 동일, 블루)
+   ========================================================= */
+.site-footer{background:var(--point);color:#fff;padding:60px 0 36px;font-size:var(--fs-sm)}
+.site-footer .top{display:grid;grid-template-columns:1fr 1.3fr 1.2fr;gap:40px;align-items:start}
+.site-footer .links a{display:block;margin-bottom:12px;font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);
+  font-size:var(--fs-sm);letter-spacing:.5px}
+.site-footer .links a:hover{color:var(--accent)}
+.site-footer .mid .sns{margin-bottom:14px}
+.site-footer .mid .sns a{display:flex;align-items:center;gap:10px;margin-bottom:9px;font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-sm)}
+.site-footer .mid .sns a:hover{color:var(--accent)}
+.site-footer .mid .cs{margin-top:14px;line-height:1.9;opacity:.9;font-size:var(--fs-xs)}
+.site-footer .right .tel{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:32px;letter-spacing:1px}
+.site-footer .right p{margin-top:12px;line-height:1.8;opacity:.9}
+.site-footer .big{text-align:center;margin:46px 0 10px;display:flex;align-items:center;justify-content:center;gap:14px}
+.site-footer .big .word{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:80px;letter-spacing:2px;line-height:1}
+.site-footer .big .smile{width:54px;height:54px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:var(--point);font-size:30px}
+.site-footer .copy{text-align:center;font-size:var(--fs-xs);opacity:.7;letter-spacing:.5px}
+
+.to-top{position:fixed;right:28px;bottom:28px;width:50px;height:50px;border-radius:50%;background:var(--accent);
+  color:var(--point);display:flex;align-items:center;justify-content:center;font-size:18px;z-index:60;
+  box-shadow:0 6px 18px rgba(0,31,163,.25)}
+.to-top:hover{background:#fff}
+
+/* =========================================================
+   스크롤 등장 효과 (fade + slide-up)
+   ========================================================= */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s ease}
+.reveal.show{opacity:1;transform:none}
+
+/* =========================================================
+   반응형
+   ========================================================= */
+@media(max-width:1100px){
+  :root{--fs-hero:40px}
+  .shop-grid{grid-template-columns:repeat(3,1fr)}
+  .rhythm .cards{grid-template-columns:repeat(2,1fr)}
+  .insta .grid{grid-template-columns:repeat(4,1fr)}
+  .about .wrap{grid-template-columns:1fr;gap:34px}
+  .about h2{font-size:34px}
+}
+@media(max-width:760px){
+  :root{--band:56px;--pad:18px;--fs-hero:34px;--fs-h2:26px}
+  .hero .grid{grid-template-columns:1fr}
+  .hero .right{height:360px;position:relative}
+  .hero .hanging{display:none}
+  .shop-grid{grid-template-columns:1fr 1fr}
+  .pcard .thumb{aspect-ratio:1/1}
+  .rhythm .icons{grid-template-columns:1fr;gap:24px}
+  .rhythm .cards{grid-template-columns:1fr 1fr}
+  .insta .grid{grid-template-columns:repeat(3,1fr)}
+  .utils a span{display:none}
+  .site-footer .top{grid-template-columns:1fr}
+  .site-footer .big .word{font-size:48px}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ 헤더 (모든 페이지 동일) ============ -->
+<header class="site-header">
+  <div class="inner container">
+    <button class="menu-btn"><i class="fa-solid fa-bars"></i> MENU</button>
+    <a href="index.html" class="logo">DENVIBE</a>
+    <nav class="utils">
+      <a href="products.html"><i class="fa-solid fa-magnifying-glass"></i> <span>SEARCH</span></a>
+      <a href="login.html"><span>MY PAGE</span></a>
+      <a href="cart.html"><span>CART(0)</span></a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ 히어로 ============ -->
+<section class="hero">
+  <div class="grid">
+    <div class="left">
+      <p class="intro">Denim made to move with you. Relaxed fits, iconic washes, and effortless style for wherever the day takes you.</p>
+      <h1 class="en">Blue, Bold,<br>Move in<br><span class="u">Denim.</span></h1>
+      <a href="products.html" class="shop-now">SHOP NOW <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="right">
+      <img src="images/hero-models.png" alt="데님을 입은 모델들">
+    </div>
+  </div>
+  <a class="hanging" href="products.html"><img src="images/hero-hanging.png" alt="행잉 데님 재킷"></a>
+</section>
+
+<!-- ============ 브랜드 스트립 ============ -->
+<section class="strip">
+  <div class="row">
+    <span class="b en">Denvibe</span>
+    <svg class="smile" viewBox="0 0 30 16" fill="none"><path d="M2 2 C6 14, 24 14, 28 2" stroke="#ffd400" stroke-width="3" stroke-linecap="round"/></svg>
+    <span class="b en">Denvibe</span>
+    <svg class="smile" viewBox="0 0 30 16" fill="none"><path d="M2 2 C6 14, 24 14, 28 2" stroke="#ffd400" stroke-width="3" stroke-linecap="round"/></svg>
+    <span class="b en">Denvibe</span>
+    <svg class="smile" viewBox="0 0 30 16" fill="none"><path d="M2 2 C6 14, 24 14, 28 2" stroke="#ffd400" stroke-width="3" stroke-linecap="round"/></svg>
+    <span class="b en">Denvibe</span>
+    <svg class="smile" viewBox="0 0 30 16" fill="none"><path d="M2 2 C6 14, 24 14, 28 2" stroke="#ffd400" stroke-width="3" stroke-linecap="round"/></svg>
+    <span class="b en">Denvibe</span>
+  </div>
+</section>
+
+<!-- ============ About ============ -->
+<section class="about">
+  <div class="container">
+    <div class="wrap">
+      <div class="reveal">
+        <h2 class="en">Denvibe is a <span class="circ">trend-driven</span><br>denim brand built<br>for movement,<br>comfort, and attitude.</h2>
+        <svg class="squig" width="260" height="14" viewBox="0 0 260 14" fill="none"><path d="M2 8 Q12 1, 22 8 T42 8 T62 8 T82 8 T102 8 T122 8 T142 8 T162 8 T182 8 T202 8 T222 8 T242 8 T260 8" stroke="#ffd400" stroke-width="4" stroke-linecap="round"/></svg>
+        <a href="products.html" class="btn">EXPLORE COLLECTION <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="pic reveal"><div class="circle"><img src="images/feat-sky.png" alt="맑은 하늘"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Shop ============ -->
+<section class="shop">
+  <div class="container">
+    <div class="sec-head">
+      <h2 class="en">Shop</h2>
+      <div class="arrows"><button aria-label="이전"><i class="fa-solid fa-arrow-left"></i></button><button aria-label="다음"><i class="fa-solid fa-arrow-right"></i></button></div>
+    </div>
+    <div class="shop-grid">
+      <a class="pcard reveal" href="product-detail.html">
+        <div class="thumb"><img src="images/p-flow-wide.png" alt="플로우 와이드 진"></div>
+        <div class="body"><div class="nm en">Flow Wide Jeans</div><div class="opt">Light Blue / XS-XL</div>
+          <div class="dots"><span style="background:#001fa3"></span><span style="background:#9db8e8"></span></div>
+          <div class="price en">79,000원</div></div>
+      </a>
+      <a class="pcard reveal" href="product-detail.html">
+        <div class="thumb"><img src="images/p-core-cargo.png" alt="코어 카고 데님"></div>
+        <div class="body"><div class="nm en">Core Cargo Denim</div><div class="opt">Mid Blue / XS-XL</div>
+          <div class="dots"><span style="background:#16181d"></span><span style="background:#4a6cc7"></span></div>
+          <div class="price en">85,000원</div></div>
+      </a>
+      <a class="pcard reveal" href="product-detail.html">
+        <div class="thumb"><img src="images/p-riot-skirt.png" alt="라이엇 데님 스커트"></div>
+        <div class="body"><div class="nm en">Riot Denim Skirt</div><div class="opt">Vintage Blue / XS-L</div>
+          <div class="dots"><span style="background:#9db8e8"></span><span style="background:#001fa3"></span></div>
+          <div class="price en">59,000원</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ rhythm (블루 밴드) ============ -->
+<section class="rhythm">
+  <div class="container">
+    <h2 class="en">Created for the rhythm<br>of <span class="u">your day</span></h2>
+    <div class="icons">
+      <div class="ic reveal"><div class="g"><i class="fa-solid fa-person-half-dress"></i></div><h3 class="en">Better Fit</h3><p>Relaxed silhouettes and precise cuts that move with your body.</p></div>
+      <div class="ic reveal"><div class="g"><i class="fa-solid fa-droplet"></i></div><h3 class="en">Timeless Wash</h3><p>Signature washes and textures that only get better with time.</p></div>
+      <div class="ic reveal"><div class="g"><i class="fa-solid fa-cloud"></i></div><h3 class="en">All-Day Comfort</h3><p>Soft, breathable denim designed for every moment.</p></div>
+    </div>
+    <div class="cards">
+      <a class="fc reveal" href="products.html"><div class="pic"><img src="images/feat-sky.png" alt="프레시 에너지"></div><h4 class="en">Fresh energy, every direction.</h4><span class="link">SHOP NEW IN <i class="fa-solid fa-arrow-right"></i></span></a>
+      <a class="fc reveal" href="products.html"><div class="pic"><img src="images/feat-pocket.png" alt="디테일"></div><h4 class="en">Details that hit different.</h4><span class="link">DISCOVER DETAILS <i class="fa-solid fa-arrow-right"></i></span></a>
+      <a class="fc reveal" href="products.html"><div class="pic"><img src="images/feat-bigfit.png" alt="빅핏"></div><h4 class="en">Big fits. Bigger mood.</h4><span class="link">SHOP WIDE FITS <i class="fa-solid fa-arrow-right"></i></span></a>
+      <a class="fc reveal" href="products.html"><div class="pic"><img src="images/feat-stacked.png" alt="에센셜"></div><h4 class="en">Built to last. Styled to stand out.</h4><span class="link">SHOP ESSENTIALS <i class="fa-solid fa-arrow-right"></i></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Instagram ============ -->
+<section class="insta">
+  <div class="container">
+    <div class="sec-head">
+      <h2 class="en">Instagram</h2>
+      <div class="arrows"><button aria-label="이전"><i class="fa-solid fa-arrow-left"></i></button><button aria-label="다음"><i class="fa-solid fa-arrow-right"></i></button></div>
+    </div>
+    <div class="grid">
+      <a class="g reveal" href="#"><img src="images/ig-7.png" alt="인스타그램"></a>
+      <a class="g reveal" href="#"><img src="images/ig-2.png" alt="인스타그램"></a>
+      <a class="g reveal" href="#"><img src="images/ig-1.png" alt="인스타그램"></a>
+      <a class="g reveal" href="#"><img src="images/ig-4.png" alt="인스타그램"></a>
+      <a class="g reveal" href="#"><img src="images/ig-5.png" alt="인스타그램"></a>
+      <a class="g reveal" href="#"><img src="images/ig-3.png" alt="인스타그램"></a>
+      <a class="g reveal" href="#"><img src="images/feat-pocket.png" alt="인스타그램"></a>
+      <a class="g reveal" href="#"><img src="images/ig-6.png" alt="인스타그램"></a>
+      <a class="g reveal" href="#"><img src="images/feat-stacked.png" alt="인스타그램"></a>
+      <a class="g reveal" href="#"><img src="images/ig-2.png" alt="인스타그램"></a>
+      <a class="g reveal" href="#"><img src="images/ig-4.png" alt="인스타그램"></a>
+      <a class="g reveal" href="#"><img src="images/ig-3.png" alt="인스타그램"></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 푸터 (모든 페이지 동일) ============ -->
+<footer class="site-footer">
+  <div class="container top">
+    <div class="links">
+      <a href="login.html">MY PAGE</a>
+      <a href="signup.html">JOIN US</a>
+      <a href="products.html">SHOP</a>
+      <a href="board.html">ABOUT US</a>
+      <a href="board.html">FAQ</a>
+      <a href="board.html">NOTICE</a>
+    </div>
+    <div class="mid">
+      <div class="sns">
+        <a href="#"><i class="fa-brands fa-instagram"></i> INSTAGRAM</a>
+        <a href="#"><i class="fa-brands fa-youtube"></i> YOUTUBE</a>
+        <a href="#"><i class="fa-brands fa-tiktok"></i> TIKTOK</a>
+      </div>
+      <div class="cs">hello@denvibe.co.kr<br>고객센터 10:00 - 16:00<br>(토,일 및 공휴일 휴무)</div>
+    </div>
+    <div class="right">
+      <div class="tel en">1661-2024</div>
+      <p>KAKAO 채널 'DENVIBE'<br>1:1 상담으로 빠르게 도와드릴게요.</p>
+    </div>
+  </div>
+  <div class="big">
+    <span class="word en">DENVIBE</span>
+    <span class="smile"><i class="fa-regular fa-face-smile"></i></span>
+  </div>
+  <div class="copy">© 2024 DENVIBE. ALL RIGHTS RESERVED.</div>
+</footer>
+
+<a href="#" class="to-top" aria-label="맨 위로"><i class="fa-solid fa-arrow-up"></i></a>
+
+<!-- ============ 스크롤 등장 효과 (바닐라 JS / IntersectionObserver) ============ -->
+<script>
+(function(){
+  var els=[].slice.call(document.querySelectorAll('.reveal'));
+  var vh=window.innerHeight||document.documentElement.clientHeight;
+  els.forEach(function(el){ if(el.getBoundingClientRect().top<vh){ el.classList.add('show'); } });
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('show')});return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('show');io.unobserve(en.target);}});},{threshold:.12});
+  els.forEach(function(e){ if(!e.classList.contains('show')) io.observe(e); });
+})();
+</script>
+</body>
+</html>

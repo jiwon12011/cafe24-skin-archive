@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DENVIBE | CART</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --main:#16181d; --sub:#8a8f99; --point:#001fa3; --accent:#ffd400; --bg:#ffffff; --bg-soft:#eef0f4;
+  --line:#e6e8ec; --text:#1d2026;
+  --maxw:1550px; --pad:30px; --gap:20px; --band:92px;
+  --fs-h2:34px; --fs-h3:18px; --fs-body:15px; --fs-sm:13px; --fs-xs:11px;
+  --fw-medium:500; --fw-bold:700; --fw-black:900; --radius:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard',sans-serif;color:var(--text);background:var(--bg);font-size:var(--fs-body);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none;transition:color .2s}a:hover{color:var(--point)}
+img{display:block;max-width:100%;height:auto}ul,ol{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.en{font-family:'Archivo',sans-serif}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+
+.site-header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
+.site-header .inner{display:flex;align-items:center;height:72px;position:relative}
+.menu-btn{display:flex;align-items:center;gap:8px;font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:var(--fs-sm);letter-spacing:1px;background:var(--accent);color:var(--main);padding:10px 16px;border-radius:6px}
+.logo{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:28px;letter-spacing:1px;color:var(--point);position:absolute;left:50%;transform:translateX(-50%)}
+.utils{margin-left:auto;display:flex;gap:24px;align-items:center;font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-sm);letter-spacing:.5px;color:var(--main)}
+.utils a{display:inline-flex;align-items:center;gap:7px}.utils a:hover{color:var(--point)}
+
+main{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);min-height:60vh}
+.page-head{text-align:center;padding:58px 0 30px}
+.page-head h1{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:42px;color:var(--main);letter-spacing:1px}
+.steps{display:flex;justify-content:center;gap:36px;margin-top:18px;font-size:var(--fs-sm);color:var(--sub)}
+.steps .on{color:var(--point);font-weight:var(--fw-bold)}
+
+.cart-wrap{display:grid;grid-template-columns:1fr 360px;gap:40px;align-items:start;padding-bottom:40px}
+.cart-table{width:100%;border-collapse:collapse}
+.cart-table thead th{border-top:2px solid var(--main);border-bottom:1px solid var(--line);padding:16px 8px;font-size:var(--fs-sm);color:var(--sub);font-weight:var(--fw-medium);text-align:center}
+.cart-table thead th.l{text-align:left}
+.cart-table td{border-bottom:1px solid var(--line);padding:22px 8px;text-align:center;font-size:var(--fs-sm);vertical-align:middle}
+.cart-table .prod{display:flex;align-items:center;gap:18px;text-align:left}
+.cart-table .prod img{width:92px;height:92px;border-radius:var(--radius);object-fit:cover;background:var(--bg-soft);flex:0 0 92px}
+.cart-table .prod .nm{font-family:'Archivo',sans-serif;font-size:var(--fs-h3);font-weight:var(--fw-bold);color:var(--main)}
+.cart-table .prod .op{font-size:var(--fs-xs);color:var(--sub);margin-top:4px}
+.cart-table .sum{font-family:'Archivo',sans-serif;font-size:var(--fs-h3);font-weight:var(--fw-black);color:var(--main)}
+input[type=checkbox]{width:18px;height:18px;accent-color:var(--point);cursor:pointer}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:6px;background:#fff;overflow:hidden}
+.qty button{width:32px;height:34px;font-size:15px;color:var(--main)}
+.qty input{width:40px;height:34px;text-align:center;border:none;border-left:1px solid var(--line);border-right:1px solid var(--line);font-size:var(--fs-sm);color:var(--main)}
+.del{color:var(--sub);font-size:16px}.del:hover{color:var(--point)}
+.cart-tools{display:flex;justify-content:space-between;align-items:center;margin-top:18px;font-size:var(--fs-sm);color:var(--sub)}
+.cart-tools label{display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.cart-tools button{border:1px solid var(--line);border-radius:6px;padding:8px 16px;color:var(--main);font-size:var(--fs-sm)}.cart-tools button:hover{border-color:var(--point);color:var(--point)}
+
+.summary{background:var(--bg-soft);border-radius:var(--radius);padding:30px 28px;position:sticky;top:92px}
+.summary h3{font-family:'Archivo',sans-serif;font-size:var(--fs-h3);font-weight:var(--fw-black);color:var(--main);margin-bottom:20px}
+.summary .row{display:flex;justify-content:space-between;font-size:var(--fs-sm);color:var(--text);margin-bottom:14px}.summary .row .v{font-weight:var(--fw-medium);color:var(--main)}
+.summary .line{border:none;border-top:1px solid var(--line);margin:18px 0}
+.summary .total{display:flex;justify-content:space-between;align-items:baseline}
+.summary .total .t{font-size:var(--fs-body);font-weight:var(--fw-bold);color:var(--main)}
+.summary .total .v{font-family:'Archivo',sans-serif;font-size:26px;font-weight:var(--fw-black);color:var(--point)}
+.summary .note{font-size:var(--fs-xs);color:var(--sub);margin-top:10px;line-height:1.7}
+.summary .order{display:block;text-align:center;width:100%;margin-top:22px;background:var(--point);color:#fff;padding:18px 0;border-radius:var(--radius);font-family:'Archivo',sans-serif;font-size:var(--fs-body);font-weight:var(--fw-bold);letter-spacing:.5px}.summary .order:hover{background:var(--main);color:#fff}
+.summary .keep{display:block;text-align:center;margin-top:12px;font-size:var(--fs-sm);color:var(--sub)}.summary .keep:hover{color:var(--point)}
+
+.site-footer{background:var(--point);color:#fff;padding:60px 0 36px;font-size:var(--fs-sm);margin-top:var(--band)}
+.site-footer .top{display:grid;grid-template-columns:1fr 1.3fr 1.2fr;gap:40px;align-items:start}
+.site-footer .links a{display:block;margin-bottom:12px;font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-sm);letter-spacing:.5px}.site-footer .links a:hover{color:var(--accent)}
+.site-footer .mid .sns a{display:flex;align-items:center;gap:10px;margin-bottom:9px;font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-sm)}.site-footer .mid .sns a:hover{color:var(--accent)}
+.site-footer .mid .cs{margin-top:14px;line-height:1.9;opacity:.9;font-size:var(--fs-xs)}
+.site-footer .right .tel{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:32px;letter-spacing:1px}.site-footer .right p{margin-top:12px;line-height:1.8;opacity:.9}
+.site-footer .big{text-align:center;margin:46px 0 10px;display:flex;align-items:center;justify-content:center;gap:14px}
+.site-footer .big .word{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:80px;letter-spacing:2px;line-height:1}
+.site-footer .big .smile{width:54px;height:54px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:var(--point);font-size:30px}
+.site-footer .copy{text-align:center;font-size:var(--fs-xs);opacity:.7;letter-spacing:.5px}
+.to-top{position:fixed;right:28px;bottom:28px;width:50px;height:50px;border-radius:50%;background:var(--accent);color:var(--point);display:flex;align-items:center;justify-content:center;font-size:18px;z-index:60;box-shadow:0 6px 18px rgba(0,31,163,.25)}.to-top:hover{background:#fff}
+
+@media(max-width:1100px){.cart-wrap{grid-template-columns:1fr}.summary{position:static}}
+@media(max-width:760px){:root{--band:56px;--pad:18px}.cart-table thead{display:none}.cart-table td{display:block;text-align:left;border:none;padding:6px 0}.cart-table tr{display:block;border-bottom:1px solid var(--line);padding:18px 0}.utils a span{display:none}.site-footer .top{grid-template-columns:1fr}.site-footer .big .word{font-size:48px}}
+</style>
+</head>
+<body>
+
+<header class="site-header"><div class="inner container">
+  <button class="menu-btn"><i class="fa-solid fa-bars"></i> MENU</button>
+  <a href="index.html" class="logo">DENVIBE</a>
+  <nav class="utils"><a href="products.html"><i class="fa-solid fa-magnifying-glass"></i> <span>SEARCH</span></a><a href="login.html"><span>MY PAGE</span></a><a href="cart.html"><span>CART(2)</span></a></nav>
+</div></header>
+
+<main>
+  <div class="page-head"><h1 class="en">CART</h1><div class="steps"><span class="on">01 장바구니</span><span>02 주문/결제</span><span>03 주문완료</span></div></div>
+
+  <div class="cart-wrap">
+    <div>
+      <table class="cart-table">
+        <thead><tr><th style="width:48px"><input type="checkbox" checked></th><th class="l">상품정보</th><th style="width:130px">수량</th><th style="width:140px">주문금액</th><th style="width:60px">삭제</th></tr></thead>
+        <tbody>
+          <tr><td><input type="checkbox" checked></td>
+            <td><div class="prod"><img src="images/p-flow-wide.png" alt="플로우 와이드 진"><div><div class="nm en">Flow Wide Jeans</div><div class="op">Light Blue / M</div></div></div></td>
+            <td><div class="qty"><button type="button">−</button><input type="text" value="1" readonly><button type="button">+</button></div></td>
+            <td><div class="sum en">79,000원</div></td>
+            <td><button class="del" aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td></tr>
+          <tr><td><input type="checkbox" checked></td>
+            <td><div class="prod"><img src="images/p-core-cargo.png" alt="코어 카고 데님"><div><div class="nm en">Core Cargo Denim</div><div class="op">Mid Blue / L</div></div></div></td>
+            <td><div class="qty"><button type="button">−</button><input type="text" value="1" readonly><button type="button">+</button></div></td>
+            <td><div class="sum en">85,000원</div></td>
+            <td><button class="del" aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td></tr>
+        </tbody>
+      </table>
+      <div class="cart-tools"><label><input type="checkbox" checked> 전체선택</label><button>선택 삭제</button></div>
+    </div>
+
+    <aside class="summary">
+      <h3>ORDER SUMMARY</h3>
+      <div class="row"><span>총 상품금액</span><span class="v en">164,000원</span></div>
+      <div class="row"><span>배송비</span><span class="v">무료</span></div>
+      <div class="row"><span>예상 적립금</span><span class="v en">+1,640P</span></div>
+      <hr class="line">
+      <div class="total"><span class="t">결제예정금액</span><span class="v en">164,000원</span></div>
+      <p class="note">* 50,000원 이상 구매 시 무료배송됩니다.</p>
+      <a href="login.html" class="order en">ORDER NOW</a>
+      <a href="products.html" class="keep">계속 쇼핑하기</a>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container top">
+    <div class="links"><a href="login.html">MY PAGE</a><a href="signup.html">JOIN US</a><a href="products.html">SHOP</a><a href="board.html">ABOUT US</a><a href="board.html">FAQ</a><a href="board.html">NOTICE</a></div>
+    <div class="mid"><div class="sns"><a href="#"><i class="fa-brands fa-instagram"></i> INSTAGRAM</a><a href="#"><i class="fa-brands fa-youtube"></i> YOUTUBE</a><a href="#"><i class="fa-brands fa-tiktok"></i> TIKTOK</a></div><div class="cs">hello@denvibe.co.kr<br>고객센터 10:00 - 16:00<br>(토,일 및 공휴일 휴무)</div></div>
+    <div class="right"><div class="tel en">1661-2024</div><p>KAKAO 채널 'DENVIBE'<br>1:1 상담으로 빠르게 도와드릴게요.</p></div>
+  </div>
+  <div class="big"><span class="word en">DENVIBE</span><span class="smile"><i class="fa-regular fa-face-smile"></i></span></div>
+  <div class="copy">© 2024 DENVIBE. ALL RIGHTS RESERVED.</div>
+</footer>
+<a href="#" class="to-top" aria-label="맨 위로"><i class="fa-solid fa-arrow-up"></i></a>
+</body>
+</html>

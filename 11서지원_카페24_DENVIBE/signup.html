@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DENVIBE | JOIN</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --main:#16181d; --sub:#8a8f99; --point:#001fa3; --accent:#ffd400; --bg:#ffffff; --bg-soft:#eef0f4;
+  --line:#e6e8ec; --text:#1d2026;
+  --maxw:1550px; --pad:30px; --band:92px;
+  --fs-h3:18px; --fs-body:15px; --fs-sm:13px; --fs-xs:11px;
+  --fw-medium:500; --fw-bold:700; --fw-black:900; --radius:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard',sans-serif;color:var(--text);background:var(--bg);font-size:var(--fs-body);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none;transition:color .2s}a:hover{color:var(--point)}
+img{display:block;max-width:100%;height:auto}ul,ol{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.en{font-family:'Archivo',sans-serif}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+
+.site-header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
+.site-header .inner{display:flex;align-items:center;height:72px;position:relative}
+.menu-btn{display:flex;align-items:center;gap:8px;font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:var(--fs-sm);letter-spacing:1px;background:var(--accent);color:var(--main);padding:10px 16px;border-radius:6px}
+.logo{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:28px;letter-spacing:1px;color:var(--point);position:absolute;left:50%;transform:translateX(-50%)}
+.utils{margin-left:auto;display:flex;gap:24px;align-items:center;font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-sm);letter-spacing:.5px;color:var(--main)}
+.utils a{display:inline-flex;align-items:center;gap:7px}.utils a:hover{color:var(--point)}
+
+main{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);min-height:62vh;display:flex;flex-direction:column;align-items:center}
+.page-head{text-align:center;padding:64px 0 30px}
+.page-head h1{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:40px;color:var(--main);letter-spacing:1px}
+.page-head p{margin-top:10px;color:var(--sub);font-size:var(--fs-sm)}
+.auth{width:100%;max-width:480px;padding-bottom:80px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:var(--fs-sm);font-weight:var(--fw-medium);color:var(--main);margin-bottom:7px}.field label .req{color:var(--point)}
+.field input{width:100%;padding:15px 16px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;font-size:var(--fs-body);color:var(--main)}.field input:focus{outline:none;border-color:var(--point)}
+.field .with-btn{display:flex;gap:8px}.field .with-btn input{flex:1}
+.field .with-btn button{flex:0 0 110px;border:1px solid var(--main);border-radius:var(--radius);color:var(--main);font-size:var(--fs-sm);font-weight:var(--fw-medium)}.field .with-btn button:hover{background:var(--bg-soft)}
+.field .hint{font-size:var(--fs-xs);color:var(--sub);margin-top:6px}
+.agree{border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin:24px 0;background:#fff}
+.agree .all{display:flex;align-items:center;gap:10px;font-size:var(--fs-body);font-weight:var(--fw-bold);color:var(--main);padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.agree .it{display:flex;align-items:center;gap:10px;font-size:var(--fs-sm);color:var(--text);margin-bottom:10px}.agree .it:last-child{margin-bottom:0}
+.agree input{accent-color:var(--point);width:16px;height:16px;cursor:pointer}.agree .it .opt{color:var(--sub)}
+.agree .it a{margin-left:auto;font-size:var(--fs-xs);color:var(--sub);border-bottom:1px solid var(--line)}.agree .it a:hover{color:var(--point)}
+.btn-main{display:block;width:100%;text-align:center;background:var(--point);color:#fff;padding:17px 0;border-radius:var(--radius);font-family:'Archivo',sans-serif;font-size:var(--fs-body);font-weight:var(--fw-bold);letter-spacing:.5px}.btn-main:hover{background:var(--main);color:#fff}
+.to-login{text-align:center;margin-top:24px;font-size:var(--fs-sm);color:var(--sub)}
+.to-login a{color:var(--main);font-weight:var(--fw-bold);border-bottom:1px solid var(--main);padding-bottom:2px}.to-login a:hover{color:var(--point);border-color:var(--point)}
+
+.site-footer{background:var(--point);color:#fff;padding:60px 0 36px;font-size:var(--fs-sm);margin-top:var(--band)}
+.site-footer .top{display:grid;grid-template-columns:1fr 1.3fr 1.2fr;gap:40px;align-items:start;max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+.site-footer .links a{display:block;margin-bottom:12px;font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-sm);letter-spacing:.5px}.site-footer .links a:hover{color:var(--accent)}
+.site-footer .mid .sns a{display:flex;align-items:center;gap:10px;margin-bottom:9px;font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-sm)}.site-footer .mid .sns a:hover{color:var(--accent)}
+.site-footer .mid .cs{margin-top:14px;line-height:1.9;opacity:.9;font-size:var(--fs-xs)}
+.site-footer .right .tel{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:32px;letter-spacing:1px}.site-footer .right p{margin-top:12px;line-height:1.8;opacity:.9}
+.site-footer .big{text-align:center;margin:46px 0 10px;display:flex;align-items:center;justify-content:center;gap:14px}
+.site-footer .big .word{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:80px;letter-spacing:2px;line-height:1}
+.site-footer .big .smile{width:54px;height:54px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:var(--point);font-size:30px}
+.site-footer .copy{text-align:center;font-size:var(--fs-xs);opacity:.7;letter-spacing:.5px}
+
+@media(max-width:760px){:root{--band:56px;--pad:18px}.utils a span{display:none}.site-footer .top{grid-template-columns:1fr}.site-footer .big .word{font-size:48px}}
+</style>
+</head>
+<body>
+
+<header class="site-header"><div class="inner container">
+  <button class="menu-btn"><i class="fa-solid fa-bars"></i> MENU</button>
+  <a href="index.html" class="logo">DENVIBE</a>
+  <nav class="utils"><a href="products.html"><i class="fa-solid fa-magnifying-glass"></i> <span>SEARCH</span></a><a href="login.html"><span>MY PAGE</span></a><a href="cart.html"><span>CART(0)</span></a></nav>
+</div></header>
+
+<main>
+  <div class="page-head"><h1 class="en">JOIN US</h1><p>가입하고 첫 구매 10% 쿠폰을 받아보세요.</p></div>
+  <form class="auth" onsubmit="return false">
+    <div class="field"><label>이름 <span class="req">*</span></label><input type="text" placeholder="이름을 입력하세요"></div>
+    <div class="field"><label>이메일 (아이디) <span class="req">*</span></label><div class="with-btn"><input type="email" placeholder="example@email.com"><button type="button">중복확인</button></div></div>
+    <div class="field"><label>비밀번호 <span class="req">*</span></label><input type="password" placeholder="영문, 숫자 포함 8자 이상"><div class="hint">영문 대/소문자, 숫자, 특수문자 중 2가지 이상 조합 8~20자</div></div>
+    <div class="field"><label>비밀번호 확인 <span class="req">*</span></label><input type="password" placeholder="비밀번호를 다시 입력하세요"></div>
+    <div class="field"><label>휴대폰 번호 <span class="req">*</span></label><div class="with-btn"><input type="tel" placeholder="'-' 없이 숫자만 입력"><button type="button">인증요청</button></div></div>
+    <div class="agree">
+      <label class="all"><input type="checkbox"> 전체 동의합니다</label>
+      <label class="it"><input type="checkbox"> [필수] 이용약관 동의 <a href="#">보기</a></label>
+      <label class="it"><input type="checkbox"> [필수] 개인정보 수집 및 이용 동의 <a href="#">보기</a></label>
+      <label class="it"><input type="checkbox"> <span class="opt">[선택] 마케팅 정보 수신 동의 (이메일/SMS)</span> <a href="#">보기</a></label>
+    </div>
+    <a href="login.html" class="btn-main en">SIGN UP</a>
+    <div class="to-login">이미 회원이신가요? <a href="login.html">로그인</a></div>
+  </form>
+</main>
+
+<footer class="site-footer">
+  <div class="top">
+    <div class="links"><a href="login.html">MY PAGE</a><a href="signup.html">JOIN US</a><a href="products.html">SHOP</a><a href="board.html">ABOUT US</a><a href="board.html">FAQ</a><a href="board.html">NOTICE</a></div>
+    <div class="mid"><div class="sns"><a href="#"><i class="fa-brands fa-instagram"></i> INSTAGRAM</a><a href="#"><i class="fa-brands fa-youtube"></i> YOUTUBE</a><a href="#"><i class="fa-brands fa-tiktok"></i> TIKTOK</a></div><div class="cs">hello@denvibe.co.kr<br>고객센터 10:00 - 16:00<br>(토,일 및 공휴일 휴무)</div></div>
+    <div class="right"><div class="tel en">1661-2024</div><p>KAKAO 채널 'DENVIBE'<br>1:1 상담으로 빠르게 도와드릴게요.</p></div>
+  </div>
+  <div class="big"><span class="word en">DENVIBE</span><span class="smile"><i class="fa-regular fa-face-smile"></i></span></div>
+  <div class="copy">© 2024 DENVIBE. ALL RIGHTS RESERVED.</div>
+</footer>
+</body>
+</html>

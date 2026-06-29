@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DENVIBE | 글쓰기</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --main:#16181d; --sub:#8a8f99; --point:#001fa3; --accent:#ffd400; --bg:#ffffff; --bg-soft:#eef0f4;
+  --line:#e6e8ec; --text:#1d2026;
+  --maxw:1550px; --pad:30px; --band:92px;
+  --fs-h3:18px; --fs-body:15px; --fs-sm:13px; --fs-xs:11px;
+  --fw-medium:500; --fw-bold:700; --fw-black:900; --radius:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard',sans-serif;color:var(--text);background:var(--bg);font-size:var(--fs-body);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none;transition:color .2s}a:hover{color:var(--point)}
+img{display:block;max-width:100%;height:auto}ul,ol{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}select,input,textarea{font-family:inherit}
+.en{font-family:'Archivo',sans-serif}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+
+.site-header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
+.site-header .inner{display:flex;align-items:center;height:72px;position:relative}
+.menu-btn{display:flex;align-items:center;gap:8px;font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:var(--fs-sm);letter-spacing:1px;background:var(--accent);color:var(--main);padding:10px 16px;border-radius:6px}
+.logo{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:28px;letter-spacing:1px;color:var(--point);position:absolute;left:50%;transform:translateX(-50%)}
+.utils{margin-left:auto;display:flex;gap:24px;align-items:center;font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-sm);letter-spacing:.5px;color:var(--main)}
+.utils a{display:inline-flex;align-items:center;gap:7px}.utils a:hover{color:var(--point)}
+
+main{max-width:980px;margin:0 auto;padding:0 var(--pad);min-height:62vh}
+.page-head{text-align:center;padding:58px 0 30px}
+.page-head h1{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:36px;color:var(--main);letter-spacing:1px}
+.write-form{border-top:2px solid var(--main)}
+.row{display:flex;border-bottom:1px solid var(--line);align-items:stretch}
+.row .k{flex:0 0 150px;background:var(--bg-soft);display:flex;align-items:center;padding:18px 20px;font-size:var(--fs-sm);font-weight:var(--fw-medium);color:var(--main)}.row .k .req{color:var(--point);margin-left:3px}
+.row .v{flex:1;padding:14px 18px;display:flex;align-items:center;gap:10px}
+.row .v input[type=text],.row .v select{width:100%;max-width:420px;padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;font-size:var(--fs-body);color:var(--main)}
+.row .v.full input[type=text]{max-width:none}
+.row .v input:focus,.row .v select:focus,.row .v textarea:focus{outline:none;border-color:var(--point)}
+.row.stars .v{gap:6px;font-size:22px;color:#d8dbe2}.row.stars .v i.on{color:var(--accent)}
+.row.content .v{padding:14px 18px}
+.row.content textarea{width:100%;min-height:280px;border:1px solid var(--line);border-radius:var(--radius);padding:16px;font-size:var(--fs-body);resize:vertical;color:var(--main);line-height:1.8}
+.row .file-note{font-size:var(--fs-xs);color:var(--sub)}
+.row .filebtn{border:1px solid var(--main);border-radius:var(--radius);padding:11px 18px;font-size:var(--fs-sm);color:var(--main)}.row .filebtn:hover{background:var(--bg-soft)}
+.notice-box{background:var(--bg-soft);border-radius:var(--radius);padding:18px 22px;margin-top:22px;font-size:var(--fs-sm);color:var(--sub);line-height:1.8}.notice-box b{color:var(--main)}
+.form-btns{display:flex;justify-content:center;gap:12px;margin:34px 0 24px}
+.form-btns a{padding:15px 40px;border-radius:var(--radius);font-family:'Archivo',sans-serif;font-size:var(--fs-body);font-weight:var(--fw-bold)}
+.form-btns .cancel{border:1px solid var(--line);color:var(--main)}.form-btns .cancel:hover{background:var(--bg-soft)}
+.form-btns .submit{background:var(--point);color:#fff}.form-btns .submit:hover{background:var(--main);color:#fff}
+
+.site-footer{background:var(--point);color:#fff;padding:60px 0 36px;font-size:var(--fs-sm);margin-top:var(--band)}
+.site-footer .top{display:grid;grid-template-columns:1fr 1.3fr 1.2fr;gap:40px;align-items:start;max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+.site-footer .links a{display:block;margin-bottom:12px;font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-sm);letter-spacing:.5px}.site-footer .links a:hover{color:var(--accent)}
+.site-footer .mid .sns a{display:flex;align-items:center;gap:10px;margin-bottom:9px;font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-sm)}.site-footer .mid .sns a:hover{color:var(--accent)}
+.site-footer .mid .cs{margin-top:14px;line-height:1.9;opacity:.9;font-size:var(--fs-xs)}
+.site-footer .right .tel{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:32px;letter-spacing:1px}.site-footer .right p{margin-top:12px;line-height:1.8;opacity:.9}
+.site-footer .big{text-align:center;margin:46px 0 10px;display:flex;align-items:center;justify-content:center;gap:14px}
+.site-footer .big .word{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:80px;letter-spacing:2px;line-height:1}
+.site-footer .big .smile{width:54px;height:54px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:var(--point);font-size:30px}
+.site-footer .copy{text-align:center;font-size:var(--fs-xs);opacity:.7;letter-spacing:.5px}
+
+@media(max-width:760px){:root{--band:56px;--pad:18px}.row{flex-direction:column}.row .k{flex:none}.utils a span{display:none}.site-footer .top{grid-template-columns:1fr}.site-footer .big .word{font-size:48px}}
+</style>
+</head>
+<body>
+
+<header class="site-header"><div class="inner container">
+  <button class="menu-btn"><i class="fa-solid fa-bars"></i> MENU</button>
+  <a href="index.html" class="logo">DENVIBE</a>
+  <nav class="utils"><a href="products.html"><i class="fa-solid fa-magnifying-glass"></i> <span>SEARCH</span></a><a href="login.html"><span>MY PAGE</span></a><a href="cart.html"><span>CART(0)</span></a></nav>
+</div></header>
+
+<main>
+  <div class="page-head"><h1 class="en">WRITE</h1></div>
+  <form class="write-form" onsubmit="return false">
+    <div class="row"><div class="k">분류<span class="req">*</span></div><div class="v"><select><option>상품 리뷰</option><option>상품 문의</option><option>1:1 문의</option><option>제휴문의</option></select></div></div>
+    <div class="row stars"><div class="k">평점</div><div class="v"><i class="fa-solid fa-star on"></i><i class="fa-solid fa-star on"></i><i class="fa-solid fa-star on"></i><i class="fa-solid fa-star on"></i><i class="fa-solid fa-star on"></i></div></div>
+    <div class="row"><div class="k">제목<span class="req">*</span></div><div class="v full"><input type="text" placeholder="제목을 입력하세요"></div></div>
+    <div class="row"><div class="k">작성자</div><div class="v"><input type="text" placeholder="이름 또는 닉네임"></div></div>
+    <div class="row content"><div class="k">내용<span class="req">*</span></div><div class="v"><textarea placeholder="내용을 입력하세요. 솔직한 사용 후기를 남겨주시면 다른 고객분들께 큰 도움이 됩니다."></textarea></div></div>
+    <div class="row"><div class="k">사진 첨부</div><div class="v"><button type="button" class="filebtn"><i class="fa-solid fa-camera"></i> 파일 선택</button><span class="file-note">JPG, PNG · 최대 5장 (각 5MB 이하)</span></div></div>
+    <div class="notice-box"><b>· 작성 시 유의사항</b><br>욕설, 비방, 광고성 게시물은 사전 통보 없이 삭제될 수 있습니다. 개인정보(연락처, 주소 등)는 노출되지 않도록 주의해 주세요.</div>
+    <div class="form-btns"><a href="board.html" class="cancel">취소</a><a href="board-view.html" class="submit">등록하기</a></div>
+  </form>
+</main>
+
+<footer class="site-footer">
+  <div class="top">
+    <div class="links"><a href="login.html">MY PAGE</a><a href="signup.html">JOIN US</a><a href="products.html">SHOP</a><a href="board.html">ABOUT US</a><a href="board.html">FAQ</a><a href="board.html">NOTICE</a></div>
+    <div class="mid"><div class="sns"><a href="#"><i class="fa-brands fa-instagram"></i> INSTAGRAM</a><a href="#"><i class="fa-brands fa-youtube"></i> YOUTUBE</a><a href="#"><i class="fa-brands fa-tiktok"></i> TIKTOK</a></div><div class="cs">hello@denvibe.co.kr<br>고객센터 10:00 - 16:00<br>(토,일 및 공휴일 휴무)</div></div>
+    <div class="right"><div class="tel en">1661-2024</div><p>KAKAO 채널 'DENVIBE'<br>1:1 상담으로 빠르게 도와드릴게요.</p></div>
+  </div>
+  <div class="big"><span class="word en">DENVIBE</span><span class="smile"><i class="fa-regular fa-face-smile"></i></span></div>
+  <div class="copy">© 2024 DENVIBE. ALL RIGHTS RESERVED.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DENVIBE | 게시글 보기</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --main:#16181d; --sub:#8a8f99; --point:#001fa3; --accent:#ffd400; --bg:#ffffff; --bg-soft:#eef0f4;
+  --line:#e6e8ec; --text:#1d2026;
+  --maxw:1550px; --pad:30px; --band:92px;
+  --fs-h3:18px; --fs-body:15px; --fs-sm:13px; --fs-xs:11px;
+  --fw-medium:500; --fw-bold:700; --fw-black:900; --radius:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard',sans-serif;color:var(--text);background:var(--bg);font-size:var(--fs-body);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none;transition:color .2s}a:hover{color:var(--point)}
+img{display:block;max-width:100%;height:auto}ul,ol{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.en{font-family:'Archivo',sans-serif}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+
+.site-header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
+.site-header .inner{display:flex;align-items:center;height:72px;position:relative}
+.menu-btn{display:flex;align-items:center;gap:8px;font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:var(--fs-sm);letter-spacing:1px;background:var(--accent);color:var(--main);padding:10px 16px;border-radius:6px}
+.logo{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:28px;letter-spacing:1px;color:var(--point);position:absolute;left:50%;transform:translateX(-50%)}
+.utils{margin-left:auto;display:flex;gap:24px;align-items:center;font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-sm);letter-spacing:.5px;color:var(--main)}
+.utils a{display:inline-flex;align-items:center;gap:7px}.utils a:hover{color:var(--point)}
+
+main{max-width:980px;margin:0 auto;padding:0 var(--pad);min-height:62vh}
+.page-head{text-align:center;padding:58px 0 30px}
+.page-head h1{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:36px;color:var(--main);letter-spacing:1px}
+.view-head{border-top:2px solid var(--main);border-bottom:1px solid var(--line);padding:26px 6px}
+.view-head .cat{font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--point);margin-bottom:8px}
+.view-head h2{font-size:21px;font-weight:var(--fw-bold);color:var(--main);line-height:1.4}
+.view-head .meta{display:flex;gap:18px;margin-top:14px;font-size:var(--fs-xs);color:var(--sub)}.view-head .meta span i{margin-right:5px;color:var(--point)}
+.view-body{padding:40px 6px;border-bottom:1px solid var(--line);font-size:var(--fs-body);color:var(--text);line-height:1.9}
+.view-body p{margin-bottom:18px}.view-body img{border-radius:var(--radius);margin:24px 0}.view-body .stars{color:var(--accent);font-size:var(--fs-h3);margin-bottom:16px}
+.view-tools{display:flex;justify-content:space-between;align-items:center;padding:18px 6px;border-bottom:1px solid var(--line)}
+.view-tools .react{display:flex;gap:10px}
+.view-tools .react button{border:1px solid var(--line);border-radius:999px;padding:8px 18px;font-size:var(--fs-sm);color:var(--main)}.view-tools .react button:hover{border-color:var(--point);color:var(--point)}
+.view-tools .edit{display:flex;gap:8px;font-size:var(--fs-sm);color:var(--sub)}.view-tools .edit a:hover{color:var(--point)}
+.comments{padding:34px 6px}
+.comments h3{font-size:var(--fs-h3);font-weight:var(--fw-bold);color:var(--main);margin-bottom:20px}
+.comments .c{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid var(--line)}
+.comments .c .av{width:40px;height:40px;border-radius:50%;background:var(--bg-soft);display:flex;align-items:center;justify-content:center;color:var(--point);flex:0 0 40px}
+.comments .c .who{font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--main)}.comments .c .dt{font-size:var(--fs-xs);color:var(--sub);margin-left:8px}
+.comments .c p{font-size:var(--fs-sm);color:var(--text);margin-top:6px;line-height:1.7}
+.comments .c.reply{background:var(--bg-soft);border-radius:var(--radius);padding:18px;border:none;margin-top:10px}
+.comment-write{display:flex;gap:10px;margin-top:22px}
+.comment-write textarea{flex:1;border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;font-family:inherit;font-size:var(--fs-sm);resize:none;height:80px;color:var(--main)}.comment-write textarea:focus{outline:none;border-color:var(--point)}
+.comment-write button{flex:0 0 100px;background:var(--point);color:#fff;border-radius:var(--radius);font-size:var(--fs-sm);font-weight:var(--fw-bold)}.comment-write button:hover{background:var(--main)}
+.nav-list{border-top:1px solid var(--line);margin-top:30px}
+.nav-list .n{display:flex;align-items:center;gap:18px;padding:16px 6px;border-bottom:1px solid var(--line);font-size:var(--fs-sm)}
+.nav-list .n .dir{color:var(--sub);width:50px;flex:0 0 50px}.nav-list .n a{color:var(--main)}.nav-list .n a:hover{color:var(--point)}
+.btn-row{display:flex;justify-content:center;margin:36px 0 24px}
+.btn-list{background:var(--main);color:#fff;padding:13px 34px;border-radius:var(--radius);font-family:'Archivo',sans-serif;font-size:var(--fs-sm);font-weight:var(--fw-bold)}.btn-list:hover{background:var(--point);color:#fff}
+
+.site-footer{background:var(--point);color:#fff;padding:60px 0 36px;font-size:var(--fs-sm);margin-top:var(--band)}
+.site-footer .top{display:grid;grid-template-columns:1fr 1.3fr 1.2fr;gap:40px;align-items:start;max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+.site-footer .links a{display:block;margin-bottom:12px;font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-sm);letter-spacing:.5px}.site-footer .links a:hover{color:var(--accent)}
+.site-footer .mid .sns a{display:flex;align-items:center;gap:10px;margin-bottom:9px;font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-sm)}.site-footer .mid .sns a:hover{color:var(--accent)}
+.site-footer .mid .cs{margin-top:14px;line-height:1.9;opacity:.9;font-size:var(--fs-xs)}
+.site-footer .right .tel{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:32px;letter-spacing:1px}.site-footer .right p{margin-top:12px;line-height:1.8;opacity:.9}
+.site-footer .big{text-align:center;margin:46px 0 10px;display:flex;align-items:center;justify-content:center;gap:14px}
+.site-footer .big .word{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:80px;letter-spacing:2px;line-height:1}
+.site-footer .big .smile{width:54px;height:54px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:var(--point);font-size:30px}
+.site-footer .copy{text-align:center;font-size:var(--fs-xs);opacity:.7;letter-spacing:.5px}
+
+@media(max-width:760px){:root{--band:56px;--pad:18px}.utils a span{display:none}.site-footer .top{grid-template-columns:1fr}.site-footer .big .word{font-size:48px}}
+</style>
+</head>
+<body>
+
+<header class="site-header"><div class="inner container">
+  <button class="menu-btn"><i class="fa-solid fa-bars"></i> MENU</button>
+  <a href="index.html" class="logo">DENVIBE</a>
+  <nav class="utils"><a href="products.html"><i class="fa-solid fa-magnifying-glass"></i> <span>SEARCH</span></a><a href="login.html"><span>MY PAGE</span></a><a href="cart.html"><span>CART(0)</span></a></nav>
+</div></header>
+
+<main>
+  <div class="page-head"><h1 class="en">REVIEW</h1></div>
+  <div class="view-head">
+    <div class="cat">[REVIEW] Flow Wide Jeans</div>
+    <h2>플로우 와이드 핏 미쳤어요 데일리로 찜</h2>
+    <div class="meta"><span><i class="fa-regular fa-user"></i>denim_lover</span><span><i class="fa-regular fa-calendar"></i>2024.06.14</span><span><i class="fa-regular fa-eye"></i>521</span><span><i class="fa-regular fa-comment"></i>4</span></div>
+  </div>
+  <div class="view-body">
+    <div class="stars">★★★★★</div>
+    <p>데님 핏 까다로운 편인데 플로우 와이드 진은 첫 착용부터 합격이었어요. 와이드인데 무겁지 않고 가볍게 떨어져서 움직일 때 진짜 편해요.</p>
+    <img src="images/ig-2.png" alt="후기 사진">
+    <p>워싱 컬러(라이트 블루)도 화면이랑 똑같고, 키 163에 XS 딱 맞아요. 기장도 적당해서 수선 없이 입었습니다. 코튼 98%라 통기성도 좋아서 요즘처럼 활동 많은 날 데일리로 매일 입고 다녀요.</p>
+    <p>다음엔 코어 카고도 사보려구요. DENVIBE 데님 입문템으로 강추합니다! :)</p>
+  </div>
+  <div class="view-tools">
+    <div class="react"><button><i class="fa-regular fa-heart"></i> 좋아요 73</button><button><i class="fa-solid fa-share-nodes"></i> 공유</button></div>
+    <div class="edit"><a href="board-write.html">수정</a> · <a href="#">삭제</a> · <a href="#">신고</a></div>
+  </div>
+  <div class="comments">
+    <h3>댓글 4</h3>
+    <div class="c"><div class="av"><i class="fa-regular fa-face-smile"></i></div><div><span class="who">DENVIBE</span><span class="dt">2024.06.15</span><p>안녕하세요, 덴바이브입니다! 플로우 와이드 진 만족스럽게 입어주셔서 감사해요. 코어 카고도 분명 마음에 드실 거예요 :)</p></div></div>
+    <div class="c reply"><div class="av"><i class="fa-regular fa-user"></i></div><div><span class="who">move_daily</span><span class="dt">2024.06.15</span><p>저도 이 진 사려고 고민 중이었는데 후기 보고 결정했어요! 감사합니다 👍</p></div></div>
+    <div class="comment-write"><textarea placeholder="댓글을 입력하세요"></textarea><button>등록</button></div>
+  </div>
+  <div class="nav-list">
+    <div class="n"><span class="dir"><i class="fa-solid fa-arrow-up"></i> 이전</span><a href="board-view.html">XS / S 사이즈 허리 차이 문의</a></div>
+    <div class="n"><span class="dir"><i class="fa-solid fa-arrow-down"></i> 다음</span><a href="board-view.html">코어 카고 데님 핏도 색도 너무 좋아요</a></div>
+  </div>
+  <div class="btn-row"><a href="board.html" class="btn-list">목록으로</a></div>
+</main>
+
+<footer class="site-footer">
+  <div class="top">
+    <div class="links"><a href="login.html">MY PAGE</a><a href="signup.html">JOIN US</a><a href="products.html">SHOP</a><a href="board.html">ABOUT US</a><a href="board.html">FAQ</a><a href="board.html">NOTICE</a></div>
+    <div class="mid"><div class="sns"><a href="#"><i class="fa-brands fa-instagram"></i> INSTAGRAM</a><a href="#"><i class="fa-brands fa-youtube"></i> YOUTUBE</a><a href="#"><i class="fa-brands fa-tiktok"></i> TIKTOK</a></div><div class="cs">hello@denvibe.co.kr<br>고객센터 10:00 - 16:00<br>(토,일 및 공휴일 휴무)</div></div>
+    <div class="right"><div class="tel en">1661-2024</div><p>KAKAO 채널 'DENVIBE'<br>1:1 상담으로 빠르게 도와드릴게요.</p></div>
+  </div>
+  <div class="big"><span class="word en">DENVIBE</span><span class="smile"><i class="fa-regular fa-face-smile"></i></span></div>
+  <div class="copy">© 2024 DENVIBE. ALL RIGHTS RESERVED.</div>
+</footer>
+</body>
+</html>

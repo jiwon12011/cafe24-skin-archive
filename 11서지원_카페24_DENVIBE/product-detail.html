@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DENVIBE | Flow Wide Jeans</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* ===== 디자인 토큰 (전 페이지 공통) ===== */
+:root{
+  --main:#16181d; --sub:#8a8f99; --point:#001fa3; --accent:#ffd400; --bg:#ffffff; --bg-soft:#eef0f4;
+  --line:#e6e8ec; --text:#1d2026; --on-blue:#ffffff;
+  --maxw:1550px; --pad:30px; --gap:20px; --band:92px;
+  --fs-h2:34px; --fs-h3:18px; --fs-body:15px; --fs-sm:13px; --fs-xs:11px;
+  --fw-regular:400; --fw-medium:500; --fw-bold:700; --fw-black:900; --radius:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard',sans-serif;color:var(--text);background:var(--bg);font-size:var(--fs-body);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none;transition:color .2s}a:hover{color:var(--point)}
+img{display:block;max-width:100%;height:auto}ul,ol{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}select{font-family:inherit}
+.en{font-family:'Archivo',sans-serif}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+
+.site-header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
+.site-header .inner{display:flex;align-items:center;height:72px;position:relative}
+.menu-btn{display:flex;align-items:center;gap:8px;font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:var(--fs-sm);letter-spacing:1px;background:var(--accent);color:var(--main);padding:10px 16px;border-radius:6px}
+.logo{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:28px;letter-spacing:1px;color:var(--point);position:absolute;left:50%;transform:translateX(-50%)}
+.utils{margin-left:auto;display:flex;gap:24px;align-items:center;font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-sm);letter-spacing:.5px;color:var(--main)}
+.utils a{display:inline-flex;align-items:center;gap:7px}.utils a:hover{color:var(--point)}
+
+main{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+.crumb{font-size:var(--fs-xs);color:var(--sub);padding:26px 0;letter-spacing:.5px}.crumb a:hover{color:var(--point)}
+
+.detail-top{display:grid;grid-template-columns:1fr 1fr;gap:56px;padding-bottom:64px}
+.gallery .main{border-radius:var(--radius);overflow:hidden;aspect-ratio:1/1.1;background:var(--bg-soft)}
+.gallery .main img{width:100%;height:100%;object-fit:cover}
+.gallery .thumbs{display:flex;gap:12px;margin-top:14px}
+.gallery .thumbs button{width:88px;height:88px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);padding:0;background:var(--bg-soft)}
+.gallery .thumbs button img{width:100%;height:100%;object-fit:cover}
+.gallery .thumbs button.on{border-color:var(--point);border-width:2px}
+
+.info{padding-top:4px}
+.info .brand{font-family:'Archivo',sans-serif;font-size:var(--fs-xs);font-weight:var(--fw-black);letter-spacing:2px;color:var(--point);margin-bottom:12px}
+.info h1{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:34px;color:var(--main);line-height:1.2}
+.info .stars{margin-top:12px;color:var(--accent);font-size:var(--fs-sm)}.info .stars span{color:var(--sub);margin-left:8px}
+.info .price{margin:22px 0;padding:22px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.info .price .now{font-family:'Archivo',sans-serif;font-size:32px;font-weight:var(--fw-black);color:var(--main)}
+.info .meta{font-size:var(--fs-sm);color:var(--sub)}
+.info .meta dl{display:flex;gap:10px;margin-bottom:9px}.info .meta dt{width:84px;color:var(--main);font-weight:var(--fw-medium);flex:0 0 84px}
+.info .opt-box{margin:24px 0}
+.info .opt-box label{display:block;font-size:var(--fs-sm);font-weight:var(--fw-medium);color:var(--main);margin-bottom:8px}
+.info select{width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;font-size:var(--fs-body);color:var(--main)}.info select+select{margin-top:10px}
+.qty-row{display:flex;align-items:center;justify-content:space-between;background:var(--bg-soft);border-radius:var(--radius);padding:16px 20px;margin-top:18px}
+.qty-row .nm{font-size:var(--fs-sm);color:var(--main);font-weight:var(--fw-medium)}
+.qty{display:flex;align-items:center;border:1px solid var(--line);border-radius:6px;background:#fff;overflow:hidden}
+.qty button{width:38px;height:38px;font-size:16px;color:var(--main)}
+.qty input{width:46px;height:38px;text-align:center;border:none;border-left:1px solid var(--line);border-right:1px solid var(--line);font-size:var(--fs-body);color:var(--main)}
+.total-row{display:flex;align-items:baseline;justify-content:space-between;margin:24px 0 22px}
+.total-row .t{font-size:var(--fs-body);color:var(--main);font-weight:var(--fw-medium)}
+.total-row .v{font-family:'Archivo',sans-serif;font-size:28px;font-weight:var(--fw-black);color:var(--point)}
+.total-row .v small{font-size:var(--fs-body);font-weight:var(--fw-regular);color:var(--sub);margin-left:4px}
+.btns{display:flex;gap:12px}
+.btns a{flex:1;text-align:center;padding:18px 0;border-radius:var(--radius);font-family:'Archivo',sans-serif;font-size:var(--fs-body);font-weight:var(--fw-bold);letter-spacing:.5px}
+.btns .cart{background:#fff;border:1.5px solid var(--main);color:var(--main)}.btns .cart:hover{background:var(--main);color:#fff}
+.btns .buy{background:var(--point);color:#fff}.btns .buy:hover{background:var(--main);color:#fff}
+.ship-note{margin-top:20px;font-size:var(--fs-sm);color:var(--sub);background:var(--bg-soft);border-radius:var(--radius);padding:14px 18px;line-height:1.8}.ship-note i{color:var(--point);width:18px}
+
+.tabs{border-top:2px solid var(--main);margin-top:20px}
+.tab-nav{display:flex}
+.tab-nav button{flex:1;padding:20px 0;font-family:'Archivo',sans-serif;font-size:var(--fs-body);font-weight:var(--fw-bold);color:var(--sub);border-bottom:1px solid var(--line)}
+.tab-nav button.on{color:var(--main);border-bottom:2px solid var(--point)}
+.tab-panel{display:none;padding:54px 0}.tab-panel.on{display:block}
+.detail-img{text-align:center}.detail-img img{max-width:800px;width:100%;margin:0 auto;border-radius:var(--radius)}
+
+.rv-summary{display:flex;align-items:center;gap:40px;background:var(--bg-soft);border-radius:var(--radius);padding:34px 40px;margin-bottom:34px}
+.rv-summary .score{text-align:center}
+.rv-summary .score b{font-family:'Archivo',sans-serif;font-size:52px;font-weight:var(--fw-black);color:var(--main);display:block;line-height:1}
+.rv-summary .score .stars{color:var(--accent);margin-top:6px}
+.rv-summary .bars{flex:1}
+.rv-summary .bars .b{display:flex;align-items:center;gap:12px;font-size:var(--fs-sm);color:var(--sub);margin-bottom:7px}
+.rv-summary .bars .b .track{flex:1;height:6px;background:#d8dce4;border-radius:3px;overflow:hidden}.rv-summary .bars .b .fill{height:100%;background:var(--point)}
+.review-list .rv{display:flex;gap:20px;padding:26px 0;border-bottom:1px solid var(--line)}
+.review-list .rv .pic{width:110px;height:110px;border-radius:var(--radius);overflow:hidden;flex:0 0 110px;background:var(--bg-soft)}
+.review-list .rv .pic img{width:100%;height:100%;object-fit:cover}
+.review-list .rv .stars{color:var(--accent);font-size:var(--fs-sm)}
+.review-list .rv .who{font-size:var(--fs-xs);color:var(--sub);margin:6px 0 10px}
+.review-list .rv p{font-size:var(--fs-body);color:var(--text);line-height:1.7}
+
+.qna-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.qna-write{background:var(--point);color:#fff;padding:11px 22px;border-radius:var(--radius);font-family:'Archivo',sans-serif;font-size:var(--fs-sm);font-weight:var(--fw-bold)}.qna-write:hover{background:var(--main);color:#fff}
+.qna-list{border-top:2px solid var(--main)}
+.qna-list .q{border-bottom:1px solid var(--line);padding:20px 6px}
+.qna-list .q .row{display:flex;align-items:center;gap:14px}
+.qna-list .q .st{font-size:var(--fs-xs);font-weight:var(--fw-bold);color:#fff;background:var(--sub);border-radius:4px;padding:3px 9px}.qna-list .q .st.done{background:var(--point)}
+.qna-list .q .tt{flex:1;font-size:var(--fs-body);color:var(--main)}
+.qna-list .q .meta{font-size:var(--fs-xs);color:var(--sub)}
+.qna-list .q .ans{margin-top:14px;background:var(--bg-soft);border-radius:var(--radius);padding:16px 18px;font-size:var(--fs-sm);color:var(--text);line-height:1.7}.qna-list .q .ans b{color:var(--point)}
+
+.site-footer{background:var(--point);color:#fff;padding:60px 0 36px;font-size:var(--fs-sm);margin-top:var(--band)}
+.site-footer .top{display:grid;grid-template-columns:1fr 1.3fr 1.2fr;gap:40px;align-items:start}
+.site-footer .links a{display:block;margin-bottom:12px;font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-sm);letter-spacing:.5px}.site-footer .links a:hover{color:var(--accent)}
+.site-footer .mid .sns a{display:flex;align-items:center;gap:10px;margin-bottom:9px;font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-sm)}.site-footer .mid .sns a:hover{color:var(--accent)}
+.site-footer .mid .cs{margin-top:14px;line-height:1.9;opacity:.9;font-size:var(--fs-xs)}
+.site-footer .right .tel{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:32px;letter-spacing:1px}
+.site-footer .right p{margin-top:12px;line-height:1.8;opacity:.9}
+.site-footer .big{text-align:center;margin:46px 0 10px;display:flex;align-items:center;justify-content:center;gap:14px}
+.site-footer .big .word{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:80px;letter-spacing:2px;line-height:1}
+.site-footer .big .smile{width:54px;height:54px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:var(--point);font-size:30px}
+.site-footer .copy{text-align:center;font-size:var(--fs-xs);opacity:.7;letter-spacing:.5px}
+.to-top{position:fixed;right:28px;bottom:28px;width:50px;height:50px;border-radius:50%;background:var(--accent);color:var(--point);display:flex;align-items:center;justify-content:center;font-size:18px;z-index:60;box-shadow:0 6px 18px rgba(0,31,163,.25)}.to-top:hover{background:#fff}
+
+@media(max-width:1100px){.detail-top{grid-template-columns:1fr;gap:34px}}
+@media(max-width:760px){:root{--band:56px;--pad:18px}.rv-summary{flex-direction:column;gap:20px}.review-list .rv .pic{width:80px;height:80px;flex:0 0 80px}.utils a span{display:none}.site-footer .top{grid-template-columns:1fr}.site-footer .big .word{font-size:48px}}
+</style>
+</head>
+<body>
+
+<header class="site-header"><div class="inner container">
+  <button class="menu-btn"><i class="fa-solid fa-bars"></i> MENU</button>
+  <a href="index.html" class="logo">DENVIBE</a>
+  <nav class="utils"><a href="products.html"><i class="fa-solid fa-magnifying-glass"></i> <span>SEARCH</span></a><a href="login.html"><span>MY PAGE</span></a><a href="cart.html"><span>CART(0)</span></a></nav>
+</div></header>
+
+<main>
+  <div class="crumb"><a href="index.html">HOME</a> / <a href="products.html">SHOP</a> / Flow Wide Jeans</div>
+
+  <div class="detail-top">
+    <div class="gallery">
+      <div class="main"><img id="mainImg" src="images/p-flow-wide.png" alt="플로우 와이드 진"></div>
+      <div class="thumbs">
+        <button class="on" onclick="swap(this,'images/p-flow-wide.png')"><img src="images/p-flow-wide.png" alt=""></button>
+        <button onclick="swap(this,'images/ig-2.png')"><img src="images/ig-2.png" alt=""></button>
+        <button onclick="swap(this,'images/feat-pocket.png')"><img src="images/feat-pocket.png" alt=""></button>
+        <button onclick="swap(this,'images/ig-4.png')"><img src="images/ig-4.png" alt=""></button>
+      </div>
+    </div>
+
+    <div class="info">
+      <div class="brand">DENVIBE</div>
+      <h1 class="en">Flow Wide Jeans</h1>
+      <div class="stars">★★★★★ <span>4.8 · 리뷰 167</span></div>
+
+      <div class="price"><span class="now en">79,000원</span></div>
+
+      <div class="meta">
+        <dl><dt>적립금</dt><dd>구매 시 790P 적립 (1%)</dd></dl>
+        <dl><dt>배송</dt><dd>3,000원 (50,000원 이상 무료배송)</dd></dl>
+        <dl><dt>소재</dt><dd>코튼 98% · 스판덱스 2%</dd></dl>
+      </div>
+
+      <div class="opt-box">
+        <label>SIZE 선택</label>
+        <select><option>사이즈를 선택하세요</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+        <select><option>COLOR 선택</option><option>Light Blue (기본)</option><option>Mid Blue</option></select>
+      </div>
+
+      <div class="qty-row">
+        <span class="nm">수량</span>
+        <div class="qty"><button type="button" onclick="step(-1)">−</button><input id="qty" type="text" value="1" inputmode="numeric" readonly><button type="button" onclick="step(1)">+</button></div>
+      </div>
+
+      <div class="total-row"><span class="t">총 상품금액</span><span class="v en"><span id="total">79,000</span>원<small>(<span id="cnt">1</span>개)</small></span></div>
+
+      <div class="btns"><a href="cart.html" class="cart en">ADD TO CART</a><a href="cart.html" class="buy en">BUY NOW</a></div>
+
+      <div class="ship-note">
+        <div><i class="fa-solid fa-truck"></i> 오후 2시 이전 주문 시 당일 출고</div>
+        <div><i class="fa-solid fa-rotate-left"></i> 수령 후 7일 이내 교환/반품 가능</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab-nav">
+      <button class="on" onclick="tab(this,'t-detail')">DETAIL</button>
+      <button onclick="tab(this,'t-review')">REVIEW <b style="color:var(--point)">167</b></button>
+      <button onclick="tab(this,'t-qna')">Q&amp;A <b style="color:var(--point)">21</b></button>
+    </div>
+
+    <div id="t-detail" class="tab-panel on">
+      <div class="detail-img"><img src="images/detail-flow-wide.png" alt="플로우 와이드 진 상세 설명"></div>
+    </div>
+
+    <div id="t-review" class="tab-panel">
+      <div class="rv-summary">
+        <div class="score"><b class="en">4.8</b><div class="stars">★★★★★</div></div>
+        <div class="bars">
+          <div class="b"><span>5점</span><div class="track"><div class="fill" style="width:86%"></div></div><span>86%</span></div>
+          <div class="b"><span>4점</span><div class="track"><div class="fill" style="width:10%"></div></div><span>10%</span></div>
+          <div class="b"><span>3점</span><div class="track"><div class="fill" style="width:3%"></div></div><span>3%</span></div>
+          <div class="b"><span>2점</span><div class="track"><div class="fill" style="width:1%"></div></div><span>1%</span></div>
+          <div class="b"><span>1점</span><div class="track"><div class="fill" style="width:0%"></div></div><span>0%</span></div>
+        </div>
+      </div>
+      <div class="review-list">
+        <div class="rv"><div class="pic"><img src="images/ig-2.png" alt="후기 사진"></div>
+          <div><div class="stars">★★★★★</div><div class="who">denim_lover · 2024.06.14</div>
+            <p>핏 진짜 예술이에요. 와이드인데 무겁지 않고 가볍게 떨어져서 움직일 때 편해요. 워싱 컬러도 화면이랑 똑같아요!</p></div></div>
+        <div class="rv"><div class="pic"><img src="images/ig-4.png" alt="후기 사진"></div>
+          <div><div class="stars">★★★★★</div><div class="who">move_daily · 2024.06.08</div>
+            <p>키 163인데 XS 딱 맞고 기장도 적당해요. 데일리로 매일 입고 다닙니다. 재질이 두껍지 않아서 사계절 가능할 듯!</p></div></div>
+        <div class="rv"><div class="pic"><img src="images/feat-pocket.png" alt="후기 사진"></div>
+          <div><div class="stars">★★★★☆</div><div class="who">blue_mood · 2024.05.30</div>
+            <p>디테일 좋고 마감 깔끔해요. 다만 생각보다 와이드해서 통이 큰 편! 슬림핏 좋아하면 한 사이즈 다운 추천해요.</p></div></div>
+      </div>
+    </div>
+
+    <div id="t-qna" class="tab-panel">
+      <div class="qna-head"><span class="en" style="font-size:var(--fs-xs);font-weight:var(--fw-black);letter-spacing:2px;color:var(--sub)">PRODUCT Q&amp;A</span><a href="board-write.html" class="qna-write"><i class="fa-solid fa-pen"></i> 문의하기</a></div>
+      <div class="qna-list">
+        <div class="q"><div class="row"><span class="st done">답변완료</span><span class="tt">XS와 S 사이즈 허리 차이가 큰가요?</span><span class="meta">kim*** · 2024.06.11</span></div>
+          <div class="ans"><b>A.</b> XS와 S는 허리 약 3cm 차이가 있습니다. 상세페이지 하단 사이즈 표를 참고해 주세요!</div></div>
+        <div class="q"><div class="row"><span class="st done">답변완료</span><span class="tt">기장 수선해도 워싱 느낌 유지되나요?</span><span class="meta">lee*** · 2024.06.04</span></div>
+          <div class="ans"><b>A.</b> 밑단 시그니처 워싱이 있어 단순 수선 시 워싱이 사라질 수 있습니다. 밑단 살리기 수선을 권장드려요.</div></div>
+        <div class="q"><div class="row"><span class="st">답변대기</span><span class="tt">Mid Blue 컬러는 언제 입고되나요?</span><span class="meta">blue*** · 2024.06.15</span></div></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container top">
+    <div class="links"><a href="login.html">MY PAGE</a><a href="signup.html">JOIN US</a><a href="products.html">SHOP</a><a href="board.html">ABOUT US</a><a href="board.html">FAQ</a><a href="board.html">NOTICE</a></div>
+    <div class="mid"><div class="sns"><a href="#"><i class="fa-brands fa-instagram"></i> INSTAGRAM</a><a href="#"><i class="fa-brands fa-youtube"></i> YOUTUBE</a><a href="#"><i class="fa-brands fa-tiktok"></i> TIKTOK</a></div><div class="cs">hello@denvibe.co.kr<br>고객센터 10:00 - 16:00<br>(토,일 및 공휴일 휴무)</div></div>
+    <div class="right"><div class="tel en">1661-2024</div><p>KAKAO 채널 'DENVIBE'<br>1:1 상담으로 빠르게 도와드릴게요.</p></div>
+  </div>
+  <div class="big"><span class="word en">DENVIBE</span><span class="smile"><i class="fa-regular fa-face-smile"></i></span></div>
+  <div class="copy">© 2024 DENVIBE. ALL RIGHTS RESERVED.</div>
+</footer>
+<a href="#" class="to-top" aria-label="맨 위로"><i class="fa-solid fa-arrow-up"></i></a>
+
+<script>
+function swap(btn,src){document.getElementById('mainImg').src=src;
+  document.querySelectorAll('.thumbs button').forEach(function(b){b.classList.remove('on')});btn.classList.add('on');}
+var UNIT=79000,q=1;
+function fmt(n){return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',');}
+function step(n){q=Math.max(1,q+n);document.getElementById('qty').value=q;
+  document.getElementById('total').textContent=fmt(UNIT*q);document.getElementById('cnt').textContent=q;}
+function tab(btn,id){document.querySelectorAll('.tab-nav button').forEach(function(b){b.classList.remove('on')});
+  document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('on')});
+  btn.classList.add('on');document.getElementById(id).classList.add('on');}
+</script>
+</body>
+</html>
