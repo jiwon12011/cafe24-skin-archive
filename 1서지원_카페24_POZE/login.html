@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>로그인 — POZE</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --main:#1e1a16;--sub:#2d2820;--point:#c2956c;--bg:#faf8f5;--bg-dark:#1a1008;
+  --surface:#f5f0e8;--white:#ffffff;--text-1:#1e1a16;--text-2:#5a5248;
+  --text-3:#9a8f85;--text-inv:#f5f0e8;--border:#e8e0d5;
+  --container-max:1550px;--container-pad:48px;
+  --fs-hero:72px;--fs-xl:48px;--fs-lg:36px;--fs-md:24px;
+  --fs-base:16px;--fs-sm:14px;--fs-xs:12px;
+  --fw-light:300;--fw-regular:400;--fw-medium:500;--fw-semibold:600;--fw-bold:700;
+  --radius:8px;--radius-lg:16px;--radius-full:9999px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Pretendard','Noto Sans KR',sans-serif;color:var(--text-1);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%;height:auto}
+button{border:0;background:none;cursor:pointer;font-family:inherit;font-size:inherit;color:inherit}
+input{font-family:inherit;outline:none}
+.serif{font-family:'Cormorant Garamond',serif}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:60px 20px}
+
+/* ── 헤더 (심플) ─────────────────────────── */
+.site-header{background:rgba(250,248,245,.97);box-shadow:0 1px 16px rgba(30,26,22,.06)}
+.header-inner{max-width:var(--container-max);margin:0 auto;padding:0 var(--container-pad);height:70px;display:flex;align-items:center;justify-content:center;position:relative}
+@media(max-width:768px){.header-inner{padding:0 20px;height:58px}}
+.logo-txt{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;letter-spacing:.32em;color:var(--main)}
+.header-back{position:absolute;left:var(--container-pad);font-size:20px;color:var(--text-2);cursor:pointer;transition:color .2s}
+.header-back:hover{color:var(--point)}
+@media(max-width:768px){.header-back{left:20px}}
+
+/* ── 로그인 래퍼 ────────────────────────── */
+.auth-split{display:grid;grid-template-columns:1fr 1fr;max-width:920px;width:100%;background:var(--white);border-radius:var(--radius-lg);overflow:hidden;box-shadow:0 8px 48px rgba(30,26,22,.1)}
+@media(max-width:680px){.auth-split{grid-template-columns:1fr}}
+.auth-visual{position:relative;background:var(--bg-dark);display:flex;flex-direction:column;justify-content:flex-end;padding:48px;overflow:hidden}
+@media(max-width:680px){.auth-visual{display:none}}
+.auth-visual-img{position:absolute;inset:0;z-index:0}
+.auth-visual-img img{width:100%;height:100%;object-fit:cover;opacity:.45}
+.auth-visual-content{position:relative;z-index:1}
+.auth-visual-logo{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;letter-spacing:.3em;color:var(--white);margin-bottom:12px}
+.auth-visual-tagline{font-size:var(--fs-sm);color:rgba(245,240,232,.65);line-height:1.7;font-weight:300;letter-spacing:.03em}
+
+.auth-form-area{padding:48px 40px}
+@media(max-width:480px){.auth-form-area{padding:32px 24px}}
+.auth-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:8px}
+.auth-subtitle{font-size:var(--fs-xs);color:var(--text-3);letter-spacing:.08em;margin-bottom:36px}
+
+/* 소셜 로그인 */
+.social-btns{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.social-btn{width:100%;padding:13px;border-radius:var(--radius);font-size:var(--fs-sm);font-weight:var(--fw-semibold);display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;transition:all .2s}
+.social-btn-kakao{background:#FEE500;color:#3A1D1D}
+.social-btn-kakao:hover{filter:brightness(.95)}
+.social-btn-naver{background:#03C75A;color:#fff}
+.social-btn-naver:hover{filter:brightness(.9)}
+.social-btn-google{background:var(--white);border:1px solid var(--border);color:var(--text-1)}
+.social-btn-google:hover{border-color:var(--main)}
+.social-icon{width:20px;height:20px;object-fit:contain}
+
+/* 구분선 */
+.divider{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.divider span{font-size:var(--fs-xs);color:var(--text-3);white-space:nowrap;letter-spacing:.08em}
+
+/* 폼 */
+.form-group{margin-bottom:16px;position:relative}
+.form-label{display:block;font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.1em;text-transform:uppercase;color:var(--text-2);margin-bottom:7px}
+.form-input{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:var(--fs-sm);color:var(--text-1);background:var(--white);transition:border-color .2s}
+.form-input:focus{border-color:var(--point)}
+.form-input::placeholder{color:var(--text-3)}
+.pw-toggle{position:absolute;right:14px;bottom:13px;font-size:15px;color:var(--text-3);cursor:pointer;transition:color .2s}
+.pw-toggle:hover{color:var(--point)}
+
+.remember-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.remember-label{display:flex;align-items:center;gap:7px;font-size:var(--fs-xs);color:var(--text-2);cursor:pointer}
+.remember-label input[type="checkbox"]{accent-color:var(--point)}
+.find-links{display:flex;gap:16px}
+.find-links a{font-size:var(--fs-xs);color:var(--text-3);transition:color .2s;position:relative}
+.find-links a::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:var(--text-3);opacity:.4}
+.find-links a:hover{color:var(--point)}
+
+.btn-login{display:block;width:100%;padding:15px;background:var(--main);color:var(--white);text-align:center;border-radius:var(--radius);font-size:var(--fs-xs);font-weight:var(--fw-bold);letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .25s;margin-bottom:16px}
+.btn-login:hover{background:var(--sub);color:var(--point)}
+
+.signup-prompt{text-align:center;font-size:var(--fs-xs);color:var(--text-3)}
+.signup-prompt a{color:var(--point);font-weight:var(--fw-semibold);margin-left:6px;text-decoration:underline;text-underline-offset:2px}
+.signup-prompt a:hover{opacity:.8}
+
+/* ── 푸터 (최소) ──────────────────────────── */
+.site-footer-min{background:var(--bg-dark);padding:20px var(--container-pad);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+@media(max-width:600px){.site-footer-min{padding:16px 20px;flex-direction:column;align-items:flex-start}}
+.site-footer-min p{font-size:11px;color:rgba(245,240,232,.3)}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="header-back" aria-label="뒤로가기"><i class="fa-solid fa-arrow-left"></i></a>
+    <a href="index.html" class="logo-txt serif" aria-label="POZE 홈">POZE</a>
+  </div>
+</header>
+
+<main>
+  <div class="auth-split">
+    <!-- 비주얼 패널 -->
+    <div class="auth-visual">
+      <div class="auth-visual-img">
+        <img src="images/main.png" alt="POZE 브랜드 이미지">
+      </div>
+      <div class="auth-visual-content">
+        <p class="auth-visual-logo serif">POZE</p>
+        <p class="auth-visual-tagline">나에게 몰입하는 순간<br>당신만의 뷰티 루틴을 완성하세요.</p>
+      </div>
+    </div>
+
+    <!-- 로그인 폼 패널 -->
+    <div class="auth-form-area">
+      <h1 class="auth-title serif">로그인</h1>
+      <p class="auth-subtitle">SIGN IN TO YOUR ACCOUNT</p>
+
+      <!-- 소셜 로그인 -->
+      <div class="social-btns">
+        <button class="social-btn social-btn-kakao" type="button">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 2C5.58 2 2 4.9 2 8.5c0 2.3 1.56 4.3 3.9 5.44l-.82 3.04c-.07.26.21.47.44.33L9.5 15.1c.16.01.33.02.5.02 4.42 0 8-2.9 8-6.5S14.42 2 10 2z" fill="#3A1D1D"/></svg>
+          카카오로 계속하기
+        </button>
+        <button class="social-btn social-btn-naver" type="button">
+          <span style="font-size:16px;font-weight:900;font-family:sans-serif;letter-spacing:-.02em">N</span>
+          네이버로 계속하기
+        </button>
+        <button class="social-btn social-btn-google" type="button">
+          <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.8-1.6 2.36v1.96h2.58c1.5-1.38 2.37-3.42 2.37-5.8 0-.56-.05-1.1-.12-1.52z" fill="#4285F4"/><path d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.58-1.96c-.72.48-1.64.76-2.72.76-2.1 0-3.87-1.4-4.5-3.3H1.84v2.02C3.16 15.12 5.9 17 8.98 17z" fill="#34A853"/><path d="M4.48 10.56c-.16-.48-.25-.99-.25-1.52s.09-1.04.25-1.52V5.5H1.84A8.97 8.97 0 0 0 1 9c0 1.46.35 2.84.96 4.06l2.52-1.96-.01-.54z" fill="#FBBC05"/><path d="M8.98 3.58c1.18 0 2.24.4 3.07 1.2l2.3-2.3C12.95 1.15 11.14.36 8.98.36 5.9.36 3.16 2.24 1.84 4.96L4.36 6.9c.63-1.9 2.4-3.32 4.62-3.32z" fill="#EA4335"/></svg>
+          Google로 계속하기
+        </button>
+      </div>
+
+      <div class="divider"><span>또는 이메일로 로그인</span></div>
+
+      <form action="#" method="post" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="email">이메일</label>
+          <input class="form-input" id="email" type="email" placeholder="example@email.com" autocomplete="email" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="password">비밀번호</label>
+          <input class="form-input" id="password" type="password" placeholder="비밀번호를 입력해 주세요" autocomplete="current-password" required>
+          <button type="button" class="pw-toggle" id="pwToggle" aria-label="비밀번호 보기"><i class="fa-regular fa-eye"></i></button>
+        </div>
+        <div class="remember-row">
+          <label class="remember-label"><input type="checkbox" name="remember"> 로그인 상태 유지</label>
+          <div class="find-links">
+            <a href="#">아이디 찾기</a>
+            <a href="#">비밀번호 찾기</a>
+          </div>
+        </div>
+        <button type="submit" class="btn-login">로그인</button>
+      </form>
+
+      <p class="signup-prompt">아직 회원이 아니신가요?<a href="signup.html">회원가입</a></p>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer-min">
+  <p>© 2026 POZE. All rights reserved.</p>
+  <p>(주)포제 | 사업자등록번호 : 000-00-00000</p>
+</footer>
+
+<script>
+document.getElementById('pwToggle').addEventListener('click', function(){
+  const pw = document.getElementById('password');
+  const isText = pw.type === 'text';
+  pw.type = isText ? 'password' : 'text';
+  this.querySelector('i').className = isText ? 'fa-regular fa-eye' : 'fa-regular fa-eye-slash';
+});
+</script>
+</body>
+</html>

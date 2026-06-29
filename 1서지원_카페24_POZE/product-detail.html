@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>딥 스모키 아이 팔레트 — POZE</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<style>
+:root{
+  --main:#1e1a16;--sub:#2d2820;--point:#c2956c;--bg:#faf8f5;--bg-dark:#1a1008;
+  --surface:#f5f0e8;--white:#ffffff;--text-1:#1e1a16;--text-2:#5a5248;
+  --text-3:#9a8f85;--text-inv:#f5f0e8;--border:#e8e0d5;
+  --section-gap:100px;--section-pad:80px;--container-max:1550px;
+  --container-pad:48px;--gap:24px;--fs-hero:72px;--fs-xl:48px;--fs-lg:36px;
+  --fs-md:24px;--fs-base:16px;--fs-sm:14px;--fs-xs:12px;
+  --fw-light:300;--fw-regular:400;--fw-medium:500;--fw-semibold:600;--fw-bold:700;
+  --radius:8px;--radius-lg:16px;--radius-full:9999px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Pretendard','Noto Sans KR',sans-serif;color:var(--text-1);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}ul,li{list-style:none}
+img{display:block;max-width:100%;height:auto}
+button{border:0;background:none;cursor:pointer;font-family:inherit;font-size:inherit;color:inherit}
+input,select{font-family:inherit;outline:none}
+.container{max-width:var(--container-max);margin:0 auto;padding:0 var(--container-pad)}
+@media(max-width:768px){.container{padding:0 20px}}
+.serif{font-family:'Cormorant Garamond',serif}
+
+/* ── 띠배너 ──────────────────────────────────────────────── */
+.strip-announce{height:36px;background:var(--bg-dark);overflow:hidden;display:flex;align-items:center}
+.strip-track{display:flex;align-items:center;gap:80px;animation:marquee 32s linear infinite;white-space:nowrap;padding-right:80px}
+.strip-track span{font-size:11px;letter-spacing:.1em;color:rgba(245,240,232,.7)}
+.strip-track strong{color:var(--point)}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── 헤더 ─────────────────────────────────────────────────── */
+.site-header{position:sticky;top:0;z-index:900;background:rgba(250,248,245,.97);box-shadow:0 1px 16px rgba(30,26,22,.06)}
+.header-inner{max-width:var(--container-max);margin:0 auto;padding:0 var(--container-pad);height:70px;display:flex;align-items:center;gap:16px;position:relative}
+@media(max-width:768px){.header-inner{padding:0 20px;height:58px}}
+.h-left{display:flex;align-items:center;gap:16px}
+.hamburger{width:36px;height:36px;display:flex;flex-direction:column;justify-content:center;gap:6px;cursor:pointer}
+.hamburger span{display:block;height:1.5px;background:var(--main);transition:all .3s;width:22px}
+.hamburger span:last-child{width:15px}
+.gnb{flex:1;display:flex;justify-content:center}
+.gnb ul{display:flex;gap:0}
+.gnb ul li a{display:block;padding:8px 18px;font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);transition:color .2s}
+.gnb ul li a:hover,.gnb ul li.active a{color:var(--point)}
+.gnb ul li.sale a{color:var(--point)}
+@media(max-width:1024px){.gnb{display:none}.site-logo{position:absolute;left:50%;transform:translateX(-50%)}}
+.h-right{display:flex;align-items:center;gap:2px}
+.h-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:17px;color:var(--text-2);transition:color .2s;position:relative;cursor:pointer}
+.h-icon:hover{color:var(--point)}
+.cart-badge{position:absolute;top:6px;right:5px;min-width:16px;height:16px;border-radius:var(--radius-full);background:var(--point);color:var(--white);font-size:9px;font-weight:var(--fw-bold);display:flex;align-items:center;justify-content:center;padding:0 3px}
+.site-logo{flex-shrink:0}
+.logo-txt{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;letter-spacing:.32em;color:var(--main);display:block}
+.mobile-nav{position:fixed;inset:0;z-index:950;background:var(--bg);transform:translateX(-100%);transition:transform .4s cubic-bezier(.25,.46,.45,.94);overflow-y:auto}
+.mobile-nav.open{transform:translateX(0)}
+.mobile-nav-inner{padding:80px 32px 48px}
+.mnav-close{position:absolute;top:18px;right:18px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--text-2);cursor:pointer}
+.mobile-nav ul li a{display:block;padding:18px 0;font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--text-1);border-bottom:1px solid var(--border)}
+.mobile-nav ul li a:hover{color:var(--point)}
+.mobile-nav ul li.sale a{color:var(--point)}
+.mnav-util{margin-top:32px;display:flex;gap:20px}
+.mnav-util a{font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+.search-layer{position:fixed;inset:0;z-index:960;background:rgba(250,248,245,.98);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.search-layer.open{opacity:1;pointer-events:all}
+.search-box{width:min(640px,88vw);border-bottom:2px solid var(--main)}
+.search-box input{width:100%;padding:16px 0;font-size:var(--fs-lg);font-family:'Cormorant Garamond',serif;font-weight:300;background:none;color:var(--text-1)}
+.search-box input::placeholder{color:var(--text-3)}
+.search-x{position:absolute;top:24px;right:32px;font-size:24px;color:var(--text-2);cursor:pointer;display:none}
+.search-layer.open .search-x{display:block}
+
+/* ── Breadcrumb ──────────────────────────────── */
+.breadcrumb-bar{padding:18px 0;border-bottom:1px solid var(--border)}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:var(--fs-xs);letter-spacing:.06em;color:var(--text-3)}
+.breadcrumb a{transition:color .2s}
+.breadcrumb a:hover{color:var(--point)}
+.breadcrumb span.sep{opacity:.4}
+
+/* ── 상품 상세 레이아웃 ───────────────────────── */
+.product-section{padding:40px 0 60px}
+.product-layout{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:flex-start}
+@media(max-width:900px){.product-layout{grid-template-columns:1fr;gap:32px}}
+
+/* 이미지 영역 */
+.product-images{}
+.main-image-wrap{position:relative;border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:1/1;background:var(--surface);margin-bottom:12px}
+.main-image-wrap img{width:100%;height:100%;object-fit:cover}
+.img-badge{position:absolute;top:16px;left:16px;padding:5px 12px;border-radius:var(--radius-full);font-size:10px;font-weight:var(--fw-bold);letter-spacing:.08em;text-transform:uppercase;background:var(--main);color:var(--white)}
+.thumb-row{display:flex;gap:8px}
+.thumb-item{width:80px;height:80px;border-radius:var(--radius);overflow:hidden;cursor:pointer;border:2px solid transparent;transition:border-color .2s;flex-shrink:0;background:var(--surface)}
+.thumb-item img{width:100%;height:100%;object-fit:cover}
+.thumb-item.active,.thumb-item:hover{border-color:var(--point)}
+
+/* 정보 영역 */
+.product-info{position:sticky;top:90px}
+@media(max-width:900px){.product-info{position:static}}
+.product-brand{font-size:var(--fs-xs);letter-spacing:.15em;text-transform:uppercase;color:var(--text-3);margin-bottom:8px}
+.product-name{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,36px);font-weight:300;line-height:1.2;color:var(--text-1);margin-bottom:12px}
+/* 리뷰 요약 */
+.review-summary{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.stars{display:flex;gap:2px;color:var(--point)}
+.stars i{font-size:13px}
+.review-count{font-size:var(--fs-xs);color:var(--text-3);text-decoration:underline;cursor:pointer;text-underline-offset:3px}
+/* 가격 */
+.price-block{margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.price-main{font-size:28px;font-weight:var(--fw-bold);color:var(--point);margin-bottom:4px}
+.price-original{font-size:var(--fs-sm);color:var(--text-3);text-decoration:line-through}
+.discount-rate{display:inline-block;font-size:var(--fs-xs);font-weight:var(--fw-bold);color:var(--white);background:var(--point);padding:2px 8px;border-radius:var(--radius-full);margin-left:8px}
+/* 배송 */
+.delivery-info{display:flex;flex-direction:column;gap:6px;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.delivery-row{display:flex;gap:12px;font-size:var(--fs-sm)}
+.delivery-label{width:72px;flex-shrink:0;color:var(--text-3);font-size:var(--fs-xs);letter-spacing:.06em;padding-top:1px}
+.delivery-value{color:var(--text-1);line-height:1.5}
+.delivery-value strong{font-weight:var(--fw-semibold);color:var(--point)}
+/* 옵션 */
+.options-block{margin-bottom:24px}
+.option-label{font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.1em;text-transform:uppercase;color:var(--text-2);margin-bottom:10px}
+.shade-list{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.shade-item{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer}
+.shade-circle{width:36px;height:36px;border-radius:50%;border:2px solid transparent;transition:all .2s;box-shadow:inset 0 0 0 1px rgba(30,26,22,.12)}
+.shade-item.active .shade-circle,.shade-item:hover .shade-circle{border-color:var(--point)}
+.shade-name{font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);text-align:center;max-width:44px;line-height:1.3}
+.select-option{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:var(--radius);font-size:var(--fs-sm);color:var(--text-1);background:var(--white);margin-bottom:10px;cursor:pointer;transition:border-color .2s;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239a8f85'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.select-option:focus{border-color:var(--point)}
+/* 수량 */
+.qty-block{margin-bottom:24px}
+.qty-control{display:inline-flex;align-items:center;border:1px solid var(--border);border-radius:var(--radius)}
+.qty-btn{width:40px;height:44px;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--text-2);transition:color .2s;cursor:pointer}
+.qty-btn:hover{color:var(--point)}
+.qty-input{width:56px;height:44px;text-align:center;font-size:var(--fs-base);font-weight:var(--fw-semibold);color:var(--text-1);border-left:1px solid var(--border);border-right:1px solid var(--border)}
+/* 구매 버튼 */
+.purchase-btns{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.btn-buy{padding:16px;font-size:var(--fs-sm);font-weight:var(--fw-bold);letter-spacing:.1em;text-transform:uppercase;border-radius:var(--radius);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .25s}
+.btn-buy-now{background:var(--main);color:var(--white)}
+.btn-buy-now:hover{background:var(--sub);color:var(--point)}
+.btn-add-cart{background:transparent;border:1.5px solid var(--main);color:var(--main)}
+.btn-add-cart:hover{background:var(--main);color:var(--white)}
+.btn-row{display:flex;gap:10px}
+.btn-wish{flex:1;padding:14px;border:1px solid var(--border);border-radius:var(--radius);font-size:var(--fs-sm);color:var(--text-2);display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;transition:all .2s}
+.btn-wish:hover{border-color:var(--point);color:var(--point)}
+.btn-share{width:52px;padding:14px;border:1px solid var(--border);border-radius:var(--radius);font-size:var(--fs-base);color:var(--text-2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s}
+.btn-share:hover{border-color:var(--main);color:var(--main)}
+/* 혜택 */
+.benefits{background:var(--surface);border-radius:var(--radius);padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.benefit-row{display:flex;align-items:center;gap:10px;font-size:var(--fs-xs)}
+.benefit-row i{color:var(--point);width:16px;text-align:center}
+.benefit-row span{color:var(--text-2);line-height:1.4}
+.benefit-row strong{color:var(--text-1)}
+
+/* ── 상품 상세 탭 ──────────────────────────────── */
+.tabs-section{margin-top:64px;border-top:2px solid var(--main)}
+.tabs-nav{display:flex;border-bottom:1px solid var(--border)}
+.tab-btn{padding:18px 28px;font-size:var(--fs-sm);font-weight:var(--fw-semibold);letter-spacing:.08em;color:var(--text-3);border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;transition:all .2s;text-transform:uppercase}
+.tab-btn.active{color:var(--main);border-bottom-color:var(--main)}
+.tab-btn:hover{color:var(--main)}
+@media(max-width:600px){.tab-btn{padding:14px 16px;font-size:var(--fs-xs)}}
+.tab-content{padding:48px 0;display:none}
+.tab-content.active{display:block}
+
+/* 상세정보 탭 */
+.detail-section{max-width:900px;margin:0 auto}
+.detail-hero{border-radius:var(--radius-lg);overflow:hidden;margin-bottom:40px;aspect-ratio:3/1;background:var(--surface)}
+.detail-hero img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:40px}
+@media(max-width:640px){.detail-grid{grid-template-columns:1fr;gap:20px}}
+.detail-block{background:var(--surface);border-radius:var(--radius);padding:32px;display:flex;flex-direction:column;gap:8px}
+.detail-block-icon{font-size:24px;color:var(--point);margin-bottom:4px}
+.detail-block h4{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:var(--text-1)}
+.detail-block p{font-size:var(--fs-sm);color:var(--text-2);line-height:1.75}
+.detail-full-img{border-radius:var(--radius-lg);overflow:hidden;margin-bottom:40px;aspect-ratio:4/3;background:var(--surface)}
+.detail-full-img img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.detail-spec-table{width:100%;border-collapse:collapse;font-size:var(--fs-sm);margin-bottom:32px}
+.detail-spec-table tr{border-bottom:1px solid var(--border)}
+.detail-spec-table th{width:140px;text-align:left;padding:14px 16px;font-weight:var(--fw-semibold);font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);background:var(--surface)}
+.detail-spec-table td{padding:14px 16px;color:var(--text-2);line-height:1.6}
+.detail-ingredients{font-size:11px;line-height:2;color:var(--text-3);padding:20px;background:var(--surface);border-radius:var(--radius)}
+.how-to-step{display:flex;align-items:flex-start;gap:16px;margin-bottom:20px;padding:20px;background:var(--surface);border-radius:var(--radius)}
+.step-num{width:32px;height:32px;border-radius:50%;background:var(--main);color:var(--white);font-size:13px;font-weight:var(--fw-bold);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-content h5{font-size:var(--fs-sm);font-weight:var(--fw-semibold);margin-bottom:4px}
+.step-content p{font-size:var(--fs-xs);color:var(--text-2);line-height:1.7}
+
+/* 리뷰 탭 */
+.reviews-section{max-width:860px;margin:0 auto}
+.review-overview{display:grid;grid-template-columns:200px 1fr;gap:40px;padding:32px;background:var(--surface);border-radius:var(--radius-lg);margin-bottom:40px}
+@media(max-width:600px){.review-overview{grid-template-columns:1fr;gap:20px}}
+.review-avg{text-align:center}
+.avg-num{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:300;color:var(--point);line-height:1}
+.avg-stars{display:flex;justify-content:center;gap:4px;color:var(--point);margin:8px 0}
+.avg-stars i{font-size:18px}
+.avg-count{font-size:var(--fs-xs);color:var(--text-3)}
+.rating-bars{display:flex;flex-direction:column;gap:8px}
+.rating-bar-row{display:flex;align-items:center;gap:10px;font-size:var(--fs-xs);color:var(--text-3)}
+.bar-label{width:32px;text-align:right;flex-shrink:0}
+.bar-track{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;background:var(--point);border-radius:3px}
+.bar-pct{width:36px;color:var(--text-3)}
+.review-filter-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.review-filter-btns{display:flex;gap:8px;flex-wrap:wrap}
+.r-filter-btn{padding:6px 16px;border:1px solid var(--border);border-radius:var(--radius-full);font-size:var(--fs-xs);color:var(--text-2);cursor:pointer;transition:all .2s;white-space:nowrap}
+.r-filter-btn.active,.r-filter-btn:hover{border-color:var(--point);color:var(--point)}
+.review-sort select{padding:8px 30px 8px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:var(--fs-xs);color:var(--text-2);appearance:none;background:var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239a8f85'/%3E%3C/svg%3E") no-repeat right 10px center;cursor:pointer}
+.review-list{display:flex;flex-direction:column;gap:24px}
+.review-item{padding:28px 0;border-bottom:1px solid var(--border)}
+.review-item:first-child{padding-top:0}
+.review-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.reviewer-info{display:flex;flex-direction:column;gap:4px}
+.reviewer-name{font-size:var(--fs-sm);font-weight:var(--fw-semibold);color:var(--text-1)}
+.reviewer-stars{display:flex;gap:2px;color:var(--point)}
+.reviewer-stars i{font-size:12px}
+.review-date{font-size:var(--fs-xs);color:var(--text-3)}
+.verified-badge{font-size:10px;color:var(--point);display:flex;align-items:center;gap:3px}
+.review-shade{font-size:var(--fs-xs);color:var(--text-3);margin-bottom:10px;padding:4px 10px;background:var(--surface);border-radius:var(--radius-full);display:inline-block}
+.review-text{font-size:var(--fs-sm);color:var(--text-2);line-height:1.8;margin-bottom:16px}
+.review-photos{display:flex;gap:8px;flex-wrap:wrap}
+.review-photo{width:80px;height:80px;border-radius:var(--radius);overflow:hidden;cursor:pointer}
+.review-photo img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.review-photo:hover img{transform:scale(1.05)}
+.review-helpful{font-size:var(--fs-xs);color:var(--text-3);display:flex;align-items:center;gap:12px;margin-top:12px}
+.helpful-btn{padding:4px 12px;border:1px solid var(--border);border-radius:var(--radius-full);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:4px}
+.helpful-btn:hover{border-color:var(--point);color:var(--point)}
+.review-write-btn{margin-top:32px;text-align:center}
+.btn-write-review{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border:1.5px solid var(--main);border-radius:var(--radius);font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.1em;text-transform:uppercase;color:var(--main);cursor:pointer;transition:all .25s}
+.btn-write-review:hover{background:var(--main);color:var(--white)}
+
+/* 문의 탭 */
+.inquiry-section{max-width:860px;margin:0 auto}
+.inquiry-notice{background:var(--surface);border-radius:var(--radius);padding:20px 24px;margin-bottom:32px;display:flex;gap:12px}
+.inquiry-notice i{color:var(--point);margin-top:2px;flex-shrink:0}
+.inquiry-notice p{font-size:var(--fs-sm);color:var(--text-2);line-height:1.7}
+.inquiry-list{display:flex;flex-direction:column;gap:0;margin-bottom:32px}
+.inquiry-item{border-bottom:1px solid var(--border)}
+.inquiry-q{padding:20px 0;display:flex;align-items:flex-start;gap:14px;cursor:pointer}
+.inquiry-q-badge{width:28px;height:20px;border-radius:4px;background:var(--main);color:var(--white);font-size:10px;font-weight:var(--fw-bold);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.inquiry-q-text{flex:1;font-size:var(--fs-sm);color:var(--text-1);line-height:1.5}
+.inquiry-q-meta{font-size:var(--fs-xs);color:var(--text-3);white-space:nowrap;flex-shrink:0}
+.inquiry-q-meta .status{color:var(--point);font-weight:var(--fw-semibold)}
+.inquiry-a{display:none;padding:16px 0 20px 42px;background:transparent}
+.inquiry-a.open{display:block}
+.inquiry-a-badge{display:inline-block;padding:2px 8px;background:var(--point);color:var(--white);font-size:10px;font-weight:var(--fw-bold);border-radius:4px;margin-bottom:8px}
+.inquiry-a p{font-size:var(--fs-sm);color:var(--text-2);line-height:1.8}
+.inquiry-write-form{background:var(--surface);border-radius:var(--radius-lg);padding:32px}
+.inquiry-write-form h4{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;margin-bottom:24px}
+.form-group{margin-bottom:16px}
+.form-label{display:block;font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.1em;text-transform:uppercase;color:var(--text-2);margin-bottom:8px}
+.form-input{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:var(--radius);font-size:var(--fs-sm);color:var(--text-1);background:var(--white);transition:border-color .2s}
+.form-input:focus{border-color:var(--point)}
+.form-textarea{width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:var(--radius);font-size:var(--fs-sm);color:var(--text-1);background:var(--white);resize:vertical;min-height:140px;transition:border-color .2s}
+.form-textarea:focus{border-color:var(--point)}
+.form-private{display:flex;align-items:center;gap:8px;font-size:var(--fs-sm);color:var(--text-2);cursor:pointer;margin-bottom:20px}
+.form-private input{accent-color:var(--point)}
+.btn-submit{padding:14px 40px;background:var(--main);color:var(--white);border-radius:var(--radius);font-size:var(--fs-xs);font-weight:var(--fw-bold);letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .25s}
+.btn-submit:hover{background:var(--sub);color:var(--point)}
+
+/* 연관 상품 */
+.related-section{padding:64px 0 80px;border-top:1px solid var(--border)}
+.related-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:32px;text-align:center}
+.product-grid-rel{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap);list-style:none}
+@media(max-width:900px){.product-grid-rel{grid-template-columns:repeat(2,1fr)}}
+.item{border-radius:var(--radius);overflow:hidden;transition:transform .3s}
+.item:hover{transform:translateY(-4px)}
+.item a{display:block}
+.item-img{position:relative;overflow:hidden;aspect-ratio:1/1;background:var(--surface)}
+.item-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.item:hover .item-img img{transform:scale(1.05)}
+.item-badge{position:absolute;top:12px;left:12px;padding:4px 10px;border-radius:var(--radius-full);font-size:10px;font-weight:var(--fw-bold);letter-spacing:.06em;text-transform:uppercase}
+.badge-new{background:var(--main);color:var(--white)}
+.badge-sale{background:var(--point);color:var(--white)}
+.item-info{padding:14px 12px 20px;background:var(--bg)}
+.item-brand{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:4px}
+.item-name{font-size:var(--fs-sm);font-weight:var(--fw-medium);color:var(--text-1);line-height:1.45;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.item-price{display:flex;align-items:baseline;gap:8px}
+.price-sale{font-size:var(--fs-base);font-weight:var(--fw-bold);color:var(--point)}
+.price-origin{font-size:var(--fs-xs);color:var(--text-3);text-decoration:line-through}
+
+/* ── 푸터 ─────────────────────────────────────── */
+.site-footer{background:var(--bg-dark);color:var(--text-inv)}
+.footer-top{max-width:var(--container-max);margin:0 auto;padding:72px var(--container-pad) 48px;display:grid;grid-template-columns:220px 1fr 240px;gap:60px}
+@media(max-width:1024px){.footer-top{grid-template-columns:1fr 1fr;gap:40px;padding:48px 20px 32px}}
+@media(max-width:600px){.footer-top{grid-template-columns:1fr;padding:40px 20px 28px}}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;letter-spacing:.3em;margin-bottom:10px}
+.f-tagline{font-size:var(--fs-xs);letter-spacing:.15em;color:rgba(245,240,232,.45);margin-bottom:24px}
+.f-social{display:flex;gap:10px}
+.f-social a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(245,240,232,.18);display:flex;align-items:center;justify-content:center;font-size:13px;color:rgba(245,240,232,.55);transition:all .2s}
+.f-social a:hover{border-color:var(--point);color:var(--point)}
+.f-nav-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+@media(max-width:480px){.f-nav-grid{grid-template-columns:1fr 1fr}}
+.f-nav-col h4{font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.15em;text-transform:uppercase;color:rgba(245,240,232,.45);margin-bottom:16px}
+.f-nav-col ul li{margin-bottom:10px}
+.f-nav-col ul li a{font-size:var(--fs-sm);color:rgba(245,240,232,.65);transition:color .2s}
+.f-nav-col ul li a:hover{color:var(--point)}
+.f-cs h4{font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.15em;text-transform:uppercase;color:rgba(245,240,232,.45);margin-bottom:16px}
+.f-cs-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:6px}
+.f-cs-hours{font-size:var(--fs-xs);color:rgba(245,240,232,.45);line-height:1.9;margin-bottom:12px}
+.f-cs-email a{font-size:var(--fs-sm);color:rgba(245,240,232,.55);transition:color .2s}
+.f-cs-email a:hover{color:var(--point)}
+.footer-bottom{max-width:var(--container-max);margin:0 auto;padding:20px var(--container-pad);border-top:1px solid rgba(245,240,232,.08);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+@media(max-width:600px){.footer-bottom{padding:20px 20px;flex-direction:column;align-items:flex-start}}
+.footer-bottom p{font-size:11px;color:rgba(245,240,232,.3);line-height:1.85}
+</style>
+</head>
+<body>
+
+<section class="strip-announce" aria-label="공지사항">
+  <div class="strip-track">
+    <span>무료배송 <strong>50,000원</strong> 이상</span><span>✦</span>
+    <span>회원가입 즉시 <strong>10%</strong> 할인 쿠폰 지급</span><span>✦</span>
+    <span>7일 이내 교환·환불 보장</span><span>✦</span>
+    <span>무이자 할부 최대 <strong>12개월</strong></span><span>✦</span>
+    <span>무료배송 <strong>50,000원</strong> 이상</span><span>✦</span>
+    <span>회원가입 즉시 <strong>10%</strong> 할인 쿠폰 지급</span><span>✦</span>
+    <span>7일 이내 교환·환불 보장</span><span>✦</span>
+    <span>무이자 할부 최대 <strong>12개월</strong></span><span>✦</span>
+  </div>
+</section>
+
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <div class="h-left">
+      <button class="hamburger" id="hamburger" aria-label="메뉴"><span></span><span></span><span></span></button>
+    </div>
+    <a href="index.html" class="site-logo"><span class="logo-txt serif">POZE</span></a>
+    <nav class="gnb" aria-label="주메뉴"><ul>
+      <li><a href="products.html?c=new">NEW</a></li>
+      <li><a href="products.html?c=best">BEST</a></li>
+      <li class="active"><a href="products.html?c=eye">EYE</a></li>
+      <li><a href="products.html?c=lip">LIP</a></li>
+      <li><a href="products.html?c=face">FACE</a></li>
+      <li><a href="products.html?c=cheeks">CHEEKS</a></li>
+      <li><a href="products.html?c=tools">TOOLS</a></li>
+      <li class="sale"><a href="products.html?c=sale">SALE</a></li>
+    </ul></nav>
+    <div class="h-right">
+      <button class="h-icon" id="searchBtn" aria-label="검색"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <a href="wishlist.html" class="h-icon" aria-label="관심상품"><i class="fa-regular fa-heart"></i></a>
+      <a href="cart.html" class="h-icon" aria-label="장바구니" style="position:relative"><i class="fa-solid fa-bag-shopping"></i><span class="cart-badge">0</span></a>
+      <a href="login.html" class="h-icon" aria-label="로그인"><i class="fa-regular fa-user"></i></a>
+    </div>
+  </div>
+</header>
+
+<div class="search-layer" id="searchLayer" role="dialog" aria-label="검색">
+  <button class="search-x" id="searchClose" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
+  <div class="search-box"><input type="text" placeholder="무엇을 찾고 계신가요?" aria-label="검색어 입력"></div>
+</div>
+<nav class="mobile-nav" id="mobileNav" aria-label="모바일 메뉴">
+  <button class="mnav-close" id="mnavClose" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
+  <div class="mobile-nav-inner">
+    <ul>
+      <li><a href="products.html?c=new">New Arrivals</a></li>
+      <li><a href="products.html?c=best">Best Sellers</a></li>
+      <li class="active"><a href="products.html?c=eye">Eye</a></li>
+      <li><a href="products.html?c=lip">Lip</a></li>
+      <li><a href="products.html?c=face">Face</a></li>
+      <li><a href="products.html?c=cheeks">Cheeks</a></li>
+      <li><a href="products.html?c=tools">Tools</a></li>
+      <li class="sale"><a href="products.html?c=sale">Sale</a></li>
+    </ul>
+    <div class="mnav-util"><a href="login.html">로그인</a><a href="signup.html">회원가입</a><a href="mypage.html">마이페이지</a></div>
+  </div>
+</nav>
+
+<main>
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-bar">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="경로">
+        <a href="index.html">Home</a>
+        <span class="sep">›</span>
+        <a href="products.html?c=eye">Eye</a>
+        <span class="sep">›</span>
+        <span>딥 스모키 아이 팔레트</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- 상품 상세 영역 -->
+  <section class="product-section">
+    <div class="container">
+      <div class="product-layout">
+
+        <!-- 이미지 영역 -->
+        <div class="product-images">
+          <div class="main-image-wrap">
+            <img src="images/Eyes-1.png" alt="딥 스모키 아이 팔레트" id="mainImg">
+            <span class="img-badge">NEW</span>
+          </div>
+          <div class="thumb-row">
+            <div class="thumb-item active" onclick="switchImg('images/Eyes-1.png',this)">
+              <img src="images/Eyes-1.png" alt="이미지 1">
+            </div>
+            <div class="thumb-item" onclick="switchImg('images/Eyes-2.png',this)">
+              <img src="images/Eyes-2.png" alt="이미지 2">
+            </div>
+            <div class="thumb-item" onclick="switchImg('images/Eyes-3.png',this)">
+              <img src="images/Eyes-3.png" alt="이미지 3">
+            </div>
+            <div class="thumb-item" onclick="switchImg('images/Eyes-4.png',this)">
+              <img src="images/Eyes-4.png" alt="이미지 4">
+            </div>
+          </div>
+        </div>
+
+        <!-- 정보 영역 -->
+        <div class="product-info">
+          <p class="product-brand">POZE Eye</p>
+          <h1 class="product-name serif">딥 스모키 아이 팔레트</h1>
+          <div class="review-summary">
+            <div class="stars" aria-label="별점 4.8점">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+            </div>
+            <span style="font-size:var(--fs-xs);font-weight:var(--fw-semibold);color:var(--text-1)">4.8</span>
+            <a class="review-count" href="#tab-reviews" onclick="openTab('reviews')">(리뷰 284개)</a>
+          </div>
+          <div class="price-block">
+            <p class="price-main">38,000원</p>
+          </div>
+          <div class="delivery-info">
+            <div class="delivery-row">
+              <span class="delivery-label">배송</span>
+              <span class="delivery-value"><strong>무료배송</strong> (50,000원 이상 주문 시)</span>
+            </div>
+            <div class="delivery-row">
+              <span class="delivery-label">배송일</span>
+              <span class="delivery-value">오늘 오후 2시 이전 주문 시 <strong>내일 도착</strong></span>
+            </div>
+            <div class="delivery-row">
+              <span class="delivery-label">교환·반품</span>
+              <span class="delivery-value">수령 후 7일 이내</span>
+            </div>
+          </div>
+
+          <!-- 색상 옵션 -->
+          <div class="options-block">
+            <p class="option-label">컬러 선택</p>
+            <div class="shade-list">
+              <div class="shade-item active">
+                <div class="shade-circle" style="background:linear-gradient(135deg,#2c2020,#5a3a38,#8b5e54,#c4a882)"></div>
+                <span class="shade-name">Dark Smoke</span>
+              </div>
+              <div class="shade-item">
+                <div class="shade-circle" style="background:linear-gradient(135deg,#d4a574,#c9846c,#9c6248,#6b4030)"></div>
+                <span class="shade-name">Warm Earth</span>
+              </div>
+              <div class="shade-item">
+                <div class="shade-circle" style="background:linear-gradient(135deg,#8b7aa8,#c4a8c8,#e8d8e8,#f0e8f0)"></div>
+                <span class="shade-name">Lavender</span>
+              </div>
+              <div class="shade-item">
+                <div class="shade-circle" style="background:linear-gradient(135deg,#1a2845,#2d4a80,#6488c0,#b8c8e0)"></div>
+                <span class="shade-name">Midnight</span>
+              </div>
+            </div>
+            <p class="option-label">선택 옵션</p>
+            <select class="select-option" aria-label="구성 선택">
+              <option value="">구성을 선택해 주세요</option>
+              <option>단품 (팔레트만)</option>
+              <option>브러쉬 세트 포함</option>
+              <option>전용 파우치 포함</option>
+            </select>
+          </div>
+
+          <!-- 수량 -->
+          <div class="qty-block">
+            <p class="option-label" style="margin-bottom:10px">수량</p>
+            <div class="qty-control" role="group" aria-label="수량 선택">
+              <button class="qty-btn" id="qtyMinus" aria-label="감소"><i class="fa-solid fa-minus" style="font-size:12px"></i></button>
+              <input class="qty-input" type="number" id="qtyInput" value="1" min="1" max="99" aria-label="수량">
+              <button class="qty-btn" id="qtyPlus" aria-label="증가"><i class="fa-solid fa-plus" style="font-size:12px"></i></button>
+            </div>
+          </div>
+
+          <!-- 구매 버튼 -->
+          <div class="purchase-btns">
+            <button class="btn-buy btn-buy-now">
+              <i class="fa-solid fa-bolt"></i> 바로 구매
+            </button>
+            <button class="btn-buy btn-add-cart">
+              <i class="fa-solid fa-bag-shopping"></i> 장바구니 담기
+            </button>
+            <div class="btn-row">
+              <button class="btn-wish"><i class="fa-regular fa-heart"></i> 관심상품 추가</button>
+              <button class="btn-share" aria-label="공유"><i class="fa-solid fa-share-nodes"></i></button>
+            </div>
+          </div>
+
+          <!-- 혜택 -->
+          <div class="benefits">
+            <div class="benefit-row">
+              <i class="fa-solid fa-truck-fast"></i>
+              <span><strong>50,000원 이상</strong> 무료배송</span>
+            </div>
+            <div class="benefit-row">
+              <i class="fa-solid fa-rotate-left"></i>
+              <span><strong>7일 이내</strong> 무료 교환·반품</span>
+            </div>
+            <div class="benefit-row">
+              <i class="fa-solid fa-percent"></i>
+              <span>회원 구매 시 <strong>포인트 3%</strong> 적립</span>
+            </div>
+            <div class="benefit-row">
+              <i class="fa-solid fa-credit-card"></i>
+              <span>카드 <strong>무이자 최대 12개월</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 상품 탭 -->
+      <div class="tabs-section" id="productTabs">
+        <div class="tabs-nav" role="tablist">
+          <button class="tab-btn active" data-tab="detail" role="tab" aria-selected="true">상세정보</button>
+          <button class="tab-btn" data-tab="reviews" role="tab" aria-selected="false" id="tab-reviews">리뷰 <span style="color:var(--point)">284</span></button>
+          <button class="tab-btn" data-tab="inquiry" role="tab" aria-selected="false">문의 <span style="color:var(--point)">12</span></button>
+        </div>
+
+        <!-- 상세정보 탭 -->
+        <div class="tab-content active" id="tab-detail" role="tabpanel">
+          <div class="container">
+            <div class="detail-section">
+              <!-- 히어로 상세 이미지 -->
+              <div class="detail-hero">
+                <img src="images/brandstory_hero.png" alt="딥 스모키 팔레트 상세">
+              </div>
+              <!-- 특징 4가지 -->
+              <div class="detail-grid">
+                <div class="detail-block">
+                  <span class="detail-block-icon"><i class="fa-solid fa-palette"></i></span>
+                  <h4>12가지 컬러 구성</h4>
+                  <p>데일리부터 스모키까지, 하나의 팔레트로 모든 아이 룩을 완성할 수 있는 12가지 정밀 발색 컬러.</p>
+                </div>
+                <div class="detail-block">
+                  <span class="detail-block-icon"><i class="fa-solid fa-sparkles"></i></span>
+                  <h4>초밀착 발색 기술</h4>
+                  <p>특수 마이크로 피그먼트 기술 적용으로 단 한 번의 터치에도 선명하고 균일한 발색을 구현합니다.</p>
+                </div>
+                <div class="detail-block">
+                  <span class="detail-block-icon"><i class="fa-solid fa-clock"></i></span>
+                  <h4>24시간 지속력</h4>
+                  <p>유분과 땀에 강한 롱래스팅 포뮬러로 아이 크리즈 없이 12시간 이상 선명함을 유지합니다.</p>
+                </div>
+                <div class="detail-block">
+                  <span class="detail-block-icon"><i class="fa-solid fa-leaf"></i></span>
+                  <h4>피부 친화 성분</h4>
+                  <p>안과 테스트 완료 성분. 저자극 히포알러지 포뮬러로 예민한 눈가에도 안전하게 사용 가능합니다.</p>
+                </div>
+              </div>
+              <!-- 전체 상세 이미지 -->
+              <div class="detail-full-img">
+                <img src="images/brand-story-hero-product.png" alt="팔레트 사용 방법">
+              </div>
+              <!-- 사용방법 -->
+              <h3 class="serif" style="font-size:24px;font-weight:300;margin-bottom:24px">How to Use</h3>
+              <div class="how-to-step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                  <h5>베이스 컬러 — 라이트 누드</h5>
+                  <p>팔레트 좌측의 베이스 컬러를 넓은 아이섀도우 브러쉬로 아이홀 전체에 가볍게 베이스를 잡아줍니다.</p>
+                </div>
+              </div>
+              <div class="how-to-step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                  <h5>미드 컬러 — 브론즈 또는 버건디</h5>
+                  <p>중간 톤 컬러를 펜슬 브러쉬로 쌍꺼풀 라인을 따라 자연스럽게 그라데이션 합니다.</p>
+                </div>
+              </div>
+              <div class="how-to-step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                  <h5>딥 컬러 — 다크 스모키</h5>
+                  <p>가장 어두운 컬러를 눈꼬리 쪽에 집중적으로 발라 깊이감 있는 스모키 아이를 완성합니다.</p>
+                </div>
+              </div>
+              <div class="how-to-step">
+                <div class="step-num">4</div>
+                <div class="step-content">
+                  <h5>글리터 컬러 — 하이라이트</h5>
+                  <p>팔레트 내 글리터 컬러를 손가락이나 포인트 브러쉬로 눈 중앙에 살짝 올려 마무리합니다.</p>
+                </div>
+              </div>
+              <!-- 스펙 테이블 -->
+              <h3 class="serif" style="font-size:24px;font-weight:300;margin:32px 0 20px">제품 정보</h3>
+              <table class="detail-spec-table" aria-label="제품 정보">
+                <tr><th>구성</th><td>아이섀도우 12컬러 (매트 8 + 글리터 4)</td></tr>
+                <tr><th>용량</th><td>각 1.2g × 12 (총 14.4g)</td></tr>
+                <tr><th>사용기한</th><td>제조일로부터 36개월 / 개봉 후 12개월</td></tr>
+                <tr><th>제조국</th><td>대한민국</td></tr>
+                <tr><th>원산지</th><td>Made in Korea</td></tr>
+                <tr><th>안전 인증</th><td>피부과 테스트 완료 · 안과 테스트 완료</td></tr>
+              </table>
+              <!-- 성분 -->
+              <h3 class="serif" style="font-size:20px;font-weight:300;margin:28px 0 12px">전성분</h3>
+              <p class="detail-ingredients">
+                탤크, 마이카, 아이소스테아릴 아이소스테아레이트, 카프릴릭/카프릭 트리글리세라이드, 실리카, 옥틸도데칸올, 부틸렌글라이콜, 디소듐 이디티에이, 글리세린, 다이메티콘, 페녹시에탄올, 1,2-헥산다이올, 향료, [+/-] 적색 201호, 적색 202호, 황색 4호, 청색 1호, 이산화티탄, 산화철
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 리뷰 탭 -->
+        <div class="tab-content" id="tab-reviews" role="tabpanel">
+          <div class="container">
+            <div class="reviews-section">
+              <!-- 리뷰 개요 -->
+              <div class="review-overview">
+                <div class="review-avg">
+                  <p class="avg-num">4.8</p>
+                  <div class="avg-stars" aria-label="별점 4.8점">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                  </div>
+                  <p class="avg-count">284개 리뷰</p>
+                </div>
+                <div class="rating-bars">
+                  <div class="rating-bar-row"><span class="bar-label">5★</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><span class="bar-pct">75%</span></div>
+                  <div class="rating-bar-row"><span class="bar-label">4★</span><div class="bar-track"><div class="bar-fill" style="width:16%"></div></div><span class="bar-pct">16%</span></div>
+                  <div class="rating-bar-row"><span class="bar-label">3★</span><div class="bar-track"><div class="bar-fill" style="width:6%"></div></div><span class="bar-pct">6%</span></div>
+                  <div class="rating-bar-row"><span class="bar-label">2★</span><div class="bar-track"><div class="bar-fill" style="width:2%"></div></div><span class="bar-pct">2%</span></div>
+                  <div class="rating-bar-row"><span class="bar-label">1★</span><div class="bar-track"><div class="bar-fill" style="width:1%"></div></div><span class="bar-pct">1%</span></div>
+                </div>
+              </div>
+              <!-- 필터 -->
+              <div class="review-filter-row">
+                <div class="review-filter-btns">
+                  <button class="r-filter-btn active">전체 (284)</button>
+                  <button class="r-filter-btn">포토 리뷰 (142)</button>
+                  <button class="r-filter-btn">5★ (213)</button>
+                  <button class="r-filter-btn">4★ (46)</button>
+                </div>
+                <div class="review-sort">
+                  <select aria-label="리뷰 정렬">
+                    <option>최신순</option>
+                    <option>도움 많은 순</option>
+                    <option>별점 높은 순</option>
+                    <option>별점 낮은 순</option>
+                  </select>
+                </div>
+              </div>
+              <!-- 리뷰 목록 -->
+              <div class="review-list">
+                <div class="review-item">
+                  <div class="review-header">
+                    <div class="reviewer-info">
+                      <span class="reviewer-name">지***</span>
+                      <div class="reviewer-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    </div>
+                    <div style="text-align:right">
+                      <span class="review-date">2026.05.18</span><br>
+                      <span class="verified-badge"><i class="fa-solid fa-circle-check" style="font-size:10px"></i> 구매 인증</span>
+                    </div>
+                  </div>
+                  <span class="review-shade">Dark Smoke · 단품</span>
+                  <p class="review-text">발색 진짜 대박이에요! 스모키 아이 메이크업하면 항상 번지고 뭉쳤는데 이 팔레트는 하루 종일 깔끔하게 유지됐어요. 12가지 컬러 구성이라 데일리 출근 룩부터 주말 파티 룩까지 이것 하나로 다 커버가 돼서 너무 만족스러워요. 발림도 부드럽고 향도 없어서 예민한 눈가에도 걱정 없이 쓸 수 있을 것 같아요. 재구매 확정!</p>
+                  <div class="review-photos">
+                    <div class="review-photo"><img src="images/review-eyes-01.webp" alt="리뷰 사진 1"></div>
+                    <div class="review-photo"><img src="images/review-eyes-02.webp" alt="리뷰 사진 2"></div>
+                    <div class="review-photo"><img src="images/review-eyes-03.webp" alt="리뷰 사진 3"></div>
+                  </div>
+                  <div class="review-helpful">
+                    <span>이 리뷰가 도움이 됐나요?</span>
+                    <button class="helpful-btn"><i class="fa-regular fa-thumbs-up"></i> 예 (42)</button>
+                  </div>
+                </div>
+                <div class="review-item">
+                  <div class="review-header">
+                    <div class="reviewer-info">
+                      <span class="reviewer-name">박***</span>
+                      <div class="reviewer-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
+                    </div>
+                    <div style="text-align:right">
+                      <span class="review-date">2026.05.12</span><br>
+                      <span class="verified-badge"><i class="fa-solid fa-circle-check" style="font-size:10px"></i> 구매 인증</span>
+                    </div>
+                  </div>
+                  <span class="review-shade">Warm Earth · 브러쉬 세트 포함</span>
+                  <p class="review-text">브러쉬 세트 포함 버전으로 구매했는데 브러쉬 퀄리티도 생각보다 좋았어요. 팔레트 자체는 진짜 훌륭한데 글리터 컬러가 약간 날리는 편이에요. 그래도 발색력은 최고고 지속력도 인정합니다. 파운데이션 먹어도 안 번지고 깔끔하게 유지돼요.</p>
+                  <div class="review-photos">
+                    <div class="review-photo"><img src="images/review-face-01.webp" alt="리뷰 사진"></div>
+                  </div>
+                  <div class="review-helpful">
+                    <span>이 리뷰가 도움이 됐나요?</span>
+                    <button class="helpful-btn"><i class="fa-regular fa-thumbs-up"></i> 예 (18)</button>
+                  </div>
+                </div>
+                <div class="review-item">
+                  <div class="review-header">
+                    <div class="reviewer-info">
+                      <span class="reviewer-name">이***</span>
+                      <div class="reviewer-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    </div>
+                    <div style="text-align:right">
+                      <span class="review-date">2026.04.28</span>
+                    </div>
+                  </div>
+                  <span class="review-shade">Midnight · 단품</span>
+                  <p class="review-text">미드나잇 컬러로 첫 구매했는데 색상이 정말 예뻐요. 사진이랑 실물이 거의 동일해서 신뢰도가 높아요. 포장도 고급스럽고 선물용으로도 완벽합니다. 다른 컬러도 사고 싶어지네요!</p>
+                  <div class="review-helpful">
+                    <span>이 리뷰가 도움이 됐나요?</span>
+                    <button class="helpful-btn"><i class="fa-regular fa-thumbs-up"></i> 예 (31)</button>
+                  </div>
+                </div>
+              </div>
+              <div class="review-write-btn">
+                <a href="#" class="btn-write-review"><i class="fa-regular fa-pen-to-square"></i> 리뷰 작성하기</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 문의 탭 -->
+        <div class="tab-content" id="tab-inquiry" role="tabpanel">
+          <div class="container">
+            <div class="inquiry-section">
+              <div class="inquiry-notice">
+                <i class="fa-solid fa-circle-info"></i>
+                <p>상품 문의는 평일 오전 10시 ~ 오후 6시에 순차적으로 답변 드립니다. 배송·교환·환불 문의는 <a href="board-write.html" style="color:var(--point);text-decoration:underline">1:1 문의</a>를 이용해 주세요.</p>
+              </div>
+              <div class="inquiry-list">
+                <div class="inquiry-item">
+                  <div class="inquiry-q" onclick="toggleInquiry(this)">
+                    <span class="inquiry-q-badge">Q</span>
+                    <span class="inquiry-q-text">민감성 피부에도 사용 가능한가요? 안과 테스트 완료된 건지 확인하고 싶어요.</span>
+                    <span class="inquiry-q-meta"><span class="status">답변완료</span> · 2026.05.20</span>
+                  </div>
+                  <div class="inquiry-a open">
+                    <span class="inquiry-a-badge">A</span>
+                    <p>안녕하세요, POZE 고객센터입니다. 딥 스모키 아이 팔레트는 안과 테스트 완료 및 피부과 저자극 테스트를 모두 통과한 제품입니다. 민감한 눈가에도 안심하고 사용하실 수 있으나, 개인에 따라 반응이 다를 수 있으므로 처음 사용 시 소량으로 테스트 후 사용하시길 권장합니다.</p>
+                  </div>
+                </div>
+                <div class="inquiry-item">
+                  <div class="inquiry-q" onclick="toggleInquiry(this)">
+                    <span class="inquiry-q-badge">Q</span>
+                    <span class="inquiry-q-text">프라이머 없이 단독으로 사용해도 발색이 잘 되나요?</span>
+                    <span class="inquiry-q-meta"><span class="status">답변완료</span> · 2026.05.15</span>
+                  </div>
+                  <div class="inquiry-a">
+                    <span class="inquiry-a-badge">A</span>
+                    <p>네, 아이 프라이머 없이도 충분히 좋은 발색이 가능합니다. 다만 아이 프라이머를 함께 사용하시면 더욱 선명하고 오래 지속되는 발색을 경험하실 수 있습니다. 지속력을 최대화하고 싶으신 분께는 아이 프라이머 사용을 권장합니다.</p>
+                  </div>
+                </div>
+                <div class="inquiry-item">
+                  <div class="inquiry-q" onclick="toggleInquiry(this)">
+                    <span class="inquiry-q-badge">Q</span>
+                    <span class="inquiry-q-text">다크 스모크 컬러와 미드나잇 컬러 중에 어느 게 더 진한가요?</span>
+                    <span class="inquiry-q-meta">답변대기 · 2026.05.22</span>
+                  </div>
+                  <div class="inquiry-a">
+                    <span class="inquiry-a-badge">A</span>
+                    <p>답변 준비 중입니다. 빠른 시일 내에 답변 드리겠습니다.</p>
+                  </div>
+                </div>
+              </div>
+              <!-- 문의 작성 -->
+              <div class="inquiry-write-form">
+                <h4 class="serif">문의 작성</h4>
+                <div class="form-group">
+                  <label class="form-label" for="inq-type">문의 유형</label>
+                  <select class="form-input" id="inq-type" aria-label="문의 유형 선택">
+                    <option>상품 문의</option>
+                    <option>성분·알러지 문의</option>
+                    <option>사용법 문의</option>
+                    <option>재고 문의</option>
+                    <option>기타</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="inq-content">문의 내용</label>
+                  <textarea class="form-textarea" id="inq-content" placeholder="문의 내용을 입력해 주세요. (최소 10자 이상)" aria-label="문의 내용"></textarea>
+                </div>
+                <label class="form-private">
+                  <input type="checkbox" aria-label="비밀글 설정"> 비밀글로 작성하기
+                </label>
+                <button class="btn-submit">문의 등록</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 연관 상품 -->
+      <section class="related-section">
+        <h2 class="related-title serif">함께 많이 보는 상품</h2>
+        <ul class="product-grid-rel">
+          <li class="item">
+            <a href="product-detail.html">
+              <div class="item-img"><img src="images/Eyes-2.png" alt="선셋 글로우 팔레트"><span class="item-badge badge-sale">SALE</span></div>
+              <div class="item-info"><p class="item-brand">POZE Eye</p><p class="item-name">선셋 글로우 팔레트</p><div class="item-price"><span class="price-sale">33,600원</span><span class="price-origin">42,000원</span></div></div>
+            </a>
+          </li>
+          <li class="item">
+            <a href="product-detail.html">
+              <div class="item-img"><img src="images/Eyes-5.png" alt="롱래스팅 젤 아이라이너"></div>
+              <div class="item-info"><p class="item-brand">POZE Eye</p><p class="item-name">롱래스팅 젤 아이라이너</p><div class="item-price"><span class="price-sale">18,000원</span></div></div>
+            </a>
+          </li>
+          <li class="item">
+            <a href="product-detail.html">
+              <div class="item-img"><img src="images/Tool-1.png" alt="블렌딩 브러쉬 세트"></div>
+              <div class="item-info"><p class="item-brand">POZE Tools</p><p class="item-name">블렌딩 브러쉬 세트 5종</p><div class="item-price"><span class="price-sale">40,800원</span><span class="price-origin">52,000원</span></div></div>
+            </a>
+          </li>
+          <li class="item">
+            <a href="product-detail.html">
+              <div class="item-img"><img src="images/Face-2.png" alt="퍼펙트 쿠션"><span class="item-badge badge-new">NEW</span></div>
+              <div class="item-info"><p class="item-brand">POZE Face</p><p class="item-name">퍼펙트 쿠션 SPF50+ PA+++</p><div class="item-price"><span class="price-sale">38,000원</span></div></div>
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" aria-label="사이트 푸터">
+  <div class="footer-top">
+    <div><p class="f-logo serif">POZE</p><p class="f-tagline">나에게 몰입하는 순간</p>
+      <div class="f-social">
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      </div>
+    </div>
+    <div class="f-nav-grid">
+      <div class="f-nav-col"><h4>SHOP</h4><ul><li><a href="products.html?c=new">신상품</a></li><li><a href="products.html?c=best">베스트</a></li><li><a href="products.html?c=sale">세일</a></li></ul></div>
+      <div class="f-nav-col"><h4>CUSTOMER</h4><ul><li><a href="board-list.html">공지사항</a></li><li><a href="board-list.html?type=faq">FAQ</a></li><li><a href="board-write.html">1:1 문의</a></li></ul></div>
+      <div class="f-nav-col"><h4>ACCOUNT</h4><ul><li><a href="mypage.html">마이페이지</a></li><li><a href="wishlist.html">관심상품</a></li><li><a href="cart.html">장바구니</a></li></ul></div>
+    </div>
+    <div class="f-cs"><h4>CUSTOMER SERVICE</h4><p class="f-cs-num serif">1588-0000</p><p class="f-cs-hours">평일 10:00 — 18:00<br>주말·공휴일 휴무</p><p class="f-cs-email"><a href="mailto:hello@poze.co.kr">hello@poze.co.kr</a></p></div>
+  </div>
+  <div class="footer-bottom">
+    <p>(주)포제 | 대표 : 홍길동 | 사업자등록번호 : 000-00-00000 | 주소 : 서울특별시 강남구 압구정로 000</p>
+    <p>© 2026 POZE. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+function switchImg(src, el) {
+  document.getElementById('mainImg').src = src;
+  document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+function openTab(id) {
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.tab === id);
+    b.setAttribute('aria-selected', b.dataset.tab === id);
+  });
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.id === 'tab-' + id));
+}
+function toggleInquiry(qEl) {
+  const a = qEl.nextElementSibling;
+  if (a) a.classList.toggle('open');
+}
+(function(){
+  // Tabs
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => openTab(btn.dataset.tab));
+  });
+  // Qty
+  const qi = document.getElementById('qtyInput');
+  document.getElementById('qtyMinus').addEventListener('click', () => { if(qi.value > 1) qi.value--; });
+  document.getElementById('qtyPlus').addEventListener('click', () => { if(qi.value < 99) qi.value++; });
+  // Mobile nav
+  document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileNav').classList.add('open'));
+  document.getElementById('mnavClose').addEventListener('click', () => document.getElementById('mobileNav').classList.remove('open'));
+  // Search
+  const sl = document.getElementById('searchLayer');
+  document.getElementById('searchBtn').addEventListener('click', () => { sl.classList.add('open'); setTimeout(() => sl.querySelector('input').focus(), 100); });
+  document.getElementById('searchClose').addEventListener('click', () => sl.classList.remove('open'));
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') sl.classList.remove('open'); });
+  // Review filter tabs
+  document.querySelectorAll('.r-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.r-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+})();
+</script>
+</body>
+</html>

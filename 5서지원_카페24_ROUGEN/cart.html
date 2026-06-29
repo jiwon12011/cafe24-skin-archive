@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>장바구니 — ROUGEN</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+/* =========================================================================
+   ROUGEN  —  편집용 디자인 토큰 (여기 값만 바꾸면 전체 톤이 바뀝니다)
+   ========================================================================= */
+:root{
+  /* ---- 색상 ---- */
+  --color-main:#0c0a0a;       /* 메인 칼라 (블랙) */
+  --color-sub:#1b1414;        /* 서브 칼라 (딥 와인 블랙) */
+  --point:#d4202c;            /* ★ 포인트 칼라 — 모든 강조 요소가 이 변수를 사용 */
+  --point-deep:#9c1b2a;       /* 포인트 딥 */
+  --bg:#0a0807;               /* 배경색 */
+  --bg-soft:#141010;          /* 보조 배경 */
+  --surface:#171212;          /* 카드/표면 */
+  --text:#f3efed;             /* 기본 글자색 */
+  --text-dim:#a89f9d;         /* 보조 글자색 */
+  --text-mute:#6f6663;        /* 흐린 글자색 */
+  --line:rgba(255,255,255,.14);/* 구분선 */
+  --line-soft:rgba(255,255,255,.08);
+
+  /* ---- 섹션 간격 / 여백 ---- */
+  --section-gap:120px;        /* 섹션별 세로 간격 */
+  --section-gap-sm:72px;
+  --pad:28px;                 /* 기본 좌우 여백 */
+  --container:1550px;         /* 콘텐츠 최대 폭 */
+  --gap:22px;                 /* 그리드 간격 */
+
+  /* ---- 글자 크기 (계층별) ---- */
+  --fs-display:clamp(46px,7vw,104px); /* 히어로 대제목 */
+  --fs-h1:clamp(30px,4vw,52px);
+  --fs-h2:clamp(24px,2.6vw,36px);
+  --fs-h3:18px;
+  --fs-body:15px;
+  --fs-sm:13px;
+  --fs-xs:11px;
+
+  /* ---- 글자 두께 ---- */
+  --fw-thin:200;
+  --fw-light:300;
+  --fw-reg:400;
+  --fw-med:500;
+  --fw-semi:600;
+  --fw-bold:700;
+
+  /* ---- 라운드 / 기타 ---- */
+  --radius:8px;               /* 공통 border-radius */
+  --radius-lg:14px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --serif:"Playfair Display","Noto Serif KR",serif;
+  --sans:"Pretendard","Pretendard Variable",-apple-system,system-ui,sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:var(--bg);
+  color:var(--text);
+  font-size:var(--fs-body);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  letter-spacing:.01em;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+li{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+::selection{background:var(--point);color:#fff}
+
+.wrap{max-width:var(--container);margin:0 auto;padding:0 var(--pad)}
+.point{color:var(--point)}
+.serif{font-family:var(--serif)}
+
+/* =================== 상단 공지 띠 =================== */
+.topbar{
+  background:#000;border-bottom:1px solid var(--line-soft);
+  font-size:var(--fs-xs);letter-spacing:.18em;color:var(--text-dim);
+  position:relative;z-index:60;
+}
+.topbar .inner{display:flex;justify-content:center;gap:42px;align-items:center;
+  height:38px;text-transform:uppercase;white-space:nowrap;overflow:hidden}
+.topbar .sep{color:var(--text-mute)}
+.topbar b{color:var(--point);font-weight:var(--fw-semi)}
+@media(max-width:880px){.topbar .inner span:nth-child(n+3){display:none}}
+
+/* =================== 헤더 =================== */
+.site-header{
+  position:absolute;top:38px;left:0;right:0;z-index:50;
+  transition:background .4s var(--ease),border-color .4s var(--ease);
+}
+.site-header .bar{
+  display:flex;align-items:center;justify-content:space-between;
+  height:96px;padding:0 48px;position:relative;
+}
+.brand{
+  font-family:var(--serif);font-size:30px;letter-spacing:.42em;
+  font-weight:var(--fw-med);padding-left:.42em;
+  position:absolute;left:50%;transform:translateX(-50%);
+}
+.h-spacer{width:200px}
+.h-util{display:flex;align-items:center;gap:26px;font-size:var(--fs-xs);
+  letter-spacing:.18em;text-transform:uppercase;color:var(--text)}
+.h-util a{transition:color .25s}
+.h-util a:hover{color:var(--point)}
+.h-util .ico{font-size:15px}
+.cart-n{color:var(--point)}
+
+/* 좌측 세로 내비 (메인 히어로 위) */
+.vnav{
+  position:absolute;top:150px;left:48px;z-index:50;
+  display:flex;flex-direction:column;gap:18px;
+  font-size:var(--fs-sm);letter-spacing:.2em;text-transform:uppercase;
+  font-weight:var(--fw-med);
+}
+.vnav a{color:var(--text);position:relative;width:max-content;
+  transition:color .25s,letter-spacing .3s}
+.vnav a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1px;
+  background:var(--point);transition:width .35s var(--ease)}
+.vnav a:hover{color:var(--point);letter-spacing:.26em}
+.vnav a:hover::after{width:100%}
+
+/* 서브페이지용 가로 내비 헤더 */
+.sub .site-header{position:sticky;top:0;background:rgba(8,6,6,.92);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+.sub .topbar{position:sticky;top:0}
+.hnav{display:flex;gap:34px;font-size:var(--fs-sm);letter-spacing:.18em;
+  text-transform:uppercase;font-weight:var(--fw-med)}
+.hnav a{color:var(--text);transition:color .25s}
+.hnav a:hover,.hnav a.on{color:var(--point)}
+@media(max-width:1100px){.hnav{display:none}}
+/* 서브페이지 헤더: 로고 좌측 정렬 → 가로 내비와 겹침 방지 */
+.sub .site-header .brand{position:static;left:auto;transform:none;padding-left:0;order:-1;white-space:nowrap}
+.sub .site-header .bar{justify-content:space-between;gap:28px;height:88px}
+.sub .site-header .hnav{order:0;flex:1;justify-content:center;gap:30px}
+.sub .site-header .h-util{order:1}
+@media(max-width:1100px){.sub .site-header .hnav{flex:none}.sub .site-header .brand{order:0}}
+
+/* =================== 메인: 스크롤 없는 한 화면 =================== */
+body.home{overflow:hidden;height:100vh;display:flex;flex-direction:column}
+body.home .hero{flex:1 1 auto;height:auto;min-height:0}
+body.home .hero .swiper-pagination{display:none}
+body.home .hero-slide{background:#000}
+body.home .hero-slide img{object-fit:contain;object-position:center;transform:none}
+body.home .swiper-slide-active .hero-slide img{transform:none}
+body.home .hero-slide::before{background:
+  linear-gradient(180deg,rgba(8,6,6,.55) 0%,rgba(8,6,6,0) 22%,rgba(8,6,6,0) 62%,rgba(8,6,6,.7) 100%)}
+.hero-foot{position:absolute;left:0;right:0;bottom:0;z-index:6;
+  display:flex;align-items:center;justify-content:space-between;padding:0 48px 30px;pointer-events:none}
+.hero-foot a{pointer-events:auto}
+.hero-foot .fl,.hero-foot .fr{display:flex;align-items:center;gap:26px;
+  font-size:var(--fs-xs);letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim)}
+.hero-foot .fl a:hover,.hero-foot .fr a:hover{color:var(--point)}
+.hero-foot .plus{color:var(--point);font-weight:var(--fw-bold)}
+.hero-foot .divider-v{width:1px;height:12px;background:var(--line)}
+@media(max-width:760px){.hero-foot{padding:0 18px 18px;flex-direction:column;gap:10px;align-items:flex-start}
+  .hero-foot .fr{flex-wrap:wrap;gap:14px}}
+
+/* =================== 히어로 (스와이퍼) =================== */
+.hero{position:relative;height:100vh;min-height:680px;background:var(--color-main)}
+.hero .swiper{height:100%}
+.hero-slide{position:relative;height:100%;overflow:hidden}
+.hero-slide::before{content:"";position:absolute;inset:0;z-index:2;
+  background:
+    linear-gradient(90deg,rgba(8,6,6,.85) 0%,rgba(8,6,6,.25) 30%,rgba(8,6,6,.25) 70%,rgba(8,6,6,.85) 100%),
+    linear-gradient(180deg,rgba(8,6,6,.6) 0%,rgba(8,6,6,0) 30%,rgba(8,6,6,.55) 100%)}
+.hero-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:center 22%;transform:scale(1.08);transition:transform 7s linear}
+.swiper-slide-active .hero-slide img{transform:scale(1)}
+.hero-copy{position:absolute;z-index:3;left:0;right:0;top:50%;transform:translateY(-50%);
+  text-align:center;padding:0 24px}
+.hero-copy h1{font-family:var(--serif);font-size:var(--fs-display);font-weight:var(--fw-med);
+  line-height:1.02;letter-spacing:-.01em}
+.hero-copy .lead{margin-top:30px;display:inline-flex;flex-direction:column;align-items:center;gap:14px;
+  font-size:var(--fs-sm);letter-spacing:.34em;text-transform:uppercase;color:var(--text)}
+.hero-copy .lead .ln{width:64px;height:1px;background:var(--point)}
+.hero-arrows{position:absolute;right:48px;bottom:64px;z-index:6;display:flex;flex-direction:column;gap:14px}
+.hero-arrows button{width:54px;height:54px;border:1px solid var(--line);border-radius:50%;
+  display:grid;place-items:center;color:var(--text);transition:.3s;background:rgba(0,0,0,.15)}
+.hero-arrows button:hover{border-color:var(--point);color:var(--point)}
+.hero .swiper-pagination{bottom:30px!important}
+.hero .swiper-pagination-bullet{width:30px;height:2px;border-radius:0;background:rgba(255,255,255,.35);opacity:1}
+.hero .swiper-pagination-bullet-active{background:var(--point)}
+@media(max-width:760px){
+  .hero-slide img{object-position:center 18%}
+  .hero-arrows{right:18px;bottom:90px}
+  .brand{font-size:24px}
+  .site-header .bar{padding:0 18px;height:74px}
+  .h-util{gap:14px}.h-util a:not(.ico){display:none}
+  .vnav{display:none}
+}
+
+/* =================== 공통 섹션 헤더 =================== */
+.section{padding-block:var(--section-gap)}
+.section.tight{padding-block:var(--section-gap-sm)}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:46px;gap:20px;flex-wrap:wrap}
+.sec-head .eyebrow{font-size:var(--fs-xs);letter-spacing:.34em;text-transform:uppercase;
+  color:var(--point);font-weight:var(--fw-semi);margin-bottom:14px}
+.sec-head h2{font-family:var(--serif);font-size:var(--fs-h2);font-weight:var(--fw-med);letter-spacing:.01em}
+.sec-head .more{font-size:var(--fs-sm);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--text-dim);display:inline-flex;align-items:center;gap:9px;transition:.25s}
+.sec-head .more:hover{color:var(--point)}
+
+/* =================== 카테고리 =================== */
+.cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:var(--gap)}
+.cat{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:3/4;display:block}
+.cat img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.cat::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.78))}
+.cat:hover img{transform:scale(1.07)}
+.cat span{position:absolute;left:0;right:0;bottom:16px;z-index:2;text-align:center;
+  font-size:var(--fs-sm);letter-spacing:.18em;text-transform:uppercase;font-weight:var(--fw-med)}
+@media(max-width:980px){.cat-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.cat-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* =================== 상품 카드 그리드 =================== */
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap) calc(var(--gap) - 2px)}
+.prod-grid.cols3{grid-template-columns:repeat(3,1fr)}
+.item{position:relative}
+.item .thumb{position:relative;display:block;border-radius:var(--radius);overflow:hidden;
+  aspect-ratio:1/1;background:var(--surface)}
+.item .thumb img{width:100%;height:100%;object-fit:cover;object-position:center;
+  transition:opacity .55s var(--ease),transform .9s var(--ease)}
+.item .thumb .pmodel{position:relative;z-index:1}
+.item .thumb .pprod{position:absolute;inset:0;z-index:2;opacity:0}
+.item:hover .pprod{opacity:1}
+.item:hover .pmodel{transform:scale(1.04)}
+.item .badge{position:absolute;top:12px;left:12px;z-index:5;font-size:var(--fs-xs);
+  letter-spacing:.12em;text-transform:uppercase;font-weight:var(--fw-bold);
+  padding:5px 10px;border-radius:4px}
+.item .badge.NEW{background:#fff;color:#111}
+.item .badge.BEST{background:var(--point);color:#fff}
+.item .wish{position:absolute;top:10px;right:12px;z-index:5;width:34px;height:34px;border-radius:50%;
+  display:grid;place-items:center;color:#fff;background:rgba(0,0,0,.32);opacity:0;transition:.3s;font-size:14px}
+.item:hover .wish{opacity:1}
+.item .wish:hover{color:var(--point)}
+.item .info{padding:16px 4px 4px}
+.item .nm{font-size:var(--fs-body);font-weight:var(--fw-med);line-height:1.4;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.8em}
+.item .nm .en{display:block;font-size:var(--fs-xs);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--text-mute);font-weight:var(--fw-reg);margin-top:3px}
+.item .price{margin-top:10px;display:flex;align-items:center;gap:10px}
+.item .price .sale{color:var(--point);font-weight:var(--fw-bold);font-size:16px}
+.item .price .normal{color:var(--text-mute);text-decoration:line-through;font-size:var(--fs-sm)}
+.item .swatches{display:flex;gap:6px;margin-top:11px}
+.item .swatches i{width:13px;height:13px;border-radius:50%;display:block;box-shadow:0 0 0 1px var(--line)}
+@media(max-width:980px){.prod-grid,.prod-grid.cols3{grid-template-columns:repeat(2,1fr)}}
+
+/* =================== 띠 배너 =================== */
+.band{position:relative;border-radius:var(--radius-lg);overflow:hidden;min-height:300px;
+  display:flex;align-items:center}
+.band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.band::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,6,6,.86),rgba(8,6,6,.15))}
+.band .b-copy{position:relative;z-index:2;padding:54px 60px;max-width:560px}
+.band .b-copy .eyebrow{color:var(--point);font-size:var(--fs-xs);letter-spacing:.32em;
+  text-transform:uppercase;font-weight:var(--fw-semi)}
+.band .b-copy h3{font-family:var(--serif);font-size:clamp(26px,3vw,42px);font-weight:var(--fw-med);
+  margin:14px 0 16px;line-height:1.12}
+.band .b-copy p{color:var(--text-dim);font-size:var(--fs-sm);margin-bottom:24px}
+.btn-line{display:inline-flex;align-items:center;gap:11px;font-size:var(--fs-sm);
+  letter-spacing:.22em;text-transform:uppercase;border:1px solid var(--line);
+  padding:13px 26px;border-radius:50px;transition:.3s}
+.btn-line:hover{background:var(--point);border-color:var(--point);color:#fff}
+@media(max-width:760px){.band .b-copy{padding:34px 26px}}
+
+/* 룩북 모자이크 */
+.look-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:230px;gap:var(--gap)}
+.look-grid a{position:relative;border-radius:var(--radius);overflow:hidden}
+.look-grid a img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.look-grid a:hover img{transform:scale(1.06)}
+.look-grid .tall{grid-row:span 2}
+.look-grid .wide{grid-column:span 2}
+@media(max-width:880px){.look-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:200px}
+  .look-grid .wide{grid-column:span 2}}
+
+/* =================== 푸터 =================== */
+.site-footer{border-top:1px solid var(--line-soft);background:var(--color-main);margin-top:0}
+.foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.3fr;gap:40px;
+  padding:74px 0 56px}
+.foot-brand .logo{font-family:var(--serif);font-size:26px;letter-spacing:.4em;padding-left:.4em}
+.foot-brand p{color:var(--text-mute);font-size:var(--fs-sm);margin-top:18px;max-width:330px;line-height:1.8}
+.foot-soc{display:flex;gap:16px;margin-top:22px;font-size:16px;color:var(--text-dim)}
+.foot-soc a:hover{color:var(--point)}
+.foot-col h4{font-size:var(--fs-xs);letter-spacing:.24em;text-transform:uppercase;
+  color:var(--text);margin-bottom:18px;font-weight:var(--fw-semi)}
+.foot-col a{display:block;color:var(--text-mute);font-size:var(--fs-sm);padding:5px 0;transition:.25s}
+.foot-col a:hover{color:var(--point)}
+.foot-news input{width:100%;background:transparent;border:none;border-bottom:1px solid var(--line);
+  padding:12px 0;color:var(--text);font-size:var(--fs-sm);outline:none}
+.foot-news .row{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line)}
+.foot-news .row input{border:none}
+.foot-news .row button{color:var(--point);font-size:18px}
+.foot-news small{color:var(--text-mute);display:block;margin-top:16px;line-height:1.7}
+.foot-bottom{border-top:1px solid var(--line-soft);padding:24px 0;display:flex;
+  justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+.foot-bottom .links{display:flex;gap:26px;font-size:var(--fs-xs);letter-spacing:.18em;
+  text-transform:uppercase;color:var(--text-dim)}
+.foot-bottom .links a:hover{color:var(--point)}
+.foot-bottom .cc{font-size:var(--fs-xs);letter-spacing:.16em;color:var(--text-mute)}
+@media(max-width:880px){.foot-top{grid-template-columns:1fr 1fr;gap:34px}}
+@media(max-width:520px){.foot-top{grid-template-columns:1fr}}
+
+/* =================== 스크롤 등장 효과 =================== */
+.reveal{opacity:0;transform:translateY(38px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}
+.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
+
+/* =================== 서브페이지 공통 =================== */
+.subhead{padding:62px 0 36px;text-align:center;border-bottom:1px solid var(--line-soft)}
+.subhead .crumb{font-size:var(--fs-xs);letter-spacing:.2em;text-transform:uppercase;color:var(--text-mute)}
+.subhead .crumb a:hover{color:var(--point)}
+.subhead h1{font-family:var(--serif);font-size:var(--fs-h1);font-weight:var(--fw-med);margin-top:14px}
+.subhead p{color:var(--text-dim);font-size:var(--fs-sm);margin-top:12px}
+.page{max-width:var(--container);margin:0 auto;padding:54px var(--pad) var(--section-gap)}
+
+/* 정렬바 */
+.sortbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:36px;
+  padding-bottom:18px;border-bottom:1px solid var(--line-soft);gap:16px;flex-wrap:wrap}
+.sortbar .count{font-size:var(--fs-sm);color:var(--text-dim)}
+.sortbar .count b{color:var(--text)}
+.sortbar .opts{display:flex;gap:22px;font-size:var(--fs-sm);letter-spacing:.06em}
+.sortbar .opts a{color:var(--text-mute);transition:.25s}
+.sortbar .opts a.on,.sortbar .opts a:hover{color:var(--text)}
+.sortbar .opts a.on{font-weight:var(--fw-semi)}
+
+/* 페이지네이션 */
+.pager{display:flex;justify-content:center;gap:8px;margin-top:64px}
+.pager a{min-width:42px;height:42px;display:grid;place-items:center;border:1px solid var(--line-soft);
+  border-radius:var(--radius);font-size:var(--fs-sm);color:var(--text-dim);transition:.25s}
+.pager a:hover{border-color:var(--point);color:var(--point)}
+.pager a.on{background:var(--point);border-color:var(--point);color:#fff;font-weight:var(--fw-semi)}
+
+/* 폼 / 인증 */
+.auth{max-width:440px;margin:0 auto;padding:70px var(--pad) var(--section-gap)}
+.auth h1{font-family:var(--serif);font-size:32px;font-weight:var(--fw-med);text-align:center}
+.auth .sub{text-align:center;color:var(--text-dim);font-size:var(--fs-sm);margin:12px 0 40px}
+.field{margin-bottom:20px}
+.field label{display:block;font-size:var(--fs-xs);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--text-dim);margin-bottom:9px}
+.field input,.field select,.field textarea{width:100%;background:var(--bg-soft);
+  border:1px solid var(--line-soft);border-radius:var(--radius);padding:14px 16px;
+  color:var(--text);font-size:var(--fs-body);outline:none;transition:border-color .25s}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--point)}
+.btn{display:block;width:100%;background:var(--point);color:#fff;font-weight:var(--fw-semi);
+  letter-spacing:.16em;text-transform:uppercase;padding:16px;border-radius:var(--radius);
+  font-size:var(--fs-sm);transition:.3s}
+.btn:hover{background:var(--point-deep)}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+.btn.ghost:hover{background:#fff;color:#111;border-color:#fff}
+.auth .alt{text-align:center;margin-top:24px;font-size:var(--fs-sm);color:var(--text-dim)}
+.auth .alt a{color:var(--point)}
+.auth .row-link{display:flex;justify-content:space-between;font-size:var(--fs-sm);color:var(--text-dim);margin:-6px 0 26px}
+.auth .row-link a:hover{color:var(--point)}
+.divider{display:flex;align-items:center;gap:16px;color:var(--text-mute);font-size:var(--fs-xs);
+  letter-spacing:.2em;margin:30px 0}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line-soft)}
+
+/* 표 (장바구니 / 게시판) */
+.table{width:100%;border-collapse:collapse;font-size:var(--fs-sm)}
+.table thead th{font-size:var(--fs-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);
+  font-weight:var(--fw-med);padding:16px 12px;border-bottom:1px solid var(--line);text-align:left}
+.table tbody td{padding:20px 12px;border-bottom:1px solid var(--line-soft);vertical-align:middle}
+.table .c{text-align:center}.table .r{text-align:right}
+.cart-prod{display:flex;align-items:center;gap:16px}
+.cart-prod img{width:92px;height:92px;object-fit:cover;border-radius:var(--radius);flex:none}
+.cart-prod .meta .opt{color:var(--text-mute);font-size:var(--fs-xs);margin-top:5px}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line-soft);border-radius:var(--radius);overflow:hidden}
+.qty button{width:34px;height:34px;color:var(--text-dim)}
+.qty span{width:42px;text-align:center;font-size:var(--fs-sm)}
+.icon-btn{color:var(--text-mute);font-size:15px;transition:.25s}
+.icon-btn:hover{color:var(--point)}
+.cart-sum{margin-top:40px;display:grid;grid-template-columns:1fr 360px;gap:40px;align-items:start}
+.sum-box{background:var(--bg-soft);border:1px solid var(--line-soft);border-radius:var(--radius-lg);padding:30px}
+.sum-box h3{font-size:var(--fs-h3);font-weight:var(--fw-semi);margin-bottom:22px}
+.sum-row{display:flex;justify-content:space-between;padding:11px 0;font-size:var(--fs-sm);color:var(--text-dim)}
+.sum-row.total{border-top:1px solid var(--line);margin-top:12px;padding-top:20px;color:var(--text);font-size:17px}
+.sum-row.total b{color:var(--point);font-size:24px;font-family:var(--serif)}
+.cart-policy{font-size:var(--fs-sm);color:var(--text-dim);line-height:2}
+@media(max-width:820px){.cart-sum{grid-template-columns:1fr}
+  .table thead{display:none}
+  .table tbody td{display:block;border:none;padding:6px 0}
+  .table tbody tr{display:block;border-bottom:1px solid var(--line-soft);padding:18px 0}}
+
+/* 게시판 리스트 */
+.board .table tbody td{padding:18px 12px}
+.board .subj{font-weight:var(--fw-med)}
+.board .subj a:hover{color:var(--point)}
+.board .tag{display:inline-block;font-size:var(--fs-xs);letter-spacing:.1em;padding:3px 9px;border-radius:4px;
+  border:1px solid var(--line);color:var(--text-dim);margin-right:8px}
+.board .tag.notice{background:var(--point);border-color:var(--point);color:#fff}
+.stars{color:var(--point);letter-spacing:2px;font-size:13px}
+.board-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;flex-wrap:wrap;gap:14px}
+.board-toolbar .tabs{display:flex;gap:8px}
+.board-toolbar .tabs a{padding:9px 18px;border:1px solid var(--line-soft);border-radius:50px;
+  font-size:var(--fs-sm);color:var(--text-dim);transition:.25s}
+.board-toolbar .tabs a.on,.board-toolbar .tabs a:hover{border-color:var(--point);color:var(--point)}
+.search-mini{display:flex;border:1px solid var(--line-soft);border-radius:50px;overflow:hidden}
+.search-mini input{background:transparent;border:none;padding:10px 16px;color:var(--text);outline:none;font-size:var(--fs-sm)}
+.search-mini button{padding:0 16px;color:var(--text-dim)}
+
+/* 리뷰 카드 (상품후기) */
+.review-list{display:grid;gap:18px}
+.review-card{border:1px solid var(--line-soft);border-radius:var(--radius-lg);padding:24px;background:var(--bg-soft)}
+.review-card .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.review-card .who{font-weight:var(--fw-med)}
+.review-card .who small{color:var(--text-mute);font-weight:var(--fw-reg);margin-left:8px}
+.review-card .date{color:var(--text-mute);font-size:var(--fs-xs)}
+.review-card p{color:var(--text-dim);font-size:var(--fs-sm);line-height:1.85}
+.review-card .ph{display:flex;gap:10px;margin-top:16px}
+.review-card .ph img{width:84px;height:84px;object-fit:cover;border-radius:var(--radius)}
+.review-card .pmeta{font-size:var(--fs-xs);color:var(--text-mute);margin-top:14px;
+  border-top:1px solid var(--line-soft);padding-top:12px}
+</style>
+</head>
+<body class="sub">
+  <div class="topbar"><div class="inner wrap">
+    <span>COMPLIMENTARY SHIPPING ON ALL ORDERS OVER $250</span>
+    <span class="sep">|</span>
+    <span>NEW COLLECTION: <b>NOIR ROUGE</b></span>
+    <span class="sep">|</span>
+    <span>SIGN UP FOR EARLY ACCESS &amp; EXCLUSIVE OFFERS <b>+</b></span>
+  </div></div>
+  <header class="site-header">
+    <div class="bar">
+      <nav class="hnav"><a href="#">ABOUT</a><a href="products.html">COLLECTION</a><a href="products.html">SHOP</a><a href="#">LOOKBOOK</a><a href="#">CAMPAIGN</a><a href="qna.html">CONTACT</a></nav>
+      <a href="index.html" class="brand">ROUGEN</a>
+    <div class="h-util">
+      <a href="login.html">Login / Join</a>
+      <a href="cart.html">Cart (<span class="cart-n">0</span>)</a>
+      <a href="login.html">Mypage</a>
+      <a href="products.html" class="ico" aria-label="search"><i class="fa-solid fa-magnifying-glass"></i></a>
+    </div>
+    </div>
+  </header>
+  <div class="subhead">
+    <div class="crumb"><a href="index.html">HOME</a> &nbsp;/&nbsp; CART</div>
+    <h1 class="serif">Shopping Bag</h1>
+    <p>장바구니 · 주문서 · 결제완료</p>
+  </div>
+  <div class="page">
+    <table class="table">
+      <thead><tr>
+        <th class="c" style="width:50px"><input type="checkbox" checked></th>
+        <th>상품정보</th><th class="c" style="width:140px">수량</th>
+        <th class="r" style="width:130px">판매가</th><th class="r" style="width:130px">합계</th>
+        <th class="c" style="width:60px"></th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td class="c"><input type="checkbox" checked></td>
+          <td>
+            <div class="cart-prod">
+              <img src="assets/images/handbags/set01_crescent_hobo_red_product.png" alt="크레센트 호보 백">
+              <div class="meta"><div>크레센트 호보 백</div><div class="opt">Crescent Hobo Bag<br>레드 / 기본 구성</div></div>
+            </div>
+          </td>
+          <td class="c"><div class="qty"><button>−</button><span>1</span><button>+</button></div></td>
+          <td class="r">₩498,000</td>
+          <td class="r" style="color:var(--text);font-weight:600">₩498,000</td>
+          <td class="c"><button class="icon-btn"><i class="fa-solid fa-xmark"></i></button></td>
+        </tr>
+        <tr>
+          <td class="c"><input type="checkbox" checked></td>
+          <td>
+            <div class="cart-prod">
+              <img src="assets/images/handbags/set04_quilted_chain_cherry_red_product.png" alt="퀼팅 체인 백">
+              <div class="meta"><div>퀼팅 체인 백</div><div class="opt">Quilted Chain Bag<br>체리 레드 / 기본 구성</div></div>
+            </div>
+          </td>
+          <td class="c"><div class="qty"><button>−</button><span>1</span><button>+</button></div></td>
+          <td class="r">₩578,000</td>
+          <td class="r" style="color:var(--text);font-weight:600">₩578,000</td>
+          <td class="c"><button class="icon-btn"><i class="fa-solid fa-xmark"></i></button></td>
+        </tr>
+        <tr>
+          <td class="c"><input type="checkbox" checked></td>
+          <td>
+            <div class="cart-prod">
+              <img src="assets/images/handbags/set08_woven_shoulder_ruby_red_product.png" alt="우븐 숄더백">
+              <div class="meta"><div>우븐 숄더백</div><div class="opt">Woven Shoulder Bag<br>루비 레드 / 기본 구성</div></div>
+            </div>
+          </td>
+          <td class="c"><div class="qty"><button>−</button><span>2</span><button>+</button></div></td>
+          <td class="r">₩624,000</td>
+          <td class="r" style="color:var(--text);font-weight:600">₩1,248,000</td>
+          <td class="c"><button class="icon-btn"><i class="fa-solid fa-xmark"></i></button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="cart-sum">
+      <div class="cart-policy">
+        <p style="color:var(--text);font-weight:600;margin-bottom:10px">배송 안내</p>
+        · 3만원 이상 구매 시 무료배송 (미만 시 3,000원)<br>
+        · 평일 오후 2시 이전 결제 건 당일 출고<br>
+        · 제주/도서산간 추가 배송비가 발생할 수 있습니다.<br><br>
+        <p style="color:var(--text);font-weight:600;margin-bottom:10px">쿠폰 / 적립금</p>
+        <div class="search-mini" style="max-width:320px;border-radius:8px">
+          <input type="text" placeholder="쿠폰 코드를 입력하세요" style="flex:1"><button>적용</button>
+        </div>
+      </div>
+      <div class="sum-box">
+        <h3>주문 요약</h3>
+        <div class="sum-row"><span>총 상품금액</span><span>₩2,324,000</span></div>
+        <div class="sum-row"><span>배송비</span><span>무료</span></div>
+        <div class="sum-row"><span>할인</span><span>- ₩0</span></div>
+        <div class="sum-row total"><span>결제예정금액</span><b>₩2,324,000</b></div>
+        <a href="#" class="btn" style="margin-top:22px">주문하기</a>
+        <a href="products.html" class="btn ghost" style="margin-top:10px">쇼핑 계속하기</a>
+      </div>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <div class="logo">ROUGEN</div>
+          <p>밤의 무드를 담은 컨템포러리 레더 하우스. ROUGEN은 정제된 실루엣과 깊은 레드의 서사로 매일의 룩을 완성합니다.</p>
+          <div class="foot-soc">
+            <a href="#" aria-label="instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="youtube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" aria-label="pinterest"><i class="fa-brands fa-pinterest"></i></a>
+            <a href="#" aria-label="x"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+        <div class="foot-col">
+          <h4>Customer Care</h4>
+          <a href="notice.html">공지사항</a>
+          <a href="qna.html">상품 Q&amp;A</a>
+          <a href="review.html">상품 후기</a>
+          <a href="#">배송 / 반품 안내</a>
+          <a href="#">자주 묻는 질문</a>
+        </div>
+        <div class="foot-col">
+          <h4>Company</h4>
+          <a href="#">브랜드 스토리</a>
+          <a href="#">매장 안내</a>
+          <a href="#">채용</a>
+          <a href="#">제휴 문의</a>
+          <a href="#">이용약관</a>
+        </div>
+        <div class="foot-col foot-news">
+          <h4>Newsletter</h4>
+          <p style="color:var(--text-mute);font-size:13px;margin-bottom:16px">신상품과 단독 혜택 소식을 가장 먼저 받아보세요.</p>
+          <div class="row">
+            <input type="email" placeholder="이메일 주소를 입력하세요">
+            <button aria-label="subscribe"><i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+          <small>구독 시 개인정보 처리방침에 동의하는 것으로 간주됩니다.</small>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <div class="cc">© 2026 ROUGEN. ALL RIGHTS RESERVED. &nbsp;|&nbsp; (주)루젠 · 대표 김지원 · 서울특별시 강남구 · 사업자등록번호 000-00-00000</div>
+        <div class="links">
+          <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Shipping</a><a href="#">Returns</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<script>
+(function(){
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+})();
+</script>
+</body>
+</html>

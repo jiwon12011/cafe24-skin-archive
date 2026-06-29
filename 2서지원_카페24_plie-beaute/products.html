@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>plié BEAUTE — SHOP</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+  /* === plié BEAUTE 공통 토큰 (운영자 수정 영역) === */
+  :root{
+    --main:#6e4a43;--sub:#a87972;--point:#d4868f;--bg:#fffaf7;--bg-soft:#f8efeb;
+    --line:#ead8d2;--white:#fffdfb;
+    --gap-section:84px;--pad-x:clamp(22px,4vw,58px);--maxw:1550px;--gap-grid:22px;
+    --fs-hero:clamp(46px,6vw,74px);--fs-h1:clamp(34px,4vw,52px);--fs-h2:clamp(26px,2.6vw,40px);
+    --fs-title:14px;--fs-body:14px;--fs-sm:12px;--fs-xs:11px;
+    --fw-normal:400;--fw-bold:700;--fw-black:800;--radius:8px;
+    --font-ko:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    --font-en:"Archivo","Helvetica Neue",Arial,sans-serif;
+    --font-serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600&family=Pretendard:wght@400;500;700&display=swap');
+  *{box-sizing:border-box;}
+  body{margin:0;color:var(--main);background:var(--bg);font-family:var(--font-ko);font-size:var(--fs-body);line-height:1.6;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}img{display:block;width:100%;}ul{list-style:none;margin:0;padding:0;}h1,h2,h3,p{margin:0;}
+
+  /* 헤더 (모든 페이지 동일) */
+  .site-header{position:fixed;z-index:50;top:0;left:0;width:100%;height:86px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 var(--pad-x);color:#fff;background:linear-gradient(to bottom,rgba(85,42,44,.30),rgba(85,42,44,0));transition:background .35s,color .35s,box-shadow .35s;}
+  .site-header.solid{color:var(--main);background:var(--white);box-shadow:0 1px 0 var(--line);}
+  .site-header nav{display:flex;gap:clamp(18px,2.6vw,44px);font-family:var(--font-en);font-size:var(--fs-sm);font-weight:var(--fw-bold);letter-spacing:.5px;}
+  .nav-right{justify-content:flex-end;align-items:center;}.nav-right i{margin-right:6px;}
+  .site-header nav a{display:inline-flex;align-items:center;transition:color .2s;}.site-header nav a:hover{color:var(--point);}
+  .brand{text-align:center;font-family:var(--font-serif);line-height:.82;}
+  .brand span{display:block;font-size:48px;font-weight:500;letter-spacing:1px;}
+  .brand small{font-family:var(--font-en);font-size:10px;letter-spacing:8px;margin-left:8px;font-weight:var(--fw-bold);}
+
+  /* 푸터 (모든 페이지 동일) */
+  footer{margin-top:var(--gap-section);padding:42px var(--pad-x) 46px;background:var(--bg);border-top:1px solid var(--line);text-align:center;color:var(--sub);}
+  .service-row{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:26px;padding-bottom:34px;border-bottom:1px solid var(--line);text-align:left;}
+  .service-row .svc{display:flex;align-items:flex-start;gap:14px;}
+  .service-row i{color:var(--point);font-size:22px;margin-top:2px;}
+  .service-row b{display:block;font-family:var(--font-en);font-size:var(--fs-xs);font-weight:var(--fw-black);letter-spacing:.5px;color:var(--main);}
+  .service-row small{display:block;margin-top:5px;font-size:var(--fs-xs);}
+  .footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:34px;margin:30px 0 16px;font-family:var(--font-en);font-size:var(--fs-xs);font-weight:var(--fw-black);}
+  .footer-links a:hover{color:var(--point);}
+  footer .copy{font-family:var(--font-en);font-size:10px;letter-spacing:.5px;}
+
+  /* 공용 버튼 / 카드 / reveal */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:54px;padding:0 30px;border:none;border-radius:var(--radius);cursor:pointer;font-family:var(--font-en);font-size:var(--fs-sm);font-weight:var(--fw-black);letter-spacing:1px;background:var(--point);color:#fff;transition:filter .2s;}
+  .btn:hover{filter:brightness(.94);}
+  .btn.outline{background:transparent;border:1px solid var(--main);color:var(--main);}
+  .btn.outline:hover{border-color:var(--point);color:var(--point);}
+  .arrow-link{display:inline-flex;align-items:center;gap:12px;font-family:var(--font-en);font-size:var(--fs-sm);font-weight:var(--fw-black);letter-spacing:1px;border-bottom:1px solid currentColor;padding-bottom:7px;transition:color .2s;}
+  .arrow-link:hover{color:var(--point);}
+  .product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gap-grid);}
+  .item{min-width:0;}
+  .item .thumb{position:relative;display:block;aspect-ratio:1/1;overflow:hidden;border-radius:var(--radius);background:var(--bg-soft);}
+  .item .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .55s ease,transform .9s ease;}
+  .item .thumb .thumb-back{opacity:0;}
+  .item:hover .thumb .thumb-front{opacity:0;transform:scale(1.04);}
+  .item:hover .thumb .thumb-back{opacity:1;transform:scale(1.04);}
+  .item .badge{position:absolute;top:12px;left:12px;z-index:2;padding:5px 11px;border-radius:var(--radius);font-family:var(--font-en);font-size:10px;font-weight:var(--fw-black);letter-spacing:.5px;color:#fff;}
+  .badge-new{background:var(--main);}.badge-sale{background:var(--point);left:auto;right:12px;}
+  .item-name{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:16px 0 8px;font-size:var(--fs-body);line-height:1.4;color:var(--main);min-height:2.8em;}
+  .item-name:hover{color:var(--point);}
+  .item-price{display:flex;align-items:baseline;gap:9px;font-family:var(--font-en);}
+  .item-price .now{font-size:var(--fs-body);font-weight:var(--fw-black);color:var(--point);}
+  .item-price .was{font-size:var(--fs-sm);color:var(--sub);text-decoration:line-through;}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s;}
+  .reveal.visible{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+
+  /* ===== 서브페이지 공통 (중앙 콘텐츠 max 1550px) ===== */
+  .subpage{padding-top:86px;}
+  .subpage-inner{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad-x);}
+  .page-head{padding:54px 0 36px;text-align:center;}
+  .breadcrumb{font-family:var(--font-en);font-size:var(--fs-xs);font-weight:var(--fw-bold);letter-spacing:1px;color:var(--sub);margin-bottom:16px;}
+  .breadcrumb a:hover{color:var(--point);}
+  .page-title{font-family:var(--font-serif);font-size:var(--fs-h1);font-weight:500;letter-spacing:1px;}
+  .page-title + .page-sub{margin-top:10px;color:var(--sub);font-size:var(--fs-sm);}
+
+  /* ===== products 전용 ===== */
+  .sort-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+    padding:16px 0;border-top:1px solid var(--main);border-bottom:1px solid var(--line);margin-bottom:34px;}
+  .sort-bar .count{font-family:var(--font-en);font-size:var(--fs-sm);font-weight:var(--fw-bold);letter-spacing:.5px;}
+  .sort-bar .count b{color:var(--point);}
+  .sort-list{display:flex;gap:22px;}
+  .sort-list button{background:none;border:none;cursor:pointer;font-family:var(--font-en);
+    font-size:var(--fs-sm);letter-spacing:.5px;color:var(--sub);padding:0;transition:color .2s;}
+  .sort-list button.active,.sort-list button:hover{color:var(--main);font-weight:var(--fw-black);}
+  .sort-list button.active{border-bottom:2px solid var(--point);padding-bottom:4px;}
+  .product-grid.list{row-gap:46px;}
+
+  /* 페이지네이션 */
+  .pagination{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:64px;}
+  .pagination a{display:inline-flex;align-items:center;justify-content:center;min-width:40px;height:40px;
+    padding:0 6px;border:1px solid var(--line);border-radius:var(--radius);font-family:var(--font-en);
+    font-size:var(--fs-sm);color:var(--sub);transition:.2s;}
+  .pagination a:hover{border-color:var(--point);color:var(--point);}
+  .pagination a.current{background:var(--point);border-color:var(--point);color:#fff;font-weight:var(--fw-black);}
+  .pagination a.edge{color:var(--main);}
+
+  @media (max-width:900px){
+    .site-header{height:72px;}.brand span{font-size:34px;}.brand small{font-size:8px;letter-spacing:4px;}
+    .subpage{padding-top:72px;}
+    .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .service-row{grid-template-columns:repeat(2,minmax(0,1fr));}
+  }
+  @media (max-width:600px){
+    .site-header{grid-template-columns:1fr auto;}.nav-left{display:none;}.nav-right a:not(:last-child){display:none;}
+    .sort-bar{flex-direction:column;align-items:flex-start;}
+    .sort-list{flex-wrap:wrap;gap:14px;}
+    .service-row,.footer-links{grid-template-columns:1fr;display:grid;gap:18px;}
+  }
+  /* ════════ ✦ BALLETCORE 디자인 레이어 (장식 전용 · 기존 규칙 유지) ✦ ════════ */
+  /* 튤(tulle) 안개 배경 */
+  body{background:
+    radial-gradient(42% 32% at 6% 2%,rgba(244,212,215,.55),transparent 60%),
+    radial-gradient(38% 28% at 98% 12%,rgba(244,212,215,.45),transparent 60%),
+    var(--bg);}
+  /* 상단 새틴 리본 안내바 */
+  .ribbon-bar{position:fixed;z-index:60;inset:0 0 auto 0;height:34px;display:flex;align-items:center;justify-content:center;
+    gap:16px;padding:0 16px;overflow:hidden;white-space:nowrap;
+    background:linear-gradient(90deg,#e9b9c1,#f6d7db 32%,#f1cad0 68%,#e9b9c1);
+    color:#7e515a;font-family:var(--font-en);font-size:10px;font-weight:var(--fw-black);letter-spacing:2.5px;
+    box-shadow:0 1px 0 rgba(176,120,128,.25);}
+  .ribbon-bar .dot{opacity:.5;}
+  .ribbon-bar .bow{width:20px;height:13px;color:#fff;flex:none;}
+  /* 리본바 높이만큼 헤더·콘텐츠 내림 */
+  .site-header{top:34px;}
+  .subpage{padding-top:120px;}
+  /* 헤더 브랜드 위 리본 (CSS 전용 · 헤더 상태별 색) */
+  .brand::before{content:"";display:block;width:34px;height:21px;margin:0 auto 5px;
+    background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 40' fill='none'><path d='M32 20C20 5 2 8 5 20C2 32 20 35 32 20Z' fill='%23ffffff'/><path d='M32 20C44 5 62 8 59 20C62 32 44 35 32 20Z' fill='%23ffffff'/><path d='M30 26L24 39L30.5 34Z' fill='%23ffffff'/><path d='M34 26L40 39L33.5 34Z' fill='%23ffffff'/><rect x='27.5' y='12' width='9' height='16' rx='4.5' fill='%23ffffff'/></svg>") center/contain no-repeat;}
+  .site-header.solid .brand::before{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 40' fill='none'><path d='M32 20C20 5 2 8 5 20C2 32 20 35 32 20Z' fill='%23d4868f'/><path d='M32 20C44 5 62 8 59 20C62 32 44 35 32 20Z' fill='%23d4868f'/><path d='M30 26L24 39L30.5 34Z' fill='%23d4868f'/><path d='M34 26L40 39L33.5 34Z' fill='%23d4868f'/><rect x='27.5' y='12' width='9' height='16' rx='4.5' fill='%23d4868f'/></svg>");}
+  /* 발레 프랑스어 아이브로 */
+  .ballet-eyebrow{font-family:var(--font-serif);font-style:italic;font-weight:500;font-size:22px;color:var(--point);margin:0 0 6px;}
+  /* 리본 디바이더 */
+  .ribbon-divider{display:flex;align-items:center;justify-content:center;gap:20px;max-width:var(--maxw);
+    margin:56px auto 0;padding:0 var(--pad-x);}
+  .ribbon-divider::before,.ribbon-divider::after{content:"";flex:1;max-width:240px;height:1px;
+    background:linear-gradient(90deg,transparent,var(--line),var(--point),var(--line),transparent);}
+  .ribbon-divider .bow{width:48px;height:30px;color:var(--point);flex:none;}
+  /* 섹션 타이틀 앞 작은 리본 */
+  .section-head h2{display:inline-flex;align-items:center;gap:11px;}
+  .section-head h2::before{content:"";width:24px;height:15px;flex:none;
+    background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 40' fill='none'><path d='M32 20C20 5 2 8 5 20C2 32 20 35 32 20Z' fill='%23d4868f'/><path d='M32 20C44 5 62 8 59 20C62 32 44 35 32 20Z' fill='%23d4868f'/><path d='M30 26L24 39L30.5 34Z' fill='%23d4868f'/><path d='M34 26L40 39L33.5 34Z' fill='%23d4868f'/><rect x='27.5' y='12' width='9' height='16' rx='4.5' fill='%23d4868f'/></svg>") center/contain no-repeat;}
+  /* 새틴 배지 */
+  .item .badge{background:linear-gradient(135deg,#8a5d56,#6e4a43);box-shadow:0 6px 14px -6px rgba(110,74,67,.5);}
+  .badge-sale{background:linear-gradient(135deg,#e7a3ac,#d4868f);}
+  /* 카드 튤 프레임 */
+  .item .thumb{background:radial-gradient(125% 120% at 50% 0%,#fff6f4,#f3e2de);
+    box-shadow:inset 0 0 0 1px rgba(212,134,143,.18);}
+  .item:hover .thumb{box-shadow:inset 0 0 0 1px rgba(212,134,143,.5),0 16px 32px -16px rgba(176,120,128,.55);}
+  /* 새틴 버튼 */
+  .btn{background:linear-gradient(135deg,#e3a0a9,#d4868f);box-shadow:0 10px 22px -12px rgba(212,134,143,.9);}
+  .btn.outline{background:transparent;box-shadow:none;}
+  /* 정렬바 활성 탭에 리본톤 유지 */
+  .sort-list button.active{border-bottom-color:var(--point);}
+  /* 푸터 리본 크레스트 */
+  .foot-crest{text-align:center;margin-bottom:30px;}
+  .foot-crest .bow{width:50px;height:31px;color:var(--point);margin:0 auto 12px;}
+  .foot-crest .foot-tag{font-family:var(--font-serif);font-style:italic;font-size:19px;color:var(--main);letter-spacing:.5px;margin:0;}
+  /* 반응형: 리본바 오프셋 */
+  @media (max-width:900px){
+    .subpage{padding-top:106px;}
+    .ribbon-bar{font-size:9px;letter-spacing:1.5px;gap:10px;}
+  }
+  @media (max-width:600px){
+    .ribbon-bar span:nth-of-type(n+2),.ribbon-bar .dot{display:none;}
+  }
+  </style>
+</head>
+<body>
+
+  <!-- ================= 헤더 (모든 페이지 동일) ================= -->
+  <!-- ✦ 상단 새틴 리본 안내바 (모든 페이지 동일) ✦ -->
+  <div class="ribbon-bar">
+    <svg class="bow" viewBox="0 0 64 40" fill="none" aria-hidden="true"><path d="M32 20C20 5 2 8 5 20C2 32 20 35 32 20Z" fill="currentColor"/><path d="M32 20C44 5 62 8 59 20C62 32 44 35 32 20Z" fill="currentColor"/><path d="M30 26L24 39L30.5 34Z" fill="currentColor"/><path d="M34 26L40 39L33.5 34Z" fill="currentColor"/><rect x="27.5" y="12" width="9" height="16" rx="4.5" fill="currentColor"/></svg>
+    <span>FREE SHIPPING OVER ₩50,000</span><span class="dot">·</span>
+    <span>BALLETCORE BEAUTY EDIT</span><span class="dot">·</span>
+    <span>POINTE-PERFECT GIFT WRAP</span>
+    <svg class="bow" viewBox="0 0 64 40" fill="none" aria-hidden="true"><path d="M32 20C20 5 2 8 5 20C2 32 20 35 32 20Z" fill="currentColor"/><path d="M32 20C44 5 62 8 59 20C62 32 44 35 32 20Z" fill="currentColor"/><path d="M30 26L24 39L30.5 34Z" fill="currentColor"/><path d="M34 26L40 39L33.5 34Z" fill="currentColor"/><rect x="27.5" y="12" width="9" height="16" rx="4.5" fill="currentColor"/></svg>
+  </div>
+
+  <header class="site-header">
+    <nav class="nav-left">
+      <a href="products.html">SHOP</a><a href="index.html#about">ABOUT</a><a href="index.html#journal">JOURNAL</a><a href="board-list.html">NOTICE</a>
+    </nav>
+    <a class="brand" href="index.html"><span>plié</span><small>BEAUTE</small></a>
+    <nav class="nav-right">
+      <a href="#"><i class="fa-solid fa-magnifying-glass"></i>SEARCH</a>
+      <a href="wishlist.html"><i class="fa-regular fa-heart"></i>WISHLIST</a>
+      <a href="login.html"><i class="fa-regular fa-user"></i>MY PAGE</a>
+      <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i>CART (0)</a>
+    </nav>
+  </header>
+
+  <main class="subpage">
+    <div class="subpage-inner">
+      <!-- 페이지 제목 -->
+      <div class="page-head">
+        <p class="breadcrumb"><a href="index.html">HOME</a> &nbsp;/&nbsp; SHOP &nbsp;/&nbsp; LIP &amp; CHEEK</p>
+        <h1 class="page-title">Lip &amp; Cheek</h1>
+        <p class="page-sub">Balletcore essentials — sheer color, dewy finish.</p>
+      </div>
+
+      <!-- 정렬바 -->
+      <div class="sort-bar">
+        <span class="count">TOTAL <b>7</b> ITEMS</span>
+        <div class="sort-list">
+          <button type="button" class="active">신상품순</button>
+          <button type="button">판매량순</button>
+          <button type="button">낮은가격순</button>
+          <button type="button">높은가격순</button>
+          <button type="button">리뷰많은순</button>
+        </div>
+      </div>
+
+      <!-- 상품 카드 그리드 (8개 직접 작성 · 모바일 2열) -->
+      <ul class="product-grid list">
+        <li class="item reveal">
+          <a class="thumb" href="product-detail.html">
+            <span class="badge badge-new">NEW</span>
+            <img class="thumb-front" src="./assets/product-ribbon-dew-lip-tint.png" alt="Ribbon Dew Lip Tint" />
+            <img class="thumb-back" src="./assets/texture-ribbon-dew-lip-tint.png" alt="Ribbon Dew Lip Tint texture" />
+          </a>
+          <a class="item-name" href="product-detail.html">Ribbon Dew Lip Tint · 촉촉 데일리 틴트</a>
+          <p class="item-price"><span class="now">₩19,000</span></p>
+        </li>
+        <li class="item reveal">
+          <a class="thumb" href="product-detail.html">
+            <span class="badge badge-new">NEW</span>
+            <img class="thumb-front" src="./assets/product-ballerina-blush-compact.png" alt="Ballerina Blush Compact" />
+            <img class="thumb-back" src="./assets/texture-ballerina-blush-compact.png" alt="Ballerina Blush Compact texture" />
+          </a>
+          <a class="item-name" href="product-detail.html">Ballerina Blush Compact · 파우더 블러셔</a>
+          <p class="item-price"><span class="now">₩26,000</span></p>
+        </li>
+        <li class="item reveal">
+          <a class="thumb" href="product-detail.html">
+            <img class="thumb-front" src="./assets/product-tulle-glow-lip-gloss.png" alt="Tulle Glow Lip Gloss" />
+            <img class="thumb-back" src="./assets/texture-tulle-glow-lip-gloss.png" alt="Tulle Glow Lip Gloss texture" />
+          </a>
+          <a class="item-name" href="product-detail.html">Tulle Glow Lip Gloss · 글로우 립글로스</a>
+          <p class="item-price"><span class="now">₩21,000</span></p>
+        </li>
+        <li class="item reveal">
+          <a class="thumb" href="product-detail.html">
+            <img class="thumb-front" src="./assets/product-ballet-lip-serum-balm.png" alt="Ballet Lip Serum Balm" />
+            <img class="thumb-back" src="./assets/texture-ballet-lip-serum-balm.png" alt="Ballet Lip Serum Balm texture" />
+          </a>
+          <a class="item-name" href="product-detail.html">Ballet Lip Serum Balm · 보습 립밤</a>
+          <p class="item-price"><span class="now">₩18,000</span></p>
+        </li>
+        <li class="item reveal">
+          <a class="thumb" href="product-detail.html">
+            <span class="badge badge-sale">-15%</span>
+            <img class="thumb-front" src="./assets/product-prima-blush-stick.png" alt="Prima Blush Stick" />
+            <img class="thumb-back" src="./assets/texture-prima-blush-stick.png" alt="Prima Blush Stick texture" />
+          </a>
+          <a class="item-name" href="product-detail.html">Prima Blush Stick · 크림 블러셔 스틱</a>
+          <p class="item-price"><span class="now">₩22,000</span><s class="was">₩26,000</s></p>
+        </li>
+        <li class="item reveal">
+          <a class="thumb" href="product-detail.html">
+            <img class="thumb-front" src="./assets/product-petal-glow-lip-oil.png" alt="Petal Glow Lip Oil" />
+            <img class="thumb-back" src="./assets/texture-petal-glow-lip-oil.png" alt="Petal Glow Lip Oil texture" />
+          </a>
+          <a class="item-name" href="product-detail.html">Petal Glow Lip Oil · 글로우 립오일</a>
+          <p class="item-price"><span class="now">₩20,000</span></p>
+        </li>
+        <li class="item reveal">
+          <a class="thumb" href="product-detail.html">
+            <span class="badge badge-new">NEW</span>
+            <img class="thumb-front" src="./assets/product-en-pointe-highlighter.png" alt="En Pointe Highlighter" />
+            <img class="thumb-back" src="./assets/texture-en-pointe-highlighter.png" alt="En Pointe Highlighter texture" />
+          </a>
+          <a class="item-name" href="product-detail.html">En Pointe Highlighter · 펄 하이라이터</a>
+          <p class="item-price"><span class="now">₩24,000</span></p>
+        </li>
+      </ul>
+
+      <!-- 페이지네이션 -->
+      <nav class="pagination" aria-label="페이지">
+        <a href="#" class="edge" aria-label="이전"><i class="fa-solid fa-angle-left"></i></a>
+        <a href="#" class="current">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#" class="edge" aria-label="다음"><i class="fa-solid fa-angle-right"></i></a>
+      </nav>
+    </div>
+  </main>
+
+  <!-- ================= 푸터 (모든 페이지 동일) ================= -->
+  <footer>
+    <div class="foot-crest">
+      <svg class="bow" viewBox="0 0 64 40" fill="none" aria-hidden="true"><path d="M32 20C20 5 2 8 5 20C2 32 20 35 32 20Z" fill="currentColor"/><path d="M32 20C44 5 62 8 59 20C62 32 44 35 32 20Z" fill="currentColor"/><path d="M30 26L24 39L30.5 34Z" fill="currentColor"/><path d="M34 26L40 39L33.5 34Z" fill="currentColor"/><rect x="27.5" y="12" width="9" height="16" rx="4.5" fill="currentColor"/></svg>
+      <p class="foot-tag">danse · grâce · beauté</p>
+    </div>
+    <div class="service-row">
+      <span class="svc"><i class="fa-solid fa-truck"></i><span><b>FREE SHIPPING</b><small>On orders over ₩50,000</small></span></span>
+      <span class="svc"><i class="fa-solid fa-gift"></i><span><b>GIFT WRAPPING</b><small>Elegant packaging</small></span></span>
+      <span class="svc"><i class="fa-regular fa-user"></i><span><b>MEMBER BENEFITS</b><small>Join for exclusive rewards</small></span></span>
+      <span class="svc"><i class="fa-solid fa-lock"></i><span><b>SECURE PAYMENT</b><small>Safe and easy checkout</small></span></span>
+    </div>
+    <div class="footer-links">
+      <a href="board-list.html">NOTICE</a><a href="wishlist.html">WISHLIST</a><a href="#">PRIVACY POLICY</a><a href="#">TERMS OF USE</a><a href="#">SHIPPING &amp; RETURNS</a><a href="#">CONTACT</a>
+    </div>
+    <p class="copy">© PLIÉ BEAUTE. ALL RIGHTS RESERVED.</p>
+  </footer>
+
+  <script>
+    (function(){var header=document.querySelector('.site-header');var hero=document.querySelector('.hero');
+      function onScroll(){if(!hero){header.classList.add('solid');return;}header.classList.toggle('solid',window.scrollY>hero.offsetHeight-90);}
+      onScroll();window.addEventListener('scroll',onScroll,{passive:true});})();
+    (function(){var els=document.querySelectorAll('.reveal');
+      if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('visible');});return;}
+      var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');io.unobserve(x.target);}});},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+      els.forEach(function(e){io.observe(e);});})();
+    // 정렬 버튼 활성표시 (모양 전용)
+    document.querySelectorAll('.sort-list button').forEach(function(b){
+      b.addEventListener('click',function(){document.querySelectorAll('.sort-list button').forEach(function(x){x.classList.remove('active');});b.classList.add('active');});
+    });
+  </script>
+</body>
+</html>

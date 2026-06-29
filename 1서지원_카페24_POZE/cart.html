@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>장바구니 — POZE</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --main:#1e1a16;--sub:#2d2820;--point:#c2956c;--bg:#faf8f5;--bg-dark:#1a1008;
+  --surface:#f5f0e8;--white:#ffffff;--text-1:#1e1a16;--text-2:#5a5248;
+  --text-3:#9a8f85;--text-inv:#f5f0e8;--border:#e8e0d5;
+  --section-gap:100px;--section-pad:80px;--container-max:1550px;
+  --container-pad:48px;--gap:24px;--fs-hero:72px;--fs-xl:48px;--fs-lg:36px;
+  --fs-md:24px;--fs-base:16px;--fs-sm:14px;--fs-xs:12px;
+  --fw-light:300;--fw-regular:400;--fw-medium:500;--fw-semibold:600;--fw-bold:700;
+  --radius:8px;--radius-lg:16px;--radius-full:9999px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Pretendard','Noto Sans KR',sans-serif;color:var(--text-1);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}ul,li{list-style:none}
+img{display:block;max-width:100%;height:auto}
+button{border:0;background:none;cursor:pointer;font-family:inherit;font-size:inherit;color:inherit}
+input,select{font-family:inherit;outline:none}
+.container{max-width:var(--container-max);margin:0 auto;padding:0 var(--container-pad)}
+@media(max-width:768px){.container{padding:0 20px}}
+.serif{font-family:'Cormorant Garamond',serif}
+
+/* ── 띠배너 ──────────────────────────────────────────── */
+.strip-announce{height:36px;background:var(--bg-dark);overflow:hidden;display:flex;align-items:center}
+.strip-track{display:flex;align-items:center;gap:80px;animation:marquee 32s linear infinite;white-space:nowrap;padding-right:80px}
+.strip-track span{font-size:11px;letter-spacing:.1em;color:rgba(245,240,232,.7)}
+.strip-track strong{color:var(--point)}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── 헤더 ─────────────────────────────────────────────── */
+.site-header{position:sticky;top:0;z-index:900;background:rgba(250,248,245,.97);box-shadow:0 1px 16px rgba(30,26,22,.06)}
+.header-inner{max-width:var(--container-max);margin:0 auto;padding:0 var(--container-pad);height:70px;display:flex;align-items:center;gap:16px;position:relative}
+@media(max-width:768px){.header-inner{padding:0 20px;height:58px}}
+.h-left{display:flex;align-items:center;gap:16px}
+.hamburger{width:36px;height:36px;display:flex;flex-direction:column;justify-content:center;gap:6px;cursor:pointer}
+.hamburger span{display:block;height:1.5px;background:var(--main);transition:all .3s;width:22px}
+.hamburger span:last-child{width:15px}
+.gnb{flex:1;display:flex;justify-content:center}
+.gnb ul{display:flex;gap:0}
+.gnb ul li a{display:block;padding:8px 18px;font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);transition:color .2s}
+.gnb ul li a:hover,.gnb ul li.active a{color:var(--point)}
+.gnb ul li.sale a{color:var(--point)}
+@media(max-width:1024px){.gnb{display:none}.site-logo{position:absolute;left:50%;transform:translateX(-50%)}}
+.h-right{display:flex;align-items:center;gap:2px}
+.h-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:17px;color:var(--text-2);transition:color .2s;position:relative;cursor:pointer}
+.h-icon:hover{color:var(--point)}
+.cart-badge{position:absolute;top:6px;right:5px;min-width:16px;height:16px;border-radius:var(--radius-full);background:var(--point);color:var(--white);font-size:9px;font-weight:var(--fw-bold);display:flex;align-items:center;justify-content:center;padding:0 3px}
+.site-logo{flex-shrink:0}
+.logo-txt{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;letter-spacing:.32em;color:var(--main);display:block}
+.mobile-nav{position:fixed;inset:0;z-index:950;background:var(--bg);transform:translateX(-100%);transition:transform .4s cubic-bezier(.25,.46,.45,.94);overflow-y:auto}
+.mobile-nav.open{transform:translateX(0)}
+.mobile-nav-inner{padding:80px 32px 48px}
+.mnav-close{position:absolute;top:18px;right:18px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--text-2);cursor:pointer}
+.mobile-nav ul li a{display:block;padding:18px 0;font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--text-1);border-bottom:1px solid var(--border)}
+.mobile-nav ul li a:hover{color:var(--point)}
+.mobile-nav ul li.sale a{color:var(--point)}
+.mnav-util{margin-top:32px;display:flex;gap:20px}
+.mnav-util a{font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+.search-layer{position:fixed;inset:0;z-index:960;background:rgba(250,248,245,.98);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.search-layer.open{opacity:1;pointer-events:all}
+.search-box{width:min(640px,88vw);border-bottom:2px solid var(--main)}
+.search-box input{width:100%;padding:16px 0;font-size:var(--fs-lg);font-family:'Cormorant Garamond',serif;font-weight:300;background:none;color:var(--text-1)}
+.search-box input::placeholder{color:var(--text-3)}
+.search-x{position:absolute;top:24px;right:32px;font-size:24px;color:var(--text-2);cursor:pointer;display:none}
+.search-layer.open .search-x{display:block}
+
+/* ── 페이지 헤더 ────────────────────────────────────── */
+.page-header{padding:40px 0 32px;border-bottom:1px solid var(--border)}
+.page-header h1{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;letter-spacing:.04em;margin-bottom:4px}
+.page-header-sub{font-size:var(--fs-xs);color:var(--text-3);letter-spacing:.08em}
+
+/* ── 장바구니 레이아웃 ───────────────────────────────── */
+.cart-section{padding:40px 0 80px}
+.cart-layout{display:grid;grid-template-columns:1fr 340px;gap:40px;align-items:flex-start}
+@media(max-width:960px){.cart-layout{grid-template-columns:1fr;gap:32px}}
+
+/* ── 상품 목록 테이블 ────────────────────────────────── */
+.cart-actions-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.select-all-wrap{display:flex;align-items:center;gap:8px;font-size:var(--fs-sm);cursor:pointer}
+.select-all-wrap input[type="checkbox"]{width:16px;height:16px;accent-color:var(--point);cursor:pointer}
+.cart-bulk-actions{display:flex;gap:8px}
+.bulk-btn{padding:7px 16px;border:1px solid var(--border);border-radius:var(--radius);font-size:var(--fs-xs);color:var(--text-2);cursor:pointer;transition:all .2s}
+.bulk-btn:hover{border-color:var(--main);color:var(--main)}
+.cart-table{width:100%;border-collapse:collapse}
+.cart-table thead th{padding:10px 12px;font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);border-bottom:2px solid var(--main);text-align:center;white-space:nowrap}
+.cart-table thead th:nth-child(2){text-align:left}
+.cart-table tbody tr{border-bottom:1px solid var(--border);transition:background .15s}
+.cart-table tbody tr:hover{background:rgba(194,149,108,.03)}
+.cart-table td{padding:20px 12px;vertical-align:middle;text-align:center}
+.cart-table td:nth-child(2){text-align:left}
+.td-check input[type="checkbox"]{width:16px;height:16px;accent-color:var(--point);cursor:pointer}
+/* 상품 셀 */
+.cart-item-cell{display:flex;align-items:center;gap:16px}
+.cart-thumb{width:88px;height:88px;border-radius:var(--radius);overflow:hidden;flex-shrink:0;background:var(--surface)}
+.cart-thumb img{width:100%;height:100%;object-fit:cover}
+.cart-item-info{flex:1;min-width:0}
+.cart-item-brand{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:2px}
+.cart-item-name{font-size:var(--fs-sm);font-weight:var(--fw-medium);color:var(--text-1);line-height:1.4;margin-bottom:4px}
+.cart-item-option{font-size:var(--fs-xs);color:var(--text-3)}
+/* 가격 셀 */
+.td-price{font-size:var(--fs-sm);color:var(--text-2)}
+.td-price .strikethrough{font-size:11px;color:var(--text-3);text-decoration:line-through;display:block}
+/* 수량 셀 */
+.qty-ctl{display:inline-flex;align-items:center;border:1px solid var(--border);border-radius:var(--radius)}
+.qty-ctl button{width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text-2);cursor:pointer;transition:color .2s}
+.qty-ctl button:hover{color:var(--point)}
+.qty-ctl input{width:40px;height:32px;text-align:center;font-size:var(--fs-sm);font-weight:var(--fw-semibold);border-left:1px solid var(--border);border-right:1px solid var(--border)}
+/* 소계 셀 */
+.td-subtotal{font-size:var(--fs-base);font-weight:var(--fw-bold);color:var(--point)}
+/* 삭제 */
+.td-del button{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:13px;color:var(--text-3);margin:0 auto;transition:all .2s}
+.td-del button:hover{background:rgba(194,149,108,.1);color:var(--point)}
+/* 쿠폰 행 */
+.coupon-row td{padding:14px 12px;background:var(--surface)}
+.coupon-cell{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.coupon-select{padding:8px 28px 8px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:var(--fs-xs);color:var(--text-2);appearance:none;background:var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239a8f85'/%3E%3C/svg%3E") no-repeat right 10px center;cursor:pointer;min-width:180px}
+.coupon-select:focus{border-color:var(--point)}
+.coupon-hint{font-size:var(--fs-xs);color:var(--text-3)}
+/* 빈 장바구니 */
+.cart-empty{padding:80px 0;text-align:center}
+.cart-empty i{font-size:56px;color:var(--border);margin-bottom:20px}
+.cart-empty p{font-size:var(--fs-base);color:var(--text-3);margin-bottom:28px}
+.cart-empty a{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--main);color:var(--white);border-radius:var(--radius);font-size:var(--fs-xs);font-weight:var(--fw-bold);letter-spacing:.1em;text-transform:uppercase;transition:background .25s}
+.cart-empty a:hover{background:var(--sub)}
+
+/* 모바일: 카드 형식 */
+@media(max-width:640px){
+  .cart-table thead{display:none}
+  .cart-table tbody tr{display:grid;grid-template-columns:20px 1fr auto;grid-template-rows:auto auto;gap:4px 8px;padding:16px 0;border-bottom:1px solid var(--border)}
+  .cart-table td{padding:0;text-align:left}
+  .cart-table td:nth-child(2){grid-column:2;grid-row:1}
+  .cart-table .td-check{grid-column:1;grid-row:1;display:flex;align-items:flex-start;padding-top:4px}
+  .cart-table .td-del{grid-column:3;grid-row:1;display:flex;align-items:flex-start}
+  .cart-table .td-price{display:none}
+  .cart-table .td-qty{grid-column:2;grid-row:2;display:flex;align-items:center;gap:12px}
+  .cart-table .td-subtotal{font-size:var(--fs-sm)}
+  .cart-item-cell{gap:12px}
+  .cart-thumb{width:72px;height:72px}
+}
+
+/* ── 주문 요약 사이드바 ────────────────────────────────── */
+.order-summary{position:sticky;top:90px;background:var(--surface);border-radius:var(--radius-lg);padding:32px}
+@media(max-width:960px){.order-summary{position:static}}
+.order-summary h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.summary-rows{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
+.summary-row{display:flex;justify-content:space-between;align-items:center;font-size:var(--fs-sm)}
+.summary-row-label{color:var(--text-2)}
+.summary-row-value{font-weight:var(--fw-medium);color:var(--text-1)}
+.summary-row-value.free{color:var(--point)}
+.summary-row-value.discount{color:var(--point)}
+.summary-divider{height:1px;background:var(--border);margin:8px 0}
+.summary-total{display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;border-top:2px solid var(--main);border-bottom:1px solid var(--border);margin-bottom:20px}
+.summary-total-label{font-size:var(--fs-sm);font-weight:var(--fw-semibold);letter-spacing:.08em;text-transform:uppercase;color:var(--text-2)}
+.summary-total-value{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--point)}
+.summary-vat{font-size:10px;color:var(--text-3);text-align:right;margin-bottom:20px}
+/* 포인트 입력 */
+.point-input-row{margin-bottom:20px}
+.point-input-label{font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.08em;text-transform:uppercase;color:var(--text-2);margin-bottom:8px}
+.point-input-wrap{display:flex;gap:8px}
+.point-input-wrap input{flex:1;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:var(--fs-sm);background:var(--white)}
+.point-input-wrap input:focus{border-color:var(--point)}
+.point-input-wrap button{padding:10px 14px;border:1px solid var(--main);border-radius:var(--radius);font-size:var(--fs-xs);font-weight:var(--fw-semibold);color:var(--main);cursor:pointer;transition:all .2s;white-space:nowrap}
+.point-input-wrap button:hover{background:var(--main);color:var(--white)}
+.my-points{font-size:var(--fs-xs);color:var(--text-3);margin-top:5px}
+.my-points strong{color:var(--point)}
+/* 결제 버튼 */
+.btn-checkout{display:block;width:100%;padding:18px;background:var(--main);color:var(--white);text-align:center;border-radius:var(--radius);font-size:var(--fs-xs);font-weight:var(--fw-bold);letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .25s;margin-bottom:12px}
+.btn-checkout:hover{background:var(--sub);color:var(--point)}
+.btn-continue{display:block;width:100%;padding:14px;background:transparent;border:1px solid var(--border);color:var(--text-2);text-align:center;border-radius:var(--radius);font-size:var(--fs-xs);letter-spacing:.08em;cursor:pointer;transition:all .2s;text-decoration:none}
+.btn-continue:hover{border-color:var(--main);color:var(--main)}
+/* 결제 수단 아이콘 */
+.payment-icons{display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.pay-icon{padding:4px 10px;border:1px solid var(--border);border-radius:4px;font-size:10px;color:var(--text-3);font-weight:var(--fw-semibold);letter-spacing:.05em}
+
+/* ── 추천 상품 ───────────────────────────────────────── */
+.recommend-section{padding:60px 0 80px;border-top:1px solid var(--border)}
+.recommend-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:32px;text-align:center}
+.recommend-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap);list-style:none}
+@media(max-width:900px){.recommend-grid{grid-template-columns:repeat(2,1fr)}}
+.r-item{border-radius:var(--radius);overflow:hidden;transition:transform .3s}
+.r-item:hover{transform:translateY(-4px)}
+.r-item a{display:block}
+.r-item-img{position:relative;overflow:hidden;aspect-ratio:1/1;background:var(--surface)}
+.r-item-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.r-item:hover .r-item-img img{transform:scale(1.05)}
+.r-item-badge{position:absolute;top:12px;left:12px;padding:4px 10px;border-radius:var(--radius-full);font-size:10px;font-weight:var(--fw-bold);letter-spacing:.06em;text-transform:uppercase;background:var(--main);color:var(--white)}
+.r-item-info{padding:14px 12px 20px;background:var(--bg)}
+.r-item-brand{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:4px}
+.r-item-name{font-size:var(--fs-sm);font-weight:var(--fw-medium);color:var(--text-1);line-height:1.45;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.r-item-price{display:flex;align-items:baseline;gap:8px}
+.r-price-sale{font-size:var(--fs-base);font-weight:var(--fw-bold);color:var(--point)}
+.r-price-origin{font-size:var(--fs-xs);color:var(--text-3);text-decoration:line-through}
+
+/* ── 푸터 ─────────────────────────────────────────────── */
+.site-footer{background:var(--bg-dark);color:var(--text-inv)}
+.footer-top{max-width:var(--container-max);margin:0 auto;padding:72px var(--container-pad) 48px;display:grid;grid-template-columns:220px 1fr 240px;gap:60px}
+@media(max-width:1024px){.footer-top{grid-template-columns:1fr 1fr;gap:40px;padding:48px 20px 32px}}
+@media(max-width:600px){.footer-top{grid-template-columns:1fr;padding:40px 20px 28px}}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;letter-spacing:.3em;margin-bottom:10px}
+.f-tagline{font-size:var(--fs-xs);letter-spacing:.15em;color:rgba(245,240,232,.45);margin-bottom:24px}
+.f-social{display:flex;gap:10px}
+.f-social a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(245,240,232,.18);display:flex;align-items:center;justify-content:center;font-size:13px;color:rgba(245,240,232,.55);transition:all .2s}
+.f-social a:hover{border-color:var(--point);color:var(--point)}
+.f-nav-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+@media(max-width:480px){.f-nav-grid{grid-template-columns:1fr 1fr}}
+.f-nav-col h4{font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.15em;text-transform:uppercase;color:rgba(245,240,232,.45);margin-bottom:16px}
+.f-nav-col ul li{margin-bottom:10px}
+.f-nav-col ul li a{font-size:var(--fs-sm);color:rgba(245,240,232,.65);transition:color .2s}
+.f-nav-col ul li a:hover{color:var(--point)}
+.f-cs h4{font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.15em;text-transform:uppercase;color:rgba(245,240,232,.45);margin-bottom:16px}
+.f-cs-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:6px}
+.f-cs-hours{font-size:var(--fs-xs);color:rgba(245,240,232,.45);line-height:1.9;margin-bottom:12px}
+.f-cs-email a{font-size:var(--fs-sm);color:rgba(245,240,232,.55);transition:color .2s}
+.f-cs-email a:hover{color:var(--point)}
+.footer-bottom{max-width:var(--container-max);margin:0 auto;padding:20px var(--container-pad);border-top:1px solid rgba(245,240,232,.08);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+@media(max-width:600px){.footer-bottom{padding:20px 20px;flex-direction:column;align-items:flex-start}}
+.footer-bottom p{font-size:11px;color:rgba(245,240,232,.3);line-height:1.85}
+</style>
+</head>
+<body>
+
+<section class="strip-announce" aria-label="공지사항">
+  <div class="strip-track">
+    <span>무료배송 <strong>50,000원</strong> 이상</span><span>✦</span>
+    <span>회원가입 즉시 <strong>10%</strong> 할인 쿠폰 지급</span><span>✦</span>
+    <span>7일 이내 교환·환불 보장</span><span>✦</span>
+    <span>무이자 할부 최대 <strong>12개월</strong></span><span>✦</span>
+    <span>무료배송 <strong>50,000원</strong> 이상</span><span>✦</span>
+    <span>회원가입 즉시 <strong>10%</strong> 할인 쿠폰 지급</span><span>✦</span>
+    <span>7일 이내 교환·환불 보장</span><span>✦</span>
+    <span>무이자 할부 최대 <strong>12개월</strong></span><span>✦</span>
+  </div>
+</section>
+
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <div class="h-left">
+      <button class="hamburger" id="hamburger" aria-label="메뉴"><span></span><span></span><span></span></button>
+    </div>
+    <a href="index.html" class="site-logo"><span class="logo-txt serif">POZE</span></a>
+    <nav class="gnb" aria-label="주메뉴"><ul>
+      <li><a href="products.html?c=new">NEW</a></li>
+      <li><a href="products.html?c=best">BEST</a></li>
+      <li><a href="products.html?c=eye">EYE</a></li>
+      <li><a href="products.html?c=lip">LIP</a></li>
+      <li><a href="products.html?c=face">FACE</a></li>
+      <li><a href="products.html?c=cheeks">CHEEKS</a></li>
+      <li><a href="products.html?c=tools">TOOLS</a></li>
+      <li class="sale"><a href="products.html?c=sale">SALE</a></li>
+    </ul></nav>
+    <div class="h-right">
+      <button class="h-icon" id="searchBtn" aria-label="검색"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <a href="wishlist.html" class="h-icon" aria-label="관심상품"><i class="fa-regular fa-heart"></i></a>
+      <a href="cart.html" class="h-icon" aria-label="장바구니" style="position:relative"><i class="fa-solid fa-bag-shopping"></i><span class="cart-badge">3</span></a>
+      <a href="login.html" class="h-icon" aria-label="로그인"><i class="fa-regular fa-user"></i></a>
+    </div>
+  </div>
+</header>
+
+<div class="search-layer" id="searchLayer" role="dialog" aria-label="검색">
+  <button class="search-x" id="searchClose" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
+  <div class="search-box"><input type="text" placeholder="무엇을 찾고 계신가요?" aria-label="검색어 입력"></div>
+</div>
+<nav class="mobile-nav" id="mobileNav" aria-label="모바일 메뉴">
+  <button class="mnav-close" id="mnavClose" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
+  <div class="mobile-nav-inner">
+    <ul>
+      <li><a href="products.html?c=new">New Arrivals</a></li>
+      <li><a href="products.html?c=best">Best Sellers</a></li>
+      <li><a href="products.html?c=eye">Eye</a></li>
+      <li><a href="products.html?c=lip">Lip</a></li>
+      <li><a href="products.html?c=face">Face</a></li>
+      <li><a href="products.html?c=cheeks">Cheeks</a></li>
+      <li><a href="products.html?c=tools">Tools</a></li>
+      <li class="sale"><a href="products.html?c=sale">Sale</a></li>
+    </ul>
+    <div class="mnav-util"><a href="login.html">로그인</a><a href="signup.html">회원가입</a><a href="mypage.html">마이페이지</a></div>
+  </div>
+</nav>
+
+<main>
+  <div class="page-header">
+    <div class="container">
+      <h1 class="serif">장바구니</h1>
+      <p class="page-header-sub">SHOPPING CART</p>
+    </div>
+  </div>
+
+  <section class="cart-section">
+    <div class="container">
+      <div class="cart-layout">
+        <!-- 좌측: 상품 목록 -->
+        <div class="cart-main">
+          <div class="cart-actions-row">
+            <label class="select-all-wrap">
+              <input type="checkbox" id="selectAll" checked aria-label="전체 선택"> 전체 선택 (3/3)
+            </label>
+            <div class="cart-bulk-actions">
+              <button class="bulk-btn">선택 삭제</button>
+              <button class="bulk-btn">품절상품 삭제</button>
+            </div>
+          </div>
+          <table class="cart-table" aria-label="장바구니 상품 목록">
+            <thead>
+              <tr>
+                <th style="width:40px"></th>
+                <th>상품 정보</th>
+                <th style="width:110px">판매가</th>
+                <th style="width:120px">수량</th>
+                <th style="width:120px">소계</th>
+                <th style="width:44px"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- 상품 1 -->
+              <tr>
+                <td class="td-check"><input type="checkbox" checked aria-label="상품 선택"></td>
+                <td>
+                  <div class="cart-item-cell">
+                    <a href="product-detail.html" class="cart-thumb">
+                      <img src="images/Eyes-1.png" alt="딥 스모키 아이 팔레트">
+                    </a>
+                    <div class="cart-item-info">
+                      <p class="cart-item-brand">POZE Eye</p>
+                      <a href="product-detail.html" class="cart-item-name">딥 스모키 아이 팔레트</a>
+                      <p class="cart-item-option">컬러 : Dark Smoke / 구성 : 단품</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="td-price">38,000원</td>
+                <td class="td-qty">
+                  <div class="qty-ctl" role="group" aria-label="수량">
+                    <button aria-label="감소"><i class="fa-solid fa-minus" style="font-size:10px"></i></button>
+                    <input type="number" value="1" min="1" max="99" aria-label="수량">
+                    <button aria-label="증가"><i class="fa-solid fa-plus" style="font-size:10px"></i></button>
+                  </div>
+                </td>
+                <td class="td-subtotal">38,000원</td>
+                <td class="td-del"><button aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <!-- 쿠폰 행 1 -->
+              <tr class="coupon-row">
+                <td></td>
+                <td colspan="5">
+                  <div class="coupon-cell">
+                    <i class="fa-solid fa-ticket" style="color:var(--point);font-size:14px"></i>
+                    <select class="coupon-select" aria-label="쿠폰 선택">
+                      <option value="">쿠폰 선택 (2개 보유)</option>
+                      <option>신규가입 10% 할인 (-3,800원)</option>
+                      <option>5만원 이상 구매 시 3,000원 할인</option>
+                    </select>
+                    <span class="coupon-hint">쿠폰 1개만 사용 가능합니다</span>
+                  </div>
+                </td>
+              </tr>
+              <!-- 상품 2 -->
+              <tr>
+                <td class="td-check"><input type="checkbox" checked aria-label="상품 선택"></td>
+                <td>
+                  <div class="cart-item-cell">
+                    <a href="product-detail.html" class="cart-thumb">
+                      <img src="images/Lip-1.jpg" alt="벨벳 매트 립스틱">
+                    </a>
+                    <div class="cart-item-info">
+                      <p class="cart-item-brand">POZE Lip</p>
+                      <a href="product-detail.html" class="cart-item-name">벨벳 매트 립스틱</a>
+                      <p class="cart-item-option">컬러 : 01 Rose Nude</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="td-price">
+                  22,400원
+                  <span class="strikethrough">28,000원</span>
+                </td>
+                <td class="td-qty">
+                  <div class="qty-ctl" role="group" aria-label="수량">
+                    <button aria-label="감소"><i class="fa-solid fa-minus" style="font-size:10px"></i></button>
+                    <input type="number" value="2" min="1" max="99" aria-label="수량">
+                    <button aria-label="증가"><i class="fa-solid fa-plus" style="font-size:10px"></i></button>
+                  </div>
+                </td>
+                <td class="td-subtotal">44,800원</td>
+                <td class="td-del"><button aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <!-- 쿠폰 행 2 -->
+              <tr class="coupon-row">
+                <td></td>
+                <td colspan="5">
+                  <div class="coupon-cell">
+                    <i class="fa-solid fa-ticket" style="color:var(--point);font-size:14px"></i>
+                    <select class="coupon-select" aria-label="쿠폰 선택">
+                      <option value="">쿠폰 선택</option>
+                      <option>신규가입 10% 할인 (-4,480원)</option>
+                    </select>
+                    <span class="coupon-hint">쿠폰 1개만 사용 가능합니다</span>
+                  </div>
+                </td>
+              </tr>
+              <!-- 상품 3 -->
+              <tr>
+                <td class="td-check"><input type="checkbox" checked aria-label="상품 선택"></td>
+                <td>
+                  <div class="cart-item-cell">
+                    <a href="product-detail.html" class="cart-thumb">
+                      <img src="images/Tool-1.png" alt="블렌딩 브러쉬 세트">
+                    </a>
+                    <div class="cart-item-info">
+                      <p class="cart-item-brand">POZE Tools</p>
+                      <a href="product-detail.html" class="cart-item-name">블렌딩 브러쉬 세트 5종</a>
+                      <p class="cart-item-option">구성 : 기본 세트</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="td-price">
+                  40,800원
+                  <span class="strikethrough">52,000원</span>
+                </td>
+                <td class="td-qty">
+                  <div class="qty-ctl" role="group" aria-label="수량">
+                    <button aria-label="감소"><i class="fa-solid fa-minus" style="font-size:10px"></i></button>
+                    <input type="number" value="1" min="1" max="99" aria-label="수량">
+                    <button aria-label="증가"><i class="fa-solid fa-plus" style="font-size:10px"></i></button>
+                  </div>
+                </td>
+                <td class="td-subtotal">40,800원</td>
+                <td class="td-del"><button aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <!-- 쿠폰 행 3 -->
+              <tr class="coupon-row">
+                <td></td>
+                <td colspan="5">
+                  <div class="coupon-cell">
+                    <i class="fa-solid fa-ticket" style="color:var(--point);font-size:14px"></i>
+                    <select class="coupon-select" aria-label="쿠폰 선택">
+                      <option value="">쿠폰 선택</option>
+                      <option>신규가입 10% 할인 (-4,080원)</option>
+                    </select>
+                    <span class="coupon-hint">쿠폰 1개만 사용 가능합니다</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 우측: 주문 요약 -->
+        <aside class="order-summary" aria-label="주문 요약">
+          <h3 class="serif">주문 요약</h3>
+          <div class="summary-rows">
+            <div class="summary-row">
+              <span class="summary-row-label">상품 금액</span>
+              <span class="summary-row-value">123,600원</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-row-label">할인 금액</span>
+              <span class="summary-row-value discount">- 18,000원</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-row-label">쿠폰 할인</span>
+              <span class="summary-row-value discount">- 0원</span>
+            </div>
+            <div class="summary-divider"></div>
+            <div class="summary-row">
+              <span class="summary-row-label">배송비</span>
+              <span class="summary-row-value free"><i class="fa-solid fa-truck-fast" style="font-size:12px;margin-right:4px"></i>무료</span>
+            </div>
+          </div>
+          <div class="summary-total">
+            <span class="summary-total-label">최종 결제금액</span>
+            <span class="summary-total-value serif">123,600원</span>
+          </div>
+          <p class="summary-vat">부가세 포함 가격입니다</p>
+          <!-- 포인트 -->
+          <div class="point-input-row">
+            <p class="point-input-label">포인트 사용</p>
+            <div class="point-input-wrap">
+              <input type="number" placeholder="0" min="0" aria-label="포인트 입력">
+              <button>전액 사용</button>
+            </div>
+            <p class="my-points">보유 포인트 <strong>3,720P</strong></p>
+          </div>
+          <a href="#" class="btn-checkout">결제하기 (3개)</a>
+          <a href="products.html" class="btn-continue"><i class="fa-solid fa-arrow-left" style="font-size:11px;margin-right:6px"></i>쇼핑 계속하기</a>
+          <!-- 결제 수단 -->
+          <div class="payment-icons">
+            <span class="pay-icon">VISA</span>
+            <span class="pay-icon">MASTER</span>
+            <span class="pay-icon">KAKAO</span>
+            <span class="pay-icon">NAVER</span>
+            <span class="pay-icon">무통장</span>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 추천 상품 -->
+  <section class="recommend-section">
+    <div class="container">
+      <h2 class="recommend-title serif">이 상품은 어떠세요?</h2>
+      <ul class="recommend-grid">
+        <li class="r-item">
+          <a href="product-detail.html">
+            <div class="r-item-img"><img src="images/Eyes-3.png" alt="뉴드 데일리 팔레트"><span class="r-item-badge">BEST</span></div>
+            <div class="r-item-info"><p class="r-item-brand">POZE Eye</p><p class="r-item-name">뉴드 데일리 팔레트</p><div class="r-item-price"><span class="r-price-sale">35,000원</span></div></div>
+          </a>
+        </li>
+        <li class="r-item">
+          <a href="product-detail.html">
+            <div class="r-item-img"><img src="images/Cheeks-1.png" alt="글로우 블러셔"></div>
+            <div class="r-item-info"><p class="r-item-brand">POZE Cheeks</p><p class="r-item-name">글로우 블러셔</p><div class="r-item-price"><span class="r-price-sale">24,000원</span></div></div>
+          </a>
+        </li>
+        <li class="r-item">
+          <a href="product-detail.html">
+            <div class="r-item-img"><img src="images/Face-1.jpg" alt="스킨 세럼 파운데이션"></div>
+            <div class="r-item-info"><p class="r-item-brand">POZE Face</p><p class="r-item-name">스킨 세럼 파운데이션</p><div class="r-item-price"><span class="r-price-sale">44,000원</span><span class="r-price-origin">55,000원</span></div></div>
+          </a>
+        </li>
+        <li class="r-item">
+          <a href="product-detail.html">
+            <div class="r-item-img"><img src="images/Lip-2.jpg" alt="글라스 립 글로우"></div>
+            <div class="r-item-info"><p class="r-item-brand">POZE Lip</p><p class="r-item-name">글라스 립 글로우</p><div class="r-item-price"><span class="r-price-sale">18,000원</span></div></div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" aria-label="사이트 푸터">
+  <div class="footer-top">
+    <div><p class="f-logo serif">POZE</p><p class="f-tagline">나에게 몰입하는 순간</p>
+      <div class="f-social">
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      </div>
+    </div>
+    <div class="f-nav-grid">
+      <div class="f-nav-col"><h4>SHOP</h4><ul><li><a href="products.html?c=new">신상품</a></li><li><a href="products.html?c=best">베스트</a></li><li><a href="products.html?c=sale">세일</a></li></ul></div>
+      <div class="f-nav-col"><h4>CUSTOMER</h4><ul><li><a href="board-list.html">공지사항</a></li><li><a href="board-list.html?type=faq">FAQ</a></li><li><a href="board-write.html">1:1 문의</a></li></ul></div>
+      <div class="f-nav-col"><h4>ACCOUNT</h4><ul><li><a href="mypage.html">마이페이지</a></li><li><a href="wishlist.html">관심상품</a></li><li><a href="cart.html">장바구니</a></li></ul></div>
+    </div>
+    <div class="f-cs"><h4>CUSTOMER SERVICE</h4><p class="f-cs-num serif">1588-0000</p><p class="f-cs-hours">평일 10:00 — 18:00<br>주말·공휴일 휴무</p><p class="f-cs-email"><a href="mailto:hello@poze.co.kr">hello@poze.co.kr</a></p></div>
+  </div>
+  <div class="footer-bottom">
+    <p>(주)포제 | 대표 : 홍길동 | 사업자등록번호 : 000-00-00000 | 주소 : 서울특별시 강남구 압구정로 000</p>
+    <p>© 2026 POZE. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileNav').classList.add('open'));
+  document.getElementById('mnavClose').addEventListener('click', () => document.getElementById('mobileNav').classList.remove('open'));
+  const sl = document.getElementById('searchLayer');
+  document.getElementById('searchBtn').addEventListener('click', () => { sl.classList.add('open'); setTimeout(() => sl.querySelector('input').focus(), 100); });
+  document.getElementById('searchClose').addEventListener('click', () => sl.classList.remove('open'));
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') sl.classList.remove('open'); });
+  // qty controls
+  document.querySelectorAll('.qty-ctl').forEach(ctl => {
+    const inp = ctl.querySelector('input');
+    ctl.querySelector('button:first-child').addEventListener('click', () => { if(inp.value > 1) inp.value--; updateTotals(); });
+    ctl.querySelector('button:last-child').addEventListener('click', () => { if(inp.value < 99) { inp.value++; updateTotals(); } });
+  });
+  // select all
+  document.getElementById('selectAll').addEventListener('change', function(){
+    document.querySelectorAll('.cart-table input[type="checkbox"]:not(#selectAll)').forEach(cb => cb.checked = this.checked);
+  });
+  function updateTotals() {
+    // visual update only — actual logic is Cafe24's
+  }
+})();
+</script>
+</body>
+</html>

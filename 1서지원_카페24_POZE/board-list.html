@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>공지사항 — POZE</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --main:#1e1a16;--sub:#2d2820;--point:#c2956c;--bg:#faf8f5;--bg-dark:#1a1008;
+  --surface:#f5f0e8;--white:#ffffff;--text-1:#1e1a16;--text-2:#5a5248;
+  --text-3:#9a8f85;--text-inv:#f5f0e8;--border:#e8e0d5;
+  --container-max:1550px;--container-pad:48px;--gap:24px;
+  --fs-base:16px;--fs-sm:14px;--fs-xs:12px;
+  --fw-light:300;--fw-regular:400;--fw-medium:500;--fw-semibold:600;--fw-bold:700;
+  --radius:8px;--radius-lg:16px;--radius-full:9999px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Pretendard','Noto Sans KR',sans-serif;color:var(--text-1);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}ul,li{list-style:none}
+img{display:block;max-width:100%;height:auto}
+button{border:0;background:none;cursor:pointer;font-family:inherit;font-size:inherit;color:inherit}
+input,select{font-family:inherit;outline:none}
+.container{max-width:var(--container-max);margin:0 auto;padding:0 var(--container-pad)}
+@media(max-width:768px){.container{padding:0 20px}}
+.serif{font-family:'Cormorant Garamond',serif}
+
+/* 띠배너 */
+.strip-announce{height:36px;background:var(--bg-dark);overflow:hidden;display:flex;align-items:center}
+.strip-track{display:flex;align-items:center;gap:80px;animation:marquee 32s linear infinite;white-space:nowrap;padding-right:80px}
+.strip-track span{font-size:11px;letter-spacing:.1em;color:rgba(245,240,232,.7)}
+.strip-track strong{color:var(--point)}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* 헤더 */
+.site-header{position:sticky;top:0;z-index:900;background:rgba(250,248,245,.97);box-shadow:0 1px 16px rgba(30,26,22,.06)}
+.header-inner{max-width:var(--container-max);margin:0 auto;padding:0 var(--container-pad);height:70px;display:flex;align-items:center;gap:16px;position:relative}
+@media(max-width:768px){.header-inner{padding:0 20px;height:58px}}
+.h-left{display:flex;align-items:center;gap:16px}
+.hamburger{width:36px;height:36px;display:flex;flex-direction:column;justify-content:center;gap:6px;cursor:pointer}
+.hamburger span{display:block;height:1.5px;background:var(--main);width:22px}
+.hamburger span:last-child{width:15px}
+.gnb{flex:1;display:flex;justify-content:center}
+.gnb ul{display:flex}
+.gnb ul li a{display:block;padding:8px 18px;font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);transition:color .2s}
+.gnb ul li a:hover{color:var(--point)}
+.gnb ul li.sale a{color:var(--point)}
+@media(max-width:1024px){.gnb{display:none}.site-logo{position:absolute;left:50%;transform:translateX(-50%)}}
+.h-right{display:flex;align-items:center;gap:2px}
+.h-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:17px;color:var(--text-2);transition:color .2s;position:relative;cursor:pointer}
+.h-icon:hover{color:var(--point)}
+.cart-badge{position:absolute;top:6px;right:5px;min-width:16px;height:16px;border-radius:var(--radius-full);background:var(--point);color:var(--white);font-size:9px;font-weight:var(--fw-bold);display:flex;align-items:center;justify-content:center;padding:0 3px}
+.site-logo{flex-shrink:0}
+.logo-txt{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;letter-spacing:.32em;color:var(--main);display:block}
+.mobile-nav{position:fixed;inset:0;z-index:950;background:var(--bg);transform:translateX(-100%);transition:transform .4s cubic-bezier(.25,.46,.45,.94);overflow-y:auto}
+.mobile-nav.open{transform:translateX(0)}
+.mobile-nav-inner{padding:80px 32px 48px}
+.mnav-close{position:absolute;top:18px;right:18px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--text-2);cursor:pointer}
+.mobile-nav ul li a{display:block;padding:18px 0;font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--text-1);border-bottom:1px solid var(--border)}
+.mobile-nav ul li a:hover{color:var(--point)}
+.mobile-nav ul li.sale a{color:var(--point)}
+.mnav-util{margin-top:32px;display:flex;gap:20px}
+.mnav-util a{font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+.search-layer{position:fixed;inset:0;z-index:960;background:rgba(250,248,245,.98);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.search-layer.open{opacity:1;pointer-events:all}
+.search-box{width:min(640px,88vw);border-bottom:2px solid var(--main)}
+.search-box input{width:100%;padding:16px 0;font-size:36px;font-family:'Cormorant Garamond',serif;font-weight:300;background:none;color:var(--text-1)}
+.search-box input::placeholder{color:var(--text-3)}
+.search-x{position:absolute;top:24px;right:32px;font-size:24px;color:var(--text-2);cursor:pointer;display:none}
+.search-layer.open .search-x{display:block}
+
+/* 페이지 헤더 */
+.page-header{padding:40px 0 32px;border-bottom:1px solid var(--border)}
+.page-header h1{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;letter-spacing:.04em;margin-bottom:4px}
+.page-header-sub{font-size:var(--fs-xs);color:var(--text-3);letter-spacing:.08em}
+
+/* 게시판 타입 탭 */
+.board-section{padding:32px 0 80px}
+.board-type-tabs{display:flex;gap:0;margin-bottom:32px;border-bottom:2px solid var(--main)}
+.board-tab{padding:12px 24px;font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);border-bottom:2px solid transparent;margin-bottom:-2px;cursor:pointer;transition:all .2s}
+.board-tab.active{color:var(--main);border-bottom-color:var(--main)}
+.board-tab:hover{color:var(--main)}
+@media(max-width:480px){.board-tab{padding:10px 14px;font-size:11px}}
+
+/* 게시판 상단 바 */
+.board-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:0;flex-wrap:wrap;gap:12px}
+.board-count{font-size:var(--fs-xs);color:var(--text-3)}
+.board-count strong{color:var(--point)}
+.search-form{display:flex;gap:8px}
+.search-select{padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:var(--fs-xs);color:var(--text-2);background:var(--white)}
+.search-input{padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);font-size:var(--fs-xs);color:var(--text-1);width:200px}
+.search-input:focus{border-color:var(--point)}
+.search-submit{padding:9px 16px;background:var(--main);color:var(--white);border-radius:var(--radius);font-size:var(--fs-xs);cursor:pointer;transition:background .2s}
+.search-submit:hover{background:var(--sub)}
+
+/* 고정 공지 */
+.notice-fixed{background:rgba(194,149,108,.06);border-left:3px solid var(--point)}
+
+/* 게시판 테이블 */
+.board-table{width:100%;border-collapse:collapse;margin-top:0}
+.board-table thead tr{border-top:2px solid var(--main);border-bottom:1px solid var(--border)}
+.board-table thead th{padding:12px 16px;font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);text-align:left}
+.board-table thead th:nth-child(1){width:70px;text-align:center}
+.board-table thead th:nth-child(3){width:110px}
+.board-table thead th:nth-child(4){width:100px;text-align:center}
+.board-table thead th:nth-child(5){width:70px;text-align:center}
+.board-table tbody tr{border-bottom:1px solid var(--border);transition:background .15s;cursor:pointer}
+.board-table tbody tr:hover{background:rgba(194,149,108,.04)}
+.board-table td{padding:16px}
+.board-table td:nth-child(1){text-align:center;font-size:var(--fs-xs);color:var(--text-3)}
+.board-table td:nth-child(4){text-align:center;font-size:var(--fs-xs);color:var(--text-3)}
+.board-table td:nth-child(5){text-align:center;font-size:var(--fs-xs);color:var(--text-3)}
+.post-num-badge{display:inline-block;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:var(--fw-bold);background:var(--point);color:var(--white)}
+.post-num-faq{background:var(--main)}
+.post-title{font-size:var(--fs-sm);color:var(--text-1);font-weight:var(--fw-medium);display:flex;align-items:center;gap:8px}
+.post-title:hover{color:var(--point)}
+.tag-new{font-size:10px;padding:1px 6px;background:var(--point);color:var(--white);border-radius:var(--radius-full);font-weight:var(--fw-bold);vertical-align:middle}
+.post-file{color:var(--text-3);font-size:12px;margin-left:4px}
+
+/* 모바일 카드 */
+@media(max-width:640px){
+  .board-table thead{display:none}
+  .board-table tbody tr{display:block;padding:14px 0;border-bottom:1px solid var(--border)}
+  .board-table td{display:block;padding:0}
+  .board-table td:nth-child(1){font-size:10px;color:var(--text-3);margin-bottom:4px}
+  .board-table td:nth-child(2){padding:0}
+  .board-table td:nth-child(3){display:none}
+  .board-table td:nth-child(4){font-size:10px;color:var(--text-3);margin-top:4px;text-align:left}
+  .board-table td:nth-child(5){display:none}
+  .post-title{font-size:var(--fs-sm)}
+}
+
+/* 페이지네이션 */
+.pagination{display:flex;justify-content:center;align-items:center;gap:4px;margin-top:32px}
+.pag-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius);font-size:var(--fs-xs);color:var(--text-2);cursor:pointer;transition:all .2s;border:1px solid transparent}
+.pag-btn:hover{border-color:var(--border);background:var(--surface)}
+.pag-btn.active{background:var(--main);color:var(--white);border-color:var(--main)}
+.pag-btn.arrow{font-size:13px}
+
+/* 글쓰기 버튼 */
+.write-btn-row{display:flex;justify-content:flex-end;margin-top:20px}
+.btn-write{display:inline-flex;align-items:center;gap:7px;padding:11px 22px;background:var(--main);color:var(--white);border-radius:var(--radius);font-size:var(--fs-xs);font-weight:var(--fw-bold);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .25s}
+.btn-write:hover{background:var(--sub);color:var(--point)}
+
+/* 푸터 */
+.site-footer{background:var(--bg-dark);color:var(--text-inv)}
+.footer-top{max-width:var(--container-max);margin:0 auto;padding:72px var(--container-pad) 48px;display:grid;grid-template-columns:220px 1fr 240px;gap:60px}
+@media(max-width:1024px){.footer-top{grid-template-columns:1fr 1fr;gap:40px;padding:48px 20px 32px}}
+@media(max-width:600px){.footer-top{grid-template-columns:1fr;padding:40px 20px 28px}}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;letter-spacing:.3em;margin-bottom:10px}
+.f-tagline{font-size:var(--fs-xs);letter-spacing:.15em;color:rgba(245,240,232,.45);margin-bottom:24px}
+.f-social{display:flex;gap:10px}
+.f-social a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(245,240,232,.18);display:flex;align-items:center;justify-content:center;font-size:13px;color:rgba(245,240,232,.55);transition:all .2s}
+.f-social a:hover{border-color:var(--point);color:var(--point)}
+.f-nav-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+@media(max-width:480px){.f-nav-grid{grid-template-columns:1fr 1fr}}
+.f-nav-col h4{font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.15em;text-transform:uppercase;color:rgba(245,240,232,.45);margin-bottom:16px}
+.f-nav-col ul li{margin-bottom:10px}
+.f-nav-col ul li a{font-size:var(--fs-sm);color:rgba(245,240,232,.65);transition:color .2s}
+.f-nav-col ul li a:hover{color:var(--point)}
+.f-cs h4{font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.15em;text-transform:uppercase;color:rgba(245,240,232,.45);margin-bottom:16px}
+.f-cs-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:6px}
+.f-cs-hours{font-size:var(--fs-xs);color:rgba(245,240,232,.45);line-height:1.9;margin-bottom:12px}
+.f-cs-email a{font-size:var(--fs-sm);color:rgba(245,240,232,.55);transition:color .2s}
+.f-cs-email a:hover{color:var(--point)}
+.footer-bottom{max-width:var(--container-max);margin:0 auto;padding:20px var(--container-pad);border-top:1px solid rgba(245,240,232,.08);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+@media(max-width:600px){.footer-bottom{padding:20px 20px;flex-direction:column;align-items:flex-start}}
+.footer-bottom p{font-size:11px;color:rgba(245,240,232,.3);line-height:1.85}
+</style>
+</head>
+<body>
+
+<section class="strip-announce">
+  <div class="strip-track">
+    <span>무료배송 <strong>50,000원</strong> 이상</span><span>✦</span>
+    <span>회원가입 즉시 <strong>10%</strong> 할인 쿠폰 지급</span><span>✦</span>
+    <span>7일 이내 교환·환불 보장</span><span>✦</span>
+    <span>무이자 할부 최대 <strong>12개월</strong></span><span>✦</span>
+    <span>무료배송 <strong>50,000원</strong> 이상</span><span>✦</span>
+    <span>회원가입 즉시 <strong>10%</strong> 할인 쿠폰 지급</span><span>✦</span>
+    <span>7일 이내 교환·환불 보장</span><span>✦</span>
+    <span>무이자 할부 최대 <strong>12개월</strong></span><span>✦</span>
+  </div>
+</section>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="h-left">
+      <button class="hamburger" id="hamburger" aria-label="메뉴"><span></span><span></span><span></span></button>
+    </div>
+    <a href="index.html" class="site-logo"><span class="logo-txt serif">POZE</span></a>
+    <nav class="gnb" aria-label="주메뉴"><ul>
+      <li><a href="products.html?c=new">NEW</a></li>
+      <li><a href="products.html?c=best">BEST</a></li>
+      <li><a href="products.html?c=eye">EYE</a></li>
+      <li><a href="products.html?c=lip">LIP</a></li>
+      <li><a href="products.html?c=face">FACE</a></li>
+      <li><a href="products.html?c=cheeks">CHEEKS</a></li>
+      <li><a href="products.html?c=tools">TOOLS</a></li>
+      <li class="sale"><a href="products.html?c=sale">SALE</a></li>
+    </ul></nav>
+    <div class="h-right">
+      <button class="h-icon" id="searchBtn" aria-label="검색"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <a href="wishlist.html" class="h-icon" aria-label="관심상품"><i class="fa-regular fa-heart"></i></a>
+      <a href="cart.html" class="h-icon" aria-label="장바구니" style="position:relative"><i class="fa-solid fa-bag-shopping"></i><span class="cart-badge">3</span></a>
+      <a href="mypage.html" class="h-icon" aria-label="마이페이지"><i class="fa-regular fa-user"></i></a>
+    </div>
+  </div>
+</header>
+
+<div class="search-layer" id="searchLayer" role="dialog" aria-label="검색">
+  <button class="search-x" id="searchClose" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
+  <div class="search-box"><input type="text" placeholder="무엇을 찾고 계신가요?" aria-label="검색어 입력"></div>
+</div>
+<nav class="mobile-nav" id="mobileNav" aria-label="모바일 메뉴">
+  <button class="mnav-close" id="mnavClose" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
+  <div class="mobile-nav-inner">
+    <ul>
+      <li><a href="products.html?c=new">New Arrivals</a></li>
+      <li><a href="products.html?c=best">Best Sellers</a></li>
+      <li><a href="products.html?c=eye">Eye</a></li>
+      <li><a href="products.html?c=lip">Lip</a></li>
+      <li><a href="products.html?c=face">Face</a></li>
+      <li><a href="products.html?c=cheeks">Cheeks</a></li>
+      <li><a href="products.html?c=tools">Tools</a></li>
+      <li class="sale"><a href="products.html?c=sale">Sale</a></li>
+    </ul>
+    <div class="mnav-util"><a href="login.html">로그인</a><a href="signup.html">회원가입</a><a href="mypage.html">마이페이지</a></div>
+  </div>
+</nav>
+
+<main>
+  <div class="page-header">
+    <div class="container">
+      <h1 class="serif">고객 지원</h1>
+      <p class="page-header-sub">CUSTOMER SUPPORT</p>
+    </div>
+  </div>
+
+  <section class="board-section">
+    <div class="container">
+      <!-- 게시판 탭 -->
+      <div class="board-type-tabs" role="tablist">
+        <button class="board-tab active" role="tab" data-board="notice">공지사항</button>
+        <button class="board-tab" role="tab" data-board="faq">FAQ</button>
+        <button class="board-tab" role="tab" data-board="inquiry">1:1 문의</button>
+        <button class="board-tab" role="tab" data-board="review">사용 후기</button>
+      </div>
+
+      <!-- 검색/필터 바 -->
+      <div class="board-topbar">
+        <p class="board-count">총 <strong>24</strong>개의 게시글</p>
+        <form class="search-form" role="search">
+          <select class="search-select" aria-label="검색 조건">
+            <option>전체</option>
+            <option>제목</option>
+            <option>내용</option>
+            <option>작성자</option>
+          </select>
+          <input class="search-input" type="text" placeholder="검색어를 입력해 주세요" aria-label="검색어">
+          <button type="submit" class="search-submit" aria-label="검색"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+      </div>
+
+      <!-- 테이블 -->
+      <table class="board-table" aria-label="공지사항 목록">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th>조회</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 고정 공지 -->
+          <tr class="notice-fixed" onclick="location.href='board-view.html'">
+            <td><span class="post-num-badge">공지</span></td>
+            <td><a href="board-view.html" class="post-title">[필독] POZE 서비스 이용약관 변경 안내 <span class="tag-new">NEW</span></a></td>
+            <td style="font-size:var(--fs-xs);color:var(--text-3)">관리자</td>
+            <td>2026.06.10</td>
+            <td>1,284</td>
+          </tr>
+          <tr class="notice-fixed" onclick="location.href='board-view.html'">
+            <td><span class="post-num-badge">공지</span></td>
+            <td><a href="board-view.html" class="post-title">[공지] 개인정보처리방침 개정 안내 (2026.05 시행)</a></td>
+            <td style="font-size:var(--fs-xs);color:var(--text-3)">관리자</td>
+            <td>2026.05.01</td>
+            <td>2,041</td>
+          </tr>
+          <!-- 일반 게시글 -->
+          <tr onclick="location.href='board-view.html'">
+            <td>24</td>
+            <td><a href="board-view.html" class="post-title">2026년 여름 신상품 출시 예고 <span class="tag-new">NEW</span></a></td>
+            <td style="font-size:var(--fs-xs);color:var(--text-3)">관리자</td>
+            <td>2026.06.08</td>
+            <td>843</td>
+          </tr>
+          <tr onclick="location.href='board-view.html'">
+            <td>23</td>
+            <td><a href="board-view.html" class="post-title">6월 정기 배송 일정 공지 <span class="tag-new">NEW</span></a></td>
+            <td style="font-size:var(--fs-xs);color:var(--text-3)">관리자</td>
+            <td>2026.06.05</td>
+            <td>512</td>
+          </tr>
+          <tr onclick="location.href='board-view.html'">
+            <td>22</td>
+            <td><a href="board-view.html" class="post-title">포인트 2배 적립 이벤트 (6/1~6/30) <i class="fa-solid fa-paperclip post-file" title="첨부파일"></i></a></td>
+            <td style="font-size:var(--fs-xs);color:var(--text-3)">관리자</td>
+            <td>2026.06.01</td>
+            <td>1,732</td>
+          </tr>
+          <tr onclick="location.href='board-view.html'">
+            <td>21</td>
+            <td><a href="board-view.html" class="post-title">5월 결제 시스템 점검 완료 안내</a></td>
+            <td style="font-size:var(--fs-xs);color:var(--text-3)">관리자</td>
+            <td>2026.05.28</td>
+            <td>389</td>
+          </tr>
+          <tr onclick="location.href='board-view.html'">
+            <td>20</td>
+            <td><a href="board-view.html" class="post-title">[이벤트] SNS 공유 시 10% 추가 할인 쿠폰 지급 <i class="fa-solid fa-paperclip post-file" title="첨부파일"></i></a></td>
+            <td style="font-size:var(--fs-xs);color:var(--text-3)">관리자</td>
+            <td>2026.05.20</td>
+            <td>2,100</td>
+          </tr>
+          <tr onclick="location.href='board-view.html'">
+            <td>19</td>
+            <td><a href="board-view.html" class="post-title">배송 파트너사 변경 안내</a></td>
+            <td style="font-size:var(--fs-xs);color:var(--text-3)">관리자</td>
+            <td>2026.05.15</td>
+            <td>746</td>
+          </tr>
+          <tr onclick="location.href='board-view.html'">
+            <td>18</td>
+            <td><a href="board-view.html" class="post-title">모바일 앱 출시 예정 안내</a></td>
+            <td style="font-size:var(--fs-xs);color:var(--text-3)">관리자</td>
+            <td>2026.05.10</td>
+            <td>918</td>
+          </tr>
+          <tr onclick="location.href='board-view.html'">
+            <td>17</td>
+            <td><a href="board-view.html" class="post-title">POZE LUCKY DRAW 당첨자 발표</a></td>
+            <td style="font-size:var(--fs-xs);color:var(--text-3)">관리자</td>
+            <td>2026.05.02</td>
+            <td>3,204</td>
+          </tr>
+          <tr onclick="location.href='board-view.html'">
+            <td>16</td>
+            <td><a href="board-view.html" class="post-title">4월 신상품 패키지 출시 안내</a></td>
+            <td style="font-size:var(--fs-xs);color:var(--text-3)">관리자</td>
+            <td>2026.04.25</td>
+            <td>1,088</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- 페이지네이션 -->
+      <nav class="pagination" aria-label="페이지 이동">
+        <button class="pag-btn arrow" aria-label="처음 페이지"><i class="fa-solid fa-angles-left"></i></button>
+        <button class="pag-btn arrow" aria-label="이전 페이지"><i class="fa-solid fa-angle-left"></i></button>
+        <button class="pag-btn active" aria-current="page">1</button>
+        <button class="pag-btn">2</button>
+        <button class="pag-btn">3</button>
+        <button class="pag-btn arrow" aria-label="다음 페이지"><i class="fa-solid fa-angle-right"></i></button>
+        <button class="pag-btn arrow" aria-label="마지막 페이지"><i class="fa-solid fa-angles-right"></i></button>
+      </nav>
+
+      <div class="write-btn-row">
+        <a href="board-write.html" class="btn-write"><i class="fa-solid fa-pen" style="font-size:11px"></i> 문의 작성</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-top">
+    <div><p class="f-logo serif">POZE</p><p class="f-tagline">나에게 몰입하는 순간</p>
+      <div class="f-social">
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      </div>
+    </div>
+    <div class="f-nav-grid">
+      <div class="f-nav-col"><h4>SHOP</h4><ul><li><a href="products.html?c=new">신상품</a></li><li><a href="products.html?c=best">베스트</a></li><li><a href="products.html?c=sale">세일</a></li></ul></div>
+      <div class="f-nav-col"><h4>CUSTOMER</h4><ul><li><a href="board-list.html">공지사항</a></li><li><a href="board-list.html?type=faq">FAQ</a></li><li><a href="board-write.html">1:1 문의</a></li></ul></div>
+      <div class="f-nav-col"><h4>ACCOUNT</h4><ul><li><a href="mypage.html">마이페이지</a></li><li><a href="wishlist.html">관심상품</a></li><li><a href="cart.html">장바구니</a></li></ul></div>
+    </div>
+    <div class="f-cs"><h4>CUSTOMER SERVICE</h4><p class="f-cs-num serif">1588-0000</p><p class="f-cs-hours">평일 10:00 — 18:00<br>주말·공휴일 휴무</p><p class="f-cs-email"><a href="mailto:hello@poze.co.kr">hello@poze.co.kr</a></p></div>
+  </div>
+  <div class="footer-bottom">
+    <p>(주)포제 | 대표 : 홍길동 | 사업자등록번호 : 000-00-00000 | 주소 : 서울특별시 강남구 압구정로 000</p>
+    <p>© 2026 POZE. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileNav').classList.add('open'));
+  document.getElementById('mnavClose').addEventListener('click', () => document.getElementById('mobileNav').classList.remove('open'));
+  const sl = document.getElementById('searchLayer');
+  document.getElementById('searchBtn').addEventListener('click', () => { sl.classList.add('open'); setTimeout(() => sl.querySelector('input').focus(), 100); });
+  document.getElementById('searchClose').addEventListener('click', () => sl.classList.remove('open'));
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') sl.classList.remove('open'); });
+  document.querySelectorAll('.board-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.board-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+  document.querySelectorAll('.pag-btn:not(.arrow)').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.pag-btn:not(.arrow)').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>plié BEAUTE — NOTICE 쓰기</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+  /* === plié BEAUTE 공통 토큰 (운영자 수정 영역) === */
+  :root{
+    --main:#6e4a43;--sub:#a87972;--point:#d4868f;--bg:#fffaf7;--bg-soft:#f8efeb;
+    --line:#ead8d2;--white:#fffdfb;
+    --gap-section:84px;--pad-x:clamp(22px,4vw,58px);--maxw:1550px;--gap-grid:22px;
+    --fs-hero:clamp(46px,6vw,74px);--fs-h1:clamp(34px,4vw,52px);--fs-h2:clamp(26px,2.6vw,40px);
+    --fs-title:14px;--fs-body:14px;--fs-sm:12px;--fs-xs:11px;
+    --fw-normal:400;--fw-bold:700;--fw-black:800;--radius:8px;
+    --font-ko:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    --font-en:"Archivo","Helvetica Neue",Arial,sans-serif;
+    --font-serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600&family=Pretendard:wght@400;500;700&display=swap');
+  *{box-sizing:border-box;}
+  body{margin:0;color:var(--main);background:var(--bg);font-family:var(--font-ko);font-size:var(--fs-body);line-height:1.6;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}img{display:block;width:100%;}ul{list-style:none;margin:0;padding:0;}h1,h2,h3,p{margin:0;}
+
+  /* 헤더 (모든 페이지 동일) */
+  .site-header{position:fixed;z-index:50;top:0;left:0;width:100%;height:86px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 var(--pad-x);color:#fff;background:linear-gradient(to bottom,rgba(85,42,44,.30),rgba(85,42,44,0));transition:background .35s,color .35s,box-shadow .35s;}
+  .site-header.solid{color:var(--main);background:var(--white);box-shadow:0 1px 0 var(--line);}
+  .site-header nav{display:flex;gap:clamp(18px,2.6vw,44px);font-family:var(--font-en);font-size:var(--fs-sm);font-weight:var(--fw-bold);letter-spacing:.5px;}
+  .nav-right{justify-content:flex-end;align-items:center;}.nav-right i{margin-right:6px;}
+  .site-header nav a{display:inline-flex;align-items:center;transition:color .2s;}.site-header nav a:hover{color:var(--point);}
+  .brand{text-align:center;font-family:var(--font-serif);line-height:.82;}
+  .brand span{display:block;font-size:48px;font-weight:500;letter-spacing:1px;}
+  .brand small{font-family:var(--font-en);font-size:10px;letter-spacing:8px;margin-left:8px;font-weight:var(--fw-bold);}
+
+  /* 푸터 (모든 페이지 동일) */
+  footer{margin-top:var(--gap-section);padding:42px var(--pad-x) 46px;background:var(--bg);border-top:1px solid var(--line);text-align:center;color:var(--sub);}
+  .service-row{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:26px;padding-bottom:34px;border-bottom:1px solid var(--line);text-align:left;}
+  .service-row .svc{display:flex;align-items:flex-start;gap:14px;}
+  .service-row i{color:var(--point);font-size:22px;margin-top:2px;}
+  .service-row b{display:block;font-family:var(--font-en);font-size:var(--fs-xs);font-weight:var(--fw-black);letter-spacing:.5px;color:var(--main);}
+  .service-row small{display:block;margin-top:5px;font-size:var(--fs-xs);}
+  .footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:34px;margin:30px 0 16px;font-family:var(--font-en);font-size:var(--fs-xs);font-weight:var(--fw-black);}
+  .footer-links a:hover{color:var(--point);}
+  footer .copy{font-family:var(--font-en);font-size:10px;letter-spacing:.5px;}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:54px;padding:0 30px;border:none;border-radius:var(--radius);cursor:pointer;font-family:var(--font-en);font-size:var(--fs-sm);font-weight:var(--fw-black);letter-spacing:1px;background:var(--point);color:#fff;transition:filter .2s;}
+  .btn:hover{filter:brightness(.94);}
+  .btn.outline{background:transparent;border:1px solid var(--main);color:var(--main);}
+  .btn.outline:hover{border-color:var(--point);color:var(--point);}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s;}
+  .reveal.visible{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+
+  /* 서브페이지 공통 */
+  .subpage{padding-top:86px;}
+  .subpage-inner{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad-x);}
+  .page-head{padding:54px 0 30px;text-align:center;}
+  .breadcrumb{font-family:var(--font-en);font-size:var(--fs-xs);font-weight:var(--fw-bold);letter-spacing:1px;color:var(--sub);margin-bottom:16px;}
+  .page-title{font-family:var(--font-serif);font-size:var(--fs-h1);font-weight:500;letter-spacing:1px;}
+  .page-title + .page-sub{margin-top:10px;color:var(--sub);font-size:var(--fs-sm);}
+
+  /* ===== board-write 전용 ===== */
+  .write{max-width:920px;margin:0 auto;border-top:2px solid var(--main);}
+  .write .row{display:grid;grid-template-columns:140px 1fr;border-bottom:1px solid var(--line);}
+  .write .row .lbl{display:flex;align-items:center;gap:5px;padding:18px 18px;background:var(--bg-soft);
+    font-size:var(--fs-sm);font-weight:var(--fw-bold);}
+  .write .row .lbl .req{color:var(--point);}
+  .write .row .fld{padding:14px 18px;}
+  .write input[type=text],.write select,.write textarea{width:100%;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--white);color:var(--main);font-family:var(--font-ko);font-size:var(--fs-body);padding:0 14px;height:50px;}
+  .write textarea{height:auto;min-height:320px;padding:14px;line-height:1.8;resize:vertical;}
+  .write input:focus,.write select:focus,.write textarea:focus{outline:none;border-color:var(--point);box-shadow:0 0 0 3px rgba(212,134,143,.16);}
+  .write select{appearance:none;width:240px;max-width:100%;padding-right:34px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23a87972' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");background-repeat:no-repeat;background-position:right 12px center;}
+  .write .file-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .write .file-btn{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px;border:1px dashed var(--line);
+    border-radius:var(--radius);background:var(--white);cursor:pointer;font-family:var(--font-ko);font-size:var(--fs-sm);color:var(--sub);}
+  .write .file-btn:hover{border-color:var(--point);color:var(--point);}
+  .write .file-name{font-size:var(--fs-sm);color:var(--sub);}
+  .write .opt-line{display:flex;align-items:center;gap:18px;flex-wrap:wrap;font-size:var(--fs-sm);color:var(--sub);}
+  .write .opt-line label{display:inline-flex;align-items:center;gap:8px;cursor:pointer;}
+  .write .opt-line input{width:16px;height:16px;accent-color:var(--point);}
+  .write-tip{max-width:920px;margin:14px auto 0;font-size:var(--fs-xs);color:var(--sub);line-height:1.8;}
+  .write-actions{display:flex;justify-content:center;gap:12px;margin-top:34px;}
+
+  @media (max-width:900px){
+    .site-header{height:72px;}.brand span{font-size:34px;}.brand small{font-size:8px;letter-spacing:4px;}
+    .subpage{padding-top:72px;}
+    .service-row{grid-template-columns:repeat(2,minmax(0,1fr));}
+  }
+  @media (max-width:600px){
+    .site-header{grid-template-columns:1fr auto;}.nav-left{display:none;}.nav-right a:not(:last-child){display:none;}
+    .write .row{grid-template-columns:1fr;}
+    .write .row .lbl{background:transparent;padding-bottom:0;}
+    .service-row,.footer-links{grid-template-columns:1fr;display:grid;gap:18px;}
+  }
+
+  /* ════════ ✦ BALLETCORE 디자인 레이어 (장식 전용 · 기존 규칙 유지) ✦ ════════ */
+  body{background:radial-gradient(42% 32% at 6% 2%,rgba(244,212,215,.55),transparent 60%),radial-gradient(38% 28% at 98% 12%,rgba(244,212,215,.45),transparent 60%),var(--bg);}
+  .ribbon-bar{position:fixed;z-index:60;inset:0 0 auto 0;height:34px;display:flex;align-items:center;justify-content:center;gap:16px;padding:0 16px;overflow:hidden;white-space:nowrap;background:linear-gradient(90deg,#e9b9c1,#f6d7db 32%,#f1cad0 68%,#e9b9c1);color:#7e515a;font-family:var(--font-en);font-size:10px;font-weight:var(--fw-black);letter-spacing:2.5px;box-shadow:0 1px 0 rgba(176,120,128,.25);}
+  .ribbon-bar .dot{opacity:.5;}.ribbon-bar .bow{width:20px;height:13px;color:#fff;flex:none;}
+  .site-header{top:34px;}.subpage{padding-top:120px;}
+  .brand::before{content:"";display:block;width:34px;height:21px;margin:0 auto 5px;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 40' fill='none'><path d='M32 20C20 5 2 8 5 20C2 32 20 35 32 20Z' fill='%23ffffff'/><path d='M32 20C44 5 62 8 59 20C62 32 44 35 32 20Z' fill='%23ffffff'/><path d='M30 26L24 39L30.5 34Z' fill='%23ffffff'/><path d='M34 26L40 39L33.5 34Z' fill='%23ffffff'/><rect x='27.5' y='12' width='9' height='16' rx='4.5' fill='%23ffffff'/></svg>") center/contain no-repeat;}
+  .site-header.solid .brand::before{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 40' fill='none'><path d='M32 20C20 5 2 8 5 20C2 32 20 35 32 20Z' fill='%23d4868f'/><path d='M32 20C44 5 62 8 59 20C62 32 44 35 32 20Z' fill='%23d4868f'/><path d='M30 26L24 39L30.5 34Z' fill='%23d4868f'/><path d='M34 26L40 39L33.5 34Z' fill='%23d4868f'/><rect x='27.5' y='12' width='9' height='16' rx='4.5' fill='%23d4868f'/></svg>");}
+  .page-title{display:inline-flex;align-items:center;gap:14px;}
+  .page-title::before,.page-title::after{content:"❀";color:var(--point);font-size:18px;opacity:.7;}
+  .btn{background:linear-gradient(135deg,#e3a0a9,#d4868f);box-shadow:0 10px 22px -12px rgba(212,134,143,.9);}
+  .btn.outline{background:transparent;box-shadow:none;}
+  .foot-crest{text-align:center;margin-bottom:30px;}
+  .foot-crest .bow{width:50px;height:31px;color:var(--point);margin:0 auto 12px;}
+  .foot-crest .foot-tag{font-family:var(--font-serif);font-style:italic;font-size:19px;color:var(--main);letter-spacing:.5px;margin:0;}
+  @media (max-width:900px){.subpage{padding-top:106px;}.ribbon-bar{font-size:9px;letter-spacing:1.5px;gap:10px;}}
+  @media (max-width:600px){.ribbon-bar span:nth-of-type(n+2),.ribbon-bar .dot{display:none;}}
+  </style>
+</head>
+<body>
+
+  <!-- ✦ 상단 새틴 리본 안내바 (모든 페이지 동일) ✦ -->
+  <div class="ribbon-bar">
+    <svg class="bow" viewBox="0 0 64 40" fill="none" aria-hidden="true"><path d="M32 20C20 5 2 8 5 20C2 32 20 35 32 20Z" fill="currentColor"/><path d="M32 20C44 5 62 8 59 20C62 32 44 35 32 20Z" fill="currentColor"/><path d="M30 26L24 39L30.5 34Z" fill="currentColor"/><path d="M34 26L40 39L33.5 34Z" fill="currentColor"/><rect x="27.5" y="12" width="9" height="16" rx="4.5" fill="currentColor"/></svg>
+    <span>FREE SHIPPING OVER ₩50,000</span><span class="dot">·</span>
+    <span>BALLETCORE BEAUTY EDIT</span><span class="dot">·</span>
+    <span>POINTE-PERFECT GIFT WRAP</span>
+    <svg class="bow" viewBox="0 0 64 40" fill="none" aria-hidden="true"><path d="M32 20C20 5 2 8 5 20C2 32 20 35 32 20Z" fill="currentColor"/><path d="M32 20C44 5 62 8 59 20C62 32 44 35 32 20Z" fill="currentColor"/><path d="M30 26L24 39L30.5 34Z" fill="currentColor"/><path d="M34 26L40 39L33.5 34Z" fill="currentColor"/><rect x="27.5" y="12" width="9" height="16" rx="4.5" fill="currentColor"/></svg>
+  </div>
+
+  <!-- ================= 헤더 (모든 페이지 동일) ================= -->
+  <header class="site-header">
+    <nav class="nav-left">
+      <a href="products.html">SHOP</a><a href="index.html#about">ABOUT</a><a href="index.html#journal">JOURNAL</a><a href="board-list.html">NOTICE</a>
+    </nav>
+    <a class="brand" href="index.html"><span>plié</span><small>BEAUTE</small></a>
+    <nav class="nav-right">
+      <a href="#"><i class="fa-solid fa-magnifying-glass"></i>SEARCH</a>
+      <a href="wishlist.html"><i class="fa-regular fa-heart"></i>WISHLIST</a>
+      <a href="login.html"><i class="fa-regular fa-user"></i>MY PAGE</a>
+      <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i>CART (0)</a>
+    </nav>
+  </header>
+
+  <main class="subpage">
+    <div class="subpage-inner">
+      <div class="page-head">
+        <p class="breadcrumb"><a href="index.html">HOME</a> &nbsp;/&nbsp; <a href="board-list.html">NOTICE</a> &nbsp;/&nbsp; 글쓰기</p>
+        <h1 class="page-title">Write Post</h1>
+        <p class="page-sub">게시글을 작성해 주세요</p>
+      </div>
+
+      <form class="write reveal" onsubmit="return false;">
+        <div class="row">
+          <div class="lbl">분류 <span class="req">*</span></div>
+          <div class="fld">
+            <select aria-label="분류">
+              <option>분류를 선택하세요</option>
+              <option>공지</option><option>이벤트</option><option>입고소식</option><option>FAQ</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="lbl">제목 <span class="req">*</span></div>
+          <div class="fld"><input type="text" placeholder="제목을 입력하세요" /></div>
+        </div>
+        <div class="row">
+          <div class="lbl">작성자 <span class="req">*</span></div>
+          <div class="fld"><input type="text" placeholder="이름 또는 닉네임" /></div>
+        </div>
+        <div class="row">
+          <div class="lbl">내용 <span class="req">*</span></div>
+          <div class="fld"><textarea placeholder="내용을 입력하세요"></textarea></div>
+        </div>
+        <div class="row">
+          <div class="lbl">첨부파일</div>
+          <div class="fld">
+            <div class="file-row">
+              <label class="file-btn"><i class="fa-solid fa-paperclip"></i> 파일 선택 <input type="file" hidden /></label>
+              <span class="file-name">선택된 파일 없음 (최대 5MB · jpg/png)</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="lbl">옵션</div>
+          <div class="fld">
+            <div class="opt-line">
+              <label><input type="checkbox" /> 비밀글로 작성</label>
+              <label><input type="checkbox" checked /> 댓글 허용</label>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <p class="write-tip">· 욕설, 비방, 광고성 게시글은 사전 통보 없이 삭제될 수 있습니다.<br />
+        · 개인정보(연락처·주소 등)는 비밀글로 작성해 주세요.</p>
+
+      <div class="write-actions">
+        <a href="board-list.html" class="btn outline">취소</a>
+        <button type="submit" class="btn">등록하기</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= 푸터 (모든 페이지 동일) ================= -->
+  <footer>
+    <div class="foot-crest">
+      <svg class="bow" viewBox="0 0 64 40" fill="none" aria-hidden="true"><path d="M32 20C20 5 2 8 5 20C2 32 20 35 32 20Z" fill="currentColor"/><path d="M32 20C44 5 62 8 59 20C62 32 44 35 32 20Z" fill="currentColor"/><path d="M30 26L24 39L30.5 34Z" fill="currentColor"/><path d="M34 26L40 39L33.5 34Z" fill="currentColor"/><rect x="27.5" y="12" width="9" height="16" rx="4.5" fill="currentColor"/></svg>
+      <p class="foot-tag">danse · grâce · beauté</p>
+    </div>
+    <div class="service-row">
+      <span class="svc"><i class="fa-solid fa-truck"></i><span><b>FREE SHIPPING</b><small>On orders over ₩50,000</small></span></span>
+      <span class="svc"><i class="fa-solid fa-gift"></i><span><b>GIFT WRAPPING</b><small>Elegant packaging</small></span></span>
+      <span class="svc"><i class="fa-regular fa-user"></i><span><b>MEMBER BENEFITS</b><small>Join for exclusive rewards</small></span></span>
+      <span class="svc"><i class="fa-solid fa-lock"></i><span><b>SECURE PAYMENT</b><small>Safe and easy checkout</small></span></span>
+    </div>
+    <div class="footer-links">
+      <a href="board-list.html">NOTICE</a><a href="wishlist.html">WISHLIST</a><a href="#">PRIVACY POLICY</a><a href="#">TERMS OF USE</a><a href="#">SHIPPING &amp; RETURNS</a><a href="#">CONTACT</a>
+    </div>
+    <p class="copy">© PLIÉ BEAUTE. ALL RIGHTS RESERVED.</p>
+  </footer>
+
+  <script>
+    (function(){var header=document.querySelector('.site-header');var hero=document.querySelector('.hero');
+      function onScroll(){if(!hero){header.classList.add('solid');return;}header.classList.toggle('solid',window.scrollY>hero.offsetHeight-90);}
+      onScroll();window.addEventListener('scroll',onScroll,{passive:true});})();
+    (function(){var els=document.querySelectorAll('.reveal');
+      if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('visible');});return;}
+      var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');io.unobserve(x.target);}});},{threshold:.06});
+      els.forEach(function(e){io.observe(e);});})();
+    // 파일명 표시 (모양 전용)
+    var fi=document.querySelector('.write input[type=file]');
+    if(fi){fi.addEventListener('change',function(){var n=document.querySelector('.file-name');if(n)n.textContent=fi.files.length?fi.files[0].name:'선택된 파일 없음';});}
+  </script>
+</body>
+</html>

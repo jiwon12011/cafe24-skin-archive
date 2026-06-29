@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POZE — 나에게 몰입하는 순간</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   POZE 2026 CAFE24 SKIN — index.html
+   아래 :root 변수만 수정하면 전체 디자인이 일괄 변경됩니다.
+   ═══════════════════════════════════════════════════════════════ */
+:root{
+  /* ① 색상 */
+  --main:    #1e1a16;
+  --sub:     #2d2820;
+  --point:   #c2956c;   /* 포인트 — 버튼·가격·배지·링크호버 전부 */
+  --bg:      #faf8f5;
+  --bg-dark: #1a1008;
+  --surface: #f5f0e8;
+  --white:   #ffffff;
+  --text-1:  #1e1a16;
+  --text-2:  #5a5248;
+  --text-3:  #9a8f85;
+  --text-inv:#f5f0e8;
+  --border:  #e8e0d5;
+
+  /* ② 섹션 간격 */
+  --section-gap: 100px;
+  --section-pad: 80px;
+
+  /* ③ 컨테이너 */
+  --container-max: 1550px;
+  --container-pad: 48px;
+  --gap: 24px;
+
+  /* ④ 글자크기 */
+  --fs-hero: 72px;
+  --fs-xl:   48px;
+  --fs-lg:   36px;
+  --fs-md:   24px;
+  --fs-base: 16px;
+  --fs-sm:   14px;
+  --fs-xs:   12px;
+
+  /* ⑤ 글자두께 */
+  --fw-light:    300;
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+
+  /* ⑥ 모서리 */
+  --radius:      8px;
+  --radius-lg:   16px;
+  --radius-full: 9999px;
+}
+
+/* ── Reset ──────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Pretendard','Noto Sans KR',sans-serif;color:var(--text-1);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+ul,li{list-style:none}
+img{display:block;max-width:100%;height:auto}
+button{border:0;background:none;cursor:pointer;font-family:inherit;font-size:inherit;color:inherit}
+input,textarea,select{font-family:inherit;outline:none;border:0}
+
+/* ── Layout ─────────────────────────────────────────────────── */
+.container{max-width:var(--container-max);margin:0 auto;padding:0 var(--container-pad)}
+@media(max-width:768px){.container{padding:0 20px}}
+.serif{font-family:'Cormorant Garamond',serif}
+
+/* ── 섹션 공통 타이포 ──────────────────────────────────────── */
+.eyebrow{display:block;font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.2em;text-transform:uppercase;color:var(--point);margin-bottom:10px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:var(--fs-lg);font-weight:400;line-height:1.2;color:var(--text-1)}
+.sec-title.inv{color:var(--text-inv)}
+.sec-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px}
+.sec-more{font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);display:flex;align-items:center;gap:6px;transition:color .2s}
+.sec-more:hover{color:var(--point)}
+
+/* ── 버튼 ───────────────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 32px;font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.12em;text-transform:uppercase;border-radius:var(--radius);cursor:pointer;transition:all .25s ease}
+.btn-dark{background:var(--main);color:var(--white)}
+.btn-dark:hover{background:var(--sub);color:var(--point)}
+.btn-outline{border:1.5px solid var(--main);color:var(--main)}
+.btn-outline:hover{background:var(--main);color:var(--white)}
+.btn-point{background:var(--point);color:var(--white)}
+.btn-point:hover{filter:brightness(.9)}
+.btn-light{border:1.5px solid rgba(245,240,232,.6);color:var(--text-inv)}
+.btn-light:hover{background:var(--text-inv);color:var(--main)}
+
+/* ── 애니메이션 ─────────────────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}.reveal.d4{transition-delay:.4s}
+
+/* ── 띠배너 1 (최상단 공지) ────────────────────────────────── */
+.strip-announce{
+  position:fixed;top:0;left:0;right:0;z-index:910;
+  height:36px;background:var(--bg-dark);
+  overflow:hidden;display:flex;align-items:center
+}
+.strip-track{
+  display:flex;align-items:center;gap:80px;
+  animation:marquee 32s linear infinite;
+  white-space:nowrap;padding-right:80px
+}
+.strip-track span{font-size:11px;letter-spacing:.1em;color:rgba(245,240,232,.7)}
+.strip-track strong{color:var(--point)}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── 헤더 ───────────────────────────────────────────────────── */
+.site-header{
+  position:fixed;top:36px;left:0;right:0;z-index:900;
+  transition:top .3s,background .3s,box-shadow .3s
+}
+.site-header.scrolled{top:0;background:rgba(250,248,245,.97);box-shadow:0 1px 16px rgba(30,26,22,.06)}
+.header-inner{
+  max-width:var(--container-max);margin:0 auto;padding:0 var(--container-pad);
+  height:70px;display:flex;align-items:center;gap:16px;position:relative
+}
+@media(max-width:768px){.header-inner{padding:0 20px;height:58px}}
+
+.h-left{display:flex;align-items:center;gap:16px}
+.hamburger{width:36px;height:36px;display:flex;flex-direction:column;justify-content:center;gap:6px;cursor:pointer}
+.hamburger span{display:block;height:1.5px;background:var(--main);transition:all .3s;width:22px}
+.hamburger span:last-child{width:15px}
+.hero-mode .hamburger span{background:var(--text-inv)}
+.hero-mode.scrolled .hamburger span{background:var(--main)}
+
+.gnb{flex:1;display:flex;justify-content:center}
+.gnb ul{display:flex;gap:0}
+.gnb ul li a{display:block;padding:8px 18px;font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);transition:color .2s}
+.gnb ul li a:hover,.gnb ul li.active a{color:var(--point)}
+.gnb ul li.sale a{color:var(--point)}
+.hero-mode .gnb ul li a{color:rgba(245,240,232,.75)}
+.hero-mode .gnb ul li a:hover{color:var(--text-inv)}
+.hero-mode.scrolled .gnb ul li a{color:var(--text-2)}
+@media(max-width:1024px){.gnb{display:none}.site-logo{position:absolute;left:50%;transform:translateX(-50%)}}
+
+.h-right{display:flex;align-items:center;gap:2px}
+.h-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:17px;color:var(--text-2);transition:color .2s;position:relative;cursor:pointer}
+.h-icon:hover{color:var(--point)}
+.hero-mode .h-icon{color:rgba(245,240,232,.8)}
+.hero-mode.scrolled .h-icon{color:var(--text-2)}
+.cart-badge{position:absolute;top:6px;right:5px;min-width:16px;height:16px;border-radius:var(--radius-full);background:var(--point);color:var(--white);font-size:9px;font-weight:var(--fw-bold);display:flex;align-items:center;justify-content:center;padding:0 3px}
+
+.site-logo{flex-shrink:0}
+.logo-txt{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;letter-spacing:.32em;color:var(--main);display:block}
+.hero-mode .logo-txt{color:var(--text-inv)}
+.hero-mode.scrolled .logo-txt{color:var(--main)}
+
+/* 모바일 메뉴 */
+.mobile-nav{position:fixed;inset:0;z-index:950;background:var(--bg);transform:translateX(-100%);transition:transform .4s cubic-bezier(.25,.46,.45,.94);overflow-y:auto}
+.mobile-nav.open{transform:translateX(0)}
+.mobile-nav-inner{padding:80px 32px 48px}
+.mnav-close{position:absolute;top:18px;right:18px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--text-2);cursor:pointer}
+.mobile-nav ul li a{display:block;padding:18px 0;font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--text-1);border-bottom:1px solid var(--border)}
+.mobile-nav ul li a:hover{color:var(--point)}
+.mobile-nav ul li.sale a{color:var(--point)}
+.mnav-util{margin-top:32px;display:flex;gap:20px}
+.mnav-util a{font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+
+/* 검색 오버레이 */
+.search-layer{position:fixed;inset:0;z-index:960;background:rgba(250,248,245,.98);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.search-layer.open{opacity:1;pointer-events:all}
+.search-box{width:min(640px,88vw);border-bottom:2px solid var(--main)}
+.search-box input{width:100%;padding:16px 0;font-size:var(--fs-lg);font-family:'Cormorant Garamond',serif;font-weight:300;background:none;color:var(--text-1)}
+.search-box input::placeholder{color:var(--text-3)}
+.search-x{position:absolute;top:24px;right:32px;font-size:24px;color:var(--text-2);cursor:pointer;display:none}
+.search-layer.open .search-x{display:block}
+
+/* ── 히어로 ──────────────────────────────────────────────────── */
+.hero-section{position:relative;height:100svh;min-height:560px;overflow:hidden}
+.hero-section picture,.hero-section>img{position:absolute;inset:0;width:100%;height:100%}
+.hero-section picture img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(26,16,8,.25) 0%,rgba(26,16,8,.1) 50%,rgba(26,16,8,.5) 100%)}
+.hero-content{
+  position:absolute;bottom:14%;left:0;right:0;
+  text-align:center;color:var(--text-inv)
+}
+.hero-eyebrow{display:block;font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.3em;text-transform:uppercase;color:var(--point);margin-bottom:16px;opacity:.9}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,8vw,var(--fs-hero));font-weight:300;line-height:1.1;margin-bottom:20px;letter-spacing:.02em}
+.hero-sub{font-size:var(--fs-sm);letter-spacing:.12em;color:rgba(245,240,232,.75);margin-bottom:32px;text-transform:uppercase}
+.hero-ctas{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.hero-scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(245,240,232,.5);font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase}
+.scroll-line{width:1px;height:40px;background:rgba(245,240,232,.3);animation:scrollDown 1.8s ease-in-out infinite}
+@keyframes scrollDown{0%,100%{transform:scaleY(1);transform-origin:top}50%{transform:scaleY(.4);transform-origin:bottom}}
+
+/* ── 띠배너 2 (페이지 내 프로모션) ─────────────────────────── */
+.strip-promo{
+  position:relative;overflow:hidden;height:200px;
+  background:var(--surface)
+}
+.strip-promo img{width:100%;height:100%;object-fit:cover;object-position:center}
+.strip-promo-overlay{position:absolute;inset:0;background:rgba(26,16,8,.45);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;text-align:center}
+.strip-promo-overlay .eyebrow{color:var(--point);margin:0}
+.strip-promo-title{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,4vw,42px);font-weight:300;color:var(--text-inv);letter-spacing:.04em}
+.strip-promo-sub{font-size:var(--fs-xs);letter-spacing:.15em;text-transform:uppercase;color:rgba(245,240,232,.65)}
+
+/* ── 카테고리 섹션 ───────────────────────────────────────────── */
+.section-categories{padding:var(--section-pad) 0}
+.cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+@media(max-width:1024px){.cat-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.cat-grid{grid-template-columns:repeat(2,1fr)}}
+.cat-item{border-radius:var(--radius);overflow:hidden;position:relative;aspect-ratio:3/4;cursor:pointer}
+.cat-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.cat-item:hover img{transform:scale(1.06)}
+.cat-label{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,16,8,.7) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:20px 16px}
+.cat-label span{color:var(--text-inv);font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.15em;text-transform:uppercase}
+.cat-label p{color:rgba(245,240,232,.7);font-size:10px;letter-spacing:.1em;margin-top:4px}
+
+/* ── 상품 그리드 공통 ───────────────────────────────────────── */
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap);list-style:none}
+@media(max-width:1024px){.product-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){.product-grid{grid-template-columns:repeat(2,1fr);gap:16px}}
+.item{border-radius:var(--radius);overflow:hidden;transition:transform .3s}
+.item:hover{transform:translateY(-4px)}
+.item a{display:block}
+.item-img{position:relative;overflow:hidden;aspect-ratio:1/1;background:var(--surface)}
+.item-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.item:hover .item-img img{transform:scale(1.05)}
+.item-badge{position:absolute;top:12px;left:12px;padding:4px 10px;border-radius:var(--radius-full);font-size:10px;font-weight:var(--fw-bold);letter-spacing:.06em;text-transform:uppercase}
+.badge-new{background:var(--main);color:var(--white)}
+.badge-sale{background:var(--point);color:var(--white)}
+.item-info{padding:14px 12px 20px;background:var(--bg)}
+.item-brand{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:4px}
+.item-name{font-size:var(--fs-sm);font-weight:var(--fw-medium);color:var(--text-1);line-height:1.45;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.item-price{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.price-sale{font-size:var(--fs-base);font-weight:var(--fw-bold);color:var(--point)}
+.price-origin{font-size:var(--fs-xs);color:var(--text-3);text-decoration:line-through}
+.section-products{padding:var(--section-pad) 0}
+
+/* ── 기획전/룩북 배너 ────────────────────────────────────────── */
+.section-lookbook{padding:var(--section-pad) 0}
+.lookbook-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+@media(max-width:768px){.lookbook-grid{grid-template-columns:1fr 1fr;gap:12px}}
+@media(max-width:480px){.lookbook-grid{grid-template-columns:1fr;gap:12px}}
+.lookbook-item{position:relative;overflow:hidden;border-radius:var(--radius);aspect-ratio:3/4;cursor:pointer}
+.lookbook-item:first-child{grid-row:span 2;aspect-ratio:auto}
+@media(max-width:768px){.lookbook-item:first-child{grid-row:span 1;aspect-ratio:3/4}}
+.lookbook-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.lookbook-item:hover img{transform:scale(1.04)}
+.lookbook-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,16,8,.65) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:24px}
+.lookbook-overlay .eyebrow{color:var(--point);margin-bottom:6px}
+.lookbook-overlay h3{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2vw,24px);font-weight:300;color:var(--text-inv);line-height:1.3}
+
+/* ── 브랜드 스토리 티저 ─────────────────────────────────────── */
+.section-brand{padding:var(--section-pad) 0;background:var(--bg-dark)}
+.brand-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+@media(max-width:900px){.brand-inner{grid-template-columns:1fr;gap:40px}}
+.brand-text .eyebrow{color:var(--point)}
+.brand-text .sec-title{color:var(--text-inv);font-size:clamp(28px,3.5vw,var(--fs-xl));margin-bottom:24px}
+.brand-text p{font-size:var(--fs-sm);line-height:1.85;color:rgba(245,240,232,.65);margin-bottom:32px}
+.brand-img{border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/5}
+.brand-img img{width:100%;height:100%;object-fit:cover}
+
+/* ── 인스타그램 피드 ─────────────────────────────────────────── */
+.section-ig{padding:var(--section-pad) 0}
+.ig-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+@media(max-width:900px){.ig-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:480px){.ig-grid{grid-template-columns:repeat(2,1fr)}}
+.ig-item{aspect-ratio:1/1;overflow:hidden;border-radius:4px;position:relative;cursor:pointer}
+.ig-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.ig-item:hover img{transform:scale(1.06)}
+.ig-item .ig-hover{position:absolute;inset:0;background:rgba(26,16,8,.4);opacity:0;transition:opacity .3s;display:flex;align-items:center;justify-content:center}
+.ig-item:hover .ig-hover{opacity:1}
+.ig-hover i{color:var(--text-inv);font-size:24px}
+.ig-header{text-align:center;margin-bottom:32px}
+.ig-header .sec-title{margin-bottom:8px}
+.ig-handle{font-size:var(--fs-sm);color:var(--text-3)}
+.ig-handle a{color:var(--point);transition:opacity .2s}
+.ig-handle a:hover{opacity:.75}
+
+/* ── 푸터 ───────────────────────────────────────────────────── */
+.site-footer{background:var(--bg-dark);color:var(--text-inv)}
+.footer-top{
+  max-width:var(--container-max);margin:0 auto;padding:72px var(--container-pad) 48px;
+  display:grid;grid-template-columns:220px 1fr 240px;gap:60px
+}
+@media(max-width:1024px){.footer-top{grid-template-columns:1fr 1fr;gap:40px;padding:48px 20px 32px}}
+@media(max-width:600px){.footer-top{grid-template-columns:1fr;padding:40px 20px 28px}}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;letter-spacing:.3em;margin-bottom:10px}
+.f-tagline{font-size:var(--fs-xs);letter-spacing:.15em;color:rgba(245,240,232,.45);margin-bottom:24px}
+.f-social{display:flex;gap:10px}
+.f-social a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(245,240,232,.18);display:flex;align-items:center;justify-content:center;font-size:13px;color:rgba(245,240,232,.55);transition:all .2s}
+.f-social a:hover{border-color:var(--point);color:var(--point)}
+.f-nav-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+@media(max-width:480px){.f-nav-grid{grid-template-columns:1fr 1fr}}
+.f-nav-col h4{font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.15em;text-transform:uppercase;color:rgba(245,240,232,.45);margin-bottom:16px}
+.f-nav-col ul li{margin-bottom:10px}
+.f-nav-col ul li a{font-size:var(--fs-sm);color:rgba(245,240,232,.65);transition:color .2s}
+.f-nav-col ul li a:hover{color:var(--point)}
+.f-cs h4{font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.15em;text-transform:uppercase;color:rgba(245,240,232,.45);margin-bottom:16px}
+.f-cs-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:6px}
+.f-cs-hours{font-size:var(--fs-xs);color:rgba(245,240,232,.45);line-height:1.9;margin-bottom:12px}
+.f-cs-email a{font-size:var(--fs-sm);color:rgba(245,240,232,.55);transition:color .2s}
+.f-cs-email a:hover{color:var(--point)}
+.footer-bottom{
+  max-width:var(--container-max);margin:0 auto;
+  padding:20px var(--container-pad);
+  border-top:1px solid rgba(245,240,232,.08);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap
+}
+@media(max-width:600px){.footer-bottom{padding:20px 20px;flex-direction:column;align-items:flex-start}}
+.footer-bottom p{font-size:11px;color:rgba(245,240,232,.3);line-height:1.85}
+</style>
+</head>
+<body>
+
+<!-- ── 띠배너 1 (최상단 공지) ─────────────────────────────── -->
+<section class="strip-announce" aria-label="공지사항">
+  <div class="strip-track">
+    <span>무료배송 <strong>50,000원</strong> 이상</span>
+    <span>✦</span>
+    <span>회원가입 즉시 <strong>10%</strong> 할인 쿠폰 지급</span>
+    <span>✦</span>
+    <span>7일 이내 교환·환불 보장</span>
+    <span>✦</span>
+    <span>무이자 할부 최대 <strong>12개월</strong></span>
+    <span>✦</span>
+    <span>무료배송 <strong>50,000원</strong> 이상</span>
+    <span>✦</span>
+    <span>회원가입 즉시 <strong>10%</strong> 할인 쿠폰 지급</span>
+    <span>✦</span>
+    <span>7일 이내 교환·환불 보장</span>
+    <span>✦</span>
+    <span>무이자 할부 최대 <strong>12개월</strong></span>
+    <span>✦</span>
+  </div>
+</section>
+
+<!-- ── 헤더 ───────────────────────────────────────────────── -->
+<header class="site-header hero-mode" id="siteHeader">
+  <div class="header-inner">
+    <div class="h-left">
+      <button class="hamburger" id="hamburger" aria-label="메뉴">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <a href="index.html" class="site-logo">
+      <span class="logo-txt">POZE</span>
+    </a>
+    <nav class="gnb" aria-label="주메뉴">
+      <ul>
+        <li><a href="products.html?c=new">NEW</a></li>
+        <li><a href="products.html?c=best">BEST</a></li>
+        <li><a href="products.html?c=eye">EYE</a></li>
+        <li><a href="products.html?c=lip">LIP</a></li>
+        <li><a href="products.html?c=face">FACE</a></li>
+        <li><a href="products.html?c=cheeks">CHEEKS</a></li>
+        <li><a href="products.html?c=tools">TOOLS</a></li>
+        <li class="sale"><a href="products.html?c=sale">SALE</a></li>
+      </ul>
+    </nav>
+    <div class="h-right">
+      <button class="h-icon" id="searchBtn" aria-label="검색"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <a href="wishlist.html" class="h-icon" aria-label="관심상품"><i class="fa-regular fa-heart"></i></a>
+      <a href="cart.html" class="h-icon" aria-label="장바구니" style="position:relative">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="cart-badge">0</span>
+      </a>
+      <a href="login.html" class="h-icon" aria-label="로그인"><i class="fa-regular fa-user"></i></a>
+    </div>
+  </div>
+</header>
+
+<!-- 검색 오버레이 -->
+<div class="search-layer" id="searchLayer" role="dialog" aria-label="검색">
+  <button class="search-x" id="searchClose" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
+  <div class="search-box">
+    <input type="text" placeholder="무엇을 찾고 계신가요?" aria-label="검색어 입력">
+  </div>
+</div>
+
+<!-- 모바일 메뉴 -->
+<nav class="mobile-nav" id="mobileNav" aria-label="모바일 메뉴">
+  <button class="mnav-close" id="mnavClose" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
+  <div class="mobile-nav-inner">
+    <ul>
+      <li><a href="products.html?c=new">New Arrivals</a></li>
+      <li><a href="products.html?c=best">Best Sellers</a></li>
+      <li><a href="products.html?c=eye">Eye</a></li>
+      <li><a href="products.html?c=lip">Lip</a></li>
+      <li><a href="products.html?c=face">Face</a></li>
+      <li><a href="products.html?c=cheeks">Cheeks</a></li>
+      <li><a href="products.html?c=tools">Tools</a></li>
+      <li class="sale"><a href="products.html?c=sale">Sale</a></li>
+    </ul>
+    <div class="mnav-util">
+      <a href="login.html">로그인</a>
+      <a href="signup.html">회원가입</a>
+      <a href="mypage.html">마이페이지</a>
+    </div>
+  </div>
+</nav>
+
+<main id="wrap">
+
+  <!-- ── 히어로 ──────────────────────────────────────────── -->
+  <section class="hero-section" aria-label="메인 비주얼">
+    <picture>
+      <source media="(max-width:768px)" srcset="images/hero_mobile.png">
+      <img src="images/main.png" alt="POZE 메인 비주얼" loading="eager">
+    </picture>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">2026 S/S Collection</span>
+      <h1 class="hero-title serif">나에게 몰입하는<br>순간</h1>
+      <p class="hero-sub">Ritual of Self — New Collection</p>
+      <div class="hero-ctas">
+        <a href="products.html?c=new" class="btn btn-light">New Arrivals</a>
+        <a href="products.html?c=best" class="btn btn-outline-ghost" style="border:1.5px solid rgba(245,240,232,.45);color:var(--text-inv);padding:14px 32px;font-size:var(--fs-xs);font-weight:600;letter-spacing:.12em;text-transform:uppercase;border-radius:var(--radius);display:inline-flex;align-items:center;gap:8px;transition:all .25s">Best Sellers</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ── 카테고리 섹션 ────────────────────────────────────── -->
+  <section class="section-categories" aria-label="카테고리">
+    <div class="container">
+      <div class="sec-header reveal">
+        <div>
+          <span class="eyebrow">Shop by Category</span>
+          <h2 class="sec-title">카테고리</h2>
+        </div>
+      </div>
+      <div class="cat-grid">
+        <a href="products.html?c=eye" class="cat-item reveal d1">
+          <img src="images/model_1.png" alt="아이 메이크업">
+          <div class="cat-label"><span>Eye</span><p>아이 메이크업</p></div>
+        </a>
+        <a href="products.html?c=lip" class="cat-item reveal d2">
+          <img src="images/model_2.png" alt="립 메이크업">
+          <div class="cat-label"><span>Lip</span><p>립 메이크업</p></div>
+        </a>
+        <a href="products.html?c=face" class="cat-item reveal d3">
+          <img src="images/model_3.png" alt="페이스">
+          <div class="cat-label"><span>Face</span><p>베이스 메이크업</p></div>
+        </a>
+        <a href="products.html?c=cheeks" class="cat-item reveal d4">
+          <img src="images/model_4.png" alt="치크">
+          <div class="cat-label"><span>Cheeks</span><p>치크 &amp; 하이라이터</p></div>
+        </a>
+        <a href="products.html?c=tools" class="cat-item reveal d2">
+          <img src="images/model_5.png" alt="툴">
+          <div class="cat-label"><span>Tools</span><p>메이크업 툴</p></div>
+        </a>
+        <a href="products.html?c=sale" class="cat-item reveal d3">
+          <img src="images/main_sicky3.png" alt="세일">
+          <div class="cat-label"><span>Sale</span><p>최대 40% 할인</p></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 띠배너 2 (프로모션 배너) ────────────────────────── -->
+  <section class="strip-promo" aria-label="프로모션 배너">
+    <img src="images/secondary-photo1.jpg" alt="프로모션 배너">
+    <div class="strip-promo-overlay">
+      <span class="eyebrow">Limited Time Offer</span>
+      <p class="strip-promo-title serif">SUMMER RITUAL SALE — UP TO 40% OFF</p>
+      <p class="strip-promo-sub">6월 30일까지 · 선착순 한정 수량</p>
+    </div>
+  </section>
+
+  <!-- ── 추천상품 ──────────────────────────────────────────── -->
+  <section class="section-products" aria-label="추천상품">
+    <div class="container">
+      <div class="sec-header reveal">
+        <div>
+          <span class="eyebrow">Curated for You</span>
+          <h2 class="sec-title">추천 상품</h2>
+        </div>
+        <a href="products.html" class="sec-more">전체보기 <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <ul class="product-grid">
+        <li class="item reveal d1">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Eyes-1.png" alt="딥 스모키 아이 팔레트">
+              <span class="item-badge badge-new">NEW</span>
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Eye</p>
+              <p class="item-name">딥 스모키 아이 팔레트</p>
+              <div class="item-price"><span class="price-sale">38,000원</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="item reveal d2">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Lip-1.jpg" alt="벨벳 매트 립스틱">
+              <span class="item-badge badge-sale">SALE</span>
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Lip</p>
+              <p class="item-name">벨벳 매트 립스틱</p>
+              <div class="item-price"><span class="price-sale">19,200원</span><span class="price-origin">24,000원</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="item reveal d3">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Face-1.jpg" alt="세미 매트 파운데이션">
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Face</p>
+              <p class="item-name">세미 매트 파운데이션 SPF30</p>
+              <div class="item-price"><span class="price-sale">45,000원</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="item reveal d4">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Cheeks-1.png" alt="실크 새틴 블러셔">
+              <span class="item-badge badge-new">NEW</span>
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Cheeks</p>
+              <p class="item-name">실크 새틴 블러셔</p>
+              <div class="item-price"><span class="price-sale">32,000원</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="item reveal d1">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Eyes-2.png" alt="선셋 글로우 팔레트">
+              <span class="item-badge badge-sale">SALE</span>
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Eye</p>
+              <p class="item-name">선셋 글로우 팔레트</p>
+              <div class="item-price"><span class="price-sale">33,600원</span><span class="price-origin">42,000원</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="item reveal d2">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Lip-2.jpg" alt="글로시 틴트 에디션">
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Lip</p>
+              <p class="item-name">글로시 틴트 에디션</p>
+              <div class="item-price"><span class="price-sale">21,000원</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="item reveal d3">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Face-2.png" alt="퍼펙트 쿠션 SPF50+">
+              <span class="item-badge badge-new">NEW</span>
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Face</p>
+              <p class="item-name">퍼펙트 쿠션 SPF50+ PA+++</p>
+              <div class="item-price"><span class="price-sale">38,000원</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="item reveal d4">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Tool-1.png" alt="블렌딩 브러쉬 세트">
+              <span class="item-badge badge-sale">SALE</span>
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Tools</p>
+              <p class="item-name">블렌딩 브러쉬 세트 5종</p>
+              <div class="item-price"><span class="price-sale">40,800원</span><span class="price-origin">52,000원</span></div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── 신상품 ────────────────────────────────────────────── -->
+  <section class="section-products" style="background:var(--surface);padding:var(--section-pad) 0" aria-label="신상품">
+    <div class="container">
+      <div class="sec-header reveal">
+        <div>
+          <span class="eyebrow">Just Arrived</span>
+          <h2 class="sec-title">신상품</h2>
+        </div>
+        <a href="products.html?c=new" class="sec-more">전체보기 <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <ul class="product-grid">
+        <li class="item reveal d1">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Eyes-3.png" alt="데일리 베이지 팔레트">
+              <span class="item-badge badge-new">NEW</span>
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Eye</p>
+              <p class="item-name">데일리 베이지 팔레트</p>
+              <div class="item-price"><span class="price-sale">29,000원</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="item reveal d2">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Eyes-4.png" alt="볼류마이징 마스카라">
+              <span class="item-badge badge-new">NEW</span>
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Eye</p>
+              <p class="item-name">볼류마이징 마스카라</p>
+              <div class="item-price"><span class="price-sale">22,000원</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="item reveal d3">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Lip-3.png" alt="에어 블러 립틴트">
+              <span class="item-badge badge-new">NEW</span>
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Lip</p>
+              <p class="item-name">에어 블러 립틴트</p>
+              <div class="item-price"><span class="price-sale">19,000원</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="item reveal d4">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Cheeks-2.png" alt="글로우 하이라이터">
+              <span class="item-badge badge-new">NEW</span>
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Cheeks</p>
+              <p class="item-name">글로우 하이라이터</p>
+              <div class="item-price"><span class="price-sale">35,000원</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="item reveal d1">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Eyes-5.png" alt="롱래스팅 젤 아이라이너">
+              <span class="item-badge badge-new">NEW</span>
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Eye</p>
+              <p class="item-name">롱래스팅 젤 아이라이너</p>
+              <div class="item-price"><span class="price-sale">18,000원</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="item reveal d2">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Lip-4.png" alt="플럼핑 립 글로스">
+              <span class="item-badge badge-new">NEW</span>
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Lip</p>
+              <p class="item-name">플럼핑 립 글로스</p>
+              <div class="item-price"><span class="price-sale">17,000원</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="item reveal d3">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Face-3.png" alt="비타민 글로우 세럼">
+              <span class="item-badge badge-new">NEW</span>
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Face</p>
+              <p class="item-name">비타민 글로우 세럼 프라이머</p>
+              <div class="item-price"><span class="price-sale">42,000원</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="item reveal d4">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Tool-2.png" alt="쉐이딩 브러쉬">
+              <span class="item-badge badge-new">NEW</span>
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Tools</p>
+              <p class="item-name">쉐이딩 &amp; 하이라이트 브러쉬</p>
+              <div class="item-price"><span class="price-sale">24,000원</span></div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── 베스트셀러 ────────────────────────────────────────── -->
+  <section class="section-products" aria-label="베스트셀러">
+    <div class="container">
+      <div class="sec-header reveal">
+        <div>
+          <span class="eyebrow">Most Loved</span>
+          <h2 class="sec-title">베스트셀러</h2>
+        </div>
+        <a href="products.html?c=best" class="sec-more">전체보기 <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <ul class="product-grid">
+        <li class="item reveal d1">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Eyes-6.png" alt="페더 터치 브로우 펜슬">
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Eye</p>
+              <p class="item-name">페더 터치 브로우 펜슬</p>
+              <div class="item-price"><span class="price-sale">16,000원</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="item reveal d2">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Lip-5.png" alt="새틴 립스틱">
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Lip</p>
+              <p class="item-name">새틴 립스틱 No.07 로즈</p>
+              <div class="item-price"><span class="price-sale">24,000원</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="item reveal d3">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Cheeks-3.png" alt="썬 블러셔 팔레트">
+              <span class="item-badge badge-sale">SALE</span>
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Cheeks</p>
+              <p class="item-name">썬 블러셔 팔레트</p>
+              <div class="item-price"><span class="price-sale">24,800원</span><span class="price-origin">32,000원</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="item reveal d4">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Face-4.png" alt="CC 크림 SPF50">
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Face</p>
+              <p class="item-name">CC 크림 SPF50 PA+++ 트리트먼트</p>
+              <div class="item-price"><span class="price-sale">36,000원</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="item reveal d1">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Eyes-7.png" alt="아이섀도우 쿼드">
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Eye</p>
+              <p class="item-name">아이섀도우 쿼드 — 오로라</p>
+              <div class="item-price"><span class="price-sale">35,000원</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="item reveal d2">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Lip-6.png" alt="미러 글로스">
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Lip</p>
+              <p class="item-name">미러 글로스 No.03</p>
+              <div class="item-price"><span class="price-sale">20,000원</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="item reveal d3">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Face-5.png" alt="스킨 틴트 세럼">
+              <span class="item-badge badge-sale">SALE</span>
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Face</p>
+              <p class="item-name">스킨 틴트 세럼 파운데이션</p>
+              <div class="item-price"><span class="price-sale">32,400원</span><span class="price-origin">45,000원</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="item reveal d4">
+          <a href="product-detail.html">
+            <div class="item-img">
+              <img src="images/Tool-3.png" alt="파우더 브러쉬">
+            </div>
+            <div class="item-info">
+              <p class="item-brand">POZE Tools</p>
+              <p class="item-name">루즈 파우더 브러쉬 프로</p>
+              <div class="item-price"><span class="price-sale">28,000원</span></div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── 기획전 / 룩북 배너 ────────────────────────────────── -->
+  <section class="section-lookbook" aria-label="기획전 룩북">
+    <div class="container">
+      <div class="sec-header reveal">
+        <div>
+          <span class="eyebrow">Editorial</span>
+          <h2 class="sec-title">기획전 &amp; 룩북</h2>
+        </div>
+      </div>
+      <div class="lookbook-grid">
+        <a href="products.html?c=new" class="lookbook-item reveal">
+          <img src="images/bmodel-1.png" alt="2026 S/S 컬렉션">
+          <div class="lookbook-overlay">
+            <span class="eyebrow">New Collection</span>
+            <h3 class="serif">2026 S/S<br>Ritual of Self</h3>
+          </div>
+        </a>
+        <a href="products.html?c=eye" class="lookbook-item reveal d1">
+          <img src="images/bmodel-2.png" alt="아이 메이크업 룩북">
+          <div class="lookbook-overlay">
+            <span class="eyebrow">Eye Lookbook</span>
+            <h3 class="serif">Smoky &amp; Sultry</h3>
+          </div>
+        </a>
+        <a href="products.html?c=lip" class="lookbook-item reveal d2">
+          <img src="images/bmodel-3.png" alt="립 컬렉션">
+          <div class="lookbook-overlay">
+            <span class="eyebrow">Lip Edition</span>
+            <h3 class="serif">Bold Lips</h3>
+          </div>
+        </a>
+        <a href="products.html?c=face" class="lookbook-item reveal d3">
+          <img src="images/bmodel-4.png" alt="글로우 스킨">
+          <div class="lookbook-overlay">
+            <span class="eyebrow">Glow Guide</span>
+            <h3 class="serif">Glass Skin</h3>
+          </div>
+        </a>
+        <a href="products.html?c=sale" class="lookbook-item reveal d4">
+          <img src="images/secondary-photo2.jpg" alt="세일 기획전">
+          <div class="lookbook-overlay">
+            <span class="eyebrow">Special Offer</span>
+            <h3 class="serif">Summer Sale<br>Up to 40%</h3>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 브랜드 스토리 ─────────────────────────────────────── -->
+  <section class="section-brand" aria-label="브랜드 스토리">
+    <div class="container">
+      <div class="brand-inner">
+        <div class="brand-text reveal-l">
+          <span class="eyebrow">Our Story</span>
+          <h2 class="sec-title inv serif">메이크업은<br>나를 표현하는<br>가장 솔직한 언어</h2>
+          <p>POZE는 '나에게 몰입하는 순간'을 위해 탄생했습니다.<br>매일 아침의 메이크업 리추얼이 나만의 의식이 되도록, 가장 순수한 성분과 정직한 발색으로 만들었습니다.</p>
+          <a href="../brand-story.html" class="btn btn-light">브랜드 스토리 보기</a>
+        </div>
+        <div class="brand-img reveal-r">
+          <img src="images/brand-story-cta-ritual-v2.png" alt="POZE 브랜드 스토리">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 인스타그램 피드 ──────────────────────────────────── -->
+  <section class="section-ig" aria-label="Instagram 피드">
+    <div class="container">
+      <div class="ig-header reveal">
+        <span class="eyebrow">Follow Our Journey</span>
+        <h2 class="sec-title">@poze_official</h2>
+        <p class="ig-handle">
+          <a href="https://instagram.com/poze_official" target="_blank" rel="noopener">Instagram</a>에서 나만의 POZE 룩을 공유해주세요
+        </p>
+      </div>
+      <div class="ig-grid">
+        <a href="#" class="ig-item reveal d1"><img src="images/ig-poze-01.png" alt="POZE Instagram"><div class="ig-hover"><i class="fa-brands fa-instagram"></i></div></a>
+        <a href="#" class="ig-item reveal d2"><img src="images/ig-poze-02.png" alt="POZE Instagram"><div class="ig-hover"><i class="fa-brands fa-instagram"></i></div></a>
+        <a href="#" class="ig-item reveal d3"><img src="images/ig-poze-03.png" alt="POZE Instagram"><div class="ig-hover"><i class="fa-brands fa-instagram"></i></div></a>
+        <a href="#" class="ig-item reveal d4"><img src="images/ig-poze-04.png" alt="POZE Instagram"><div class="ig-hover"><i class="fa-brands fa-instagram"></i></div></a>
+        <a href="#" class="ig-item reveal d2"><img src="images/ig-poze-05.png" alt="POZE Instagram"><div class="ig-hover"><i class="fa-brands fa-instagram"></i></div></a>
+        <a href="#" class="ig-item reveal d3"><img src="images/ig-poze-06.png" alt="POZE Instagram"><div class="ig-hover"><i class="fa-brands fa-instagram"></i></div></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── 푸터 ─────────────────────────────────────────────────── -->
+<footer class="site-footer" aria-label="사이트 푸터">
+  <div class="footer-top">
+    <div class="footer-brand reveal">
+      <p class="f-logo serif">POZE</p>
+      <p class="f-tagline">나에게 몰입하는 순간</p>
+      <div class="f-social">
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#" aria-label="KakaoTalk"><i class="fa-brands fa-comment" style="font-family:'Font Awesome 6 Brands'"></i></a>
+        <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      </div>
+    </div>
+    <div class="f-nav-grid reveal d1">
+      <div class="f-nav-col">
+        <h4>SHOP</h4>
+        <ul>
+          <li><a href="products.html?c=new">신상품</a></li>
+          <li><a href="products.html?c=best">베스트</a></li>
+          <li><a href="products.html?c=eye">아이</a></li>
+          <li><a href="products.html?c=lip">립</a></li>
+          <li><a href="products.html?c=face">페이스</a></li>
+          <li><a href="products.html?c=sale">세일</a></li>
+        </ul>
+      </div>
+      <div class="f-nav-col">
+        <h4>CUSTOMER</h4>
+        <ul>
+          <li><a href="board-list.html">공지사항</a></li>
+          <li><a href="board-list.html?type=faq">자주묻는질문</a></li>
+          <li><a href="board-write.html">1:1 문의</a></li>
+          <li><a href="board-list.html?type=review">리뷰</a></li>
+        </ul>
+      </div>
+      <div class="f-nav-col">
+        <h4>ACCOUNT</h4>
+        <ul>
+          <li><a href="mypage.html">마이페이지</a></li>
+          <li><a href="wishlist.html">관심상품</a></li>
+          <li><a href="cart.html">장바구니</a></li>
+          <li><a href="mypage.html?tab=order">주문배송</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-cs reveal d2">
+      <h4>CUSTOMER SERVICE</h4>
+      <p class="f-cs-num serif">1588-0000</p>
+      <p class="f-cs-hours">평일 10:00 — 18:00<br>점심 13:00 — 14:00<br>주말 · 공휴일 휴무</p>
+      <p class="f-cs-email"><a href="mailto:hello@poze.co.kr">hello@poze.co.kr</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>(주)포제 | 대표 : 홍길동 | 사업자등록번호 : 000-00-00000 | 주소 : 서울특별시 강남구 압구정로 000<br>통신판매업신고 : 제2026-서울강남-0000호 | 개인정보보호책임자 : 홍길동</p>
+    <p>© 2026 POZE. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ── Scripts ───────────────────────────────────────────────── -->
+<script>
+(function(){
+  'use strict';
+
+  // ── Header Scroll ──
+  const header = document.getElementById('siteHeader');
+  const strip  = document.querySelector('.strip-announce');
+  let lastY = 0;
+  function onScroll() {
+    const y = window.scrollY;
+    if (y > 60) {
+      header.classList.add('scrolled');
+      strip.style.transform = 'translateY(-100%)';
+      strip.style.transition = 'transform .4s';
+      header.style.top = '0';
+    } else {
+      header.classList.remove('scrolled');
+      strip.style.transform = '';
+      header.style.top = '36px';
+    }
+    lastY = y;
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // ── Hamburger / Mobile Nav ──
+  const hamburger  = document.getElementById('hamburger');
+  const mobileNav  = document.getElementById('mobileNav');
+  const mnavClose  = document.getElementById('mnavClose');
+  hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
+  mnavClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+
+  // ── Search ──
+  const searchBtn   = document.getElementById('searchBtn');
+  const searchLayer = document.getElementById('searchLayer');
+  const searchClose = document.getElementById('searchClose');
+  searchBtn.addEventListener('click', () => {
+    searchLayer.classList.add('open');
+    setTimeout(() => searchLayer.querySelector('input').focus(), 100);
+  });
+  searchClose.addEventListener('click', () => searchLayer.classList.remove('open'));
+  searchLayer.addEventListener('click', e => { if(e.target === searchLayer) searchLayer.classList.remove('open'); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') searchLayer.classList.remove('open'); });
+
+  // ── IntersectionObserver Reveal ──
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal, .reveal-l, .reveal-r').forEach(el => io.observe(el));
+
+})();
+</script>
+</body>
+</html>

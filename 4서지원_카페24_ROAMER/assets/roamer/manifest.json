@@ -1,0 +1,42 @@
+{
+  "brand": "ROAMER",
+  "generatedAt": "2026-06-25",
+  "assets": {
+    "hero": [
+      { "id": "move-light", "file": "hero-move-light.png", "ratio": "4:5", "suggestedAlt": "Model in light technical anorak and hiking backpack walking in studio" },
+      { "id": "all-weather-orange", "file": "hero-all-weather-orange.png", "ratio": "4:5", "suggestedAlt": "Model in orange waterproof shell standing in a stormy mountain landscape" },
+      { "id": "vision-forward", "file": "hero-vision-forward.png", "ratio": "4:5", "suggestedAlt": "Profile close-up of hooded model wearing reflective sport sunglasses" }
+    ],
+    "fieldNotes": [
+      { "id": "water-repellent-shell", "file": "field-water-repellent-shell.png", "ratio": "16:9", "suggestedAlt": "Close-up of waterproof shell fabric with rain beads and zipper" },
+      { "id": "made-to-move", "file": "field-made-to-move.png", "ratio": "16:9", "suggestedAlt": "Close-up of cargo pants and trail shoes stepping over wet rocks" }
+    ],
+    "weeklyBestItems": [
+      { "id": "windproof-anorak", "file": "product-windproof-anorak.png", "ratio": "1:1", "suggestedAlt": "Sage gray windproof anorak on model" },
+      { "id": "trail-utility-vest", "file": "product-trail-utility-vest.png", "ratio": "1:1", "suggestedAlt": "Black trail utility vest on model" },
+      { "id": "tech-cargo-pants", "file": "product-tech-cargo-pants.png", "ratio": "1:1", "suggestedAlt": "Olive technical cargo pants product image" },
+      { "id": "rover-trail-shoes", "file": "product-rover-trail-shoes.png", "ratio": "1:1", "suggestedAlt": "Rugged dark olive trail shoes on wet rock" },
+      { "id": "packable-daypack", "file": "product-packable-daypack.png", "ratio": "1:1", "suggestedAlt": "Light gray packable daypack worn by model" },
+      { "id": "roamer-cap", "file": "product-roamer-cap.png", "ratio": "1:1", "suggestedAlt": "Technical cap and sport sunglasses side profile" },
+      { "id": "half-zip-grid-fleece", "file": "product-half-zip-grid-fleece.png", "ratio": "1:1", "suggestedAlt": "Chartreuse half zip grid fleece on model" },
+      { "id": "convertible-pants", "file": "product-convertible-pants.png", "ratio": "1:1", "suggestedAlt": "Slate blue convertible hiking pants product image" },
+      { "id": "polarized-sport-shades", "file": "product-polarized-sport-shades.png", "ratio": "1:1", "suggestedAlt": "Polarized sport sunglasses resting on rock" },
+      { "id": "tech-long-sleeve-tee", "file": "product-tech-long-sleeve-tee.png", "ratio": "1:1", "suggestedAlt": "Light gray technical long sleeve tee on model" },
+      { "id": "utility-sling-bag", "file": "product-utility-sling-bag.png", "ratio": "1:1", "suggestedAlt": "Light gray utility sling bag worn crossbody" },
+      { "id": "trail-socks-2pk", "file": "product-trail-socks-2pk.png", "ratio": "1:1", "suggestedAlt": "Two pairs of olive and gray technical trail socks" }
+    ],
+    "bestSeller": [
+      { "id": "summit-3l-shell", "file": "bestseller-summit-3l-shell.png", "ratio": "4:3", "suggestedAlt": "Black 3L shell jacket in rocky mountain setting" },
+      { "id": "apex-cargo-pants", "file": "bestseller-apex-cargo-pants.png", "ratio": "4:3", "suggestedAlt": "Dark olive cargo pants walking across rocks" },
+      { "id": "roamer-windbreaker", "file": "bestseller-roamer-windbreaker.png", "ratio": "4:3", "suggestedAlt": "Orange hooded windbreaker studio product image" },
+      { "id": "expedition-backpack-28l", "file": "bestseller-expedition-backpack-28l.png", "ratio": "4:3", "suggestedAlt": "Large olive expedition backpack near misty lake" }
+    ],
+    "trailJournal": [
+      { "id": "beyond-the-map", "file": "journal-beyond-the-map.png", "ratio": "16:9", "suggestedAlt": "Two hikers walking toward a snow-dusted mountain peak" },
+      { "id": "shell-label-detail", "file": "journal-shell-label-detail.png", "ratio": "4:3", "suggestedAlt": "Close-up of technical shell fabric and woven label detail" },
+      { "id": "carabiner-detail", "file": "journal-carabiner-detail.png", "ratio": "4:3", "suggestedAlt": "Carabiners and sling on wet rock" },
+      { "id": "water-bottle-pocket", "file": "journal-water-bottle-pocket.png", "ratio": "4:3", "suggestedAlt": "Reusable water bottle tucked into hiking backpack side pocket" },
+      { "id": "yellow-shell-detail", "file": "journal-yellow-shell-detail.png", "ratio": "4:3", "suggestedAlt": "Yellow waterproof shell fabric with zipper and rain droplets" }
+    ]
+  }
+}

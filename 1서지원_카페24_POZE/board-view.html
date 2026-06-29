@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026년 여름 신상품 출시 예고 — POZE</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --main:#1e1a16;--sub:#2d2820;--point:#c2956c;--bg:#faf8f5;--bg-dark:#1a1008;
+  --surface:#f5f0e8;--white:#ffffff;--text-1:#1e1a16;--text-2:#5a5248;
+  --text-3:#9a8f85;--text-inv:#f5f0e8;--border:#e8e0d5;
+  --container-max:1550px;--container-pad:48px;--gap:24px;
+  --fs-base:16px;--fs-sm:14px;--fs-xs:12px;
+  --fw-light:300;--fw-regular:400;--fw-medium:500;--fw-semibold:600;--fw-bold:700;
+  --radius:8px;--radius-lg:16px;--radius-full:9999px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Pretendard','Noto Sans KR',sans-serif;color:var(--text-1);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}ul,li{list-style:none}
+img{display:block;max-width:100%;height:auto}
+button{border:0;background:none;cursor:pointer;font-family:inherit;font-size:inherit;color:inherit}
+input,select{font-family:inherit;outline:none}
+.container{max-width:var(--container-max);margin:0 auto;padding:0 var(--container-pad)}
+@media(max-width:768px){.container{padding:0 20px}}
+.serif{font-family:'Cormorant Garamond',serif}
+
+/* 띠배너 */
+.strip-announce{height:36px;background:var(--bg-dark);overflow:hidden;display:flex;align-items:center}
+.strip-track{display:flex;align-items:center;gap:80px;animation:marquee 32s linear infinite;white-space:nowrap;padding-right:80px}
+.strip-track span{font-size:11px;letter-spacing:.1em;color:rgba(245,240,232,.7)}
+.strip-track strong{color:var(--point)}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* 헤더 */
+.site-header{position:sticky;top:0;z-index:900;background:rgba(250,248,245,.97);box-shadow:0 1px 16px rgba(30,26,22,.06)}
+.header-inner{max-width:var(--container-max);margin:0 auto;padding:0 var(--container-pad);height:70px;display:flex;align-items:center;gap:16px;position:relative}
+@media(max-width:768px){.header-inner{padding:0 20px;height:58px}}
+.h-left{display:flex;align-items:center;gap:16px}
+.hamburger{width:36px;height:36px;display:flex;flex-direction:column;justify-content:center;gap:6px;cursor:pointer}
+.hamburger span{display:block;height:1.5px;background:var(--main);width:22px}
+.hamburger span:last-child{width:15px}
+.gnb{flex:1;display:flex;justify-content:center}
+.gnb ul{display:flex}
+.gnb ul li a{display:block;padding:8px 18px;font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);transition:color .2s}
+.gnb ul li a:hover{color:var(--point)}
+.gnb ul li.sale a{color:var(--point)}
+@media(max-width:1024px){.gnb{display:none}.site-logo{position:absolute;left:50%;transform:translateX(-50%)}}
+.h-right{display:flex;align-items:center;gap:2px}
+.h-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:17px;color:var(--text-2);transition:color .2s;position:relative;cursor:pointer}
+.h-icon:hover{color:var(--point)}
+.cart-badge{position:absolute;top:6px;right:5px;min-width:16px;height:16px;border-radius:var(--radius-full);background:var(--point);color:var(--white);font-size:9px;font-weight:var(--fw-bold);display:flex;align-items:center;justify-content:center;padding:0 3px}
+.site-logo{flex-shrink:0}
+.logo-txt{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;letter-spacing:.32em;color:var(--main);display:block}
+.mobile-nav{position:fixed;inset:0;z-index:950;background:var(--bg);transform:translateX(-100%);transition:transform .4s cubic-bezier(.25,.46,.45,.94);overflow-y:auto}
+.mobile-nav.open{transform:translateX(0)}
+.mobile-nav-inner{padding:80px 32px 48px}
+.mnav-close{position:absolute;top:18px;right:18px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--text-2);cursor:pointer}
+.mobile-nav ul li a{display:block;padding:18px 0;font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--text-1);border-bottom:1px solid var(--border)}
+.mobile-nav ul li a:hover{color:var(--point)}
+.mnav-util{margin-top:32px;display:flex;gap:20px}
+.mnav-util a{font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+.search-layer{position:fixed;inset:0;z-index:960;background:rgba(250,248,245,.98);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.search-layer.open{opacity:1;pointer-events:all}
+.search-box{width:min(640px,88vw);border-bottom:2px solid var(--main)}
+.search-box input{width:100%;padding:16px 0;font-size:36px;font-family:'Cormorant Garamond',serif;font-weight:300;background:none;color:var(--text-1)}
+.search-box input::placeholder{color:var(--text-3)}
+.search-x{position:absolute;top:24px;right:32px;font-size:24px;color:var(--text-2);cursor:pointer;display:none}
+.search-layer.open .search-x{display:block}
+
+/* 페이지 헤더 */
+.page-header{padding:40px 0 20px;border-bottom:1px solid var(--border)}
+.page-breadcrumb{display:flex;align-items:center;gap:8px;font-size:var(--fs-xs);color:var(--text-3);margin-bottom:8px}
+.page-breadcrumb a:hover{color:var(--point)}
+.page-breadcrumb .sep{opacity:.4}
+
+/* 게시글 뷰 영역 */
+.board-view-section{padding:32px 0 80px}
+.board-view-wrap{max-width:900px;margin:0 auto}
+
+/* 게시글 헤더 */
+.post-header{padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:28px}
+.post-category{font-size:var(--fs-xs);font-weight:var(--fw-bold);letter-spacing:.1em;text-transform:uppercase;color:var(--point);margin-bottom:8px}
+.post-title-main{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,32px);font-weight:300;line-height:1.3;color:var(--text-1);margin-bottom:14px}
+.post-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.post-meta-item{display:flex;align-items:center;gap:5px;font-size:var(--fs-xs);color:var(--text-3)}
+.post-meta-item i{font-size:12px}
+
+/* 게시글 본문 */
+.post-body{padding:32px 0;border-bottom:1px solid var(--border);margin-bottom:32px}
+.post-body p{font-size:var(--fs-sm);color:var(--text-2);line-height:1.9;margin-bottom:18px}
+.post-body p:last-child{margin-bottom:0}
+.post-body h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin:28px 0 12px;color:var(--text-1)}
+.post-body ul{padding-left:20px;margin-bottom:18px}
+.post-body ul li{font-size:var(--fs-sm);color:var(--text-2);line-height:1.8;margin-bottom:4px;list-style:disc}
+.post-body .highlight{background:rgba(194,149,108,.12);border-left:3px solid var(--point);padding:16px 20px;border-radius:0 var(--radius) var(--radius) 0;margin:20px 0}
+.post-body .highlight p{margin:0;font-size:var(--fs-sm)}
+.post-img{border-radius:var(--radius-lg);overflow:hidden;margin:24px 0;aspect-ratio:16/7;background:var(--surface)}
+.post-img img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+
+/* 첨부파일 */
+.post-attachments{padding:16px 0;border-bottom:1px solid var(--border);margin-bottom:28px}
+.att-label{font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:8px}
+.att-file{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border:1px solid var(--border);border-radius:var(--radius-full);font-size:var(--fs-xs);color:var(--text-2);cursor:pointer;transition:all .2s}
+.att-file:hover{border-color:var(--point);color:var(--point)}
+
+/* 공감 */
+.post-reaction{display:flex;justify-content:center;gap:12px;margin-bottom:32px}
+.reaction-btn{display:flex;flex-direction:column;align-items:center;gap:5px;padding:16px 24px;border:1px solid var(--border);border-radius:var(--radius-lg);cursor:pointer;transition:all .2s;min-width:80px}
+.reaction-btn:hover,.reaction-btn.active{border-color:var(--point);background:rgba(194,149,108,.06)}
+.reaction-btn i{font-size:20px;color:var(--text-3)}
+.reaction-btn.active i{color:var(--point)}
+.reaction-btn span{font-size:var(--fs-xs);color:var(--text-3)}
+
+/* 이전/다음 글 */
+.post-nav{border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:32px}
+.post-nav-item{display:flex;align-items:center;gap:12px;padding:14px 20px;transition:background .2s;cursor:pointer}
+.post-nav-item:first-child{border-bottom:1px solid var(--border)}
+.post-nav-item:hover{background:var(--surface)}
+.pn-label{font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);width:52px;flex-shrink:0}
+.pn-title{flex:1;font-size:var(--fs-sm);color:var(--text-2);transition:color .2s}
+.post-nav-item:hover .pn-title{color:var(--point)}
+.pn-date{font-size:var(--fs-xs);color:var(--text-3);white-space:nowrap}
+
+/* 댓글 */
+.comment-section{margin-bottom:32px}
+.comment-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.comment-count{font-size:var(--fs-sm);color:var(--point)}
+.comment-list{display:flex;flex-direction:column;gap:0}
+.comment-item{padding:20px 0;border-bottom:1px solid var(--border)}
+.comment-item:first-child{border-top:1px solid var(--border)}
+.comment-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.comment-author{display:flex;align-items:center;gap:8px}
+.comment-avatar{width:32px;height:32px;border-radius:50%;background:var(--main);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:var(--fw-bold);color:var(--white)}
+.comment-name{font-size:var(--fs-sm);font-weight:var(--fw-semibold);color:var(--text-1)}
+.comment-admin-badge{font-size:10px;padding:2px 6px;background:var(--point);color:var(--white);border-radius:var(--radius-full);font-weight:var(--fw-bold)}
+.comment-date{font-size:var(--fs-xs);color:var(--text-3)}
+.comment-text{font-size:var(--fs-sm);color:var(--text-2);line-height:1.8;padding-left:40px}
+.comment-actions{padding-left:40px;margin-top:8px;display:flex;gap:12px}
+.comment-action-btn{font-size:var(--fs-xs);color:var(--text-3);cursor:pointer;transition:color .2s;display:flex;align-items:center;gap:4px}
+.comment-action-btn:hover{color:var(--point)}
+/* 대댓글 */
+.reply-item{padding:16px 0 16px 40px;border-bottom:1px solid var(--border);background:var(--surface);margin:0 -20px;padding-left:60px;padding-right:20px}
+
+/* 댓글 작성 폼 */
+.comment-form{background:var(--surface);border-radius:var(--radius-lg);padding:24px;margin-top:24px}
+.comment-form h4{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;margin-bottom:14px}
+.comment-textarea{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:var(--fs-sm);color:var(--text-1);background:var(--white);resize:vertical;min-height:100px;transition:border-color .2s;font-family:inherit}
+.comment-textarea:focus{border-color:var(--point);outline:none}
+.comment-form-footer{display:flex;justify-content:space-between;align-items:center;margin-top:10px;flex-wrap:wrap;gap:8px}
+.char-count{font-size:var(--fs-xs);color:var(--text-3)}
+.comment-submit{padding:10px 24px;background:var(--main);color:var(--white);border-radius:var(--radius);font-size:var(--fs-xs);font-weight:var(--fw-bold);letter-spacing:.08em;cursor:pointer;transition:all .2s}
+.comment-submit:hover{background:var(--sub);color:var(--point)}
+
+/* 목록 버튼 행 */
+.post-btn-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.post-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border:1px solid var(--border);border-radius:var(--radius);font-size:var(--fs-xs);color:var(--text-2);cursor:pointer;transition:all .2s}
+.post-btn:hover{border-color:var(--main);color:var(--main)}
+.post-btn-primary{border-color:var(--point);background:var(--point);color:var(--white)}
+.post-btn-primary:hover{background:var(--main);border-color:var(--main)}
+
+/* 푸터 */
+.site-footer{background:var(--bg-dark);color:var(--text-inv)}
+.footer-top{max-width:var(--container-max);margin:0 auto;padding:72px var(--container-pad) 48px;display:grid;grid-template-columns:220px 1fr 240px;gap:60px}
+@media(max-width:1024px){.footer-top{grid-template-columns:1fr 1fr;gap:40px;padding:48px 20px 32px}}
+@media(max-width:600px){.footer-top{grid-template-columns:1fr;padding:40px 20px 28px}}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;letter-spacing:.3em;margin-bottom:10px}
+.f-tagline{font-size:var(--fs-xs);letter-spacing:.15em;color:rgba(245,240,232,.45);margin-bottom:24px}
+.f-social{display:flex;gap:10px}
+.f-social a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(245,240,232,.18);display:flex;align-items:center;justify-content:center;font-size:13px;color:rgba(245,240,232,.55);transition:all .2s}
+.f-social a:hover{border-color:var(--point);color:var(--point)}
+.f-nav-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+@media(max-width:480px){.f-nav-grid{grid-template-columns:1fr 1fr}}
+.f-nav-col h4{font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.15em;text-transform:uppercase;color:rgba(245,240,232,.45);margin-bottom:16px}
+.f-nav-col ul li{margin-bottom:10px}
+.f-nav-col ul li a{font-size:var(--fs-sm);color:rgba(245,240,232,.65);transition:color .2s}
+.f-nav-col ul li a:hover{color:var(--point)}
+.f-cs h4{font-size:var(--fs-xs);font-weight:var(--fw-semibold);letter-spacing:.15em;text-transform:uppercase;color:rgba(245,240,232,.45);margin-bottom:16px}
+.f-cs-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:6px}
+.f-cs-hours{font-size:var(--fs-xs);color:rgba(245,240,232,.45);line-height:1.9;margin-bottom:12px}
+.f-cs-email a{font-size:var(--fs-sm);color:rgba(245,240,232,.55);transition:color .2s}
+.f-cs-email a:hover{color:var(--point)}
+.footer-bottom{max-width:var(--container-max);margin:0 auto;padding:20px var(--container-pad);border-top:1px solid rgba(245,240,232,.08);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+@media(max-width:600px){.footer-bottom{padding:20px 20px;flex-direction:column;align-items:flex-start}}
+.footer-bottom p{font-size:11px;color:rgba(245,240,232,.3);line-height:1.85}
+</style>
+</head>
+<body>
+
+<section class="strip-announce">
+  <div class="strip-track">
+    <span>무료배송 <strong>50,000원</strong> 이상</span><span>✦</span>
+    <span>회원가입 즉시 <strong>10%</strong> 할인 쿠폰 지급</span><span>✦</span>
+    <span>7일 이내 교환·환불 보장</span><span>✦</span>
+    <span>무이자 할부 최대 <strong>12개월</strong></span><span>✦</span>
+    <span>무료배송 <strong>50,000원</strong> 이상</span><span>✦</span>
+    <span>회원가입 즉시 <strong>10%</strong> 할인 쿠폰 지급</span><span>✦</span>
+    <span>7일 이내 교환·환불 보장</span><span>✦</span>
+    <span>무이자 할부 최대 <strong>12개월</strong></span><span>✦</span>
+  </div>
+</section>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="h-left">
+      <button class="hamburger" id="hamburger" aria-label="메뉴"><span></span><span></span><span></span></button>
+    </div>
+    <a href="index.html" class="site-logo"><span class="logo-txt serif">POZE</span></a>
+    <nav class="gnb" aria-label="주메뉴"><ul>
+      <li><a href="products.html?c=new">NEW</a></li>
+      <li><a href="products.html?c=best">BEST</a></li>
+      <li><a href="products.html?c=eye">EYE</a></li>
+      <li><a href="products.html?c=lip">LIP</a></li>
+      <li><a href="products.html?c=face">FACE</a></li>
+      <li><a href="products.html?c=cheeks">CHEEKS</a></li>
+      <li><a href="products.html?c=tools">TOOLS</a></li>
+      <li class="sale"><a href="products.html?c=sale">SALE</a></li>
+    </ul></nav>
+    <div class="h-right">
+      <button class="h-icon" id="searchBtn" aria-label="검색"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <a href="wishlist.html" class="h-icon" aria-label="관심상품"><i class="fa-regular fa-heart"></i></a>
+      <a href="cart.html" class="h-icon" aria-label="장바구니" style="position:relative"><i class="fa-solid fa-bag-shopping"></i><span class="cart-badge">3</span></a>
+      <a href="mypage.html" class="h-icon" aria-label="마이페이지"><i class="fa-regular fa-user"></i></a>
+    </div>
+  </div>
+</header>
+
+<div class="search-layer" id="searchLayer" role="dialog" aria-label="검색">
+  <button class="search-x" id="searchClose" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
+  <div class="search-box"><input type="text" placeholder="무엇을 찾고 계신가요?" aria-label="검색어 입력"></div>
+</div>
+<nav class="mobile-nav" id="mobileNav" aria-label="모바일 메뉴">
+  <button class="mnav-close" id="mnavClose" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
+  <div class="mobile-nav-inner">
+    <ul>
+      <li><a href="products.html?c=new">New Arrivals</a></li>
+      <li><a href="products.html?c=best">Best Sellers</a></li>
+      <li><a href="products.html?c=eye">Eye</a></li>
+      <li><a href="products.html?c=lip">Lip</a></li>
+      <li><a href="products.html?c=face">Face</a></li>
+      <li><a href="products.html?c=cheeks">Cheeks</a></li>
+      <li><a href="products.html?c=tools">Tools</a></li>
+      <li class="sale"><a href="products.html?c=sale">Sale</a></li>
+    </ul>
+    <div class="mnav-util"><a href="login.html">로그인</a><a href="signup.html">회원가입</a><a href="mypage.html">마이페이지</a></div>
+  </div>
+</nav>
+
+<main>
+  <div class="page-header">
+    <div class="container">
+      <nav class="page-breadcrumb" aria-label="경로">
+        <a href="index.html">Home</a><span class="sep">›</span>
+        <a href="board-list.html">고객 지원</a><span class="sep">›</span>
+        <span>공지사항</span>
+      </nav>
+    </div>
+  </div>
+
+  <section class="board-view-section">
+    <div class="container">
+      <div class="board-view-wrap">
+        <!-- 게시글 헤더 -->
+        <div class="post-header">
+          <p class="post-category">공지사항</p>
+          <h1 class="post-title-main serif">2026년 여름 신상품 출시 예고</h1>
+          <div class="post-meta">
+            <span class="post-meta-item"><i class="fa-regular fa-user"></i> 관리자</span>
+            <span class="post-meta-item"><i class="fa-regular fa-calendar"></i> 2026.06.08</span>
+            <span class="post-meta-item"><i class="fa-regular fa-eye"></i> 843</span>
+            <span class="post-meta-item"><i class="fa-regular fa-comment"></i> 4</span>
+          </div>
+        </div>
+
+        <!-- 게시글 본문 -->
+        <article class="post-body">
+          <p>안녕하세요, POZE 공식 스토어입니다.</p>
+          <p>2026년 여름 시즌을 맞이하여 새로운 컬렉션 출시를 앞두고 있습니다. 이번 컬렉션은 포제만의 감각적인 컬러 철학을 담아, 여름의 열정과 섬세함을 동시에 표현합니다.</p>
+
+          <div class="post-img">
+            <img src="images/main_sticky1.png" alt="여름 신상품 예고 이미지">
+          </div>
+
+          <h3 class="serif">여름 신상품 출시 예정 라인업</h3>
+          <ul>
+            <li>선셋 글로우 팔레트 (12컬러) — 골든 아워를 담은 웜톤 팔레트</li>
+            <li>오션 블루 아이섀도우 (6컬러) — 맑고 깊은 블루 계열 쿨톤 팔레트</li>
+            <li>코랄 서머 립스틱 (4가지 컬러) — 생기 넘치는 코랄 계열 매트&글로시 듀얼 핀 립</li>
+            <li>선케어 틴티드 모이스처라이저 SPF50+ — 가볍고 촉촉한 여름 쿠션 대체제</li>
+            <li>쿨링 미스트 세팅 스프레이 — 메이크업 지속력을 높여주는 쿨링 픽싱 스프레이</li>
+          </ul>
+
+          <div class="highlight">
+            <p><strong>출시 일정:</strong> 2026년 6월 25일 (목) 오전 10시 공식 스토어 단독 선 출시<br>
+            <strong>사전 알림 신청:</strong> 마이페이지 &gt; 알림 설정에서 신상품 알림을 구독하시면 출시 전날 SMS를 수신하실 수 있습니다.</p>
+          </div>
+
+          <h3 class="serif">사전 출시 혜택</h3>
+          <p>출시 당일 첫 24시간 구매 고객 대상으로 다음과 같은 혜택을 제공해 드립니다:</p>
+          <ul>
+            <li>신상품 구매 금액의 5% 추가 포인트 적립</li>
+            <li>3만원 이상 구매 시 미니 파우치 증정 (수량 한정)</li>
+            <li>SNS 공유 시 500P 추가 지급</li>
+          </ul>
+
+          <p>더 자세한 사항은 출시 당일 공지사항을 통해 안내 드리겠습니다. 앞으로도 POZE의 새로운 컬렉션에 많은 기대와 관심 부탁드립니다.</p>
+          <p>감사합니다. — POZE Team</p>
+        </article>
+
+        <!-- 첨부파일 -->
+        <div class="post-attachments">
+          <p class="att-label">첨부파일</p>
+          <a class="att-file" href="#"><i class="fa-solid fa-file-image" style="color:var(--point)"></i> summer_collection_preview.jpg (2.4 MB)</a>
+        </div>
+
+        <!-- 공감 -->
+        <div class="post-reaction">
+          <button class="reaction-btn active" onclick="this.classList.toggle('active')">
+            <i class="fa-regular fa-thumbs-up"></i>
+            <span>도움돼요 (42)</span>
+          </button>
+          <button class="reaction-btn" onclick="this.classList.toggle('active')">
+            <i class="fa-regular fa-heart"></i>
+            <span>좋아요 (28)</span>
+          </button>
+        </div>
+
+        <!-- 이전/다음 글 -->
+        <nav class="post-nav" aria-label="이전/다음 글">
+          <a href="board-view.html" class="post-nav-item">
+            <span class="pn-label"><i class="fa-solid fa-angle-up" style="font-size:11px;margin-right:2px"></i> 이전글</span>
+            <span class="pn-title">6월 정기 배송 일정 공지</span>
+            <span class="pn-date">2026.06.05</span>
+          </a>
+          <a href="board-view.html" class="post-nav-item">
+            <span class="pn-label"><i class="fa-solid fa-angle-down" style="font-size:11px;margin-right:2px"></i> 다음글</span>
+            <span class="pn-title">포인트 2배 적립 이벤트 (6/1~6/30)</span>
+            <span class="pn-date">2026.06.01</span>
+          </a>
+        </nav>
+
+        <!-- 댓글 -->
+        <section class="comment-section" aria-label="댓글">
+          <h2 class="comment-title serif">댓글 <span class="comment-count">4</span></h2>
+          <div class="comment-list">
+            <!-- 댓글 1 -->
+            <div class="comment-item">
+              <div class="comment-header">
+                <div class="comment-author">
+                  <div class="comment-avatar">지</div>
+                  <span class="comment-name">지***</span>
+                </div>
+                <span class="comment-date">2026.06.08 14:32</span>
+              </div>
+              <p class="comment-text">선셋 글로우 팔레트 정말 기대돼요! 빨리 출시됐으면 좋겠어요 ✨</p>
+              <div class="comment-actions">
+                <button class="comment-action-btn"><i class="fa-regular fa-thumbs-up"></i> 좋아요 (5)</button>
+                <button class="comment-action-btn"><i class="fa-regular fa-comment"></i> 답글</button>
+              </div>
+            </div>
+            <!-- 대댓글 -->
+            <div class="reply-item">
+              <div class="comment-header">
+                <div class="comment-author">
+                  <div class="comment-avatar" style="background:var(--point)">P</div>
+                  <span class="comment-name">POZE 공식</span>
+                  <span class="comment-admin-badge">관리자</span>
+                </div>
+                <span class="comment-date">2026.06.08 15:10</span>
+              </div>
+              <p class="comment-text">안녕하세요 지*** 고객님! 많은 기대 감사합니다. 출시 당일 알림을 받으실 수 있도록 마이페이지에서 알림을 설정해 주세요 :)</p>
+            </div>
+            <!-- 댓글 2 -->
+            <div class="comment-item">
+              <div class="comment-header">
+                <div class="comment-author">
+                  <div class="comment-avatar">박</div>
+                  <span class="comment-name">박***</span>
+                </div>
+                <span class="comment-date">2026.06.09 10:15</span>
+              </div>
+              <p class="comment-text">코랄 서머 립스틱 색상이 궁금한데 더 많은 컬러 사진을 올려주실 수 있을까요?</p>
+              <div class="comment-actions">
+                <button class="comment-action-btn"><i class="fa-regular fa-thumbs-up"></i> 좋아요 (2)</button>
+                <button class="comment-action-btn"><i class="fa-regular fa-comment"></i> 답글</button>
+              </div>
+            </div>
+            <!-- 댓글 3 -->
+            <div class="comment-item">
+              <div class="comment-header">
+                <div class="comment-author">
+                  <div class="comment-avatar">이</div>
+                  <span class="comment-name">이***</span>
+                </div>
+                <span class="comment-date">2026.06.09 18:44</span>
+              </div>
+              <p class="comment-text">쿨링 미스트 스프레이 진짜 너무 필요했는데!! 빨리 사고 싶어요.</p>
+              <div class="comment-actions">
+                <button class="comment-action-btn"><i class="fa-regular fa-thumbs-up"></i> 좋아요 (8)</button>
+                <button class="comment-action-btn"><i class="fa-regular fa-comment"></i> 답글</button>
+              </div>
+            </div>
+          </div>
+          <!-- 댓글 작성 폼 -->
+          <div class="comment-form">
+            <h4 class="serif">댓글 작성</h4>
+            <textarea class="comment-textarea" placeholder="댓글을 입력해 주세요. 비방, 욕설, 광고성 댓글은 삭제될 수 있습니다." aria-label="댓글 내용" maxlength="500" id="commentText"></textarea>
+            <div class="comment-form-footer">
+              <span class="char-count"><span id="charCount">0</span>/500</span>
+              <button type="button" class="comment-submit">댓글 등록</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 하단 버튼 -->
+        <div class="post-btn-row">
+          <a href="board-list.html" class="post-btn"><i class="fa-solid fa-list" style="font-size:11px"></i> 목록</a>
+          <div style="display:flex;gap:8px">
+            <a href="board-write.html" class="post-btn post-btn-primary"><i class="fa-solid fa-pen" style="font-size:11px"></i> 글쓰기</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-top">
+    <div><p class="f-logo serif">POZE</p><p class="f-tagline">나에게 몰입하는 순간</p>
+      <div class="f-social">
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      </div>
+    </div>
+    <div class="f-nav-grid">
+      <div class="f-nav-col"><h4>SHOP</h4><ul><li><a href="products.html?c=new">신상품</a></li><li><a href="products.html?c=best">베스트</a></li><li><a href="products.html?c=sale">세일</a></li></ul></div>
+      <div class="f-nav-col"><h4>CUSTOMER</h4><ul><li><a href="board-list.html">공지사항</a></li><li><a href="board-list.html?type=faq">FAQ</a></li><li><a href="board-write.html">1:1 문의</a></li></ul></div>
+      <div class="f-nav-col"><h4>ACCOUNT</h4><ul><li><a href="mypage.html">마이페이지</a></li><li><a href="wishlist.html">관심상품</a></li><li><a href="cart.html">장바구니</a></li></ul></div>
+    </div>
+    <div class="f-cs"><h4>CUSTOMER SERVICE</h4><p class="f-cs-num serif">1588-0000</p><p class="f-cs-hours">평일 10:00 — 18:00<br>주말·공휴일 휴무</p><p class="f-cs-email"><a href="mailto:hello@poze.co.kr">hello@poze.co.kr</a></p></div>
+  </div>
+  <div class="footer-bottom">
+    <p>(주)포제 | 대표 : 홍길동 | 사업자등록번호 : 000-00-00000 | 주소 : 서울특별시 강남구 압구정로 000</p>
+    <p>© 2026 POZE. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileNav').classList.add('open'));
+  document.getElementById('mnavClose').addEventListener('click', () => document.getElementById('mobileNav').classList.remove('open'));
+  const sl = document.getElementById('searchLayer');
+  document.getElementById('searchBtn').addEventListener('click', () => { sl.classList.add('open'); setTimeout(() => sl.querySelector('input').focus(), 100); });
+  document.getElementById('searchClose').addEventListener('click', () => sl.classList.remove('open'));
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') sl.classList.remove('open'); });
+  document.getElementById('commentText').addEventListener('input', function(){
+    document.getElementById('charCount').textContent = this.value.length;
+  });
+})();
+</script>
+</body>
+</html>
