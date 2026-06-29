@@ -141,42 +141,42 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   <!-- 상품카드 8개 (HTML 직접) -->
   <ul class="prod-grid">
     <li class="item reveal"><a href="product-detail.html">
-      <div class="thumb"><span class="badge sale">20%</span><img src="images/product-ocean-blue-cap.png" alt="오션 베이 볼캡"></div>
+      <div class="thumb"><span class="badge sale">20%</span><img src="images/product-ocean-blue-cap.jpg" alt="오션 베이 볼캡"></div>
       <p class="name">오션 베이 볼캡</p><p class="opt">리넨 블루</p>
       <div class="price"><span class="now">29,000원</span><span class="pct">20%</span></div><div class="was">36,000원</div>
     </a></li>
     <li class="item reveal"><a href="product-detail.html">
-      <div class="thumb"><span class="badge sale">20%</span><img src="images/product-cream-script-cap.png" alt="썬키스 자수 볼캡"></div>
+      <div class="thumb"><span class="badge sale">20%</span><img src="images/product-cream-script-cap.jpg" alt="썬키스 자수 볼캡"></div>
       <p class="name">썬키스 자수 볼캡</p><p class="opt">크림</p>
       <div class="price"><span class="now">32,000원</span><span class="pct">20%</span></div><div class="was">40,000원</div>
     </a></li>
     <li class="item reveal"><a href="product-detail.html">
-      <div class="thumb"><span class="badge sale">23%</span><img src="images/product-forest-green-cap.png" alt="위켄드 소셜클럽 볼캡"></div>
+      <div class="thumb"><span class="badge sale">23%</span><img src="images/product-forest-green-cap.jpg" alt="위켄드 소셜클럽 볼캡"></div>
       <p class="name">위켄드 소셜클럽 볼캡</p><p class="opt">그린</p>
       <div class="price"><span class="now">29,000원</span><span class="pct">23%</span></div><div class="was">38,000원</div>
     </a></li>
     <li class="item reveal"><a href="product-detail.html">
-      <div class="thumb"><span class="badge sale">15%</span><img src="images/product-beige-bucket-hat.png" alt="데이 브리즈 버킷햇"></div>
+      <div class="thumb"><span class="badge sale">15%</span><img src="images/product-beige-bucket-hat.jpg" alt="데이 브리즈 버킷햇"></div>
       <p class="name">데이 브리즈 버킷햇</p><p class="opt">베이지</p>
       <div class="price"><span class="now">34,000원</span><span class="pct">15%</span></div><div class="was">40,000원</div>
     </a></li>
     <li class="item reveal"><a href="product-detail.html">
-      <div class="thumb"><span class="badge new">NEW</span><img src="images/product-cream-green-cap.png" alt="마리나 클럽 볼캡"></div>
+      <div class="thumb"><span class="badge new">NEW</span><img src="images/product-cream-green-cap.jpg" alt="마리나 클럽 볼캡"></div>
       <p class="name">마리나 클럽 볼캡</p><p class="opt">아이보리/그린</p>
       <div class="price"><span class="now">29,000원</span><span class="tag-new">NEW</span></div>
     </a></li>
     <li class="item reveal"><a href="product-detail.html">
-      <div class="thumb"><span class="badge new">NEW</span><img src="images/product-raffia-visor.png" alt="라피아 바이저"></div>
+      <div class="thumb"><span class="badge new">NEW</span><img src="images/product-raffia-visor.jpg" alt="라피아 바이저"></div>
       <p class="name">라피아 바이저</p><p class="opt">내추럴</p>
       <div class="price"><span class="now">36,000원</span><span class="tag-new">NEW</span></div>
     </a></li>
     <li class="item reveal"><a href="product-detail.html">
-      <div class="thumb"><span class="badge new">NEW</span><img src="images/product-sky-blue-cap.png" alt="씨사이드 무드 볼캡"></div>
+      <div class="thumb"><span class="badge new">NEW</span><img src="images/product-sky-blue-cap.jpg" alt="씨사이드 무드 볼캡"></div>
       <p class="name">씨사이드 무드 볼캡</p><p class="opt">스카이</p>
       <div class="price"><span class="now">32,000원</span><span class="tag-new">NEW</span></div>
     </a></li>
     <li class="item reveal"><a href="product-detail.html">
-      <div class="thumb"><span class="badge new">NEW</span><img src="images/product-denim-vintage-cap.png" alt="1975 워시드 볼캡"></div>
+      <div class="thumb"><span class="badge new">NEW</span><img src="images/product-denim-vintage-cap.jpg" alt="1975 워시드 볼캡"></div>
       <p class="name">1975 워시드 볼캡</p><p class="opt">빈티지 블루</p>
       <div class="price"><span class="now">31,000원</span><span class="tag-new">NEW</span></div>
     </a></li>
@@ -206,8 +206,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 </div></footer>
 
 <script>
-(function(){var els=document.querySelectorAll('.reveal');if(!('IntersectionObserver'in window)){els.forEach(function(e){e.classList.add('show')});return;}
-var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('show');io.unobserve(x.target);}})},{threshold:.12});els.forEach(function(e){io.observe(e)});})();
+(function(){var els=[].slice.call(document.querySelectorAll('.reveal'));var vh=window.innerHeight||document.documentElement.clientHeight;
+els.forEach(function(el){if(el.getBoundingClientRect().top<vh){el.classList.add('show');}});
+if(!('IntersectionObserver'in window)){els.forEach(function(e){e.classList.add('show')});return;}
+var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('show');io.unobserve(x.target);}})},{threshold:.12});els.forEach(function(e){if(!e.classList.contains('show'))io.observe(e);});})();
 </script>
 </body>
 </html>
