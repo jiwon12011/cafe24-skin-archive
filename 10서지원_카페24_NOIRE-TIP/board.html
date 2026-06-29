@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIRÉ TIP | 커뮤니티</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --main:#141414; --sub:#9a9388; --point:#8c2f3d; --bg:#ffffff; --bg-soft:#f4f1ea;
+  --dark:#101010; --sale:#8c2f3d; --line:#e4ded3; --line-d:#2b2b2b; --text:#262626;
+  --maxw:1550px; --pad:30px; --band:84px;
+  --fs-h3:16px; --fs-body:15px; --fs-sm:13px; --fs-xs:11px;
+  --fw-medium:500; --fw-bold:700; --fw-black:800; --radius:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard',sans-serif;color:var(--text);background:var(--bg);font-size:var(--fs-body);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none;transition:color .2s}a:hover{color:var(--point)}
+img{display:block;max-width:100%;height:auto}ul,ol{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.serif{font-family:'Playfair Display',serif}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+
+.site-header{position:sticky;top:0;z-index:50;background:var(--dark);border-bottom:1px solid var(--line-d)}
+.site-header .inner{display:flex;align-items:center;height:88px}
+.logo{flex:0 0 auto;color:#fff}.logo .ttl{font-family:'Playfair Display',serif;font-size:27px;font-weight:var(--fw-bold);letter-spacing:2px;line-height:1}
+.logo .sub{font-size:9px;letter-spacing:4px;color:#b9b2a6;margin-top:5px}
+.gnb{flex:1;display:flex;gap:42px;justify-content:center;font-size:var(--fs-body);font-weight:var(--fw-medium)}
+.gnb a{color:#e9e6df;padding:6px 0}.gnb a:hover{color:#fff}
+.utils{flex:0 0 auto;display:flex;gap:22px;font-size:18px;color:#e9e6df;align-items:center}.utils a:hover{color:#fff}
+
+main{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);min-height:62vh}
+.page-head{text-align:center;padding:60px 0 30px}
+.page-head h1{font-family:'Playfair Display',serif;font-size:38px;font-weight:var(--fw-bold);color:var(--main);letter-spacing:1px}
+.board-tabs{display:flex;justify-content:center;gap:8px;margin-bottom:30px;flex-wrap:wrap}
+.board-tabs a{padding:9px 22px;border:1px solid var(--line);border-radius:999px;font-size:var(--fs-sm);font-weight:var(--fw-medium);background:#fff;color:var(--main)}
+.board-tabs a:hover{border-color:var(--point);color:var(--point)}
+.board-tabs a.on{background:var(--main);color:#fff;border-color:var(--main)}
+.board-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.board-top .cnt{font-size:var(--fs-sm);color:var(--sub)}.board-top .cnt b{color:var(--main)}
+.board-top .search{display:flex;gap:8px}
+.board-top .search select,.board-top .search input{border:1px solid var(--line);border-radius:var(--radius);padding:10px 14px;font-size:var(--fs-sm);background:#fff;color:var(--main)}
+.board-top .search button{background:var(--main);color:#fff;border-radius:var(--radius);padding:10px 18px;font-size:var(--fs-sm)}.board-top .search button:hover{background:var(--point)}
+.board-list{width:100%;border-collapse:collapse}
+.board-list thead th{border-top:1px solid var(--main);border-bottom:1px solid var(--line);padding:15px 8px;font-size:var(--fs-sm);color:var(--sub);font-weight:var(--fw-medium)}
+.board-list td{border-bottom:1px solid var(--line);padding:18px 8px;font-size:var(--fs-sm);text-align:center;color:var(--text)}
+.board-list td.title{text-align:left}
+.board-list td.title a{color:var(--main);font-weight:var(--fw-medium)}.board-list td.title a:hover{color:var(--point)}
+.board-list .cat{display:inline-block;font-size:var(--fs-xs);font-weight:var(--fw-bold);color:var(--point);margin-right:8px}
+.board-list .tag-notice{color:#fff;background:var(--main);padding:2px 9px;border-radius:4px;font-size:var(--fs-xs);font-weight:var(--fw-bold)}
+.board-list .reply{color:var(--sub);font-size:var(--fs-xs);margin-left:8px}
+.board-list .new{color:var(--sale);font-size:var(--fs-xs);margin-left:6px;font-weight:var(--fw-bold)}
+.board-list tr.notice{background:var(--bg-soft)}
+.board-bottom{display:flex;justify-content:flex-end;margin-top:18px}
+.btn-write{background:var(--point);color:#fff;padding:12px 26px;border-radius:var(--radius);font-size:var(--fs-sm);font-weight:var(--fw-bold)}.btn-write:hover{background:var(--main);color:#fff}
+.pagination{display:flex;justify-content:center;align-items:center;gap:8px;margin:46px 0 24px}
+.pagination a{width:40px;height:40px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:var(--fs-sm);color:var(--sub);border:1px solid transparent}
+.pagination a:hover{border-color:var(--line);color:var(--main)}.pagination a.on{background:var(--main);color:#fff}
+
+.site-footer{background:var(--dark);color:#b9b2a6;padding:64px 0 40px;font-size:var(--fs-sm);margin-top:var(--band)}
+.site-footer .top{display:grid;grid-template-columns:1.1fr 1.3fr 1fr;gap:40px}
+.site-footer h4{font-size:var(--fs-xs);font-weight:var(--fw-bold);letter-spacing:2px;color:#fff;margin-bottom:18px}
+.site-footer .cs .tel{font-family:'Playfair Display',serif;font-size:26px;font-weight:var(--fw-bold);color:#fff;letter-spacing:1px}
+.site-footer .cs .hrs{margin:14px 0 22px;line-height:1.9;color:#8f897e;font-size:var(--fs-xs)}
+.site-footer .company p{line-height:2;color:#8f897e}.site-footer .company b{color:#cfc9bd;font-weight:var(--fw-medium)}
+.site-footer .follow .sns{display:flex;gap:16px;font-size:19px;color:#cfc9bd;margin-bottom:24px}.site-footer .follow .sns a:hover{color:#fff}
+.site-footer .follow .links a{display:block;margin-bottom:11px;color:#8f897e}.site-footer .follow .links a:hover{color:#fff}
+.site-footer .copy{max-width:var(--maxw);margin:48px auto 0;padding:22px var(--pad) 0;border-top:1px solid var(--line-d);font-size:var(--fs-xs);color:#736d63;letter-spacing:.5px}
+.logo-f .ttl{font-family:'Playfair Display',serif;font-size:22px;font-weight:var(--fw-bold);letter-spacing:2px;color:#fff}
+.to-top{position:fixed;right:28px;bottom:28px;width:52px;height:52px;border-radius:50%;background:var(--main);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;z-index:60;box-shadow:0 6px 20px rgba(0,0,0,.3);opacity:.95;line-height:1}.to-top i{font-size:14px;margin-bottom:1px}.to-top:hover{background:var(--point);color:#fff}
+
+@media(max-width:1100px){.gnb{display:none}}
+@media(max-width:760px){:root{--band:54px;--pad:18px}.board-top{flex-direction:column;gap:12px;align-items:stretch}.board-list .hide-m{display:none}.site-footer .top{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="site-header"><div class="inner container">
+  <a href="index.html" class="logo"><div class="ttl serif">NOIRÉ TIP</div><div class="sub">NAIL TIP COLLECTION</div></a>
+  <nav class="gnb"><a href="products.html">브랜드</a><a href="products.html">제품구매</a><a href="board.html">리뷰</a><a href="board.html">이벤트</a><a href="board.html">커뮤니티</a></nav>
+  <div class="utils"><a href="login.html" aria-label="로그인"><i class="fa-regular fa-user"></i></a><a href="cart.html" aria-label="장바구니"><i class="fa-solid fa-bag-shopping"></i></a><a href="products.html" aria-label="검색"><i class="fa-solid fa-magnifying-glass"></i></a></div>
+</div></header>
+
+<main>
+  <div class="page-head"><h1>COMMUNITY</h1></div>
+  <div class="board-tabs">
+    <a href="board.html" class="on">공지사항</a><a href="board.html">상품 리뷰</a><a href="board.html">이벤트</a><a href="board.html">자주 묻는 질문</a>
+  </div>
+  <div class="board-top">
+    <div class="cnt">전체 <b>26</b>건</div>
+    <div class="search"><select><option>제목</option><option>내용</option><option>작성자</option></select><input type="text" placeholder="검색어를 입력하세요"><button>검색</button></div>
+  </div>
+  <table class="board-list">
+    <thead><tr><th style="width:80px">번호</th><th>제목</th><th style="width:140px" class="hide-m">작성자</th><th style="width:120px" class="hide-m">작성일</th><th style="width:80px" class="hide-m">조회</th></tr></thead>
+    <tbody>
+      <tr class="notice"><td><span class="tag-notice">공지</span></td><td class="title"><a href="board-view.html">블랙 시즌 컬렉션 출시 & 첫 구매 5,000원 쿠폰 안내</a></td><td class="hide-m">NOIRÉ TIP</td><td class="hide-m">2024.06.01</td><td class="hide-m">3,120</td></tr>
+      <tr class="notice"><td><span class="tag-notice">공지</span></td><td class="title"><a href="board-view.html">네일 팁 부착 & 케어 가이드 (오래 가는 꿀팁)</a></td><td class="hide-m">NOIRÉ TIP</td><td class="hide-m">2024.05.20</td><td class="hide-m">2,455</td></tr>
+      <tr><td>24</td><td class="title"><a href="board-view.html"><span class="cat">[리뷰]</span>글로시 블랙 진짜 영롱해요 광택 미쳤음<span class="reply">[3]</span><span class="new">N</span></a></td><td class="hide-m">noir***</td><td class="hide-m">2024.06.12</td><td class="hide-m">412</td></tr>
+      <tr><td>23</td><td class="title"><a href="board-view.html"><span class="cat">[문의]</span>젤 본드 없이 부착해도 되나요?<span class="reply">[1]</span></a></td><td class="hide-m">kim***</td><td class="hide-m">2024.06.10</td><td class="hide-m">96</td></tr>
+      <tr><td>22</td><td class="title"><a href="board-view.html"><span class="cat">[리뷰]</span>실버 스타 크롬 빛 반사 너무 예뻐요</a></td><td class="hide-m">midnight_m</td><td class="hide-m">2024.06.05</td><td class="hide-m">288</td></tr>
+      <tr><td>21</td><td class="title"><a href="board-view.html"><span class="cat">[이벤트]</span>리뷰 작성하고 적립금 받아가세요</a></td><td class="hide-m">NOIRÉ TIP</td><td class="hide-m">2024.06.02</td><td class="hide-m">1,204</td></tr>
+      <tr><td>20</td><td class="title"><a href="board-view.html"><span class="cat">[문의]</span>재사용 가능한가요?<span class="reply">[1]</span></a></td><td class="hide-m">lee***</td><td class="hide-m">2024.06.03</td><td class="hide-m">142</td></tr>
+      <tr><td>19</td><td class="title"><a href="board-view.html"><span class="cat">[리뷰]</span>딥 체리 와인 색감 고급져요 재구매!</a></td><td class="hide-m">cherry.n</td><td class="hide-m">2024.05.28</td><td class="hide-m">331</td></tr>
+    </tbody>
+  </table>
+  <div class="board-bottom"><a href="board-write.html" class="btn-write"><i class="fa-solid fa-pen"></i> 글쓰기</a></div>
+  <div class="pagination"><a href="#" aria-label="이전"><i class="fa-solid fa-chevron-left"></i></a><a href="#" class="on">1</a><a href="#">2</a><a href="#">3</a><a href="#" aria-label="다음"><i class="fa-solid fa-chevron-right"></i></a></div>
+</main>
+
+<footer class="site-footer">
+  <div class="container top">
+    <div class="cs"><h4>CS CENTER</h4><div class="tel">070-5175-0024</div><div class="hrs">OPEN 10:00 - 17:00<br>LUNCH 12:00 - 13:00<br>SAT, SUN, HOLIDAY OFF</div><h4>BANK INFO</h4><div class="hrs" style="margin-bottom:0">국민은행 123-456789-01-012<br>예금주 : (주)누아레팁</div></div>
+    <div class="company"><h4>COMPANY</h4><p>상호명 : (주)누아레팁 &nbsp;|&nbsp; 대표자 : 김누아<br>사업자등록번호 : 123-45-67890<br>통신판매업신고 : 제2024-서울강남-01234호<br>주소 : 서울특별시 강남구 도산대로 123, 4F (신사동)<br>이메일 : <b>hello@noiretip.com</b><br>개인정보보호책임자 : 김누아 (privacy@noiretip.com)</p></div>
+    <div class="follow"><h4>FOLLOW US</h4><div class="sns"><a href="#" aria-label="instagram"><i class="fa-brands fa-instagram"></i></a><a href="#" aria-label="tiktok"><i class="fa-brands fa-tiktok"></i></a></div><div class="links"><a href="board.html">이용약관</a><a href="board.html">개인정보처리방침</a><a href="board.html">고객센터 이용안내</a><a href="board-write.html">제휴문의</a></div></div>
+  </div>
+  <div class="copy"><span class="logo-f"><span class="ttl serif">NOIRÉ TIP</span></span> &nbsp; Copyright © NOIRÉ TIP All rights reserved.</div>
+</footer>
+<a href="#" class="to-top" aria-label="맨 위로"><i class="fa-solid fa-chevron-up"></i>TOP</a>
+</body>
+</html>

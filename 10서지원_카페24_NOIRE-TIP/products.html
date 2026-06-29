@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIRÉ TIP | 제품구매</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* ===== 디자인 토큰 (전 페이지 공통) ===== */
+:root{
+  --main:#141414; --sub:#9a9388; --point:#8c2f3d; --bg:#ffffff; --bg-soft:#f4f1ea; --bg-cream:#ece7dd;
+  --dark:#101010; --sale:#8c2f3d; --line:#e4ded3; --line-d:#2b2b2b; --text:#262626;
+  --maxw:1550px; --pad:30px; --gap:18px; --band:84px;
+  --fs-hero:30px; --fs-h2:25px; --fs-h3:16px; --fs-body:15px; --fs-sm:13px; --fs-xs:11px;
+  --fw-light:300; --fw-regular:400; --fw-medium:500; --fw-bold:700; --fw-black:800; --radius:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard',sans-serif;color:var(--text);background:var(--bg);font-size:var(--fs-body);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none;transition:color .2s}a:hover{color:var(--point)}
+img{display:block;max-width:100%;height:auto}ul,ol{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.serif{font-family:'Playfair Display',serif}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+
+/* ===== 헤더 (모든 페이지 동일) ===== */
+.site-header{position:sticky;top:0;z-index:50;background:var(--dark);border-bottom:1px solid var(--line-d)}
+.site-header .inner{display:flex;align-items:center;height:88px}
+.logo{flex:0 0 auto;color:#fff}
+.logo .ttl{font-family:'Playfair Display',serif;font-size:27px;font-weight:var(--fw-bold);letter-spacing:2px;line-height:1}
+.logo .sub{font-size:9px;letter-spacing:4px;color:#b9b2a6;margin-top:5px}
+.gnb{flex:1;display:flex;gap:42px;justify-content:center;font-size:var(--fs-body);font-weight:var(--fw-medium)}
+.gnb a{color:#e9e6df;position:relative;padding:6px 0}.gnb a:hover{color:#fff}
+.utils{flex:0 0 auto;display:flex;gap:22px;font-size:18px;color:#e9e6df;align-items:center}
+.utils a:hover{color:#fff}
+
+/* ===== 서브페이지 공통 ===== */
+main{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);min-height:60vh}
+.page-head{text-align:center;padding:60px 0 36px}
+.page-head .crumb{font-size:var(--fs-xs);color:var(--sub);letter-spacing:.5px;margin-bottom:14px}
+.page-head .crumb a:hover{color:var(--point)}
+.page-head h1{font-family:'Playfair Display',serif;font-size:38px;font-weight:var(--fw-bold);color:var(--main);letter-spacing:1px}
+.page-head .desc{margin-top:12px;color:var(--sub);font-size:var(--fs-sm)}
+
+.cat-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:36px}
+.cat-row a{padding:9px 20px;border:1px solid var(--line);border-radius:999px;font-size:var(--fs-sm);font-weight:var(--fw-medium);background:#fff;color:var(--main)}
+.cat-row a:hover{border-color:var(--point);color:var(--point)}
+.cat-row a.active{background:var(--main);color:#fff;border-color:var(--main)}
+
+.sortbar{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--main);border-bottom:1px solid var(--line);padding:16px 4px;margin-bottom:30px}
+.sortbar .cnt{font-size:var(--fs-sm);color:var(--sub)}
+.sortbar .cnt b{color:var(--main);font-weight:var(--fw-bold)}
+.sortbar .sorts{display:flex;gap:18px;font-size:var(--fs-sm)}
+.sortbar .sorts a{color:var(--sub);position:relative;padding-left:14px}
+.sortbar .sorts a:first-child{padding-left:0}
+.sortbar .sorts a:not(:first-child)::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:1px;height:11px;background:var(--line)}
+.sortbar .sorts a.on,.sortbar .sorts a:hover{color:var(--main);font-weight:var(--fw-bold)}
+
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap);row-gap:48px}
+.item{position:relative}
+.item .thumb{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:1/1;background:#eceae5}
+.item .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
+.item:hover .thumb img{transform:scale(1.05)}
+.item .badge{position:absolute;top:12px;left:12px;z-index:3;padding:4px 10px;border-radius:5px;font-size:var(--fs-xs);font-weight:var(--fw-bold);letter-spacing:.5px;background:var(--point);color:#fff}
+.item .badge.sale{background:var(--main)}
+.item .nm{margin-top:15px;font-size:var(--fs-h3);font-weight:var(--fw-medium);color:var(--main);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4;min-height:2.7em}
+.item .spec{font-size:var(--fs-xs);color:var(--sub);margin-top:6px;letter-spacing:.5px}
+.item .price{margin-top:9px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.item .price .was{font-size:var(--fs-sm);color:#b6afa3;text-decoration:line-through}
+.item .price .now{font-size:var(--fs-h3);font-weight:var(--fw-bold);color:var(--main)}
+.item .price .pct{color:var(--sale);font-weight:var(--fw-bold);font-size:var(--fs-sm)}
+.item .cart{display:inline-block;margin-top:12px;font-size:var(--fs-xs);font-weight:var(--fw-bold);letter-spacing:1px;color:var(--main);border-bottom:1px solid var(--main);padding-bottom:3px}
+.item .cart:hover{color:var(--point);border-color:var(--point)}
+
+.pagination{display:flex;justify-content:center;align-items:center;gap:8px;margin:64px 0 24px}
+.pagination a{width:40px;height:40px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:var(--fs-sm);color:var(--sub);border:1px solid transparent}
+.pagination a:hover{border-color:var(--line);color:var(--main)}
+.pagination a.on{background:var(--main);color:#fff}
+
+/* ===== 푸터 (모든 페이지 동일) ===== */
+.site-footer{background:var(--dark);color:#b9b2a6;padding:64px 0 40px;font-size:var(--fs-sm);margin-top:var(--band)}
+.site-footer .top{display:grid;grid-template-columns:1.1fr 1.3fr 1fr;gap:40px}
+.site-footer h4{font-size:var(--fs-xs);font-weight:var(--fw-bold);letter-spacing:2px;color:#fff;margin-bottom:18px}
+.site-footer .cs .tel{font-family:'Playfair Display',serif;font-size:26px;font-weight:var(--fw-bold);color:#fff;letter-spacing:1px}
+.site-footer .cs .hrs{margin:14px 0 22px;line-height:1.9;color:#8f897e;font-size:var(--fs-xs)}
+.site-footer .company p{line-height:2;color:#8f897e}
+.site-footer .company b{color:#cfc9bd;font-weight:var(--fw-medium)}
+.site-footer .follow .sns{display:flex;gap:16px;font-size:19px;color:#cfc9bd;margin-bottom:24px}
+.site-footer .follow .sns a:hover{color:#fff}
+.site-footer .follow .links a{display:block;margin-bottom:11px;color:#8f897e}
+.site-footer .follow .links a:hover{color:#fff}
+.site-footer .copy{max-width:var(--maxw);margin:48px auto 0;padding:22px var(--pad) 0;border-top:1px solid var(--line-d);font-size:var(--fs-xs);color:#736d63;letter-spacing:.5px}
+.logo-f .ttl{font-family:'Playfair Display',serif;font-size:22px;font-weight:var(--fw-bold);letter-spacing:2px;color:#fff}
+.to-top{position:fixed;right:28px;bottom:28px;width:52px;height:52px;border-radius:50%;background:var(--main);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;z-index:60;box-shadow:0 6px 20px rgba(0,0,0,.3);opacity:.95;line-height:1}
+.to-top i{font-size:14px;margin-bottom:1px}.to-top:hover{background:var(--point);color:#fff}
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s ease}.reveal.show{opacity:1;transform:none}
+
+@media(max-width:1100px){.gnb{display:none}.prod-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){:root{--band:54px;--pad:18px}.prod-grid{grid-template-columns:repeat(2,1fr);row-gap:34px}.sortbar{flex-direction:column;gap:12px;align-items:flex-start}.site-footer .top{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- ============ 헤더 ============ -->
+<header class="site-header"><div class="inner container">
+  <a href="index.html" class="logo"><div class="ttl serif">NOIRÉ TIP</div><div class="sub">NAIL TIP COLLECTION</div></a>
+  <nav class="gnb"><a href="products.html">브랜드</a><a href="products.html">제품구매</a><a href="board.html">리뷰</a><a href="board.html">이벤트</a><a href="board.html">커뮤니티</a></nav>
+  <div class="utils"><a href="login.html" aria-label="로그인"><i class="fa-regular fa-user"></i></a><a href="cart.html" aria-label="장바구니"><i class="fa-solid fa-bag-shopping"></i></a><a href="products.html" aria-label="검색"><i class="fa-solid fa-magnifying-glass"></i></a></div>
+</div></header>
+
+<main>
+  <div class="page-head">
+    <div class="crumb"><a href="index.html">HOME</a> / 제품구매</div>
+    <h1>NAIL TIP</h1>
+    <p class="desc">도시의 밤을 닮은 블랙 무드, 손끝에서 완성되는 시크함</p>
+  </div>
+
+  <div class="cat-row">
+    <a href="products.html" class="active">전체</a>
+    <a href="products.html">젤 네일 팁</a>
+    <a href="products.html">크롬 / 글리터</a>
+    <a href="products.html">리본 / 포인트</a>
+    <a href="products.html">누드 / 데일리</a>
+    <a href="products.html">시즌 한정</a>
+  </div>
+
+  <div class="sortbar">
+    <div class="cnt">전체 <b>8</b>개</div>
+    <div class="sorts">
+      <a href="#" class="on">신상품순</a><a href="#">인기순</a><a href="#">낮은가격순</a><a href="#">높은가격순</a><a href="#">할인율순</a>
+    </div>
+  </div>
+
+  <!-- 상품 카드 8개 (하드코딩) -->
+  <ul class="prod-grid">
+    <li class="item reveal"><a href="product-detail.html">
+      <div class="thumb"><span class="badge">BEST</span><img src="images/p-glossy-black.png" alt="글로시 블랙 심플 네일 팁"></div>
+      <p class="nm">글로시 블랙 심플 네일 팁</p><p class="spec">24PCS / 12 SIZES</p>
+      <div class="price"><span class="was">26,000원</span><span class="now">17,900원</span><span class="pct">31%</span></div>
+    </a><a class="cart" href="cart.html">CART</a></li>
+    <li class="item reveal"><a href="product-detail.html">
+      <div class="thumb"><span class="badge">BEST</span><img src="images/p-silver-star.png" alt="실버 스타 크롬 네일 팁"></div>
+      <p class="nm">실버 스타 크롬 네일 팁</p><p class="spec">24PCS / 12 SIZES</p>
+      <div class="price"><span class="was">26,000원</span><span class="now">18,900원</span><span class="pct">32%</span></div>
+    </a><a class="cart" href="cart.html">CART</a></li>
+    <li class="item reveal"><a href="product-detail.html">
+      <div class="thumb"><img src="images/p-nude-ribbon.png" alt="누드 블랙 리본 네일 팁"></div>
+      <p class="nm">누드 블랙 리본 네일 팁</p><p class="spec">24PCS / 12 SIZES</p>
+      <div class="price"><span class="was">26,000원</span><span class="now">17,900원</span><span class="pct">31%</span></div>
+    </a><a class="cart" href="cart.html">CART</a></li>
+    <li class="item reveal"><a href="product-detail.html">
+      <div class="thumb"><img src="images/p-cherry-wine.png" alt="딥 체리 와인 네일 팁"></div>
+      <p class="nm">딥 체리 와인 네일 팁</p><p class="spec">24PCS / 12 SIZES</p>
+      <div class="price"><span class="was">28,000원</span><span class="now">19,900원</span><span class="pct">29%</span></div>
+    </a><a class="cart" href="cart.html">CART</a></li>
+    <li class="item reveal"><a href="product-detail.html">
+      <div class="thumb"><img src="images/p-moonlight-dot.png" alt="문라이트 도트 네일 팁"></div>
+      <p class="nm">문라이트 도트 네일 팁</p><p class="spec">24PCS / 12 SIZES</p>
+      <div class="price"><span class="was">26,000원</span><span class="now">17,900원</span><span class="pct">31%</span></div>
+    </a><a class="cart" href="cart.html">CART</a></li>
+    <li class="item reveal"><a href="product-detail.html">
+      <div class="thumb"><span class="badge sale">SET</span><img src="images/hero-1-black-star.png" alt="블랙 스타 젤 세트"></div>
+      <p class="nm">블랙 스타 젤 세트</p><p class="spec">24PCS / 12 SIZES</p>
+      <div class="price"><span class="was">29,000원</span><span class="now">21,900원</span><span class="pct">24%</span></div>
+    </a><a class="cart" href="cart.html">CART</a></li>
+    <li class="item reveal"><a href="product-detail.html">
+      <div class="thumb"><span class="badge sale">SET</span><img src="images/hero-2-noir-chrome.png" alt="누아 크롬 네일 팁 세트"></div>
+      <p class="nm">누아 크롬 네일 팁 세트</p><p class="spec">24PCS / 12 SIZES</p>
+      <div class="price"><span class="was">32,000원</span><span class="now">23,900원</span><span class="pct">25%</span></div>
+    </a><a class="cart" href="cart.html">CART</a></li>
+    <li class="item reveal"><a href="product-detail.html">
+      <div class="thumb"><span class="badge">NEW</span><img src="images/hero-3-midnight-ribbon.png" alt="미드나잇 리본 에디션"></div>
+      <p class="nm">미드나잇 리본 에디션</p><p class="spec">24PCS / 12 SIZES</p>
+      <div class="price"><span class="was">30,000원</span><span class="now">22,900원</span><span class="pct">23%</span></div>
+    </a><a class="cart" href="cart.html">CART</a></li>
+  </ul>
+
+  <div class="pagination">
+    <a href="#" aria-label="이전"><i class="fa-solid fa-chevron-left"></i></a>
+    <a href="#" class="on">1</a><a href="#">2</a><a href="#">3</a>
+    <a href="#" aria-label="다음"><i class="fa-solid fa-chevron-right"></i></a>
+  </div>
+</main>
+
+<!-- ============ 푸터 ============ -->
+<footer class="site-footer">
+  <div class="container top">
+    <div class="cs"><h4>CS CENTER</h4><div class="tel">070-5175-0024</div><div class="hrs">OPEN 10:00 - 17:00<br>LUNCH 12:00 - 13:00<br>SAT, SUN, HOLIDAY OFF</div><h4>BANK INFO</h4><div class="hrs" style="margin-bottom:0">국민은행 123-456789-01-012<br>예금주 : (주)누아레팁</div></div>
+    <div class="company"><h4>COMPANY</h4><p>상호명 : (주)누아레팁 &nbsp;|&nbsp; 대표자 : 김누아<br>사업자등록번호 : 123-45-67890<br>통신판매업신고 : 제2024-서울강남-01234호<br>주소 : 서울특별시 강남구 도산대로 123, 4F (신사동)<br>이메일 : <b>hello@noiretip.com</b><br>개인정보보호책임자 : 김누아 (privacy@noiretip.com)</p></div>
+    <div class="follow"><h4>FOLLOW US</h4><div class="sns"><a href="#" aria-label="instagram"><i class="fa-brands fa-instagram"></i></a><a href="#" aria-label="tiktok"><i class="fa-brands fa-tiktok"></i></a></div><div class="links"><a href="board.html">이용약관</a><a href="board.html">개인정보처리방침</a><a href="board.html">고객센터 이용안내</a><a href="board-write.html">제휴문의</a></div></div>
+  </div>
+  <div class="copy"><span class="logo-f"><span class="ttl serif">NOIRÉ TIP</span></span> &nbsp; Copyright © NOIRÉ TIP All rights reserved.</div>
+</footer>
+<a href="#" class="to-top" aria-label="맨 위로"><i class="fa-solid fa-chevron-up"></i>TOP</a>
+
+<script>
+(function(){
+  var els=[].slice.call(document.querySelectorAll('.reveal'));
+  var vh=window.innerHeight||document.documentElement.clientHeight;
+  els.forEach(function(el){if(el.getBoundingClientRect().top<vh){el.classList.add('show');}});
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('show')});return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('show');io.unobserve(en.target);}});},{threshold:.12});
+  els.forEach(function(e){if(!e.classList.contains('show'))io.observe(e);});
+})();
+</script>
+</body>
+</html>

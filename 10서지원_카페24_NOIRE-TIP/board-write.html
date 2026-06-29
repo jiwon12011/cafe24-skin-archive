@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIRÉ TIP | 글쓰기</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --main:#141414; --sub:#9a9388; --point:#8c2f3d; --bg:#ffffff; --bg-soft:#f4f1ea;
+  --dark:#101010; --line:#e4ded3; --line-d:#2b2b2b; --text:#262626;
+  --maxw:1550px; --pad:30px; --band:84px;
+  --fs-h3:16px; --fs-body:15px; --fs-sm:13px; --fs-xs:11px;
+  --fw-medium:500; --fw-bold:700; --fw-black:800; --radius:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard',sans-serif;color:var(--text);background:var(--bg);font-size:var(--fs-body);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none;transition:color .2s}a:hover{color:var(--point)}
+img{display:block;max-width:100%;height:auto}ul,ol{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+select,input,textarea{font-family:inherit}
+.serif{font-family:'Playfair Display',serif}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+
+.site-header{position:sticky;top:0;z-index:50;background:var(--dark);border-bottom:1px solid var(--line-d)}
+.site-header .inner{display:flex;align-items:center;height:88px}
+.logo{flex:0 0 auto;color:#fff}.logo .ttl{font-family:'Playfair Display',serif;font-size:27px;font-weight:var(--fw-bold);letter-spacing:2px;line-height:1}
+.logo .sub{font-size:9px;letter-spacing:4px;color:#b9b2a6;margin-top:5px}
+.gnb{flex:1;display:flex;gap:42px;justify-content:center;font-size:var(--fs-body);font-weight:var(--fw-medium)}
+.gnb a{color:#e9e6df;padding:6px 0}.gnb a:hover{color:#fff}
+.utils{flex:0 0 auto;display:flex;gap:22px;font-size:18px;color:#e9e6df;align-items:center}.utils a:hover{color:#fff}
+
+main{max-width:980px;margin:0 auto;padding:0 var(--pad);min-height:62vh}
+.page-head{text-align:center;padding:60px 0 30px}
+.page-head h1{font-family:'Playfair Display',serif;font-size:32px;font-weight:var(--fw-bold);color:var(--main);letter-spacing:1px}
+.write-form{border-top:2px solid var(--main)}
+.row{display:flex;border-bottom:1px solid var(--line);align-items:stretch}
+.row .k{flex:0 0 150px;background:var(--bg-soft);display:flex;align-items:center;padding:18px 20px;font-size:var(--fs-sm);font-weight:var(--fw-medium);color:var(--main)}
+.row .k .req{color:var(--point);margin-left:3px}
+.row .v{flex:1;padding:14px 18px;display:flex;align-items:center;gap:10px}
+.row .v input[type=text],.row .v select{width:100%;max-width:420px;padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;font-size:var(--fs-body);color:var(--main)}
+.row .v.full input[type=text]{max-width:none}
+.row .v input:focus,.row .v select:focus,.row .v textarea:focus{outline:none;border-color:var(--point)}
+.row.stars .v{gap:6px;font-size:22px;color:#d8cfc1}.row.stars .v i.on{color:var(--point)}
+.row.content .v{padding:14px 18px}
+.row.content textarea{width:100%;min-height:280px;border:1px solid var(--line);border-radius:var(--radius);padding:16px;font-size:var(--fs-body);resize:vertical;color:var(--main);line-height:1.8}
+.row .file-note{font-size:var(--fs-xs);color:var(--sub)}
+.row .filebtn{border:1px solid var(--main);border-radius:var(--radius);padding:11px 18px;font-size:var(--fs-sm);color:var(--main)}.row .filebtn:hover{background:var(--bg-soft)}
+.notice-box{background:var(--bg-soft);border-radius:var(--radius);padding:18px 22px;margin-top:22px;font-size:var(--fs-sm);color:var(--sub);line-height:1.8}.notice-box b{color:var(--main)}
+.form-btns{display:flex;justify-content:center;gap:12px;margin:34px 0 24px}
+.form-btns a{padding:15px 40px;border-radius:var(--radius);font-size:var(--fs-body);font-weight:var(--fw-bold)}
+.form-btns .cancel{border:1px solid var(--line);color:var(--main)}.form-btns .cancel:hover{background:var(--bg-soft)}
+.form-btns .submit{background:var(--point);color:#fff}.form-btns .submit:hover{background:var(--main);color:#fff}
+
+.site-footer{background:var(--dark);color:#b9b2a6;padding:64px 0 40px;font-size:var(--fs-sm);margin-top:var(--band)}
+.site-footer .top{display:grid;grid-template-columns:1.1fr 1.3fr 1fr;gap:40px;max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+.site-footer h4{font-size:var(--fs-xs);font-weight:var(--fw-bold);letter-spacing:2px;color:#fff;margin-bottom:18px}
+.site-footer .cs .tel{font-family:'Playfair Display',serif;font-size:26px;font-weight:var(--fw-bold);color:#fff;letter-spacing:1px}
+.site-footer .cs .hrs{margin:14px 0 22px;line-height:1.9;color:#8f897e;font-size:var(--fs-xs)}
+.site-footer .company p{line-height:2;color:#8f897e}.site-footer .company b{color:#cfc9bd;font-weight:var(--fw-medium)}
+.site-footer .follow .sns{display:flex;gap:16px;font-size:19px;color:#cfc9bd;margin-bottom:24px}.site-footer .follow .sns a:hover{color:#fff}
+.site-footer .follow .links a{display:block;margin-bottom:11px;color:#8f897e}.site-footer .follow .links a:hover{color:#fff}
+.site-footer .copy{max-width:var(--maxw);margin:48px auto 0;padding:22px var(--pad) 0;border-top:1px solid var(--line-d);font-size:var(--fs-xs);color:#736d63;letter-spacing:.5px}
+.logo-f .ttl{font-family:'Playfair Display',serif;font-size:22px;font-weight:var(--fw-bold);letter-spacing:2px;color:#fff}
+
+@media(max-width:1100px){.gnb{display:none}}
+@media(max-width:760px){:root{--band:54px;--pad:18px}.row{flex-direction:column}.row .k{flex:none}.site-footer .top{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="site-header"><div class="inner container">
+  <a href="index.html" class="logo"><div class="ttl serif">NOIRÉ TIP</div><div class="sub">NAIL TIP COLLECTION</div></a>
+  <nav class="gnb"><a href="products.html">브랜드</a><a href="products.html">제품구매</a><a href="board.html">리뷰</a><a href="board.html">이벤트</a><a href="board.html">커뮤니티</a></nav>
+  <div class="utils"><a href="login.html" aria-label="로그인"><i class="fa-regular fa-user"></i></a><a href="cart.html" aria-label="장바구니"><i class="fa-solid fa-bag-shopping"></i></a><a href="products.html" aria-label="검색"><i class="fa-solid fa-magnifying-glass"></i></a></div>
+</div></header>
+
+<main>
+  <div class="page-head"><h1>WRITE</h1></div>
+  <form class="write-form" onsubmit="return false">
+    <div class="row"><div class="k">분류<span class="req">*</span></div><div class="v"><select><option>상품 리뷰</option><option>상품 문의</option><option>1:1 문의</option><option>제휴문의</option></select></div></div>
+    <div class="row stars"><div class="k">평점</div><div class="v"><i class="fa-solid fa-star on"></i><i class="fa-solid fa-star on"></i><i class="fa-solid fa-star on"></i><i class="fa-solid fa-star on"></i><i class="fa-solid fa-star on"></i></div></div>
+    <div class="row"><div class="k">제목<span class="req">*</span></div><div class="v full"><input type="text" placeholder="제목을 입력하세요"></div></div>
+    <div class="row"><div class="k">작성자</div><div class="v"><input type="text" placeholder="이름 또는 닉네임"></div></div>
+    <div class="row content"><div class="k">내용<span class="req">*</span></div><div class="v"><textarea placeholder="내용을 입력하세요. 솔직한 사용 후기를 남겨주시면 다른 고객분들께 큰 도움이 됩니다."></textarea></div></div>
+    <div class="row"><div class="k">사진 첨부</div><div class="v"><button type="button" class="filebtn"><i class="fa-solid fa-camera"></i> 파일 선택</button><span class="file-note">JPG, PNG · 최대 5장 (각 5MB 이하)</span></div></div>
+    <div class="notice-box"><b>· 작성 시 유의사항</b><br>욕설, 비방, 광고성 게시물은 사전 통보 없이 삭제될 수 있습니다. 개인정보(연락처, 주소 등)는 노출되지 않도록 주의해 주세요.</div>
+    <div class="form-btns"><a href="board.html" class="cancel">취소</a><a href="board-view.html" class="submit">등록하기</a></div>
+  </form>
+</main>
+
+<footer class="site-footer">
+  <div class="top">
+    <div class="cs"><h4>CS CENTER</h4><div class="tel">070-5175-0024</div><div class="hrs">OPEN 10:00 - 17:00<br>LUNCH 12:00 - 13:00<br>SAT, SUN, HOLIDAY OFF</div><h4>BANK INFO</h4><div class="hrs" style="margin-bottom:0">국민은행 123-456789-01-012<br>예금주 : (주)누아레팁</div></div>
+    <div class="company"><h4>COMPANY</h4><p>상호명 : (주)누아레팁 &nbsp;|&nbsp; 대표자 : 김누아<br>사업자등록번호 : 123-45-67890<br>통신판매업신고 : 제2024-서울강남-01234호<br>주소 : 서울특별시 강남구 도산대로 123, 4F (신사동)<br>이메일 : <b>hello@noiretip.com</b><br>개인정보보호책임자 : 김누아 (privacy@noiretip.com)</p></div>
+    <div class="follow"><h4>FOLLOW US</h4><div class="sns"><a href="#" aria-label="instagram"><i class="fa-brands fa-instagram"></i></a><a href="#" aria-label="tiktok"><i class="fa-brands fa-tiktok"></i></a></div><div class="links"><a href="board.html">이용약관</a><a href="board.html">개인정보처리방침</a><a href="board.html">고객센터 이용안내</a><a href="board-write.html">제휴문의</a></div></div>
+  </div>
+  <div class="copy"><span class="logo-f"><span class="ttl serif">NOIRÉ TIP</span></span> &nbsp; Copyright © NOIRÉ TIP All rights reserved.</div>
+</footer>
+</body>
+</html>
