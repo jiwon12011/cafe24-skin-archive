@@ -16,8 +16,8 @@
   /* ---- 색상 ---- */
   --main:#16181d;        /* 메인색 (텍스트·헤딩 near-black) */
   --sub:#8a8f99;         /* 서브색 (보조 텍스트) */
-  --point:#001fa3;       /* ★포인트색 (코발트 블루 = 버튼·링크호버·배지·강조·블루밴드) */
-  --accent:#ffd400;      /* 보조 액센트 (옐로 = 밑줄·스마일·MENU) */
+  --point:#001fa3;       /* ★포인트색 (네온 블루 = 버튼·링크호버·배지·강조·밴드) */
+  --accent:#ffd400;      /* 보조 액센트 (옐로 = 밑줄·짝대기·MENU) */
   --bg:#ffffff;          /* 기본 배경색 */
   --bg-soft:#eef0f4;     /* 보조 배경 (About 라이트 그레이) */
   --line:#e6e8ec;        /* 구분선 */
@@ -97,7 +97,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .hero .shop-now:hover{background:#fff;color:var(--point)}
 .hero .right{position:relative;background:#d6dae4}
 .hero .right img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:64% 16%}
-.hero .hanging{position:absolute;top:0;left:31%;width:185px;z-index:3}
+.hero .hanging{position:absolute;top:0;left:29%;width:240px;z-index:3}
 .hero .hanging img{width:100%;height:auto}
 
 /* =========================================================
@@ -106,7 +106,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .strip{background:var(--point);border-top:1px solid rgba(255,255,255,.18);padding:18px 0}
 .strip .row{display:flex;align-items:center;justify-content:center;gap:26px;color:#fff;flex-wrap:wrap}
 .strip .row .b{font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-h3);letter-spacing:1px}
-.strip .row .smile{width:30px;height:16px;opacity:.92}
+.strip .row .bar{width:2px;height:18px;background:var(--accent);opacity:.9;border-radius:1px}
 
 /* =========================================================
    About (트렌드 드리븐)
@@ -149,7 +149,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
    rhythm (블루 밴드 + 3아이콘 + 4카드)
    ========================================================= */
 .rhythm{background:var(--point);color:#fff;padding:var(--band) 0}
-.rhythm h2{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:var(--fs-h2);text-align:center;line-height:1.18}
+.rhythm h2{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:var(--fs-h2);text-align:center;line-height:1.18;margin-bottom:50px}
 .rhythm h2 .u{position:relative;display:inline-block}
 .rhythm h2 .u::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:5px;background:var(--accent);border-radius:3px}
 .rhythm .icons{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;max-width:900px;margin:46px auto 56px}
@@ -179,7 +179,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 /* =========================================================
    푸터 (모든 페이지 동일, 블루)
    ========================================================= */
-.site-footer{background:var(--point);color:#fff;padding:60px 0 36px;font-size:var(--fs-sm)}
+.site-footer{background:var(--point);color:#fff;padding:56px 0 36px;font-size:var(--fs-sm);border-top:5px solid var(--accent)}
 .site-footer .top{display:grid;grid-template-columns:1fr 1.3fr 1.2fr;gap:40px;align-items:start}
 .site-footer .links a{display:block;margin-bottom:12px;font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);
   font-size:var(--fs-sm);letter-spacing:.5px}
@@ -190,7 +190,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .site-footer .mid .cs{margin-top:14px;line-height:1.9;opacity:.9;font-size:var(--fs-xs)}
 .site-footer .right .tel{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:32px;letter-spacing:1px}
 .site-footer .right p{margin-top:12px;line-height:1.8;opacity:.9}
-.site-footer .big{text-align:center;margin:46px 0 10px;display:flex;align-items:center;justify-content:center;gap:14px}
+.site-footer .big{text-align:center;margin:40px 0 12px;padding-top:38px;border-top:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;gap:14px}
 .site-footer .big .word{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:80px;letter-spacing:2px;line-height:1}
 .site-footer .big .smile{width:54px;height:54px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:var(--point);font-size:30px}
 .site-footer .copy{text-align:center;font-size:var(--fs-xs);opacity:.7;letter-spacing:.5px}
@@ -252,7 +252,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 <section class="hero">
   <div class="grid">
     <div class="left">
-      <p class="intro">Denim made to move with you. Relaxed fits, iconic washes, and effortless style for wherever the day takes you.</p>
+      <p class="intro">진짜 청바지의 무드. 편안한 핏과 깊은 인디고 워싱으로, 매일의 움직임을 더 자유롭게.</p>
       <h1 class="en">Blue, Bold,<br>Move in<br><span class="u">Denim.</span></h1>
       <a href="products.html" class="shop-now">SHOP NOW <i class="fa-solid fa-arrow-right"></i></a>
     </div>
@@ -267,13 +267,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 <section class="strip">
   <div class="row">
     <span class="b en">Denvibe</span>
-    <svg class="smile" viewBox="0 0 30 16" fill="none"><path d="M2 2 C6 14, 24 14, 28 2" stroke="#ffd400" stroke-width="3" stroke-linecap="round"/></svg>
+    <span class="bar"></span>
     <span class="b en">Denvibe</span>
-    <svg class="smile" viewBox="0 0 30 16" fill="none"><path d="M2 2 C6 14, 24 14, 28 2" stroke="#ffd400" stroke-width="3" stroke-linecap="round"/></svg>
+    <span class="bar"></span>
     <span class="b en">Denvibe</span>
-    <svg class="smile" viewBox="0 0 30 16" fill="none"><path d="M2 2 C6 14, 24 14, 28 2" stroke="#ffd400" stroke-width="3" stroke-linecap="round"/></svg>
+    <span class="bar"></span>
     <span class="b en">Denvibe</span>
-    <svg class="smile" viewBox="0 0 30 16" fill="none"><path d="M2 2 C6 14, 24 14, 28 2" stroke="#ffd400" stroke-width="3" stroke-linecap="round"/></svg>
+    <span class="bar"></span>
     <span class="b en">Denvibe</span>
   </div>
 </section>
@@ -326,13 +326,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 <section class="rhythm">
   <div class="container">
     <h2 class="en">Created for the rhythm<br>of <span class="u">your day</span></h2>
-    <div class="icons">
-      <div class="ic reveal"><div class="g"><i class="fa-solid fa-person-half-dress"></i></div><h3 class="en">Better Fit</h3><p>Relaxed silhouettes and precise cuts that move with your body.</p></div>
-      <div class="ic reveal"><div class="g"><i class="fa-solid fa-droplet"></i></div><h3 class="en">Timeless Wash</h3><p>Signature washes and textures that only get better with time.</p></div>
-      <div class="ic reveal"><div class="g"><i class="fa-solid fa-cloud"></i></div><h3 class="en">All-Day Comfort</h3><p>Soft, breathable denim designed for every moment.</p></div>
-    </div>
     <div class="cards">
-      <a class="fc reveal" href="products.html"><div class="pic"><img src="images/feat-sky.png" alt="프레시 에너지"></div><h4 class="en">Fresh energy, every direction.</h4><span class="link">SHOP NEW IN <i class="fa-solid fa-arrow-right"></i></span></a>
+      <a class="fc reveal" href="products.html"><div class="pic"><img src="images/feat-sky.png" alt="라이트 워시 데님"></div><h4 class="en">Light wash, easy move.</h4><span class="link">SHOP NEW IN <i class="fa-solid fa-arrow-right"></i></span></a>
       <a class="fc reveal" href="products.html"><div class="pic"><img src="images/feat-pocket.png" alt="디테일"></div><h4 class="en">Details that hit different.</h4><span class="link">DISCOVER DETAILS <i class="fa-solid fa-arrow-right"></i></span></a>
       <a class="fc reveal" href="products.html"><div class="pic"><img src="images/feat-bigfit.png" alt="빅핏"></div><h4 class="en">Big fits. Bigger mood.</h4><span class="link">SHOP WIDE FITS <i class="fa-solid fa-arrow-right"></i></span></a>
       <a class="fc reveal" href="products.html"><div class="pic"><img src="images/feat-stacked.png" alt="에센셜"></div><h4 class="en">Built to last. Styled to stand out.</h4><span class="link">SHOP ESSENTIALS <i class="fa-solid fa-arrow-right"></i></span></a>
@@ -390,7 +385,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   </div>
   <div class="big">
     <span class="word en">DENVIBE</span>
-    <span class="smile"><i class="fa-regular fa-face-smile"></i></span>
+    <span class="smile"><i class="fa-solid fa-circle-dot"></i></span>
   </div>
   <div class="copy">© 2024 DENVIBE. ALL RIGHTS RESERVED.</div>
 </footer>
