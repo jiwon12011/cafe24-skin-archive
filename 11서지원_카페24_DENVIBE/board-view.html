@@ -71,15 +71,61 @@ main{max-width:980px;margin:0 auto;padding:0 var(--pad);min-height:62vh}
 .site-footer .copy{text-align:center;font-size:var(--fs-xs);opacity:.7;letter-spacing:.5px}
 
 @media(max-width:760px){:root{--band:56px;--pad:18px}.utils a span{display:none}.site-footer .top{grid-template-columns:1fr}.site-footer .big .word{font-size:48px}}
+
+/* ===== 메뉴 드로어 (MENU 버튼) ===== */
+.menu-btn{border:0;cursor:pointer}
+.nav-overlay{position:fixed;inset:0;z-index:60;background:rgba(22,24,29,.5);opacity:0;transition:opacity .3s;pointer-events:none}
+.nav-overlay.open{opacity:1;pointer-events:auto}
+.nav-drawer{position:fixed;top:0;left:0;z-index:61;width:330px;max-width:86vw;height:100%;background:var(--bg);
+  box-shadow:2px 0 28px rgba(0,0,0,.18);transform:translateX(-100%);transition:transform .32s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;padding:26px 26px 30px}
+.nav-drawer.open{transform:none}
+.nav-drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.nav-drawer-head .en{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:20px;letter-spacing:2px;color:var(--point)}
+.nav-close{border:0;background:none;cursor:pointer;font-size:24px;line-height:1;color:var(--main);padding:2px 4px}
+.nav-close:hover{color:var(--point)}
+.nav-links{display:flex;flex-direction:column}
+.nav-links a{display:flex;align-items:baseline;gap:12px;padding:15px 2px;border-bottom:1px solid var(--line);
+  font-weight:var(--fw-bold);font-size:18px;color:var(--main)}
+.nav-links a .en{font-family:'Archivo',sans-serif;font-weight:var(--fw-black);font-size:12px;letter-spacing:1px;color:var(--sub);min-width:52px}
+.nav-links a:hover,.nav-links a:hover .en{color:var(--point)}
+.nav-links a.sale,.nav-links a.sale .en{color:#d92020}
+.nav-drawer-foot{margin-top:auto;display:flex;gap:20px;padding-top:22px;
+  font-family:'Archivo',sans-serif;font-weight:var(--fw-bold);font-size:var(--fs-sm);letter-spacing:.5px;color:var(--main)}
+.nav-drawer-foot a:hover{color:var(--point)}
 </style>
 </head>
 <body>
 
 <header class="site-header"><div class="inner container">
-  <button class="menu-btn"><i class="fa-solid fa-bars"></i> MENU</button>
+  <button class="menu-btn" id="menuBtn" aria-controls="navDrawer" aria-expanded="false"><i class="fa-solid fa-bars"></i> MENU</button>
   <a href="index.html" class="logo">DENVIBE</a>
   <nav class="utils"><a href="products.html"><i class="fa-solid fa-magnifying-glass"></i> <span>SEARCH</span></a><a href="login.html"><span>MY PAGE</span></a><a href="cart.html"><span>CART(0)</span></a></nav>
 </div></header>
+
+<!-- ============ 메뉴 드로어 (모든 페이지 동일) ============ -->
+<div class="nav-overlay" id="navOverlay" hidden></div>
+<aside class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <div class="nav-drawer-head">
+    <span class="en">MENU</span>
+    <button class="nav-close" id="navClose" aria-label="메뉴 닫기"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <nav class="nav-links">
+    <a href="products.html"><span class="en">NEW</span> 신상품</a>
+    <a href="products.html"><span class="en">BEST</span> 베스트</a>
+    <a href="products.html"><span class="en">JEANS</span> 데님</a>
+    <a href="products.html"><span class="en">TOPS</span> 상의</a>
+    <a href="products.html"><span class="en">OUTER</span> 아우터</a>
+    <a href="products.html"><span class="en">ACC</span> 액세서리</a>
+    <a href="products.html" class="sale"><span class="en">SALE</span> 세일</a>
+  </nav>
+  <div class="nav-drawer-foot">
+    <a href="login.html">MY PAGE</a>
+    <a href="cart.html">CART</a>
+    <a href="board.html">고객센터</a>
+  </div>
+</aside>
+
 
 <main>
   <div class="page-head"><h1 class="en">REVIEW</h1></div>
@@ -121,5 +167,31 @@ main{max-width:980px;margin:0 auto;padding:0 var(--pad);min-height:62vh}
   <div class="big"><span class="word en">DENVIBE</span><span class="smile"><i class="fa-solid fa-circle-dot"></i></span></div>
   <div class="copy">© 2024 DENVIBE. ALL RIGHTS RESERVED.</div>
 </footer>
+<script>
+/* MENU 버튼 → 드로어 열기/닫기 */
+(function(){
+  var btn=document.getElementById('menuBtn');
+  var drawer=document.getElementById('navDrawer');
+  var overlay=document.getElementById('navOverlay');
+  var closeBtn=document.getElementById('navClose');
+  if(!btn||!drawer||!overlay) return;
+  function open(){
+    drawer.classList.add('open');overlay.hidden=false;
+    requestAnimationFrame(function(){overlay.classList.add('open');});
+    btn.setAttribute('aria-expanded','true');drawer.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+  }
+  function close(){
+    drawer.classList.remove('open');overlay.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');drawer.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+    setTimeout(function(){overlay.hidden=true;},320);
+  }
+  btn.addEventListener('click',open);
+  if(closeBtn) closeBtn.addEventListener('click',close);
+  overlay.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
 </body>
 </html>
