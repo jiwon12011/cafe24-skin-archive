@@ -82,7 +82,7 @@
   .site-header nav a:hover{color:var(--point);}
   .brand{text-align:center;font-family:var(--font-serif);line-height:.82;}
   .brand span{display:block;font-size:48px;font-weight:500;letter-spacing:1px;}
-  .brand small{font-family:var(--font-en);font-size:10px;letter-spacing:8px;margin-left:8px;font-weight:var(--fw-bold);}
+  .brand small{display:block;font-family:var(--font-en);font-size:10px;letter-spacing:8px;text-indent:8px;font-weight:var(--fw-bold);}
 
   /* ============ 푸터 (모든 페이지 동일) ============ */
   footer{
@@ -157,7 +157,7 @@
      ==================================================== */
   /* 1) 히어로 */
   .hero{position:relative;min-height:760px;height:86vh;overflow:hidden;background:var(--bg-soft);}
-  .hero img{height:100%;object-fit:cover;object-position:center;}
+  .hero img{width:100%;height:100%;object-fit:cover;object-position:center 18%;}
   .hero::after{content:"";position:absolute;inset:0;
     background:linear-gradient(90deg,rgba(113,60,58,.34),rgba(113,60,58,.05) 52%,rgba(113,60,58,.14));}
   .hero-copy{position:absolute;z-index:2;left:8%;top:34%;width:min(480px,84vw);color:#fff;}
